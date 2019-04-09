@@ -14,8 +14,8 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * @author quchao
- * @date 2017/11/27
+ * @author wangziang
+ * @date 2019/04/07
  */
 
 @Module

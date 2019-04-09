@@ -80,7 +80,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
                 mRegisterBtn.getHeight() / 2,
                 0 ,
                 0);
-        //startActivity(new Intent(this, RegisterActivity.class), options.toBundle());
+        startActivity(new Intent(this, RegisterActivity.class), options.toBundle());
     }
 
     private void subscribeLoginClickEvent() {

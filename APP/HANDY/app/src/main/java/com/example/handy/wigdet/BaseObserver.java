@@ -13,8 +13,11 @@ import io.reactivex.observers.ResourceObserver;
 import retrofit2.HttpException;
 
 /**
- * @author quchao
- * @date 2017/11/27
+ *
+ * 统一处理网络请求结果的 Observer
+ *
+ * @author wangziang
+ * @date 2019/04/07
  *
  * @param <T>
  */

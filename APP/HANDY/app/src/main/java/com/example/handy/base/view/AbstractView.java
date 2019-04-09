@@ -1,5 +1,10 @@
 package com.example.handy.base.view;
 
+/**
+ * @author wangziang
+ * @date 2019/04/07
+ */
+
 public interface AbstractView {
 
     /**
