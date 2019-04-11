@@ -1,0 +1,228 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+apply from: 'jacoco.gradle'
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+
+    defaultConfig {
+        applicationId "com.example.handy"
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+        //AndroidJunitRunner必须要显示指定在defaultConfig中，使用Gradle依赖管理无法使其生效
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        renderscriptTargetApi rootProject.ext.android["renderscriptTargetApi"]
+        renderscriptSupportModeEnabled true    // Enable RS support
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+
+        }
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+    flavorDimensions "code"
+    productFlavors {
+    }
+
+    testOptions {
+        unitTests {
+            // Fix unit test resources not included with AS3
+            includeAndroidResources = true
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+
+    dexOptions {
+        jumboMode true
+        javaMaxHeapSize "4g"
+    }
+
+    greendao {
+        schemaVersion 1
+        targetGenDir 'src/main/java'
+        daoPackage 'com.example.handy.core.dao'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //base
+    implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["cardview-v7"]
+    implementation rootProject.ext.dependencies["design"]
+    implementation rootProject.ext.dependencies["constraint-layout"]
+
+    //ui
+    implementation rootProject.ext.dependencies["SmartRefreshLayout"]
+    implementation rootProject.ext.dependencies["SmartRefreshHeader"]
+    implementation rootProject.ext.dependencies["banner"]
+    implementation rootProject.ext.dependencies["FlycoTabLayout_Lib"]
+    implementation rootProject.ext.dependencies["VerticalTabLayout"]
+    implementation rootProject.ext.dependencies["flowlayout-lib"]
+    implementation rootProject.ext.dependencies["agentweb"]
+
+    //net
+    implementation rootProject.ext.dependencies["gson"]
+    implementation rootProject.ext.dependencies["okhttp"]
+    implementation rootProject.ext.dependencies["logging-interceptor"]
+    implementation rootProject.ext.dependencies["retrofit"]
+    implementation rootProject.ext.dependencies["converter-gson"]
+    implementation rootProject.ext.dependencies["adapter-rxjava2"]
+    implementation rootProject.ext.dependencies["glide"]
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    annotationProcessor rootProject.ext.dependencies["glide_compiler"]
+    implementation rootProject.ext.dependencies["retrofit-url-manager"]
+
+    //dao
+    implementation rootProject.ext.dependencies["greendao"]
+
+    //rx
+    implementation rootProject.ext.dependencies["rxjava"]
+    implementation rootProject.ext.dependencies["rxandroid"]
+    implementation rootProject.ext.dependencies["rxbinding"]
+    implementation rootProject.ext.dependencies["rxpermissions"]
+
+    //di
+    implementation rootProject.ext.dependencies["dagger"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+    implementation rootProject.ext.dependencies["dagger-android"]
+    implementation rootProject.ext.dependencies["dagger-android-support"]
+    annotationProcessor rootProject.ext.dependencies["dagger-android-processor"]
+    implementation rootProject.ext.dependencies["javax_annotation"]
+    implementation rootProject.ext.dependencies["butterknife"]
+    annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
+
+    //multidex
+    implementation rootProject.ext.dependencies["multidex"]
+
+    //canary
+    debugImplementation(rootProject.ext.dependencies["leakcanary-android"]) {
+        exclude group: 'com.android.support'
+    }
+    releaseImplementation(rootProject.ext.dependencies["leakcanary-android-no-op"]) {
+        exclude group: 'com.android.support'
+
+    }
+    testImplementation(rootProject.ext.dependencies["leakcanary-android-no-op"]) {
+        exclude group: 'com.android.support'
+    }
+
+    //other
+    implementation rootProject.ext.dependencies["lottie"]
+    implementation rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+    implementation rootProject.ext.dependencies["fragmentation"]
+    implementation rootProject.ext.dependencies["fragmentation-swipeback"]
+    implementation rootProject.ext.dependencies["crashreport_upgrade"]
+    implementation rootProject.ext.dependencies["logger"]
+    implementation rootProject.ext.dependencies["ByeBurger"]
+    implementation rootProject.ext.dependencies["stetho"]
+    implementation rootProject.ext.dependencies["stetho-okhttp3"]
+    implementation rootProject.ext.dependencies["PersistentCookieJar"]
+    implementation rootProject.ext.dependencies["XUpdate"]
+
+    //UI测试
+    androidTestImplementation(rootProject.ext.dependencies["espresso-core"]) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    implementation(rootProject.ext.dependencies["espresso-idling-resource"]) {
+        exclude module: 'support-annotations'
+    }
+    androidTestImplementation rootProject.ext.dependencies["espresso-contrib"]
+    androidTestImplementation rootProject.ext.dependencies["espresso-intents"]
+    androidTestImplementation rootProject.ext.dependencies["espresso-accessibility"]
+    androidTestImplementation rootProject.ext.dependencies["espresso-web"]
+    androidTestImplementation rootProject.ext.dependencies["idling-concurrent"]
+
+    //unit test
+    testImplementation rootProject.ext.dependencies["junit"]
+    testImplementation rootProject.ext.dependencies["mockito"]
+    testImplementation rootProject.ext.dependencies["powermock-module-junit4"]
+    testImplementation rootProject.ext.dependencies["powermock-module-junit4-rule"]
+    testImplementation rootProject.ext.dependencies["powermock-api-mockito2"]
+
+    //注意这里是mockito2
+    testImplementation rootProject.ext.dependencies["powermock-classloading-xstream"]
+    testImplementation rootProject.ext.dependencies["robolectric"]
+    testImplementation rootProject.ext.dependencies["shadows-support-v4"]
+    testImplementation rootProject.ext.dependencies["shadows-multidex"]
+
+    //支持Multidex功能
+    androidTestImplementation rootProject.ext.dependencies["runner"]
+    //noinspection GradleCompatible
+//    implementation 'com.android.support:appcompat-v7:28.0.0'
+//    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+//    api "com.google.dagger:dagger:2.15"
+//    annotationProcessor "com.google.dagger:dagger-compiler:2.15"
+//    api 'com.jakewharton:butterknife:8.8.1'
+//    // dagger.android
+//    implementation "com.google.dagger:dagger-android:2.15"
+//    implementation "com.google.dagger:dagger-android-support:2.15"
+//    annotationProcessor "com.google.dagger:dagger-android-processor:2.15"
+//
+//    implementation 'me.yokeyword:fragmentation:1.1.9'
+//    implementation 'me.yokeyword:fragmentation-swipeback:1.1.9'
+//    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+//
+//    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+//    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+//
+//    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+//    implementation "me.jessyan:retrofit-url-manager:1.4.0"
+//
+//    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+//    implementation 'io.reactivex.rxjava2:rxjava:2.2.4'
+//    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+//    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.0'
+
+//    //ui test
+//    implementation "com.android.support.test.espresso:espresso-core:3.0.2"
+//    implementation "com.android.support.test.espresso:espresso-idling-resource:3.0.2"
+//    implementation "com.android.support.test.espresso:espresso-contrib:3.0.2"
+//    implementation "com.android.support.test.espresso:espresso-intents:3.0.2"
+//    implementation "com.android.support.test.espresso:espresso-accessibility:3.0.2"
+//    implementation "com.android.support.test.espresso:espresso-web:3.0.2"
+//    implementation "com.android.support.test.espresso.idling:idling-concurrent:3.0.2"
+//    // logger
+//    implementation "com.orhanobut:logger:2.1.1"
+//
+//    //
+//    implementation "com.facebook.stetho:stetho:1.5.0"
+//    implementation "com.facebook.stetho:stetho-okhttp3:1.4.2"
+//    // PersistentCookieJar
+//    implementation "com.github.franmontiel:PersistentCookieJar:v1.0.1"
+
+
+}
+
+//解决支持库版本不兼容问题
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '26.1.0'
+            }
+        }
+    }
+}
+repositories {
+    mavenCentral()
+}
