@@ -4,7 +4,7 @@ import com.example.handy.BuildConfig;
 import com.example.handy.app.Constants;
 import com.example.handy.app.HandyAPP;
 import com.example.handy.core.http.api.Apis;
-import com.example.handy.di.qualifier.WanAndroidUrl;
+import com.example.handy.di.qualifier.HandyUrl;
 import com.example.handy.utils.CommonUtils;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
@@ -40,14 +40,14 @@ public class HttpModule {
 
     @Singleton
     @Provides
-    Apis provideGeeksApi(@WanAndroidUrl Retrofit retrofit) {
+    Apis provideHandyApi(@HandyUrl Retrofit retrofit) {
         return retrofit.create(Apis.class);
     }
 
     @Singleton
     @Provides
-    @WanAndroidUrl
-    Retrofit provideGeeksRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+    @HandyUrl
+    Retrofit provideHandyRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, Apis.HOST);
     }
 

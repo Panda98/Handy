@@ -6,6 +6,10 @@ import java.io.File;
 
 public class Constants {
 
+    /**
+     * Shared Preference
+     */
+
     public static final String MY_SHARED_PREFERENCE = "my_shared_preference";
 
     /**

@@ -29,14 +29,14 @@ public interface AppComponent {
     /**
      * 注入WanAndroidApp实例
      *
-     * @param wanAndroidApp WanAndroidApp
+     * @param handyApp HandyAPP
      */
-    void inject(HandyAPP wanAndroidApp);
+    void inject(HandyAPP handyApp);
 
     /**
      * 提供App的Context
      *
-     * @return GeeksApp context
+     * @return App context
      */
     HandyAPP getContext();
 
