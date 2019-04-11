@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="handy@106.13.106.249">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="handy">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <table id="6" parent="2" name="album">
+      <Comment>专辑</Comment>
+    </table>
+    <table id="7" parent="2" name="album_course">
+      <Comment>专辑关联教程</Comment>
+    </table>
+    <table id="8" parent="2" name="collection">
+      <Comment>用户收藏的专辑</Comment>
+    </table>
+    <table id="9" parent="2" name="comment">
+      <Comment>评论</Comment>
+    </table>
+    <table id="10" parent="2" name="course">
+      <Comment>教程</Comment>
+    </table>
+    <table id="11" parent="2" name="course_comment">
+      <Comment>教程关联评论</Comment>
+    </table>
+    <table id="12" parent="2" name="course_item">
+      <Comment>教程关联用料表项</Comment>
+    </table>
+    <table id="13" parent="2" name="course_label">
+      <Comment>教程关联标签</Comment>
+    </table>
+    <table id="14" parent="2" name="course_step">
+      <Comment>教程关联步骤表项</Comment>
+    </table>
+    <table id="15" parent="2" name="follow">
+      <Comment>关注</Comment>
+    </table>
+    <table id="16" parent="2" name="item">
+      <Comment>用料表项</Comment>
+    </table>
+    <table id="17" parent="2" name="label">
+      <Comment>标签</Comment>
+    </table>
+    <table id="18" parent="2" name="step">
+      <Comment>步骤表项</Comment>
+    </table>
+    <table id="19" parent="2" name="user">
+      <Comment>用户</Comment>
+    </table>
+    <table id="20" parent="2" name="user_label">
+      <Comment>用户兴趣标签</Comment>
+    </table>
+    <table id="21" parent="2" name="view">
+      <Comment>浏览记录</Comment>
+    </table>
+    <column id="22" parent="6" name="user_id">
+      <Position>5</Position>
+      <DataType>int(11) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="23" parent="6" name="album_id">
+      <Position>1</Position>
+      <DataType>int(15) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="24" parent="6" name="album_name">
+      <Position>2</Position>
+      <DataType>varchar(63)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="25" parent="6" name="album_detail">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="26" parent="6" name="album_state">
+      <Position>4</Position>
+      <Comment>是否发布</Comment>
+      <DataType>bit(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>b&apos;0&apos;</DefaultExpression>
+    </column>
+    <key id="27" parent="6" name="PRIMARY">
+      <ColNames>album_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="28" parent="7" name="course_id">
+      <Position>2</Position>
+      <DataType>int(15) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="29" parent="7" name="album_id">
+      <Position>1</Position>
+      <DataType>int(15) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="30" parent="8" name="user_id">
+      <Position>1</Position>
+      <DataType>int(11) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="31" parent="8" name="album_id">
+      <Position>2</Position>
+      <DataType>int(15) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="32" parent="9" name="comment_id">
+      <Position>1</Position>
+      <Comment>留言条目id</Comment>
+      <DataType>int(20) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="33" parent="9" name="comment_content">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="34" parent="9" name="author_answer">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="35" parent="9" name="user_id">
+      <Position>4</Position>
+      <DataType>int(11) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="36" parent="9" name="PRIMARY">
+      <ColNames>comment_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="37" parent="10" name="course_id">
+      <Position>1</Position>
+      <Comment>教程id</Comment>
+      <DataType>int(15) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="38" parent="10" name="course_title">
+      <Position>2</Position>
+      <DataType>varchar(63)|0</DataType>
+    </column>
+    <column id="39" parent="10" name="course_intro">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="40" parent="10" name="course_note">
+      <Position>4</Position>
+      <DataType>varchar(1023)|0</DataType>
+    </column>
+    <column id="41" parent="10" name="course_cover">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="42" parent="10" name="course_views">
+      <Position>6</Position>
+      <DataType>int(11) unsigned|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="43" parent="10" name="course_collects">
+      <Position>7</Position>
+      <DataType>int(11) unsigned|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="44" parent="10" name="course_likes">
+      <Position>8</Position>
+      <DataType>int(11) unsigned|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="45" parent="10" name="user_id">
+      <Position>9</Position>
+      <DataType>int(11) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="46" parent="10" name="diy_label">
+      <Position>10</Position>
+      <Comment>自设标签</Comment>
+      <DataType>varchar(11)|0</DataType>
+    </column>
+    <key id="47" parent="10" name="PRIMARY">
+      <ColNames>course_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="48" parent="11" name="course_id">
+      <Position>1</Position>
+      <DataType>int(15) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="49" parent="11" name="comment_id">
+      <Position>2</Position>
+      <DataType>int(20) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="50" parent="12" name="course_id">
+      <Position>1</Position>
+      <DataType>int(15) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="12" name="item_id">
+      <Position>2</Position>
+      <DataType>int(20) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="52" parent="13" name="course_id">
+      <Position>1</Position>
+      <DataType>int(15) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="53" parent="13" name="label_id">
+      <Position>2</Position>
+      <DataType>int(8) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="54" parent="14" name="course_id">
+      <Position>1</Position>
+      <DataType>int(15) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="55" parent="14" name="step_id">
+      <Position>2</Position>
+      <DataType>int(20) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="56" parent="15" name="user_id">
+      <Position>1</Position>
+      <DataType>int(11) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="57" parent="15" name="follower_id">
+      <Position>2</Position>
+      <DataType>int(11) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="58" parent="15" name="follow_id">
+      <Position>3</Position>
+      <Comment>关注条目id</Comment>
+      <DataType>int(31) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <key id="59" parent="15" name="PRIMARY">
+      <ColNames>follow_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="60" parent="16" name="item_id">
+      <Position>1</Position>
+      <Comment>用料表项ID</Comment>
+      <DataType>int(20) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="61" parent="16" name="item_name">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="62" parent="16" name="item_number">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="63" parent="16" name="item_tag">
+      <Position>4</Position>
+      <Comment>序号</Comment>
+      <DataType>int(4) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="64" parent="16" name="PRIMARY">
+      <ColNames>item_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="65" parent="17" name="label_id">
+      <Position>1</Position>
+      <Comment>标签id</Comment>
+      <DataType>int(8) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="66" parent="17" name="label_name">
+      <Position>2</Position>
+      <DataType>varchar(63)|0</DataType>
+    </column>
+    <column id="67" parent="17" name="flabel_id">
+      <Position>3</Position>
+      <DataType>int(8) unsigned|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <key id="68" parent="17" name="PRIMARY">
+      <ColNames>label_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="69" parent="18" name="step_id">
+      <Position>1</Position>
+      <DataType>int(20) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="70" parent="18" name="step_tag">
+      <Position>2</Position>
+      <Comment>序号</Comment>
+      <DataType>int(4) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="71" parent="18" name="step_img">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="72" parent="18" name="step_detail">
+      <Position>4</Position>
+      <DataType>varchar(1023)|0</DataType>
+    </column>
+    <key id="73" parent="18" name="PRIMARY">
+      <ColNames>step_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="74" parent="19" name="user_id">
+      <Position>1</Position>
+      <Comment> 用户id</Comment>
+      <DataType>int(11) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="75" parent="19" name="nick_name">
+      <Position>2</Position>
+      <Comment>用户登录名</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="76" parent="19" name="login_password">
+      <Position>3</Position>
+      <Comment>用户密码</Comment>
+      <DataType>varchar(31)|0</DataType>
+    </column>
+    <column id="77" parent="19" name="email">
+      <Position>4</Position>
+      <Comment>电子邮箱</Comment>
+      <DataType>varchar(31)|0</DataType>
+    </column>
+    <column id="78" parent="19" name="sex">
+      <Position>5</Position>
+      <Comment>性别</Comment>
+      <DataType>tinyint(2)|0</DataType>
+    </column>
+    <column id="79" parent="19" name="user_pic">
+      <Position>6</Position>
+      <Comment>头像</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="80" parent="19" name="birthday">
+      <Position>7</Position>
+      <Comment>生日</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <index id="81" parent="19" name="email_index">
+      <ColNames>email</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="82" parent="19" name="PRIMARY">
+      <ColNames>user_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="83" parent="19" name="email_index">
+      <ColNames>email</ColNames>
+      <UnderlyingIndexName>email_index</UnderlyingIndexName>
+    </key>
+    <column id="84" parent="20" name="user_id">
+      <Position>1</Position>
+      <Comment>用户与标签关联</Comment>
+      <DataType>int(11) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="85" parent="20" name="label_id">
+      <Position>2</Position>
+      <DataType>int(8) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="86" parent="21" name="user_id">
+      <Position>1</Position>
+      <DataType>int(11) unsigned|0</DataType>
+    </column>
+    <column id="87" parent="21" name="course_id">
+      <Position>2</Position>
+      <DataType>int(15) unsigned|0</DataType>
+    </column>
+    <column id="88" parent="21" name="view_id">
+      <Position>3</Position>
+      <Comment>浏览记录id</Comment>
+      <DataType>int(63) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <key id="89" parent="21" name="PRIMARY">
+      <ColNames>view_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
