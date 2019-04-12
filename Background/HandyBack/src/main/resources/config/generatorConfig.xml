@@ -73,6 +73,7 @@
         <table schema="handy" tableName="follow"/>
         <table schema="handy" tableName="item"/>
         <table schema="handy" tableName="label"/>
+        <table schema="handy" tableName="level"/>
         <table schema="handy" tableName="collection"/>
         <table schema="handy" tableName="step"/>
         <table schema="handy" tableName="user"/>
