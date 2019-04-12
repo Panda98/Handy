@@ -4,15 +4,13 @@ import com.google.gson.Gson;
 import com.handy.support.entity.User;
 import com.handy.support.pojo.dto.UserDto;
 import com.handy.support.pojo.vo.UserVO;
-import com.handy.util.GsonSetting;
+import com.handy.support.utils.GsonSetting;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.handy.support.service.User.IUserService;
-
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by Pan on 2019/4/11.
@@ -56,5 +54,5 @@ public class UserController {
         return gson.toJson(msg);
     }
 
-    
+
 }
