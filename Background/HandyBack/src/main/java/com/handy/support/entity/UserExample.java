@@ -654,6 +654,66 @@ public class UserExample {
             addCriterion("birthday not between", value1, value2, "birthday");
             return (Criteria) this;
         }
+
+        public Criteria andLevelIdIsNull() {
+            addCriterion("level_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdIsNotNull() {
+            addCriterion("level_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdEqualTo(Byte value) {
+            addCriterion("level_id =", value, "levelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdNotEqualTo(Byte value) {
+            addCriterion("level_id <>", value, "levelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdGreaterThan(Byte value) {
+            addCriterion("level_id >", value, "levelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdGreaterThanOrEqualTo(Byte value) {
+            addCriterion("level_id >=", value, "levelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdLessThan(Byte value) {
+            addCriterion("level_id <", value, "levelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdLessThanOrEqualTo(Byte value) {
+            addCriterion("level_id <=", value, "levelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdIn(List<Byte> values) {
+            addCriterion("level_id in", values, "levelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdNotIn(List<Byte> values) {
+            addCriterion("level_id not in", values, "levelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdBetween(Byte value1, Byte value2) {
+            addCriterion("level_id between", value1, value2, "levelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdNotBetween(Byte value1, Byte value2) {
+            addCriterion("level_id not between", value1, value2, "levelId");
+            return (Criteria) this;
+        }
     }
 
     /**

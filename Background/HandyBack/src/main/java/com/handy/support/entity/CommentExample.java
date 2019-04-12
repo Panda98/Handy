@@ -1,6 +1,7 @@
 package com.handy.support.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CommentExample {
@@ -324,76 +325,6 @@ public class CommentExample {
             return (Criteria) this;
         }
 
-        public Criteria andAuthorAnswerIsNull() {
-            addCriterion("author_answer is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAuthorAnswerIsNotNull() {
-            addCriterion("author_answer is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAuthorAnswerEqualTo(String value) {
-            addCriterion("author_answer =", value, "authorAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andAuthorAnswerNotEqualTo(String value) {
-            addCriterion("author_answer <>", value, "authorAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andAuthorAnswerGreaterThan(String value) {
-            addCriterion("author_answer >", value, "authorAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andAuthorAnswerGreaterThanOrEqualTo(String value) {
-            addCriterion("author_answer >=", value, "authorAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andAuthorAnswerLessThan(String value) {
-            addCriterion("author_answer <", value, "authorAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andAuthorAnswerLessThanOrEqualTo(String value) {
-            addCriterion("author_answer <=", value, "authorAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andAuthorAnswerLike(String value) {
-            addCriterion("author_answer like", value, "authorAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andAuthorAnswerNotLike(String value) {
-            addCriterion("author_answer not like", value, "authorAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andAuthorAnswerIn(List<String> values) {
-            addCriterion("author_answer in", values, "authorAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andAuthorAnswerNotIn(List<String> values) {
-            addCriterion("author_answer not in", values, "authorAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andAuthorAnswerBetween(String value1, String value2) {
-            addCriterion("author_answer between", value1, value2, "authorAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andAuthorAnswerNotBetween(String value1, String value2) {
-            addCriterion("author_answer not between", value1, value2, "authorAnswer");
-            return (Criteria) this;
-        }
-
         public Criteria andUserIdIsNull() {
             addCriterion("user_id is null");
             return (Criteria) this;
@@ -451,6 +382,66 @@ public class CommentExample {
 
         public Criteria andUserIdNotBetween(Integer value1, Integer value2) {
             addCriterion("user_id not between", value1, value2, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIsNull() {
+            addCriterion("update_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIsNotNull() {
+            addCriterion("update_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeEqualTo(Date value) {
+            addCriterion("update_time =", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotEqualTo(Date value) {
+            addCriterion("update_time <>", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeGreaterThan(Date value) {
+            addCriterion("update_time >", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("update_time >=", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeLessThan(Date value) {
+            addCriterion("update_time <", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("update_time <=", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIn(List<Date> values) {
+            addCriterion("update_time in", values, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotIn(List<Date> values) {
+            addCriterion("update_time not in", values, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeBetween(Date value1, Date value2) {
+            addCriterion("update_time between", value1, value2, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("update_time not between", value1, value2, "updateTime");
             return (Criteria) this;
         }
     }

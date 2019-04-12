@@ -1,6 +1,7 @@
 package com.handy.support.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CourseExample {
@@ -841,6 +842,126 @@ public class CourseExample {
 
         public Criteria andDiyLabelNotBetween(String value1, String value2) {
             addCriterion("diy_label not between", value1, value2, "diyLabel");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIsNull() {
+            addCriterion("update_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIsNotNull() {
+            addCriterion("update_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeEqualTo(Date value) {
+            addCriterion("update_time =", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotEqualTo(Date value) {
+            addCriterion("update_time <>", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeGreaterThan(Date value) {
+            addCriterion("update_time >", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("update_time >=", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeLessThan(Date value) {
+            addCriterion("update_time <", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("update_time <=", value, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeIn(List<Date> values) {
+            addCriterion("update_time in", values, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotIn(List<Date> values) {
+            addCriterion("update_time not in", values, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeBetween(Date value1, Date value2) {
+            addCriterion("update_time between", value1, value2, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("update_time not between", value1, value2, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdIsNull() {
+            addCriterion("level_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdIsNotNull() {
+            addCriterion("level_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdEqualTo(Byte value) {
+            addCriterion("level_id =", value, "levelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdNotEqualTo(Byte value) {
+            addCriterion("level_id <>", value, "levelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdGreaterThan(Byte value) {
+            addCriterion("level_id >", value, "levelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdGreaterThanOrEqualTo(Byte value) {
+            addCriterion("level_id >=", value, "levelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdLessThan(Byte value) {
+            addCriterion("level_id <", value, "levelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdLessThanOrEqualTo(Byte value) {
+            addCriterion("level_id <=", value, "levelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdIn(List<Byte> values) {
+            addCriterion("level_id in", values, "levelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdNotIn(List<Byte> values) {
+            addCriterion("level_id not in", values, "levelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdBetween(Byte value1, Byte value2) {
+            addCriterion("level_id between", value1, value2, "levelId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIdNotBetween(Byte value1, Byte value2) {
+            addCriterion("level_id not between", value1, value2, "levelId");
             return (Criteria) this;
         }
     }
