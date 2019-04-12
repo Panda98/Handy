@@ -1,6 +1,8 @@
 package com.handy.support.pojo.vo;
 
+import com.handy.support.entity.User;
 import com.handy.support.pojo.dto.UserDto;
+import org.springframework.beans.BeanUtils;
 
 import java.util.Date;
 
@@ -28,7 +30,7 @@ public class UserVO {
         this.id = dto.getUserId();
         this.email = dto.getEmail();
         this.nickname = dto.getNickName();
-        this.sex = dto.getSex() == 1?"男":"女";
+        this.sex = dto.getSex() != null?(dto.getSex() == 1?"男":"女"):null;
         this.birthday = dto.getBirthday();
         this.userPic = dto.getUserPic();
 
