@@ -1,4 +1,4 @@
-package com.handy.support.pojo.dto;
+package com.handy.support.pojo.user.dto;
 
 import java.util.Date;
 
@@ -12,7 +12,7 @@ public class UserDto {
     private Byte sex;
     private String userPic;
     private Date birthday;
-    private String levelId;
+    private Byte levelId;
 
     public Integer getUserId() {
         return userId;
@@ -62,11 +62,11 @@ public class UserDto {
         this.birthday = birthday;
     }
 
-    public String getLevelId() {
+    public Byte getLevelId() {
         return levelId;
     }
 
-    public void setLevelId(String levelId) {
+    public void setLevelId(Byte levelId) {
         this.levelId = levelId;
     }
 }

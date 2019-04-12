@@ -1,8 +1,6 @@
-package com.handy.support.pojo.vo;
+package com.handy.support.pojo.user.vo;
 
-import com.handy.support.entity.User;
-import com.handy.support.pojo.dto.UserDto;
-import org.springframework.beans.BeanUtils;
+import com.handy.support.pojo.user.dto.UserDto;
 
 import java.util.Date;
 
@@ -18,6 +16,9 @@ public class UserVO {
     private Date birthday;
     private String userPic;
 
+    public UserVO(){
+        super();
+    }
     public UserVO(int id, String email, String nickname, String sex, Date birthday, String userPic) {
         this.id = id;
         this.email = email;
