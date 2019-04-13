@@ -1,7 +1,6 @@
 package com.handy.web.controller;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.handy.support.entity.User;
 import com.handy.support.pojo.user.dto.UserDto;
 import com.handy.support.pojo.user.vo.UserAuthorVO;
@@ -12,12 +11,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.handy.support.service.User.IUserService;
-
-import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Pan on 2019/4/11.
