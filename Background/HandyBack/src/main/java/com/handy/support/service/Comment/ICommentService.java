@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ICommentService {
      List<Comment> getCourseComment(int course_id, int from, int to);
+
 }
