@@ -1,45 +1,57 @@
 package com.handy.support.utils.status;
 
+import com.google.gson.Gson;
+import com.handy.support.utils.GsonSetting;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by joanie on 2019/4/13.
  */
-public class ReturnCode {
+public class ReturnCode<T> {
 
-    private ReturnStatus<String,String> errorCode;
-    private ReturnStatus<String,String> errorMsg;
-    private ReturnStatus<String,String> data;
+    private Integer errorCode;
+    private String msg;
+    private T data;
 
-    public ReturnCode() {
-    }
-
-    public ReturnCode(ReturnStatus<String, String> errorCode, ReturnStatus<String, String> errorMsg, ReturnStatus<String, String> data) {
+    public ReturnCode(Integer errorCode, String msg, T data) {
         this.errorCode = errorCode;
-        this.errorMsg = errorMsg;
+        this.msg = msg;
         this.data = data;
     }
 
-    public ReturnStatus<String, String> getErrorCode() {
+    public Integer getErrorCode() {
         return errorCode;
     }
 
-    public void setErrorCode(Integer code) {
-        this.errorCode=new ReturnStatus<String,String>("errorCode",code.toString());
+    public void setErrorCode(Integer errorCode) {
+        this.errorCode = errorCode;
     }
 
-    public ReturnStatus<String, String> getErrorMsg() {
-        return errorMsg;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setErrorMsg(String msg) {
-        this.errorMsg=new ReturnStatus<String,String>("errorMsg",msg);
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
-    public ReturnStatus<String, String> getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(String d) {
-        this.data=new ReturnStatus<String,String>("data",d);
+    public void setData(T data) {
+        this.data = data;
     }
 
+    public String returnHandler(ReturnCode<T> r){
+        Map<String,String> map=new HashMap<String,String>();
+        map.put("errorCode",r.getErrorCode().toString());
+        map.put("errorMsg",r.getMsg());
+        Gson gson=GsonSetting.GSON;
+        String s=gson.toJson(r);
+        map.put("data",s);
+        return gson.toJson(map);
+    }
 }
