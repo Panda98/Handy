@@ -7,6 +7,7 @@ import com.handy.support.pojo.user.vo.UserAuthVO;
 import com.handy.support.pojo.user.vo.UserLabelVO;
 import com.handy.support.pojo.user.vo.UserVO;
 import com.handy.support.utils.GsonSetting;
+import com.handy.support.utils.status.ErrorEnum;
 import com.handy.support.utils.status.ReturnCode;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,9 @@ public class UserController {
     private IUserService iUserService;
     @Autowired
     private Gson gson;
-    
+
+
+
     /**
      * 登录
      * @param userAuthVO 包含username和password
@@ -32,26 +35,29 @@ public class UserController {
     @RequestMapping(value="/user/login",produces = "application/json; charset=utf-8",method = RequestMethod.POST)
     public String login(@RequestBody UserAuthVO userAuthVO){
         User user = iUserService.getUserByEmail(userAuthVO.getUsername());
+
+        Integer statusCode=0;
         String msg = "";
         if(user == null){
-            msg = "用户不存在！";
+            statusCode = ErrorEnum.USER_NOT_EXIST.getErrorCode();
+            msg = ErrorEnum.USER_NOT_EXIST.getErrorMsg();
         }
         else if(!user.getLoginPassword().equals(userAuthVO.getPassword())){
-            msg = "密码错误！";
+            statusCode = ErrorEnum.WRONG_PASSWORD.getErrorCode();
+            msg = ErrorEnum.WRONG_PASSWORD.getErrorMsg();
         }
         UserDto dto = new UserDto();
         BeanUtils.copyProperties(user,dto);
 
         gson = GsonSetting.GSON;
 
-        ReturnCode code = new ReturnCode();
 
+        UserVO vo=null;
         if(msg.equals("")) {
-            UserVO vo = new UserVO(dto);
-
-            return gson.toJson(new UserVO(dto));
+           vo = new UserVO(dto);
         }
-        return msg;
+        ReturnCode<UserVO> code = new ReturnCode<UserVO>(statusCode,msg,vo);
+        return code.returnHandler(code);
     }
 
     /**
