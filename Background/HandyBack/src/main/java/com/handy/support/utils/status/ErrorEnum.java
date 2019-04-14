@@ -17,7 +17,7 @@ public enum ErrorEnum{
     REQUEST_FAIL(5002,"请求失败！"),
     UPDATE_FAIL(5003,"更新失败!"),
     COLLECT_FAIL(6001,"收藏失败!"),
-    UNCOLLECT_FAIL(6002,"取消收藏!"),
+    UNCOLLECT_FAIL(6002,"取消收藏失败!"),
     LIKE_FAIL(8001,"点赞失败"),
     UNLIKE_FAIL(8002,"取消点赞失败!"),
     COMMENT_FAIL(9001,"评论失败!");
