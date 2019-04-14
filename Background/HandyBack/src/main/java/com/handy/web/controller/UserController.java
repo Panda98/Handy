@@ -7,6 +7,7 @@ import com.handy.support.pojo.user.vo.UserAuthVO;
 import com.handy.support.pojo.user.vo.UserLabelVO;
 import com.handy.support.pojo.user.vo.UserVO;
 import com.handy.support.utils.GsonSetting;
+import com.handy.support.utils.status.ReturnCode;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,8 +43,12 @@ public class UserController {
         BeanUtils.copyProperties(user,dto);
 
         gson = GsonSetting.GSON;
+
+        ReturnCode code = new ReturnCode();
+
         if(msg.equals("")) {
-            System.out.println(gson.toJson(new UserVO(dto)));
+            UserVO vo = new UserVO(dto);
+
             return gson.toJson(new UserVO(dto));
         }
         return msg;
