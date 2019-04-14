@@ -3,6 +3,7 @@ package com.handy.support.pojo.user.vo;
 import java.util.List;
 
 /**
+ * 用户及其标签的表现层
  * Created by Pan on 2019/4/12.
  */
 public class UserLabelVO {

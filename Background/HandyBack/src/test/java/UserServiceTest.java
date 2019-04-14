@@ -1,10 +1,7 @@
 import com.handy.support.entity.User;
 import com.handy.support.pojo.user.dto.UserDto;
-import com.handy.support.pojo.user.vo.UserAuthorVO;
-import com.handy.support.pojo.user.vo.UserLabelVO;
 import com.handy.support.pojo.user.vo.UserVO;
 import com.handy.support.service.User.IUserService;
-import com.handy.web.controller.UserController;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.springframework.beans.factory.annotation.Autowired;
