@@ -52,8 +52,8 @@ public class UserController {
         if(msg.equals("")) {
            vo = new UserVO(dto);
         }
-        ReturnCode<UserVO> code = new ReturnCode<UserVO>(error,vo);
-        return code.returnHandler(code);
+        ReturnCode<UserVO> code = new ReturnCode<UserVO>(vo);
+        return code.returnHandler();
     }
 
     /**
@@ -72,7 +72,7 @@ public class UserController {
 
         }
         ReturnCode<UserVO> code = new ReturnCode<UserVO>(res,vo);
-        return code.returnHandler(code);
+        return code.returnHandler();
     }
 
     /**
