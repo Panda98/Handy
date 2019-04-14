@@ -9,12 +9,37 @@ public class ReturnCode {
     private ReturnStatus<String,String> errorMsg;
     private ReturnStatus<String,String> data;
 
-
-    public ReturnCode get(Integer code, String msg, String d){
-        ReturnCode returnCode=new ReturnCode();
-        returnCode.errorCode=new ReturnStatus<String,String>("errorCode",code.toString());
-        returnCode.errorMsg=new ReturnStatus<String,String>("errorMsg",msg);
-        returnCode.data=new ReturnStatus<String,String>("data",d);
-        return returnCode;
+    public ReturnCode() {
     }
+
+    public ReturnCode(ReturnStatus<String, String> errorCode, ReturnStatus<String, String> errorMsg, ReturnStatus<String, String> data) {
+        this.errorCode = errorCode;
+        this.errorMsg = errorMsg;
+        this.data = data;
+    }
+
+    public ReturnStatus<String, String> getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(Integer code) {
+        this.errorCode=new ReturnStatus<String,String>("errorCode",code.toString());
+    }
+
+    public ReturnStatus<String, String> getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String msg) {
+        this.errorMsg=new ReturnStatus<String,String>("errorMsg",msg);
+    }
+
+    public ReturnStatus<String, String> getData() {
+        return data;
+    }
+
+    public void setData(String d) {
+        this.data=new ReturnStatus<String,String>("data",d);
+    }
+
 }
