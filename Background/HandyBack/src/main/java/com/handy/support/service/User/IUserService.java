@@ -3,6 +3,7 @@ package com.handy.support.service.User;
 import com.handy.support.entity.User;
 import com.handy.support.pojo.user.dto.UserDto;
 import com.handy.support.pojo.user.vo.UserVO;
+import com.handy.support.utils.status.ErrorEnum;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * Created by Pan on 2019/4/10.
  */
 public interface IUserService {
-    int addUser(String email,String psw);
+    ErrorEnum addUser(String email, String psw);
     User getUserByEmail(String email);
     UserDto getUserByID(int id);
 
