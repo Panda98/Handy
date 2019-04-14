@@ -10,37 +10,25 @@ import java.util.Map;
  * Created by joanie on 2019/4/13.
  */
 public class ReturnCode<T> {
-
-    private Integer errorCode;
-    private String msg;
+    private ErrorEnum errorEnum;
     private T data;
 
-    public ReturnCode(Integer errorCode, String msg, T data) {
-        this.errorCode = errorCode;
-        this.msg = msg;
+    public ReturnCode(ErrorEnum errorEnum, T data) {
+        this.errorEnum=errorEnum;
         this.data = data;
     }
 
     public ReturnCode(T data) {
-        this.errorCode = 0;
-        this.msg ="";
+        this.errorEnum=ErrorEnum.SUCCESS;
         this.data = data;
     }
 
-    public Integer getErrorCode() {
-        return errorCode;
+    public ErrorEnum getErrorEnum() {
+        return errorEnum;
     }
 
-    public void setErrorCode(Integer errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setErrorEnum(ErrorEnum errorEnum) {
+        this.errorEnum = errorEnum;
     }
 
     public T getData() {
@@ -53,8 +41,8 @@ public class ReturnCode<T> {
 
     public String returnHandler(ReturnCode<T> r){
         Map<String,String> map=new HashMap<String,String>();
-        map.put("errorCode",r.getErrorCode().toString());
-        map.put("errorMsg",r.getMsg());
+        map.put("errorCode",r.getErrorEnum().getErrorCode().toString());
+        map.put("errorMsg",r.getErrorEnum().getErrorMsg());
         Gson gson=GsonSetting.GSON;
         String s=gson.toJson(r);
         map.put("data",s);

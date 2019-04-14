@@ -6,6 +6,7 @@ package com.handy.support.utils.status;
  * Created by joanie on 2019/4/13.
  */
 public enum ErrorEnum{
+    SUCCESS(0,""),
     USER_NOT_EXIST(1000,"该账号不存在!"),
     WRONG_PASSWORD(1001, "您输入的密码不正确!"),
     REGISTER_FAIL(2001,"注册失败！"),
