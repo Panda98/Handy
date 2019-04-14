@@ -48,4 +48,48 @@ public class Constants {
     public static final long CLICK_TIME_AREA = 1000;
 
     public static final long DOUBLE_INTERVAL_TIME = 2000;
+
+    /**
+     * Tag fragment classify
+     */
+    public static final int TYPE_MAIN_PAGER = 0;
+
+    public static final int TYPE_FOLLOW_PAGER = 1;
+
+    public static final int TYPE_COLLECT_PAGER = 2;
+
+    public static final int TYPE_ACCOUNT_PAGER = 3;
+
+
+    public static final int TYPE_COLLECT = 5;
+
+    public static final int TYPE_SETTING = 6;
+
+
+    /**
+     * Bottom Navigation tab classify
+     */
+    public static final int TAB_ONE = 0;
+
+    /**
+     * Intent params
+     */
+    public static final String ARG_PARAM1 = "param1";
+
+    public static final String ARG_PARAM2 = "param2";
+
+    /**
+     * Main Pager
+     */
+    //public static final String SEARCH_TEXT = "search_text";
+
+    //public static final String MENU_BUILDER = "MenuBuilder";
+
+    //public static final String LOGIN_DATA = "login_data";
+
+    public static final String BANNER_DATA = "banner_data";
+    public static final String RECOMMEND_ALBUM_DATA = "recommend_album_data";
+    public static final String RECOMMEND_COURSE_DATA = "recommend_course_data";
+    public static final String CURRENT_PAGE = "current_page";
+
 }

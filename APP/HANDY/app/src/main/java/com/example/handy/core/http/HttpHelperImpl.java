@@ -1,8 +1,13 @@
 package com.example.handy.core.http;
 
+import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
 import com.example.handy.core.bean.LoginData;
+import com.example.handy.core.bean.RecommendAlbumListData;
+import com.example.handy.core.bean.RecommendCourseListData;
 import com.example.handy.core.http.api.Apis;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -36,5 +41,20 @@ public class HttpHelperImpl implements HttpHelper {
     @Override
     public Observable<BaseResponse<LoginData>> logout() {
         return mApis.logout();
+    }
+
+    @Override
+    public Observable<BaseResponse<List<BannerData>>> getBannerData() {
+        return mApis.getBannerData();
+    }
+
+    @Override
+    public Observable<BaseResponse<List<RecommendAlbumListData>>> getRecommendAlbumListData() {
+        return mApis.getRecommendAlbumListData();
+    }
+
+    @Override
+    public Observable<BaseResponse<List<RecommendCourseListData>>> getRecommendCourseListData() {
+        return mApis.getRecommendCourseListData();
     }
 }

@@ -1,9 +1,14 @@
 package com.example.handy.core;
 
+import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
 import com.example.handy.core.bean.LoginData;
+import com.example.handy.core.bean.RecommendAlbumListData;
+import com.example.handy.core.bean.RecommendCourseListData;
 import com.example.handy.core.http.HttpHelper;
 import com.example.handy.core.prefs.PreferenceHelper;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -17,6 +22,9 @@ public class DataManager implements HttpHelper, PreferenceHelper {
         this.mPreferenceHelper = preferencesHelper;
     }
 
+    /**
+     *  登录注册相关
+     */
     @Override
     public Observable<BaseResponse<LoginData>> getLoginData(String username, String password) {
         return mHttpHelper.getLoginData(username, password);
@@ -32,6 +40,29 @@ public class DataManager implements HttpHelper, PreferenceHelper {
         return mHttpHelper.logout();
     }
 
+    /*
+       首页相关
+    */
+
+    @Override
+    public Observable<BaseResponse<List<BannerData>>> getBannerData() {
+        return mHttpHelper.getBannerData();
+    }
+
+    @Override
+    public Observable<BaseResponse<List<RecommendAlbumListData>>> getRecommendAlbumListData() {
+        return mHttpHelper.getRecommendAlbumListData();
+    }
+
+    @Override
+    public Observable<BaseResponse<List<RecommendCourseListData>>> getRecommendCourseListData() {
+        return mHttpHelper.getRecommendCourseListData();
+    }
+
+
+    /*
+       Preference
+    */
     @Override
     public void setLoginAccount(String account) {
         mPreferenceHelper.setLoginAccount(account);
@@ -61,4 +92,17 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     public boolean getLoginStatus() {
         return mPreferenceHelper.getLoginStatus();
     }
+
+    // main
+    @Override
+    public void setCurrentPage(int position) {
+        mPreferenceHelper.setCurrentPage(position);
+    }
+
+    @Override
+    public int getCurrentPage() {
+        return mPreferenceHelper.getCurrentPage();
+    }
+
+
 }
