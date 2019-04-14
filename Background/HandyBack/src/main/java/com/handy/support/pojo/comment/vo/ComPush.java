@@ -1,9 +1,13 @@
 package com.handy.support.pojo.comment.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ComPush {
     private int uid;
     private int course_id;
     private String content;
+    public ComPush(){}
 public ComPush(int uid,int course_id,String content){
     this.content=content;
     this.uid=uid;

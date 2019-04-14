@@ -1,10 +1,17 @@
 package com.handy.support.service.Comment;
 
 import com.handy.support.entity.Comment;
+import com.handy.support.entity.CommentReply;
+import com.handy.support.pojo.comment.dto.CommentPush;
+import com.handy.support.pojo.comment.vo.ComPush;
+import com.handy.support.pojo.comment.vo.ComRepReq;
+import com.handy.support.pojo.comment.vo.CourseComReq;
 
 import java.util.List;
 
 public interface ICommentService {
-     List<Comment> getCourseComment(int course_id, int from, int to);
+     List<Comment> getCourseComment(CourseComReq req);
+     void pushCommentToCourse(CommentPush req);
+     List<CommentReply>getCommentReply(ComRepReq req);
 
 }
