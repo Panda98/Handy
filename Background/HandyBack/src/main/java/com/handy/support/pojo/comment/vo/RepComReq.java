@@ -6,13 +6,13 @@ import org.springframework.stereotype.Component;
 public class RepComReq {
     private int uid;
     private int comment_id;
-    private  int reply_id;
+    private  int to_reply_id;
     private String content;
     public RepComReq(){}
     public RepComReq(int uid,int comment_id,int reply_id,String content){
         this.comment_id=comment_id;
         this.uid=uid;
-        this.reply_id=reply_id;
+        this.to_reply_id=reply_id;
         this.content=content;
     }
 
@@ -40,11 +40,11 @@ public class RepComReq {
         return comment_id;
     }
 
-    public int getReply_id() {
-        return reply_id;
+    public int getTo_reply_id() {
+        return to_reply_id;
     }
 
-    public void setReply_id(int reply_id) {
-        this.reply_id = reply_id;
+    public void setTo_reply_id(int to_reply_id) {
+        this.to_reply_id = to_reply_id;
     }
 }

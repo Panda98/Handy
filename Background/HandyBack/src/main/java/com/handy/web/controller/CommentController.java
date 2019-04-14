@@ -48,7 +48,11 @@ public class CommentController {
     }
     @RequestMapping(value="/reply",method = GET)
     public String replyComment(RepComReq req){
-        return null;
+        ReplyPush replyPush=new CommentPush();
+        commentPush.setComment(req);
+        commentService.pushCommentToCourse(commentPush);
+        ReturnCode<Boolean> code = new ReturnCode<Boolean>(true);
+        return code.returnHandler();
     }
 }
 
