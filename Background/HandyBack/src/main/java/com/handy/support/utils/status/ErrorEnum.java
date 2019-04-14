@@ -9,6 +9,7 @@ public enum ErrorEnum{
     USER_NOT_EXIST(1000,"该账号不存在!"),
     WRONG_PASSWORD(1001, "您输入的密码不正确!"),
     REGISTER_FAIL(2001,"注册失败！"),
+    EMAIL_FAIL(2002,"该邮箱已被使用！"),
     DATABASE_BUSY(3001,"数据库忙!"),
     PUBLISH_FAIL(4001,"发布失败！"),
     QUERY_FAIL(5001,"查询失败!"),

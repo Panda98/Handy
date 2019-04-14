@@ -21,6 +21,12 @@ public class ReturnCode<T> {
         this.data = data;
     }
 
+    public ReturnCode(T data) {
+        this.errorCode = 0;
+        this.msg ="";
+        this.data = data;
+    }
+
     public Integer getErrorCode() {
         return errorCode;
     }
