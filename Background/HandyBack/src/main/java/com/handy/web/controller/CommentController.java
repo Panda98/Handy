@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value="/comment",produces = "application/json; charset=utf-8")
 public class CommentController {
    public String getCourseComment(int course_id,int from,int to){
-
+      return null;
    }
 }
