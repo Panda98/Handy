@@ -9,6 +9,17 @@ public class AlbumDto {
     private String albumDetail;
     private Boolean albumState;
     private Integer userId;
+    private String albumPic;
+
+    public String getAlbumPic() {
+        return albumPic;
+    }
+
+    public void setAlbumPic(String albumPic) {
+        this.albumPic = albumPic;
+    }
+
+
     public Integer getAlbumId() {
         return albumId;
     }

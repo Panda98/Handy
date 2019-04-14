@@ -1,5 +1,8 @@
 package com.handy.support.pojo.album.vo;
 
+import com.handy.support.pojo.album.dto.AlbumDto;
+import org.springframework.beans.BeanUtils;
+
 /**
  * Created by Pan on 2019/4/14.
  */
@@ -8,6 +11,14 @@ public class AlbumVO {
     private String albumName;
     private String albumDetail;
     private Integer userId;
+    private String albumPic;
+
+    public AlbumVO(){
+        super();
+    }
+    public AlbumVO(AlbumDto dto){
+        BeanUtils.copyProperties(dto,this);
+    }
 
     public Integer getAlbumId() {
         return albumId;
@@ -41,4 +52,11 @@ public class AlbumVO {
         this.userId = userId;
     }
 
+    public String getAlbumPic() {
+        return albumPic;
+    }
+
+    public void setAlbumPic(String albumPic) {
+        this.albumPic = albumPic;
+    }
 }
