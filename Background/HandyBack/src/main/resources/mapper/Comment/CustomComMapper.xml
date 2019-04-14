@@ -3,9 +3,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.handy.support.mapper.comment.MyCommentMapper">
     <select id="getCommentsByCourseLimited" resultMap="com.handy.support.mapper.CommentMapper.BaseResultMap">
-        select * from comment where course_id=#{courseId} order by update_time desc limit #{startRow},#{size}
+        select * from comment where course_id=#{courseId}  limit #{startRow},#{size}
     </select>
     <select id="getCommentReplyByCommentIdLimited" resultMap="com.handy.support.mapper.CommentReplyMapper.BaseResultMap">
-        select * from comment where comment_id=#{commentId} order by update_time desc limit #{startRow},#{size}
+        select * from comment_reply where comment_id=#{commentId}  limit #{startRow},#{size}
     </select>
 </mapper>
