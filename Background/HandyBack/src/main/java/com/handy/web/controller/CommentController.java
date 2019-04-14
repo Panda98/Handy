@@ -3,6 +3,7 @@ package com.handy.web.controller;
 import com.handy.support.entity.Comment;
 import com.handy.support.entity.CommentReply;
 import com.handy.support.pojo.comment.dto.CommentPush;
+import com.handy.support.pojo.comment.dto.ReplyPush;
 import com.handy.support.pojo.comment.vo.ComPush;
 import com.handy.support.pojo.comment.vo.ComRepReq;
 import com.handy.support.pojo.comment.vo.CourseComReq;
@@ -48,9 +49,9 @@ public class CommentController {
     }
     @RequestMapping(value="/reply",method = GET)
     public String replyComment(RepComReq req){
-        ReplyPush replyPush=new CommentPush();
-        commentPush.setComment(req);
-        commentService.pushCommentToCourse(commentPush);
+        ReplyPush replyPush=new ReplyPush();
+        replyPush.setReply(req);
+        commentService.pushCommentReply(replyPush);
         ReturnCode<Boolean> code = new ReturnCode<Boolean>(true);
         return code.returnHandler();
     }
