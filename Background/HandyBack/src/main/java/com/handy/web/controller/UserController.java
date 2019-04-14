@@ -84,8 +84,9 @@ public class UserController {
         UserDto userDto = new UserDto();
         userDto.setUserId(uid);
         userDto.setLevelId(level);
-        String msg = iUserService.updateUser(userDto);
-        return msg;
+        ErrorEnum res = iUserService.updateUser(userDto);
+        ReturnCode<String> code = new ReturnCode<String>(res,null);
+        return code.returnHandler();
     }
 
     /**
@@ -95,8 +96,9 @@ public class UserController {
      */
     @RequestMapping(value = "/user/choose_labels", produces = "application/json; charset=utf-8",method = RequestMethod.POST)
     public String chooseLabels(@RequestBody UserLabelVO userLabelVO){
-        String msg = iUserService.addUserLabels(userLabelVO.getUid(),userLabelVO.getLabelId());
-        return msg;
+        ErrorEnum error = iUserService.addUserLabels(userLabelVO.getUid(),userLabelVO.getLabelId());
+        ReturnCode<String> code = new ReturnCode<String>(error,null);
+        return code.returnHandler();
     }
 
     /**
@@ -106,10 +108,18 @@ public class UserController {
      */
     @RequestMapping(value = "/user", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
     public String getUserInfo(int uid){
-        UserVO vo = new UserVO(iUserService.getUserByID(uid));
-        gson = GsonSetting.GSON;
-        System.out.print(gson.toJson(vo));
-        return gson.toJson(vo);
+        UserDto user = iUserService.getUserByID(uid);
+        ErrorEnum error = null;
+        UserVO vo = null;
+        if(user == null){
+            error = ErrorEnum.USER_NOT_EXIST;
+        }else{
+            error = ErrorEnum.SUCCESS;
+            vo = new UserVO(user);
+        }
+
+        ReturnCode<UserVO> code = new ReturnCode<UserVO>(error,vo);
+        return code.returnHandler();
     }
 
 }

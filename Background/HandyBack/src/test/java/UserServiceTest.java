@@ -41,8 +41,8 @@ public class UserServiceTest extends BaseTest{
         UserDto dto = new UserDto();
         dto.setUserId(232);
         dto.setSex((byte)1);
-        String msg = iUserService.updateUser(dto);
-        assertTrue(msg.equals("success"));
+        ErrorEnum msg = iUserService.updateUser(dto);
+        assertTrue(msg == ErrorEnum.SUCCESS);
     }
 
     @Test
@@ -51,8 +51,8 @@ public class UserServiceTest extends BaseTest{
         List<Integer> labels = new ArrayList<Integer>();
         labels.add(1);
         labels.add(2);
-        String msg = iUserService.addUserLabels(uid,labels);
-        assertTrue(msg.equals("success"));
+        ErrorEnum msg = iUserService.addUserLabels(uid,labels);
+        assertTrue(msg == ErrorEnum.SUCCESS);
     }
 
     @Test

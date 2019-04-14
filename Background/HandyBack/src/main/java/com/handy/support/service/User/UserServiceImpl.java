@@ -57,27 +57,29 @@ public class UserServiceImpl implements IUserService{
         return users.get(0);
     }
 
-    public String updateUser(UserDto dto){
+    public ErrorEnum updateUser(UserDto dto){
         User user = new User();
         BeanUtils.copyProperties(dto,user);
         try{
-            userMapper.updateByPrimaryKeySelective(user);
+            int i = userMapper.updateByPrimaryKeySelective(user);
+            if(i != 1)
+                return ErrorEnum.USER_NOT_EXIST;
         }catch (Exception e){
-            return e.getCause().getMessage();
+            return ErrorEnum.UPDATE_FAIL;
         }
-        return "success";
+        return ErrorEnum.SUCCESS;
     }
 
-    public String addUserLabels(int uid,List<Integer> labels){
+    public ErrorEnum addUserLabels(int uid,List<Integer> labels){
         for(Integer label:labels){
             UserLabel userLabel = new UserLabel(uid,label);
             try{
                 userLabelMapper.insert(userLabel);
             }catch (Exception e){
-                return e.getCause().getMessage();
+                return ErrorEnum.UPDATE_FAIL;
             }
         }
-        return "success";
+        return ErrorEnum.SUCCESS;
     }
 
     public UserVO revert2VO(User user){

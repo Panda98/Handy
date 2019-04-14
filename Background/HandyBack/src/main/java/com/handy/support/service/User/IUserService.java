@@ -15,9 +15,9 @@ public interface IUserService {
     User getUserByEmail(String email);
     UserDto getUserByID(int id);
 
-    String updateUser(UserDto vo);
+    ErrorEnum updateUser(UserDto vo);
 
-    String addUserLabels(int uid, List<Integer>labels);
+    ErrorEnum addUserLabels(int uid, List<Integer>labels);
 
 
     UserVO revert2VO(User user);
