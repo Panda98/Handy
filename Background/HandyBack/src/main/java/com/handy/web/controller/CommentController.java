@@ -1,6 +1,7 @@
 package com.handy.web.controller;
 
 import com.handy.support.entity.Comment;
+import com.handy.support.entity.CommentReply;
 import com.handy.support.pojo.comment.dto.CommentPush;
 import com.handy.support.pojo.comment.vo.ComPush;
 import com.handy.support.pojo.comment.vo.ComRepReq;
@@ -33,7 +34,9 @@ public class CommentController {
    }
     @RequestMapping(value="/replyComment",method = GET)
     public String getCommentReply(ComRepReq req){
-        return null;
+        List<CommentReply>commentReplies=commentService.getCommentReply(req);
+        ReturnCode<List> code = new ReturnCode<List>(commentReplies);
+        return code.returnHandler();
     }
     @RequestMapping(value="/push",method = RequestMethod.POST)
     public String pushComment(ComPush req){
