@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.handy.support.mapper.customMapper.MyFollowMapper">
+    <select id="getFollowsByUidLimited" resultMap="com.handy.support.mapper.FollowMapper.BaseResultMap">
+        select * from follow where follower_id=#{userId}  limit #{startRow},#{size}
+    </select>
+   <delete id="unFollowOther" >
+       delete from follow where user_id=#{followId} and follower_id=#{userId}
+   </delete>
+</mapper>
