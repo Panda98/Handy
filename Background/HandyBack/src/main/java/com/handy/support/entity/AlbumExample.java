@@ -513,6 +513,76 @@ public class AlbumExample {
             addCriterion("user_id not between", value1, value2, "userId");
             return (Criteria) this;
         }
+
+        public Criteria andAlbumPicIsNull() {
+            addCriterion("album_pic is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumPicIsNotNull() {
+            addCriterion("album_pic is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumPicEqualTo(String value) {
+            addCriterion("album_pic =", value, "albumPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumPicNotEqualTo(String value) {
+            addCriterion("album_pic <>", value, "albumPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumPicGreaterThan(String value) {
+            addCriterion("album_pic >", value, "albumPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumPicGreaterThanOrEqualTo(String value) {
+            addCriterion("album_pic >=", value, "albumPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumPicLessThan(String value) {
+            addCriterion("album_pic <", value, "albumPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumPicLessThanOrEqualTo(String value) {
+            addCriterion("album_pic <=", value, "albumPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumPicLike(String value) {
+            addCriterion("album_pic like", value, "albumPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumPicNotLike(String value) {
+            addCriterion("album_pic not like", value, "albumPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumPicIn(List<String> values) {
+            addCriterion("album_pic in", values, "albumPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumPicNotIn(List<String> values) {
+            addCriterion("album_pic not in", values, "albumPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumPicBetween(String value1, String value2) {
+            addCriterion("album_pic between", value1, value2, "albumPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andAlbumPicNotBetween(String value1, String value2) {
+            addCriterion("album_pic not between", value1, value2, "albumPic");
+            return (Criteria) this;
+        }
     }
 
     /**
