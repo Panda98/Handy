@@ -1,7 +1,12 @@
 package com.example.handy.core.http.api;
 
+import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
 import com.example.handy.core.bean.LoginData;
+import com.example.handy.core.bean.RecommendAlbumListData;
+import com.example.handy.core.bean.RecommendCourseListData;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -49,4 +54,31 @@ public interface Apis {
      */
     @GET("user/logout/json")
     Observable<BaseResponse<LoginData>> logout();
+
+    /**
+     * 热门推荐
+     * http://www.wanandroid.com/banner/json
+     *
+     * @return 轮播数据
+     */
+    @GET("banner/json")
+    Observable<BaseResponse<List<BannerData>>> getBannerData();
+
+    /**
+     * 推荐专辑
+     * http://www.wanandroid.com/album/recommend
+     *
+     * @return 专辑列表
+     */
+    @GET("album/recommend")
+    Observable<BaseResponse<List<RecommendAlbumListData>>> getRecommendAlbumListData();
+
+    /**
+     * 推荐教程
+     * http://www.wanandroid.com/course/recommend
+     *
+     * @return 教程列表
+     */
+    @GET("course/recommend")
+    Observable<BaseResponse<List<RecommendCourseListData>>> getRecommendCourseListData();
 }

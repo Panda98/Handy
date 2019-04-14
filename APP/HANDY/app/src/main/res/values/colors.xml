@@ -9,7 +9,27 @@
     <color name="grey">#cccccc</color>
     <color name="grey_divider">#E5E5E5</color>
     <color name="comment_text">#5b5d5c</color>
+    <color name="colorBackground">#EEEEEE</color>
+
     <!--register-->
     <color name="shallow_green">#FF36BC9B</color>
     <color name="register_bac">#303c59</color>
+    <!--bottom bar-->
+    <color name="yellow">#f39c12</color>
+    <color name="delete_text">#cccccc</color>
+    <color name="colorCard">#FFFFFF</color>
+    <color name="bottom_bar_bac">#C4D8D8</color>
+
+    <!--common dialog-->
+    <color name="blue">#3F9FE0</color>
+
+    <!--error view-->
+    <color name="transparent">#00000000</color>
+    <color name="setting_text">#5b5d5c</color>
+    <color name="tab_bac">#049486</color>
+    <color name="light_tab_bac">#45c1b5</color>
+
+    <!--main-->
+    <color name="main_status_bar_blue">#279ede</color>
+
 </resources>
