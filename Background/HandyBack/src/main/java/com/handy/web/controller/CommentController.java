@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping(value="/comment",produces = "application/json; charset=utf-8")
@@ -30,25 +31,25 @@ public class CommentController {
     @RequestMapping(value="/all",method = GET)
    public String getCourseComment( CourseComReq req){
         List<Comment>comments=commentService.getCourseComment(req);
-        ReturnCode<List> code = new ReturnCode<List>(comments);
+        ReturnCode<List<Comment>> code = new ReturnCode<List<Comment>>(comments);
         return code.returnHandler();
    }
     @RequestMapping(value="/replyComment",method = GET)
     public String getCommentReply(ComRepReq req){
         List<CommentReply>commentReplies=commentService.getCommentReply(req);
-        ReturnCode<List> code = new ReturnCode<List>(commentReplies);
+        ReturnCode<List<CommentReply>> code = new ReturnCode<List<CommentReply>>(commentReplies);
         return code.returnHandler();
     }
     @RequestMapping(value="/push",method = RequestMethod.POST)
-    public String pushComment(ComPush req){
+    public String pushComment(@RequestBody  ComPush req){
         CommentPush commentPush=new CommentPush();
         commentPush.setComment(req);
         commentService.pushCommentToCourse(commentPush);
         ReturnCode<Boolean> code = new ReturnCode<Boolean>(true);
         return code.returnHandler();
     }
-    @RequestMapping(value="/reply",method = GET)
-    public String replyComment(RepComReq req){
+    @RequestMapping(value="/reply",method = POST)
+    public String replyComment(@RequestBody  RepComReq req){
         ReplyPush replyPush=new ReplyPush();
         replyPush.setReply(req);
         commentService.pushCommentReply(replyPush);
