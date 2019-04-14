@@ -49,9 +49,6 @@ public class UserController {
         UserDto dto = new UserDto();
         BeanUtils.copyProperties(user,dto);
 
-        gson = GsonSetting.GSON;
-
-
         UserVO vo=null;
         if(msg.equals("")) {
            vo = new UserVO(dto);
@@ -67,13 +64,13 @@ public class UserController {
      */
     @RequestMapping(value = "/user/regist",produces = "application/json; charset=utf-8",method = RequestMethod.POST)
     public String regist(@RequestBody UserAuthVO userAuthVO){
-        String msg = iUserService.addUser(userAuthVO.getUsername(), userAuthVO.getPassword());
-        if(msg.equals("success")){
+        int resCode = iUserService.addUser(userAuthVO.getUsername(), userAuthVO.getPassword());
+        if(resCode == 0){
             User user = iUserService.getUserByEmail(userAuthVO.getUsername());
             UserVO vo = iUserService.revert2VO(user);
-            return gson.toJson(vo);
+
         }
-        return gson.toJson(msg);
+        return gson.toJson(resCode);
     }
 
     /**

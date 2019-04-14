@@ -25,17 +25,17 @@ public class UserServiceImpl implements IUserService{
     @Autowired
     private UserLabelMapper userLabelMapper;
 
-    public String addUser(String username,String password){
+    public int addUser(String username,String password){
         User user = new User(username,password);
         try{
             userMapper.insertSelective(user);
         }catch (Exception e){
             String cause = e.getCause().getMessage();
             if(cause.contains("Duplicate"))
-                return "该邮箱已被注册";
+                return 0;
 
         }
-        return "success";
+        return 0;
     }
 
     public UserDto getUserByID(int id){
