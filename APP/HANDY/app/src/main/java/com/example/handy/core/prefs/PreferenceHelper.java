@@ -53,4 +53,18 @@ public interface PreferenceHelper {
      * @param domain Domain
      * @param cookie Cookie
      */
+
+    /**
+     * Set current page
+     *
+     * @param position Position
+     */
+    void setCurrentPage(int position);
+
+    /**
+     * Get current page
+     *
+     * @return current page
+     */
+    int getCurrentPage();
 }

@@ -108,6 +108,13 @@ ext {
             "shadows-multidex"                  : "org.robolectric:shadows-multidex:3.+",
             "runner"                            : "com.android.support.test:runner:1.0.2",
 
+            // slider
+            "slider"                            : "com.daimajia.slider:library:1.1.5@aar",
+            //三级缓存的图片加载器
+            "picasso"                           : 'com.squareup.picasso:picasso:2.3.2',
+            //属性动画的兼容包
+            "nineoldandroids"                   :'com.nineoldandroids:library:2.4.0',
+
     ]
 
 }

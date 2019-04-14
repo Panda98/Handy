@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/normal_view"
+        app:srlPrimaryColor="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.scwang.smartrefresh.header.PhoenixHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackground"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/dp_20">
+
+
+                <LinearLayout
+                    android:id="@+id/layout_search_find"
+                    android:layout_width="@dimen/dp_200"
+                    android:layout_height="@dimen/dp_35"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_20"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/dp_10"
+                        android:background="@drawable/ic_search_black_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/search_tint"
+                        android:textColor="#8E8E93" />
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/main_pager_banner"
+                android:layout_width="match_parent"
+                android:layout_height="180dp">
+
+                <com.daimajia.slider.library.SliderLayout
+                    android:id="@+id/main_pager_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp">
+
+                    <com.daimajia.slider.library.Indicators.PagerIndicator
+                        style="@style/AndroidImageSlider_Corner_Oval_Orange"
+                        android:id="@+id/main_pager_indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="70dp"
+                        />
+
+                </com.daimajia.slider.library.SliderLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <com.scwang.smartrefresh.header.TaurusHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</FrameLayout>
+

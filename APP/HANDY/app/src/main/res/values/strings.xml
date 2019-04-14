@@ -1,4 +1,5 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="app_name">HANDY</string>
     <string name="double_click_exit_tint">再按一次后退键退出Handy</string>
     //通用
@@ -25,11 +26,34 @@
 
     <string name="or">或</string>
 
+    <!--注册-->
     <string name="register_account_hint">邮箱/手机号</string>
     <string name="register_password_hint">输入密码</string>
     <string name="register_confirm_password_hint">确认密码</string>
     <string name="register_success">注册成功</string>
 
-    <!--// 注册-->
+
+    <!--bottom navigation bar-->
+    <string name="navigation_follow">关注</string>
+    <string name="navigation_collect">收藏</string>
+    <string name="navigation_home_pager">首页</string>
+    <string name="navigation_account">个人中心</string>
+
+    <!--error view-->
+    <string name="error_tips">不妙！加载失败了\n 一些可能的原因：\n1.网络环境不佳\n 2.服务器问题\n 3.Handy拒绝服务~</string>
+    <string name="reload">重新加载</string>
+
+    //主页
+    <!--<string name="item_article_author">作者：<xliff:g id="author">%s</xliff:g></string>-->
+    <!--<string name="item_article_classify">分类：<xliff:g id="classify">%s</xliff:g></string>-->
+    <!--<string name="item_article_time">时间：<xliff:g id="time">%s</xliff:g></string>-->
+    <!--<string name="install">安装</string>-->
+    <string name="logout_tint">退出登录?</string>
+    <string name="failed_to_obtain_banner_data">获取广告数据失败</string>
+    <string name="failed_to_obtain_article_list">获取文章列表数据失败</string>
+    <string name="search_tint">搜索专辑或教程</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
