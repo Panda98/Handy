@@ -9,6 +9,7 @@ import com.handy.support.mapper.UserLabelMapper;
 import com.handy.support.mapper.UserMapper;
 import com.handy.support.pojo.user.dto.UserDto;
 import com.handy.support.pojo.user.vo.UserVO;
+import com.handy.support.utils.status.ErrorEnum;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,17 +26,17 @@ public class UserServiceImpl implements IUserService{
     @Autowired
     private UserLabelMapper userLabelMapper;
 
-    public String addUser(String username,String password){
+    public ErrorEnum addUser(String username, String password){
         User user = new User(username,password);
         try{
             userMapper.insertSelective(user);
         }catch (Exception e){
             String cause = e.getCause().getMessage();
             if(cause.contains("Duplicate"))
-                return "该邮箱已被注册";
+                return ErrorEnum.EMAIL_FAIL;
 
         }
-        return "success";
+        return ErrorEnum.SUCCESS;
     }
 
     public UserDto getUserByID(int id){

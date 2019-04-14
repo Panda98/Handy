@@ -36,28 +36,22 @@ public class UserController {
     public String login(@RequestBody UserAuthVO userAuthVO){
         User user = iUserService.getUserByEmail(userAuthVO.getUsername());
 
-        Integer statusCode=0;
-        String msg = "";
+        ErrorEnum error = null;
         if(user == null){
-            statusCode = ErrorEnum.USER_NOT_EXIST.getErrorCode();
-            msg = ErrorEnum.USER_NOT_EXIST.getErrorMsg();
+            error = ErrorEnum.USER_NOT_EXIST;
         }
         else if(!user.getLoginPassword().equals(userAuthVO.getPassword())){
-            statusCode = ErrorEnum.WRONG_PASSWORD.getErrorCode();
-            msg = ErrorEnum.WRONG_PASSWORD.getErrorMsg();
+            error = ErrorEnum.WRONG_PASSWORD;
         }
         UserDto dto = new UserDto();
         BeanUtils.copyProperties(user,dto);
 
-        gson = GsonSetting.GSON;
-
-
         UserVO vo=null;
-        if(msg.equals("")) {
+        if(error == null) {
            vo = new UserVO(dto);
         }
-        ReturnCode<UserVO> code = new ReturnCode<UserVO>(statusCode,msg,vo);
-        return code.returnHandler(code);
+        ReturnCode<UserVO> code = new ReturnCode<UserVO>(vo);
+        return code.returnHandler();
     }
 
     /**
@@ -67,13 +61,16 @@ public class UserController {
      */
     @RequestMapping(value = "/user/regist",produces = "application/json; charset=utf-8",method = RequestMethod.POST)
     public String regist(@RequestBody UserAuthVO userAuthVO){
-        String msg = iUserService.addUser(userAuthVO.getUsername(), userAuthVO.getPassword());
-        if(msg.equals("success")){
+        ErrorEnum res = iUserService.addUser(userAuthVO.getUsername(), userAuthVO.getPassword());
+
+        UserVO vo = null;
+        if(res == ErrorEnum.SUCCESS){
             User user = iUserService.getUserByEmail(userAuthVO.getUsername());
-            UserVO vo = iUserService.revert2VO(user);
-            return gson.toJson(vo);
+            vo = iUserService.revert2VO(user);
+
         }
-        return gson.toJson(msg);
+        ReturnCode<UserVO> code = new ReturnCode<UserVO>(res,vo);
+        return code.returnHandler();
     }
 
     /**

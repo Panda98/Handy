@@ -10,31 +10,25 @@ import java.util.Map;
  * Created by joanie on 2019/4/13.
  */
 public class ReturnCode<T> {
-
-    private Integer errorCode;
-    private String msg;
+    private ErrorEnum errorEnum;
     private T data;
 
-    public ReturnCode(Integer errorCode, String msg, T data) {
-        this.errorCode = errorCode;
-        this.msg = msg;
+    public ReturnCode(ErrorEnum errorEnum, T data) {
+        this.errorEnum=errorEnum;
         this.data = data;
     }
 
-    public Integer getErrorCode() {
-        return errorCode;
+    public ReturnCode(T data) {
+        this.errorEnum=ErrorEnum.SUCCESS;
+        this.data = data;
     }
 
-    public void setErrorCode(Integer errorCode) {
-        this.errorCode = errorCode;
+    public ErrorEnum getErrorEnum() {
+        return errorEnum;
     }
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setErrorEnum(ErrorEnum errorEnum) {
+        this.errorEnum = errorEnum;
     }
 
     public T getData() {
@@ -45,12 +39,12 @@ public class ReturnCode<T> {
         this.data = data;
     }
 
-    public String returnHandler(ReturnCode<T> r){
+    public String returnHandler(){
         Map<String,String> map=new HashMap<String,String>();
-        map.put("errorCode",r.getErrorCode().toString());
-        map.put("errorMsg",r.getMsg());
+        map.put("errorCode",this.getErrorEnum().getErrorCode().toString());
+        map.put("errorMsg",this.getErrorEnum().getErrorMsg());
         Gson gson=GsonSetting.GSON;
-        String s=gson.toJson(r);
+        String s=gson.toJson(this);
         map.put("data",s);
         return gson.toJson(map);
     }

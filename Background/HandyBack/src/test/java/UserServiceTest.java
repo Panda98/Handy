@@ -2,6 +2,7 @@ import com.handy.support.entity.User;
 import com.handy.support.pojo.user.dto.UserDto;
 import com.handy.support.pojo.user.vo.UserVO;
 import com.handy.support.service.User.IUserService;
+import com.handy.support.utils.status.ErrorEnum;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class UserServiceTest extends BaseTest{
     }
     @Test
     public void addUserTest(){
-        String msg = iUserService.addUser("1234@qq.com","1234");
-        assertTrue(msg.equals("success"));
+//        ErrorEnum msg = iUserService.addUser("1234@qq.com","1234");
+//        assertTrue(msg == ErrorEnum.SUCCESS);
     }
     @Test
     public void getUserByEmailTest(){
