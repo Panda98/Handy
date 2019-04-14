@@ -38,13 +38,12 @@ public class UserController {
 
         Integer statusCode=0;
         String msg = "";
+        ErrorEnum error = null;
         if(user == null){
-            statusCode = ErrorEnum.USER_NOT_EXIST.getErrorCode();
-            msg = ErrorEnum.USER_NOT_EXIST.getErrorMsg();
+            error = ErrorEnum.USER_NOT_EXIST;
         }
         else if(!user.getLoginPassword().equals(userAuthVO.getPassword())){
-            statusCode = ErrorEnum.WRONG_PASSWORD.getErrorCode();
-            msg = ErrorEnum.WRONG_PASSWORD.getErrorMsg();
+            error = ErrorEnum.WRONG_PASSWORD;
         }
         UserDto dto = new UserDto();
         BeanUtils.copyProperties(user,dto);
@@ -53,7 +52,7 @@ public class UserController {
         if(msg.equals("")) {
            vo = new UserVO(dto);
         }
-        ReturnCode<UserVO> code = new ReturnCode<UserVO>(statusCode,msg,vo);
+        ReturnCode<UserVO> code = new ReturnCode<UserVO>(error,vo);
         return code.returnHandler(code);
     }
 
@@ -64,13 +63,16 @@ public class UserController {
      */
     @RequestMapping(value = "/user/regist",produces = "application/json; charset=utf-8",method = RequestMethod.POST)
     public String regist(@RequestBody UserAuthVO userAuthVO){
-        int resCode = iUserService.addUser(userAuthVO.getUsername(), userAuthVO.getPassword());
-        if(resCode == 0){
+        ErrorEnum res = iUserService.addUser(userAuthVO.getUsername(), userAuthVO.getPassword());
+
+        UserVO vo = null;
+        if(res == ErrorEnum.SUCCESS){
             User user = iUserService.getUserByEmail(userAuthVO.getUsername());
-            UserVO vo = iUserService.revert2VO(user);
+            vo = iUserService.revert2VO(user);
 
         }
-        return gson.toJson(resCode);
+        ReturnCode<UserVO> code = new ReturnCode<UserVO>(res,vo);
+        return code.returnHandler(code);
     }
 
     /**
