@@ -1,10 +1,9 @@
 package com.handy.web.controller;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.handy.support.entity.User;
 import com.handy.support.pojo.user.dto.UserDto;
-import com.handy.support.pojo.user.vo.UserAuthorVO;
+import com.handy.support.pojo.user.vo.UserAuthVO;
 import com.handy.support.pojo.user.vo.UserLabelVO;
 import com.handy.support.pojo.user.vo.UserVO;
 import com.handy.support.utils.GsonSetting;
@@ -12,12 +11,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.handy.support.service.User.IUserService;
-
-import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Pan on 2019/4/11.
@@ -32,17 +25,17 @@ public class UserController {
 
     /**
      * 登录
-     * @param userAuthorVO 包含username和password
+     * @param userAuthVO 包含username和password
      * @return 该user的json
      */
     @RequestMapping(value="/user/login",produces = "application/json; charset=utf-8",method = RequestMethod.POST)
-    public String login(@RequestBody UserAuthorVO userAuthorVO){
-        User user = iUserService.getUserByEmail(userAuthorVO.getUsername());
+    public String login(@RequestBody UserAuthVO userAuthVO){
+        User user = iUserService.getUserByEmail(userAuthVO.getUsername());
         String msg = "";
         if(user == null){
             msg = "用户不存在！";
         }
-        else if(!user.getLoginPassword().equals(userAuthorVO.getPassword())){
+        else if(!user.getLoginPassword().equals(userAuthVO.getPassword())){
             msg = "密码错误！";
         }
         UserDto dto = new UserDto();
@@ -58,14 +51,14 @@ public class UserController {
 
     /**
      * 注册
-     * @param userAuthorVO 包含username和password
+     * @param userAuthVO 包含username和password
      * @return 该user的json
      */
     @RequestMapping(value = "/user/regist",produces = "application/json; charset=utf-8",method = RequestMethod.POST)
-    public String regist(@RequestBody UserAuthorVO userAuthorVO){
-        String msg = iUserService.addUser(userAuthorVO.getUsername(),userAuthorVO.getPassword());
+    public String regist(@RequestBody UserAuthVO userAuthVO){
+        String msg = iUserService.addUser(userAuthVO.getUsername(), userAuthVO.getPassword());
         if(msg.equals("success")){
-            User user = iUserService.getUserByEmail(userAuthorVO.getUsername());
+            User user = iUserService.getUserByEmail(userAuthVO.getUsername());
             UserVO vo = iUserService.revert2VO(user);
             return gson.toJson(vo);
         }

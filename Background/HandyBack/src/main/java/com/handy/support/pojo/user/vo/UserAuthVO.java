@@ -1,17 +1,18 @@
 package com.handy.support.pojo.user.vo;
 
 /**
+ * 用户认证信息的表现层
  * Created by Pan on 2019/4/12.
  */
-public class UserAuthorVO {
+public class UserAuthVO {
     private String username;
     private String password;
 
-    public UserAuthorVO(String username, String password) {
+    public UserAuthVO(String username, String password) {
         this.username = username;
         this.password = password;
     }
-    public UserAuthorVO(){
+    public UserAuthVO(){
         super();
     }
 
