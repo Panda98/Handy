@@ -1,16 +1,21 @@
 package com.handy.support.pojo.comment.vo;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
+@Component
 public class CourseComReq {
-    private int user_id;
+    private int course_id;
     private int page_no;
     private int n;
-public CourseComReq(int user_id,int page_no,int n){
+    public CourseComReq(){}
+public CourseComReq(int course_id,int page_no,int n){
     this.n=n;
     this.page_no=page_no;
-    this.user_id=user_id;
+    this.course_id=course_id;
 }
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setCourse_id(int course_id) {
+        this.course_id = course_id;
     }
 
     public void setN(int n) {
@@ -29,7 +34,7 @@ public CourseComReq(int user_id,int page_no,int n){
         return page_no;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getCourse_id() {
+        return course_id;
     }
 }

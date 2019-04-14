@@ -1,10 +1,14 @@
 package com.handy.support.pojo.comment.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class RepComReq {
     private int uid;
     private int comment_id;
     private  int reply_id;
     private String content;
+    public RepComReq(){}
     public RepComReq(int uid,int comment_id,int reply_id,String content){
         this.comment_id=comment_id;
         this.uid=uid;
