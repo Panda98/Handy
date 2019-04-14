@@ -36,8 +36,6 @@ public class UserController {
     public String login(@RequestBody UserAuthVO userAuthVO){
         User user = iUserService.getUserByEmail(userAuthVO.getUsername());
 
-        Integer statusCode=0;
-        String msg = "";
         ErrorEnum error = null;
         if(user == null){
             error = ErrorEnum.USER_NOT_EXIST;
@@ -49,7 +47,7 @@ public class UserController {
         BeanUtils.copyProperties(user,dto);
 
         UserVO vo=null;
-        if(msg.equals("")) {
+        if(error == null) {
            vo = new UserVO(dto);
         }
         ReturnCode<UserVO> code = new ReturnCode<UserVO>(vo);
