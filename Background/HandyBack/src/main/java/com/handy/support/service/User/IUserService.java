@@ -10,7 +10,7 @@ import java.util.List;
  * Created by Pan on 2019/4/10.
  */
 public interface IUserService {
-    String addUser(String email,String psw);
+    int addUser(String email,String psw);
     User getUserByEmail(String email);
     UserDto getUserByID(int id);
 
