@@ -39,12 +39,12 @@ public class ReturnCode<T> {
         this.data = data;
     }
 
-    public String returnHandler(ReturnCode<T> r){
+    public String returnHandler(){
         Map<String,String> map=new HashMap<String,String>();
-        map.put("errorCode",r.getErrorEnum().getErrorCode().toString());
-        map.put("errorMsg",r.getErrorEnum().getErrorMsg());
+        map.put("errorCode",this.getErrorEnum().getErrorCode().toString());
+        map.put("errorMsg",this.getErrorEnum().getErrorMsg());
         Gson gson=GsonSetting.GSON;
-        String s=gson.toJson(r);
+        String s=gson.toJson(this);
         map.put("data",s);
         return gson.toJson(map);
     }
