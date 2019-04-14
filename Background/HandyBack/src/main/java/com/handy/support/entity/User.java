@@ -286,7 +286,7 @@ public class User {
         this.birthday = birthday;
     }
 
-    public User( String email, String loginPassword) {
+    public User(String email, String loginPassword) {
         this.loginPassword = loginPassword;
         this.email = email;
     }
