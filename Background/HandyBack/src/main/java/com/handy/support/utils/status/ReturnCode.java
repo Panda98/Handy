@@ -41,7 +41,7 @@ public class ReturnCode<T> {
 
     public String returnHandler(){
         Map<String,Object> map=new HashMap<String,Object>();
-        map.put("errorCode",this.getErrorEnum().getErrorCode().toString());
+        map.put("errorCode",this.getErrorEnum().getErrorCode());
         map.put("errorMsg",this.getErrorEnum().getErrorMsg());
         Gson gson=GsonSetting.GSON;
         map.put("data",this.getData());

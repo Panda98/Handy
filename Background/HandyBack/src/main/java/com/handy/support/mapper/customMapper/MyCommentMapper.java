@@ -1,4 +1,4 @@
-package com.handy.support.mapper.comment;
+package com.handy.support.mapper.customMapper;
 
 import com.handy.support.entity.Comment;
 import com.handy.support.entity.CommentReply;
