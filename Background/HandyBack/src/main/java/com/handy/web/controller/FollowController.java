@@ -3,15 +3,16 @@ package com.handy.web.controller;
 import com.handy.support.entity.Follow;
 import com.handy.support.pojo.Follow.dto.FollowDTO;
 import com.handy.support.pojo.Follow.vo.FollowVO;
+import com.handy.support.pojo.UserCourse.dto.UsersCoursesBrief;
 import com.handy.support.service.Follow.FollowServiceImpl;
 import com.handy.support.utils.status.ReturnCode;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @RestController
@@ -22,7 +23,11 @@ public class FollowController {
     @RequestMapping(value="/follows",method = RequestMethod.GET)
     public String getFollowers(int uid,int page_no,int n){
         List<Follow> followList=followService.getFollows(uid,page_no,n);
-        ReturnCode<List> code = new ReturnCode<List>(followList);
+        List<FollowVO>followVOS=new LinkedList<FollowVO>();
+        for(int i=0;i<followList.size();i++){
+            followVOS.add(new FollowVO(new FollowDTO(followList.get(i))));
+        }
+        ReturnCode<List> code = new ReturnCode<List>(followVOS);
         return code.returnHandler();
     }
     @RequestMapping(value="/follow",method = RequestMethod.GET)
@@ -41,9 +46,15 @@ public class FollowController {
         ReturnCode<Boolean> code = new ReturnCode<Boolean>(true);
         return code.returnHandler();
     }
-    @RequestMapping(value="/moments",method = RequestMethod.GET)
+   /* @RequestMapping(value="/moments",method = RequestMethod.GET)
     public String followsMoment(int uid,int page_no,int n){
-       return null;
-       // return code.returnHandler();
-    }
+        List<Follow> followList=followService.getFollows(uid,page_no,n);
+        List<Integer>follows=new LinkedList<Integer>();
+        for(int i=0;i<followList.size();i++){
+            follows.add(new Integer(followList.get(i).getUserId()));
+        }
+        List<UsersCoursesBrief>list=followService.getFollowsUpdate(follows,page_no,n);
+        ReturnCode<List> code = new ReturnCode<List>(list);
+        return code.returnHandler();
+    }*/
 }
