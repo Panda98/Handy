@@ -10,6 +10,7 @@ import com.example.handy.contract.LoginContract;
 import com.example.handy.core.DataManager;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.event.LoginEvent;
+import com.example.handy.core.vo.LoginView;
 import com.example.handy.utils.RxUtils;
 import com.example.handy.wigdet.BaseObserver;
 
@@ -36,15 +37,15 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
             mView.showSnackBar(HandyAPP.getInstance().getString(R.string.account_password_null_tint));
             return;
         }
-        addSubscribe(mDataManager.getLoginData(username, password)
+        LoginView loginView = new LoginView(username,password);
+        addSubscribe(mDataManager.getLoginData(loginView)
                 .compose(RxUtils.rxSchedulerHelper())
                 .compose(RxUtils.handleResult())
                 .subscribeWith(new BaseObserver<LoginData>(mView,
                         HandyAPP.getInstance().getString(R.string.login_fail)) {
                     @Override
                     public void onNext(LoginData loginData) {
-                        setLoginAccount(loginData.getUsername());
-                        setLoginPassword(loginData.getPassword());
+                        setLoginAccount(loginData.getId());
                         setLoginStatus(true);
                         RxBus.getDefault().post(new LoginEvent(true));
                         mView.showLoginSuccess();

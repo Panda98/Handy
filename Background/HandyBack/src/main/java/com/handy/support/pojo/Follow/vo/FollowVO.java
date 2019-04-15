@@ -1,6 +1,7 @@
 package com.handy.support.pojo.Follow.vo;
 
 
+import com.handy.support.pojo.Follow.dto.FollowDTO;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,6 +12,10 @@ public class FollowVO {
 public FollowVO(int uid,int follow_id){
         this.uid=uid;
         this.follow_id=follow_id;
+}
+public FollowVO(FollowDTO followDTO){
+        this.follow_id=followDTO.getFollow().getUserId();
+        this.uid=followDTO.getFollow().getFollowerId();
 }
     public int getUid() {
         return uid;
