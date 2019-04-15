@@ -43,14 +43,14 @@ public interface AbstractPresenter<T extends AbstractView> {
      *
      * @return login account
      */
-    String getLoginAccount();
+    int getLoginAccount();
 
     /**
      * Set login status
      *
      * @param account account
      */
-    void setLoginAccount(String account);
+    void setLoginAccount(int account);
 
     /**
      * Set login password
@@ -58,4 +58,11 @@ public interface AbstractPresenter<T extends AbstractView> {
      * @param password password
      */
     void setLoginPassword(String password);
+
+    /**
+     * Get current page
+     *
+     * @return current page
+     */
+    int getCurrentPage();
 }

@@ -11,9 +11,8 @@ import com.example.handy.contract.MainPagerContract;
 import com.example.handy.core.DataManager;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
-import com.example.handy.core.bean.LoginData;
-import com.example.handy.core.bean.RecommendAlbumListData;
-import com.example.handy.core.bean.RecommendCourseListData;
+import com.example.handy.core.bean.RecommendAlbumData;
+import com.example.handy.core.bean.RecommendCourseData;
 import com.example.handy.core.event.LoginEvent;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.RxUtils;
@@ -30,6 +29,7 @@ public class MainPagerPresenter extends BasePresenter<MainPagerContract.View> im
 
     private DataManager mDataManager;
     private int mCurrentPage;
+    private boolean isRefresh = true;
 
     @Inject
     public MainPagerPresenter(DataManager dataManager) {
@@ -62,7 +62,7 @@ public class MainPagerPresenter extends BasePresenter<MainPagerContract.View> im
     }
 
     @Override
-    public String getLoginAccount() {
+    public int getLoginAccount() {
         return mDataManager.getLoginAccount();
     }
 
@@ -74,8 +74,8 @@ public class MainPagerPresenter extends BasePresenter<MainPagerContract.View> im
     @Override
     public void loadMainPagerData() {
         Observable<BaseResponse<List<BannerData>>> mBannerObservable = mDataManager.getBannerData();
-        Observable<BaseResponse<List<RecommendAlbumListData>>> mRecommendAlbumObservable = mDataManager.getRecommendAlbumListData();
-        Observable<BaseResponse<List<RecommendCourseListData>>> mRecommendCourseObservable = mDataManager.getRecommendCourseListData();
+        Observable<BaseResponse<List<RecommendAlbumData>>> mRecommendAlbumObservable = mDataManager.getRecommendAlbumListData();
+        Observable<BaseResponse<List<RecommendCourseData>>> mRecommendCourseObservable = mDataManager.getRecommendCourseListData(0,Constants.LOAD_NUM);
         addSubscribe(Observable.zip(mBannerObservable, mRecommendAlbumObservable, mRecommendCourseObservable, this::createResponseMap)
                 .compose(RxUtils.rxSchedulerHelper())
                 .subscribeWith(new BaseObserver<HashMap<String, Object>>(mView) {
@@ -87,14 +87,14 @@ public class MainPagerPresenter extends BasePresenter<MainPagerContract.View> im
                             mView.showBannerData(bannerResponse.getData());
                         }
                         // recommend album
-                        BaseResponse<List<RecommendAlbumListData>> recommendAlbumResponse = CommonUtils.cast(map.get(Constants.RECOMMEND_ALBUM_DATA));
+                        BaseResponse<List<RecommendAlbumData>> recommendAlbumResponse = CommonUtils.cast(map.get(Constants.RECOMMEND_ALBUM_DATA));
                         if (recommendAlbumResponse != null) {
                             mView.showRecommendAlbumList(recommendAlbumResponse.getData());
                         }
                         // recommend course
-                        BaseResponse<List<RecommendCourseListData>> recommendCourseResponse = CommonUtils.cast(map.get(Constants.RECOMMEND_COURSE_DATA));
+                        BaseResponse<List<RecommendCourseData>> recommendCourseResponse = CommonUtils.cast(map.get(Constants.RECOMMEND_COURSE_DATA));
                         if (recommendCourseResponse != null) {
-                            mView.showRecommendCourseList(recommendCourseResponse.getData());
+                            mView.showRecommendCourseList(recommendCourseResponse.getData(),isRefresh);
                         }
                     }
                 }));
@@ -105,11 +105,11 @@ public class MainPagerPresenter extends BasePresenter<MainPagerContract.View> im
         addSubscribe(mDataManager.getRecommendAlbumListData()
                 .compose(RxUtils.rxSchedulerHelper())
                 .compose(RxUtils.handleResult())
-                .subscribeWith(new BaseObserver<List<RecommendAlbumListData>>(mView,
+                .subscribeWith(new BaseObserver<List<RecommendAlbumData>>(mView,
                         HandyAPP.getInstance().getString(R.string.failed_to_obtain_banner_data),
                         isShowError) {
                     @Override
-                    public void onNext(List<RecommendAlbumListData> recommendAlbumList) {
+                    public void onNext(List<RecommendAlbumData> recommendAlbumList) {
                         mView.showRecommendAlbumList(recommendAlbumList);
                     }
                 }));
@@ -117,22 +117,32 @@ public class MainPagerPresenter extends BasePresenter<MainPagerContract.View> im
 
     @Override
     public void getRecommendCourseList(boolean isShowError) {
-        addSubscribe(mDataManager.getRecommendCourseListData()
+        addSubscribe(mDataManager.getRecommendCourseListData(mCurrentPage, Constants.LOAD_NUM)
                 .compose(RxUtils.rxSchedulerHelper())
                 .compose(RxUtils.handleResult())
-                .subscribeWith(new BaseObserver<List<RecommendCourseListData>>(mView,
+                .subscribeWith(new BaseObserver<List<RecommendCourseData>>(mView,
                         HandyAPP.getInstance().getString(R.string.failed_to_obtain_banner_data),
                         isShowError) {
                     @Override
-                    public void onNext(List<RecommendCourseListData> recommendCourseList) {
-                        mView.showRecommendCourseList(recommendCourseList);
+                    public void onNext(List<RecommendCourseData> recommendCourseList) {
+                        mView.showRecommendCourseList(recommendCourseList,isRefresh);
                     }
                 }));
     }
 
     @Override
     public void loadMoreData() {
-
+        addSubscribe(mDataManager.getRecommendCourseListData(mCurrentPage,Constants.LOAD_NUM)
+                .compose(RxUtils.rxSchedulerHelper())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new BaseObserver<List<RecommendCourseData>>(mView,
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_article_list),
+                        false) {
+                    @Override
+                    public void onNext(List<RecommendCourseData> recommendCourseDataList) {
+                        mView.showRecommendCourseList(recommendCourseDataList, isRefresh);
+                    }
+                }));
     }
 
     @Override
@@ -152,18 +162,24 @@ public class MainPagerPresenter extends BasePresenter<MainPagerContract.View> im
 
     @Override
     public void autoRefresh(boolean isShowError) {
-
+        isRefresh = true;
+        mCurrentPage = 0;
+        getBannerData(isShowError);
+        getRecommendAlbumList(isShowError);
+        getRecommendCourseList(isShowError);
     }
 
     @Override
     public void loadMore() {
-
+        isRefresh = false;
+        mCurrentPage++;
+        loadMoreData();
     }
 
     @NonNull
     private HashMap<String, Object> createResponseMap(BaseResponse<List<BannerData>> bannerResponse,
-                                                      BaseResponse<List<RecommendAlbumListData>> recommendAlbumResponse,
-                                                      BaseResponse<List<RecommendCourseListData>> recommendCourseResponse) {
+                                                      BaseResponse<List<RecommendAlbumData>> recommendAlbumResponse,
+                                                      BaseResponse<List<RecommendCourseData>> recommendCourseResponse) {
         HashMap<String, Object> map = new HashMap<>(3);
         map.put(Constants.BANNER_DATA, bannerResponse);
         map.put(Constants.RECOMMEND_ALBUM_DATA, recommendAlbumResponse);

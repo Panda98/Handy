@@ -10,6 +10,7 @@ public class AlbumCourseInfoVO {
     private int courseId;
     private String courseTitle;
     private String courseIntro;
+    private String coursePic;
     private String authorName;
 
 
@@ -43,5 +44,13 @@ public class AlbumCourseInfoVO {
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
+    }
+
+    public String getCoursePic() {
+        return coursePic;
+    }
+
+    public void setCoursePic(String coursePic) {
+        this.coursePic = coursePic;
     }
 }

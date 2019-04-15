@@ -3,8 +3,8 @@ package com.example.handy.contract;
 import com.example.handy.base.presenter.AbstractPresenter;
 import com.example.handy.base.view.AbstractView;
 import com.example.handy.core.bean.BannerData;
-import com.example.handy.core.bean.RecommendAlbumListData;
-import com.example.handy.core.bean.RecommendCourseListData;
+import com.example.handy.core.bean.RecommendAlbumData;
+import com.example.handy.core.bean.RecommendCourseData;
 
 import java.util.List;
 
@@ -32,16 +32,16 @@ public interface MainPagerContract {
         /**
          * Show content 显示推荐专辑
          *
-         * @param recommendAlbumListData RecommendAlbumListData
+         * @param recommendAlbumData RecommendAlbumData
          */
-        void showRecommendAlbumList(List<RecommendAlbumListData> recommendAlbumListData);
+        void showRecommendAlbumList(List<RecommendAlbumData> recommendAlbumData);
 
         /**
          * Show content 显示推荐教程
          *
-         * @param recommendCourseListData RecommendCourseListData
+         * @param recommendCourseData RecommendCourseData
          */
-        void showRecommendCourseList(List<RecommendCourseListData> recommendCourseListData);
+        void showRecommendCourseList(List<RecommendCourseData> recommendCourseData, boolean isRefresh);
     }
 
     interface Presenter extends AbstractPresenter<View> {

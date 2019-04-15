@@ -10,7 +10,7 @@ public interface PreferenceHelper {
      *
      * @param account Account
      */
-    void setLoginAccount(String account);
+    void setLoginAccount(int account);
 
     /**
      * Set login password
@@ -24,7 +24,7 @@ public interface PreferenceHelper {
      *
      * @return account
      */
-    String getLoginAccount();
+    int getLoginAccount();
 
     /**
      * Get login password
@@ -67,4 +67,18 @@ public interface PreferenceHelper {
      * @return current page
      */
     int getCurrentPage();
+
+    /**
+     * Get no image state
+     *
+     * @return if has image state
+     */
+    boolean getNoImageState();
+
+    /**
+     * Set no image state
+     *
+     * @param b current no image state
+     */
+    void setNoImageState(boolean b);
 }

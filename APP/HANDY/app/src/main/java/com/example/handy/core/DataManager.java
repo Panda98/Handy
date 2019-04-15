@@ -3,10 +3,11 @@ package com.example.handy.core;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
 import com.example.handy.core.bean.LoginData;
-import com.example.handy.core.bean.RecommendAlbumListData;
-import com.example.handy.core.bean.RecommendCourseListData;
+import com.example.handy.core.bean.RecommendAlbumData;
+import com.example.handy.core.bean.RecommendCourseData;
 import com.example.handy.core.http.HttpHelper;
 import com.example.handy.core.prefs.PreferenceHelper;
+import com.example.handy.core.vo.LoginView;
 
 import java.util.List;
 
@@ -26,13 +27,13 @@ public class DataManager implements HttpHelper, PreferenceHelper {
      *  登录注册相关
      */
     @Override
-    public Observable<BaseResponse<LoginData>> getLoginData(String username, String password) {
-        return mHttpHelper.getLoginData(username, password);
+    public Observable<BaseResponse<LoginData>> getLoginData(LoginView loginView) {
+        return mHttpHelper.getLoginData(loginView);
     }
 
     @Override
-    public Observable<BaseResponse<LoginData>> getRegisterData(String username, String password, String repassword) {
-        return mHttpHelper.getRegisterData(username, password, repassword);
+    public Observable<BaseResponse<LoginData>> getRegisterData(LoginView loginView) {
+        return mHttpHelper.getRegisterData(loginView);
     }
 
     @Override
@@ -50,13 +51,13 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse<List<RecommendAlbumListData>>> getRecommendAlbumListData() {
+    public Observable<BaseResponse<List<RecommendAlbumData>>> getRecommendAlbumListData() {
         return mHttpHelper.getRecommendAlbumListData();
     }
 
     @Override
-    public Observable<BaseResponse<List<RecommendCourseListData>>> getRecommendCourseListData() {
-        return mHttpHelper.getRecommendCourseListData();
+    public Observable<BaseResponse<List<RecommendCourseData>>> getRecommendCourseListData(int currentPage, int n) {
+        return mHttpHelper.getRecommendCourseListData(currentPage,n);
     }
 
 
@@ -64,7 +65,7 @@ public class DataManager implements HttpHelper, PreferenceHelper {
        Preference
     */
     @Override
-    public void setLoginAccount(String account) {
+    public void setLoginAccount(int account) {
         mPreferenceHelper.setLoginAccount(account);
     }
 
@@ -74,7 +75,7 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public String getLoginAccount() {
+    public int getLoginAccount() {
         return mPreferenceHelper.getLoginAccount();
     }
 
@@ -102,6 +103,16 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     @Override
     public int getCurrentPage() {
         return mPreferenceHelper.getCurrentPage();
+    }
+
+    @Override
+    public boolean getNoImageState() {
+        return mPreferenceHelper.getNoImageState();
+    }
+
+    @Override
+    public void setNoImageState(boolean b) {
+        mPreferenceHelper.setNoImageState(b);
     }
 
 

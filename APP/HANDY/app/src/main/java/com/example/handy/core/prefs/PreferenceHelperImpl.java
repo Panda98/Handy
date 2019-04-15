@@ -24,8 +24,8 @@ public class PreferenceHelperImpl  implements PreferenceHelper {
     }
 
     @Override
-    public void setLoginAccount(String account) {
-        mPreferences.edit().putString(Constants.ACCOUNT, account).apply();
+    public void setLoginAccount(int account) {
+        mPreferences.edit().putInt(Constants.ACCOUNT, account).apply();
     }
 
     @Override
@@ -34,8 +34,8 @@ public class PreferenceHelperImpl  implements PreferenceHelper {
     }
 
     @Override
-    public String getLoginAccount() {
-        return mPreferences.getString(Constants.ACCOUNT, "");
+    public int getLoginAccount() {
+        return mPreferences.getInt(Constants.ACCOUNT,20);
     }
 
     @Override
@@ -61,5 +61,15 @@ public class PreferenceHelperImpl  implements PreferenceHelper {
     @Override
     public int getCurrentPage() {
         return mPreferences.getInt(Constants.CURRENT_PAGE, 0);
+    }
+
+    @Override
+    public boolean getNoImageState() {
+        return mPreferences.getBoolean(Constants.NO_IMAGE_STATE, false);
+    }
+
+    @Override
+    public void setNoImageState(boolean b) {
+        mPreferences.edit().putBoolean(Constants.NO_IMAGE_STATE, b).apply();
     }
 }

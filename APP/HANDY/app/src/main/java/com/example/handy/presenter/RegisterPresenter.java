@@ -11,6 +11,7 @@ import com.example.handy.contract.RegisterContract;
 import com.example.handy.core.DataManager;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.event.LoginEvent;
+import com.example.handy.core.vo.LoginView;
 import com.example.handy.utils.RxUtils;
 import com.example.handy.wigdet.BaseObserver;
 
@@ -40,7 +41,8 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.View> impl
             mView.showSnackBar(HandyAPP.getInstance().getString(R.string.password_not_same));
             return;
         }
-        addSubscribe(mDataManager.getRegisterData(username, password, rePassword)
+        LoginView registerView = new LoginView(username,password);
+        addSubscribe(mDataManager.getRegisterData(registerView)
                 .compose(RxUtils.rxSchedulerHelper())
                 .compose(RxUtils.handleResult())
                 .subscribeWith(new BaseObserver<LoginData>(mView,

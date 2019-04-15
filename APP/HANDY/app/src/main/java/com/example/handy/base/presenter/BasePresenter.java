@@ -52,12 +52,12 @@ public class BasePresenter<T extends AbstractView> implements AbstractPresenter<
     }
 
     @Override
-    public String getLoginAccount() {
+    public int getLoginAccount() {
         return mDataManager.getLoginAccount();
     }
 
     @Override
-    public void setLoginAccount(String account) {
+    public void setLoginAccount(int account) {
         mDataManager.setLoginAccount(account);
     }
 
@@ -71,5 +71,10 @@ public class BasePresenter<T extends AbstractView> implements AbstractPresenter<
             compositeDisposable = new CompositeDisposable();
         }
         compositeDisposable.add(disposable);
+    }
+
+    @Override
+    public int getCurrentPage() {
+        return mDataManager.getCurrentPage();
     }
 }

@@ -4,55 +4,62 @@ import java.util.List;
 
 /**
  * @author wangziang
- * @date 2019/04/07
+ * @date 2019/04/15
  */
 public class LoginData {
 
-    private String username;
-    private String password;
-    private String icon;
-    private int type;
-    private List<Integer> collectIds;
+    private int id;
+    private String email;
+    private String nickname;
+    private String sex;
+    private String birthday;
+    private String userPic;
 
-    public String getUsername() {
-        return username;
+    public int getId() {
+        return id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getPassword() {
-        return password;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    public int getType() {
-        return type;
+    public String getSex() {
+        return sex;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
-    public List<Integer> getCollectIds() {
-        return collectIds;
+    public String getBirthday() {
+        return birthday;
     }
 
-    public void setCollectIds(List<Integer> collectIds) {
-        this.collectIds = collectIds;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
+    public String getUserPic() {
+        return userPic;
+    }
 
+    public void setUserPic(String userPic) {
+        this.userPic = userPic;
+    }
 }
