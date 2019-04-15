@@ -14,5 +14,5 @@ import java.util.List;
 public interface IAlbumService {
     List<AlbumVO> getRecommendedAlbum(int uid);
     List<AlbumDto> getAlbumList(int uid);
-    List<AlbumCourseDto> getAlbumDetail(int albumid);
+    AlbumCourseDto getAlbumDetail(int albumid,int start,int n);
 }

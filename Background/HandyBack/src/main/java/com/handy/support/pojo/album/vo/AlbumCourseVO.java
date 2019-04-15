@@ -5,6 +5,7 @@ import com.handy.support.entity.Course;
 import com.handy.support.pojo.album.dto.AlbumCourseDto;
 import org.springframework.beans.BeanUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public class AlbumCourseVO {
     private List<AlbumCourseInfoVO> courseList;
 
     public AlbumCourseVO(){
-        super();
+        courseList = new ArrayList<AlbumCourseInfoVO>();
     }
 
     public AlbumCourseVO(AlbumCourseDto dto){
