@@ -1,14 +1,18 @@
 package com.handy.support.pojo.album.vo;
 
+import com.handy.support.entity.AlbumCourse;
+import com.handy.support.entity.Course;
 import com.handy.support.pojo.album.dto.AlbumCourseDto;
 import org.springframework.beans.BeanUtils;
+
+import java.util.List;
 
 /**
  * Created by Pan on 2019/4/14.
  */
 public class AlbumCourseVO {
     private Integer albumId;
-    private Integer courseId;
+    private List<AlbumCourseInfoVO> courseList;
 
     public AlbumCourseVO(){
         super();
@@ -26,11 +30,11 @@ public class AlbumCourseVO {
         this.albumId = albumId;
     }
 
-    public Integer getCourseId() {
-        return courseId;
+    public List<AlbumCourseInfoVO> getCourseList() {
+        return courseList;
     }
 
-    public void setCourseId(Integer courseId) {
-        this.courseId = courseId;
+    public void setCourseList(List<AlbumCourseInfoVO> courseList) {
+        this.courseList = courseList;
     }
 }
