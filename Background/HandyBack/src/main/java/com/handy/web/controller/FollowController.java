@@ -23,7 +23,11 @@ public class FollowController {
     @RequestMapping(value="/follows",method = RequestMethod.GET)
     public String getFollowers(int uid,int page_no,int n){
         List<Follow> followList=followService.getFollows(uid,page_no,n);
-        ReturnCode<List> code = new ReturnCode<List>(followList);
+        List<FollowVO>followVOS=new LinkedList<FollowVO>();
+        for(int i=0;i<followList.size();i++){
+            followVOS.add(new FollowVO(new FollowDTO(followList.get(i))));
+        }
+        ReturnCode<List> code = new ReturnCode<List>(followVOS);
         return code.returnHandler();
     }
     @RequestMapping(value="/follow",method = RequestMethod.GET)

@@ -9,6 +9,9 @@ public class FollowDTO {
     public FollowDTO(){
         follow=new Follow();
     }
+    public FollowDTO(Follow follow)  {
+        this.follow=follow;
+    }
     public Follow getFollow() {
         return follow;
     }
