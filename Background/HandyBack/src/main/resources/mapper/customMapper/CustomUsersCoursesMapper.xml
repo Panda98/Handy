@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.handy.support.mapper.customMapper.MyUsersCoursesMapper">
-    <resultMap id="UsersCoursesBriefMap" type="com.handy.support.pojo.UserCourse.dto.UserCourseBrief">
+    <!--resultMap id="UsersCoursesBriefMap" type="com.handy.support.pojo.UserCourse.dto.UserCourseBrief">
         <association property="course"  resultMap="com.handy.support.mapper.CourseMapper.BaseResultMap"/>
         <association property="user" resultMap="com.handy.support.mapper.UserMapper.BaseResultMap"/>
     </resultMap>
@@ -14,5 +14,5 @@
     item="id" index="i">
         #{id}
     </foreach> order by c.update_time desc  limit #{startRow},#{size}
-    </select>
+    </select-->
 </mapper>

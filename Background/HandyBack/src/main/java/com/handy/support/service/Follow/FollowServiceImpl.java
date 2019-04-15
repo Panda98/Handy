@@ -30,7 +30,7 @@ public class FollowServiceImpl implements IFollowService{
         //follower为当前用户，userId为其关注的人
         myFollowMapper.unFollowOther(followDTO.getFollow().getFollowerId(),followDTO.getFollow().getUserId());
     }
-    public List<UsersCoursesBrief> getFollowsUpdate(List<Integer>list,int page_no,int n){
+   /* public List<UsersCoursesBrief> getFollowsUpdate(List<Integer>list,int page_no,int n){
        return usersCoursesMapper.getUsersCoursesBrief(list,page_no,n);
-    }
+    }*/
 }
