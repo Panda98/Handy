@@ -6,6 +6,7 @@ import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.RecommendAlbumListData;
 import com.example.handy.core.bean.RecommendCourseListData;
 import com.example.handy.core.http.api.Apis;
+import com.example.handy.core.vo.LoginView;
 
 import java.util.List;
 
@@ -29,13 +30,13 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse<LoginData>> getLoginData(String username, String password) {
-        return mApis.getLoginData(username, password);
+    public Observable<BaseResponse<LoginData>> getLoginData(LoginView loginView) {
+        return mApis.getLoginData(loginView);
     }
 
     @Override
-    public Observable<BaseResponse<LoginData>> getRegisterData(String username, String password, String repassword) {
-        return mApis.getRegisterData(username, password, repassword);
+    public Observable<BaseResponse<LoginData>> getRegisterData(LoginView loginView) {
+        return mApis.getRegisterData(loginView);
     }
 
     @Override

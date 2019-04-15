@@ -5,46 +5,44 @@ import com.example.handy.core.bean.BaseResponse;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.RecommendAlbumListData;
 import com.example.handy.core.bean.RecommendCourseListData;
+import com.example.handy.core.vo.LoginView;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
  * @author wangziang
  * @date 2019/04/07
  */
 public interface Apis {
-    String HOST = "https://www.wanandroid.com/";
+    String HOST = "http://106.13.106.249:8080/";
 
     /**
      * 登陆
      * http://www.wanandroid.com/user/login
      *
-     * @param username user name
-     * @param password password
+     * @param loginData name password
      * @return 登陆数据
      */
     @POST("user/login")
-    @FormUrlEncoded
-    Observable<BaseResponse<LoginData>> getLoginData(@Field("username") String username, @Field("password") String password);
+    Observable<BaseResponse<LoginData>> getLoginData(@Body LoginView loginData);
 
     /**
      * 注册
      * http://www.wanandroid.com/user/register
      *
-     * @param username user name
-     * @param password password
-     * @param repassword re password
+     * @param loginData user name password
      * @return 注册数据
      */
-    @POST("user/register")
-    @FormUrlEncoded
-    Observable<BaseResponse<LoginData>> getRegisterData(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
+    @POST("user/regist")
+    Observable<BaseResponse<LoginData>> getRegisterData(@Body LoginView loginData);
 
     /**
      * 退出登录

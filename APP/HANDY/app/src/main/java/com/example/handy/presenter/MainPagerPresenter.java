@@ -62,7 +62,7 @@ public class MainPagerPresenter extends BasePresenter<MainPagerContract.View> im
     }
 
     @Override
-    public String getLoginAccount() {
+    public int getLoginAccount() {
         return mDataManager.getLoginAccount();
     }
 

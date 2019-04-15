@@ -10,7 +10,7 @@ public interface PreferenceHelper {
      *
      * @param account Account
      */
-    void setLoginAccount(String account);
+    void setLoginAccount(int account);
 
     /**
      * Set login password
@@ -24,7 +24,7 @@ public interface PreferenceHelper {
      *
      * @return account
      */
-    String getLoginAccount();
+    int getLoginAccount();
 
     /**
      * Get login password
