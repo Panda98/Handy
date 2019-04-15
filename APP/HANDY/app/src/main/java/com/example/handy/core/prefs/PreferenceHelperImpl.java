@@ -62,4 +62,14 @@ public class PreferenceHelperImpl  implements PreferenceHelper {
     public int getCurrentPage() {
         return mPreferences.getInt(Constants.CURRENT_PAGE, 0);
     }
+
+    @Override
+    public boolean getNoImageState() {
+        return mPreferences.getBoolean(Constants.NO_IMAGE_STATE, false);
+    }
+
+    @Override
+    public void setNoImageState(boolean b) {
+        mPreferences.edit().putBoolean(Constants.NO_IMAGE_STATE, b).apply();
+    }
 }

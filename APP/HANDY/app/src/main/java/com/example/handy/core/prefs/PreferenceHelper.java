@@ -67,4 +67,18 @@ public interface PreferenceHelper {
      * @return current page
      */
     int getCurrentPage();
+
+    /**
+     * Get no image state
+     *
+     * @return if has image state
+     */
+    boolean getNoImageState();
+
+    /**
+     * Set no image state
+     *
+     * @param b current no image state
+     */
+    void setNoImageState(boolean b);
 }
