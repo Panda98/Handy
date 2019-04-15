@@ -28,13 +28,10 @@ public class AlbumController {
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     private IAlbumService albumService;
-
-    @Autowired
-    @SuppressWarnings("SpringJavaAutowiringInspection")
-    private ICourseSevice courseSevice;
     
     @RequestMapping(value = "/album/recommend",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
     public String getRecommendAlbum(int uid){
+        //todo: 待开发
         List<AlbumVO> dtos = albumService.getRecommendedAlbum(uid);
         ErrorEnum error = null;
         if(dtos== null){
@@ -75,15 +72,12 @@ public class AlbumController {
         return code.returnHandler();
     }
 
+
     @RequestMapping(value = "/album/detail",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
     public String getListDetail(int uid, int albumid,int page,int n){
-        List<AlbumCourseDto> list = albumService.getAlbumDetail(albumid);
-        AlbumCourseVO vo = new AlbumCourseVO();
-        if(list.size()!=0)
-            vo.setAlbumId(list.get(0).getAlbumId());
-        for(AlbumCourseDto dto:list){
-            Course course = courseSevice.getCourseByID(dto.getCourseId().toString());
-        }
+        AlbumCourseDto list = albumService.getAlbumDetail(albumid,page,n);
+        AlbumCourseVO vo = list.revert2VO();
+
         ReturnCode<AlbumCourseVO> code = new ReturnCode<AlbumCourseVO>(vo);
         return code.returnHandler();
     }

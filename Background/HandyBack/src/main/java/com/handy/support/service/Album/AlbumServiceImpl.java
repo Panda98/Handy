@@ -1,12 +1,13 @@
 package com.handy.support.service.Album;
 
-import com.handy.support.entity.Album;
-import com.handy.support.entity.AlbumCourse;
-import com.handy.support.entity.AlbumCourseExample;
-import com.handy.support.entity.AlbumExample;
+import com.handy.support.entity.*;
 import com.handy.support.mapper.AlbumCourseMapper;
 import com.handy.support.mapper.AlbumMapper;
+import com.handy.support.mapper.CourseMapper;
+import com.handy.support.mapper.UserMapper;
+import com.handy.support.mapper.customMapper.MyAlbumCoursesMapper;
 import com.handy.support.pojo.album.dto.AlbumCourseDto;
+import com.handy.support.pojo.album.dto.AlbumCourseInfoDto;
 import com.handy.support.pojo.album.dto.AlbumDto;
 import com.handy.support.pojo.album.vo.AlbumVO;
 import org.springframework.beans.BeanUtils;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Created by Pan on 2019/4/14.
  */
-@Service
+@Service("albumService")
 public class AlbumServiceImpl implements IAlbumService {
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -28,6 +29,18 @@ public class AlbumServiceImpl implements IAlbumService {
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     private AlbumCourseMapper albumCourseMapper;
+
+    @Autowired
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    private MyAlbumCoursesMapper myAlbumCoursesMapper;
+
+    @Autowired
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    private CourseMapper courseMapper;
+
+    @Autowired
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    private UserMapper userMapper;
 
     public List<AlbumVO> getRecommendedAlbum(int uid){
         //todo: 完成推荐算法后进行测试
@@ -49,19 +62,20 @@ public class AlbumServiceImpl implements IAlbumService {
         return albumDtos;
     }
 
-    public List<AlbumCourseDto> getAlbumDetail(int albumid){
-        AlbumCourseExample example = new AlbumCourseExample();
-        AlbumCourseExample.Criteria criteria = example.createCriteria();
-        criteria.andAlbumIdEqualTo(albumid);
-        example.or(criteria);
-        List<AlbumCourse> list = albumCourseMapper.selectByExample(example);
-        List<AlbumCourseDto> dtos = new ArrayList<AlbumCourseDto>();
+    public AlbumCourseDto getAlbumDetail(int albumid,int start,int n){
+        List<AlbumCourse> list = myAlbumCoursesMapper.getCoursesByAlbumLimited(albumid,start,n);
+        AlbumCourseDto albumCourseDto = new AlbumCourseDto();
+        if(list.size()!=0)
+            albumCourseDto.setAlbumId(list.get(0).getAlbumId());
         for(AlbumCourse albumCourse:list){
-            AlbumCourseDto dto = new AlbumCourseDto();
-            BeanUtils.copyProperties(albumCourse,dto);
-            dtos.add(dto);
+            Course course = courseMapper.selectByPrimaryKey(albumCourse.getCourseId());
+            User author = userMapper.selectByPrimaryKey(course.getUserId());
+            AlbumCourseInfoDto dto = new AlbumCourseInfoDto();
+            BeanUtils.copyProperties(author,dto);
+            BeanUtils.copyProperties(course,dto);
+            albumCourseDto.getCourseList().add(dto);
         }
-        return dtos;
+        return albumCourseDto;
     }
 
 
