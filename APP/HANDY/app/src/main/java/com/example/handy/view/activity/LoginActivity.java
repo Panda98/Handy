@@ -60,7 +60,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     public void showLoginSuccess() {
         CommonUtils.showMessage(this, getString(R.string.login_success));
         startActivity(new Intent(this, MainActivity.class));
-        onBackPressedSupport();
+        //onBackPressedSupport();
     }
 
     @OnClick({R.id.login_register_btn})

@@ -18,6 +18,7 @@
 *.zip
 *.tar.gz
 *.rar
+*.iml
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
@@ -33,7 +34,12 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
+# Android
+APP/HANDY/.idea/*
+APP/HANDY/.gradle/*
+
 Background/HandyBack/.idea/*
 Background/HandyBack/target/*
 Background/HandyBack/out/*
 Background/HandyBack/HandyBack.iml
+APP/HANDY/local.properties
