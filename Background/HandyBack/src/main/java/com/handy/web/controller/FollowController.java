@@ -1,15 +1,12 @@
 package com.handy.web.controller;
 
 import com.handy.support.entity.Follow;
-import com.handy.support.mapper.customMapper.MyUsersCoursesMapper;
 import com.handy.support.pojo.Follow.dto.FollowDTO;
 import com.handy.support.pojo.Follow.vo.FollowVO;
 import com.handy.support.pojo.UserCourse.dto.UsersCoursesBrief;
 import com.handy.support.service.Follow.FollowServiceImpl;
 import com.handy.support.utils.status.ReturnCode;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
