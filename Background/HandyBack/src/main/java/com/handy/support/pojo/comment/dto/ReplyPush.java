@@ -5,6 +5,9 @@ import com.handy.support.pojo.comment.vo.RepComReq;
 
 public class ReplyPush {
     CommentReply reply;
+    public ReplyPush(){
+        this.reply=new CommentReply();
+    }
     public void setReply(RepComReq req){
         this.reply.setCommentId(req.getComment_id());
         this.reply.setReplyContent(req.getContent());

@@ -5,7 +5,7 @@ import com.handy.support.entity.CommentExample;
 import com.handy.support.entity.CommentReply;
 import com.handy.support.mapper.CommentMapper;
 import com.handy.support.mapper.CommentReplyMapper;
-import com.handy.support.mapper.comment.MyCommentMapper;
+import com.handy.support.mapper.customMapper.MyCommentMapper;
 import com.handy.support.pojo.comment.dto.CommentPush;
 import com.handy.support.pojo.comment.dto.ReplyPush;
 import com.handy.support.pojo.comment.vo.ComPush;
@@ -29,13 +29,13 @@ public class CommentServiceImpl implements ICommentService {
     }
 
     public void pushCommentToCourse(CommentPush req) {
-        autoCommentMapper.insert(req.getComment());
+        autoCommentMapper.insertSelective(req.getComment());
     }
 
     public List<CommentReply> getCommentReply(ComRepReq req) {
         return commentMapper.getCommentReplyByCommentIdLimited(req.getComment_id(),req.getPage_no()*req.getN(),req.getN());
     }
     public void pushCommentReply(ReplyPush req){
-        commentReplyMapper.insert(req.getReply());
+        commentReplyMapper.insertSelective(req.getReply());
     }
 }

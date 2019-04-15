@@ -24,6 +24,7 @@ public class UserServiceImpl implements IUserService{
     private UserMapper userMapper;
 
     @Autowired
+    @SuppressWarnings("SpringJavaAutowiringInspection")
     private UserLabelMapper userLabelMapper;
 
     public ErrorEnum addUser(String username, String password){
