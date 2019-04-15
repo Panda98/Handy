@@ -16,6 +16,7 @@ import com.example.handy.presenter.LoginPresenter;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.StatusBarUtil;
 import com.jakewharton.rxbinding2.view.RxView;
+import com.squareup.haha.perflib.Main;
 
 import java.util.concurrent.TimeUnit;
 
@@ -58,6 +59,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     @Override
     public void showLoginSuccess() {
         CommonUtils.showMessage(this, getString(R.string.login_success));
+        startActivity(new Intent(this, MainActivity.class));
         onBackPressedSupport();
     }
 

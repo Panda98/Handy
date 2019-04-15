@@ -8,7 +8,7 @@
     <string name="auto_login_in">自动登录</string>
     <string name="logout">退出登录</string>
     <string name="login_tint">请先登录</string>
-    <string name="login_success">登录成功</string>
+    <string name="login_success">登录成功~</string>
     <string name="account_password_null_tint">用户名或密码不能为空</string>
     <string name="login_fail">登录失败</string>
     <string name="logout_fail">退出登录失败</string>
