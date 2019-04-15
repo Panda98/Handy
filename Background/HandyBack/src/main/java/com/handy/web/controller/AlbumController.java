@@ -1,11 +1,13 @@
 package com.handy.web.controller;
 
 import com.handy.support.entity.Album;
+import com.handy.support.entity.Course;
 import com.handy.support.pojo.album.dto.AlbumCourseDto;
 import com.handy.support.pojo.album.dto.AlbumDto;
 import com.handy.support.pojo.album.vo.AlbumCourseVO;
 import com.handy.support.pojo.album.vo.AlbumVO;
 import com.handy.support.service.Album.IAlbumService;
+import com.handy.support.service.Course.ICourseSevice;
 import com.handy.support.utils.status.ErrorEnum;
 import com.handy.support.utils.status.ReturnCode;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
@@ -26,6 +28,10 @@ public class AlbumController {
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     private IAlbumService albumService;
+
+    @Autowired
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    private ICourseSevice courseSevice;
     
     @RequestMapping(value = "/album/recommend",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
     public String getRecommendAlbum(int uid){
@@ -70,14 +76,15 @@ public class AlbumController {
     }
 
     @RequestMapping(value = "/album/detail",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
-    public String getListDetail(int uid, int albumid){
+    public String getListDetail(int uid, int albumid,int page,int n){
         List<AlbumCourseDto> list = albumService.getAlbumDetail(albumid);
-        List<AlbumCourseVO> vos = new ArrayList<AlbumCourseVO>();
-        for(AlbumCourseDto dto : list){
-            AlbumCourseVO vo = new AlbumCourseVO(dto);
-            vos.add(vo);
+        AlbumCourseVO vo = new AlbumCourseVO();
+        if(list.size()!=0)
+            vo.setAlbumId(list.get(0).getAlbumId());
+        for(AlbumCourseDto dto:list){
+            Course course = courseSevice.getCourseByID(dto.getCourseId().toString());
         }
-        ReturnCode<List<AlbumCourseVO>> code = new ReturnCode<List<AlbumCourseVO>>(vos);
+        ReturnCode<AlbumCourseVO> code = new ReturnCode<AlbumCourseVO>(vo);
         return code.returnHandler();
     }
 
