@@ -21,12 +21,19 @@ public class Constants {
 
     public static final String LOGIN_STATUS = "login_status";
 
+    public static final String NO_IMAGE_STATE = "no_image_state";
+
     /**
      * Path
      */
     public static final String PATH_DATA = HandyAPP.getInstance().getCacheDir().getAbsolutePath() + File.separator + "data";
 
     public static final String PATH_CACHE = PATH_DATA + "/NetCache";
+
+    /**
+     * 一次加载条目的个数
+     */
+    public static final int LOAD_NUM = 5;
 
 
     /**

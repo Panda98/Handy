@@ -3,8 +3,8 @@ package com.example.handy.core.http;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
 import com.example.handy.core.bean.LoginData;
-import com.example.handy.core.bean.RecommendAlbumListData;
-import com.example.handy.core.bean.RecommendCourseListData;
+import com.example.handy.core.bean.RecommendAlbumData;
+import com.example.handy.core.bean.RecommendCourseData;
 import com.example.handy.core.vo.LoginView;
 
 import java.util.List;
@@ -52,7 +52,7 @@ public interface HttpHelper {
      *
      * @return 专辑列表
      */
-    Observable<BaseResponse<List<RecommendAlbumListData>>> getRecommendAlbumListData();
+    Observable<BaseResponse<List<RecommendAlbumData>>> getRecommendAlbumListData();
 
     /**
      * 推荐教程
@@ -60,5 +60,5 @@ public interface HttpHelper {
      *
      * @return 教程列表
      */
-    Observable<BaseResponse<List<RecommendCourseListData>>> getRecommendCourseListData();
+    Observable<BaseResponse<List<RecommendCourseData>>> getRecommendCourseListData(int currentPage, int n);
 }

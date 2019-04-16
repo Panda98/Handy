@@ -2,17 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.handy.support.mapper.customMapper.MyUsersCoursesMapper">
-    <!--resultMap id="UsersCoursesBriefMap" type="com.handy.support.pojo.UserCourse.dto.UserCourseBrief">
-        <association property="course"  resultMap="com.handy.support.mapper.CourseMapper.BaseResultMap"/>
-        <association property="user" resultMap="com.handy.support.mapper.UserMapper.BaseResultMap"/>
+    <resultMap id="CourseMap" type="com.handy.support.pojo.Follow.vo.CourseBrief" >
+            <id column="course_id" property="courseId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <result column="course_title" property="courseTitle" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <result column="course_cover" property="courseCover" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <result column="diy_label" property="diyLabel" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <result column="update_time" property="updateTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <result column="level_id" property="levelId" javaType="java.lang.Byte" jdbcType="TINYINT" />
     </resultMap>
+    <resultMap id="UserMap" type="com.handy.support.pojo.Follow.vo.UserBrief">
+            <id column="user_id" property="userId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <result column="nick_name" property="nickName" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <result column="user_pic" property="userPic" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </resultMap>
+    <resultMap id="UsersCoursesBriefMap" type="com.handy.support.pojo.UserCourse.dto.UsersCoursesBrief">
+        <association property="course" columnPrefix="course_" resultMap="CourseMap" />
+        <association property="user" columnPrefix="user_" resultMap="UserMap"/>
+    </resultMap><!--u.user_id user_user_id,u.nick_name user_nick_name,u.user_pic user_user_pic,c.update_time course_update_time,
+        c.course_cover course_course_cover,c.course_id course_course_id,c.course_title course_course_title,c.course_intro course_course_intro
+        ,c.diy_label course_diy_label,c.level_id course_level_id-->
     <select id="getUsersCoursesBrief" resultMap="UsersCoursesBriefMap">
-        select u.user_id,u.nick_name,u.user_pic,c.update_time,c.course_cover,c.course_id,c.course_title,c.diy_label,c.level_id
+        select u.user_id user_user_id,u.nick_name user_nick_name,u.user_pic user_user_pic,c.update_time course_update_time,
+        c.course_cover course_course_cover,c.course_id course_course_id,c.course_title course_course_title
+        ,c.diy_label course_diy_label,c.level_id course_level_id
         from user u
         inner join course c
-        where u.user_id=c.user_id and id in <foreach collection="users" open="(" close=")" separator=","
+        where u.user_id=c.user_id and u.user_id in <foreach collection="users" open="(" close=")" separator=","
     item="id" index="i">
         #{id}
     </foreach> order by c.update_time desc  limit #{startRow},#{size}
-    </select-->
+    </select>
 </mapper>

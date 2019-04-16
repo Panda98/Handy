@@ -72,4 +72,9 @@ public class BasePresenter<T extends AbstractView> implements AbstractPresenter<
         }
         compositeDisposable.add(disposable);
     }
+
+    @Override
+    public int getCurrentPage() {
+        return mDataManager.getCurrentPage();
+    }
 }

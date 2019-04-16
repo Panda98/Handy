@@ -58,4 +58,11 @@ public interface AbstractPresenter<T extends AbstractView> {
      * @param password password
      */
     void setLoginPassword(String password);
+
+    /**
+     * Get current page
+     *
+     * @return current page
+     */
+    int getCurrentPage();
 }
