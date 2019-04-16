@@ -1,6 +1,7 @@
 package com.handy.support.mapper;
 
 import com.handy.support.entity.CourseLabel;
+import com.handy.support.entity.Label;
 import com.handy.support.entity.CourseLabelExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -61,4 +62,10 @@ public interface CourseLabelMapper {
      * @mbggenerated
      */
     int updateByExample(@Param("record") CourseLabel record, @Param("example") CourseLabelExample example);
+
+
+
+
+
+
 }

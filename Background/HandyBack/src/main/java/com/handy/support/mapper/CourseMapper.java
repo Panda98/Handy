@@ -93,4 +93,5 @@ public interface CourseMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Course record);
+
 }
