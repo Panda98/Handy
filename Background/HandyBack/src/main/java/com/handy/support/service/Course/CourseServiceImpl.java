@@ -4,8 +4,7 @@ import com.handy.support.entity.*;
 import com.handy.support.mapper.*;
 import com.handy.support.pojo.course.dto.*;
 import com.handy.support.pojo.course.vo.*;
-import com.handy.support.mapper.courseMapper.*;
-import com.handy.support.mapper.UserMapper;
+
 
 
 import com.handy.support.service.Album.IAlbumService;

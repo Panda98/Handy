@@ -5,7 +5,7 @@ import com.handy.support.entity.CommentExample;
 import com.handy.support.entity.CommentReply;
 import com.handy.support.mapper.CommentMapper;
 import com.handy.support.mapper.CommentReplyMapper;
-import com.handy.support.mapper.customMapper.MyCommentMapper;
+import com.handy.support.mapper.MyCommentMapper;
 import com.handy.support.pojo.comment.dto.CommentPush;
 import com.handy.support.pojo.comment.dto.ReplyPush;
 import com.handy.support.pojo.comment.vo.ComPush;

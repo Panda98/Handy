@@ -1,4 +1,4 @@
-package com.handy.support.mapper.courseMapper;
+package com.handy.support.mapper;
 
 import com.handy.support.entity.Course;
 import com.handy.support.entity.AlbumCourse;

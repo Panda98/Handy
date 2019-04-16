@@ -5,7 +5,7 @@ import com.handy.support.mapper.AlbumCourseMapper;
 import com.handy.support.mapper.AlbumMapper;
 import com.handy.support.mapper.CourseMapper;
 import com.handy.support.mapper.UserMapper;
-import com.handy.support.mapper.customMapper.MyAlbumCoursesMapper;
+import com.handy.support.mapper.MyAlbumCoursesMapper;
 import com.handy.support.pojo.album.dto.AlbumCourseDto;
 import com.handy.support.pojo.album.dto.AlbumCourseInfoDto;
 import com.handy.support.pojo.album.dto.AlbumDto;

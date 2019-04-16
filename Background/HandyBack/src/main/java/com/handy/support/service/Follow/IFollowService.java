@@ -1,7 +1,6 @@
 package com.handy.support.service.Follow;
 
 import com.handy.support.entity.Follow;
-import com.handy.support.mapper.customMapper.MyFollowMapper;
 import com.handy.support.pojo.Follow.dto.FollowDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 

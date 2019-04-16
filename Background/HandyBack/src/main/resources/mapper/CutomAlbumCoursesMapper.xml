@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.handy.support.mapper.customMapper.MyAlbumCoursesMapper">
+<mapper namespace="com.handy.support.mapper.MyAlbumCoursesMapper">
     <select id="getCoursesByAlbumLimited" resultMap="com.handy.support.mapper.AlbumCourseMapper.BaseResultMap">
         select * from album_course where album_id=#{albumId} limit #{startRow},#{size}
     </select>

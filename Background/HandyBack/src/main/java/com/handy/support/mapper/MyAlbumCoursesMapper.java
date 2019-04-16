@@ -1,4 +1,4 @@
-package com.handy.support.mapper.customMapper;
+package com.handy.support.mapper;
 
 import com.handy.support.entity.AlbumCourse;
 import org.apache.ibatis.annotations.Param;

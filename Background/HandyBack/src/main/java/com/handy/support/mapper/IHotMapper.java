@@ -1,4 +1,4 @@
-package com.handy.support.mapper.courseMapper;
+package com.handy.support.mapper;
 
 import com.handy.support.entity.Hot;
 import org.apache.ibatis.annotations.Param;

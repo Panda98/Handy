@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.handy.support.mapper.customMapper.MyUsersCoursesMapper">
+<mapper namespace="com.handy.support.mapper.MyUsersCoursesMapper">
     <resultMap id="CourseMap" type="com.handy.support.pojo.Follow.vo.CourseBrief" >
             <id column="course_id" property="courseId" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <result column="course_title" property="courseTitle" javaType="java.lang.String" jdbcType="VARCHAR" />
