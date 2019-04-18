@@ -23,7 +23,7 @@ public interface ICourseService {
 
     List<CourseSimpleVO> getBannerList();
 
-    List<CourseSimpleVO> getRecommendList(Integer page_no,Integer n);
+    List<CourseSimpleVO> getRecommendList(Integer userId, Integer page_no, Integer n);
 
     CourseDetailVO getCourseDetail(Integer courseId);
 

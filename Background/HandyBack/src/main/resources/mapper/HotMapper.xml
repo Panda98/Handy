@@ -143,15 +143,6 @@
       </if>
     </trim>
   </insert>
-
-
-
-
-
-
-
-
-
   <select id="countByExample" parameterType="com.handy.support.entity.HotExample" resultType="java.lang.Integer">
     <!--
       WARNING - @mbggenerated

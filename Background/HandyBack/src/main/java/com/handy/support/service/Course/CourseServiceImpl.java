@@ -132,7 +132,7 @@ public class CourseServiceImpl implements ICourseService {
         return simpleList;
     }
 
-    public List<CourseSimpleVO> getRecommendList(Integer page_no, Integer n){
+    public List<CourseSimpleVO> getRecommendList(Integer userId,Integer page_no, Integer n){
         List<CourseSimpleVO> simpleList=new ArrayList<CourseSimpleVO>();
         List<Course> courseList=iCourseMapper.getAll(page_no*n,n);
         for(Course c:courseList){
@@ -234,24 +234,25 @@ public class CourseServiceImpl implements ICourseService {
         c.setDiyLabel(e.getDiyLabel());
         c.setUserId(e.getUserId());
         c.setLevelId(e.getLevelId());
-        Integer count=iCourseMapper.insertCourse(c);
+        Integer count=courseMapper.insertSelective(c);
+        Integer courseId=iCourseMapper.getLastId();
 
         List<Label> labelList=e.getLabelList();
         for(Label l:labelList){
-            CourseLabel cl=new CourseLabel(c.getCourseId(),l.getLabelId());
+            CourseLabel cl=new CourseLabel(courseId,l.getLabelId());
             courseLabelMapper.insert(cl);
         }
         List<Item> itemList=e.getItemList();
         for(Item i:itemList){
             itemMapper.insert(i);
-            CourseItem courseItem=new CourseItem(c.getCourseId(),i.getItemId());
+            CourseItem courseItem=new CourseItem(courseId,i.getItemId());
             courseItemMapper.insert(courseItem);
         }
         List<Step> stepList=e.getStepList();
 
         for(Step s:stepList){
             stepMapper.insert(s);
-            CourseStep courseStep=new CourseStep(c.getCourseId(),s.getStepId());
+            CourseStep courseStep=new CourseStep(courseId,s.getStepId());
             courseStepMapper.insert(courseStep);
         }
 

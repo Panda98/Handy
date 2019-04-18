@@ -61,6 +61,4 @@ public interface HotMapper {
      * @mbggenerated
      */
     int updateByExample(@Param("record") Hot record, @Param("example") HotExample example);
-
-
 }

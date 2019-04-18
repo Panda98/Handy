@@ -6,7 +6,7 @@
 <!--根据course_id查找item list-->
 <select id="listByCourseId" resultType="com.handy.support.entity.Item">
     SELECT
-    l.item_id AS itemId,
+    i.item_id AS itemId,
     item_name AS itemName,
     item_number AS itemNumber,
     item_tag AS itemTag
@@ -14,10 +14,7 @@
     course_item course
     LEFT JOIN item i ON course.item_id = i.item_id
     <where>
-        1=1
-        <if test="courseId != null">
             course_id=#{courseId}
-        </if>
     </where>
 </select>
 

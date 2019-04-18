@@ -7,7 +7,7 @@
       WHERE album_id=#{albumId} AND course_id=#{courseId};
     </delete>
 
-    <select id="isCollected">
+    <select id="isCollected" resultType="Integer">
         SELECT 1
         FROM album_course ac
         LEFT JOIN album a ON ac.album_id=a.album_id

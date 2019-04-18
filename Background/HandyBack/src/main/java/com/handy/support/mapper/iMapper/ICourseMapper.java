@@ -13,5 +13,7 @@ public interface ICourseMapper {
 
     List<Integer> getMyCourse(@Param("userId")Integer userId,@Param("start") Integer start, @Param("n") Integer n);
 
-    Integer insertCourse(@Param("course")Course course);
+    //Integer insertCourse(@Param("course")Course course);
+
+    Integer getLastId();
 }
