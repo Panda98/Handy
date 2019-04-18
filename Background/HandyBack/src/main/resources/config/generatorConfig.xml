@@ -74,13 +74,13 @@
         <!--<table schema="handy" tableName="item"/>-->
         <!--<table schema="handy" tableName="label"/>-->
         <!--<table schema="handy" tableName="level"/>-->
-        <!--<table schema="handy" tableName="collection"/>-->
+        <table schema="handy" tableName="hold"/>
         <!--<table schema="handy" tableName="step"/>-->
         <!--<table schema="handy" tableName="user"/>-->
         <!--<table schema="handy" tableName="user_label"/>-->
         <!--<table schema="handy" tableName="view"/>-->
         <!--<table schema="handy" tableName="comment_reply"/>-->
         <!--<table schema="handy" tableName="hot"/>-->
-        <table schema="handy" tableName="like"/>
+        <table schema="handy" tableName="favor"/>
     </context>
 </generatorConfiguration>

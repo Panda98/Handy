@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.handy.support.mapper.iMapper.IHotMapper">
+
+        <!--查询最热门n个教程-->
+        <select id="listMax" resultType="com.handy.support.entity.Hot">
+            SELECT
+            course_id AS courseId,
+            course_hot AS courseHot
+            FROM
+            hot
+            ORDER BY course_hot DESC limit 0,#{n};
+        </select>
+
+</mapper>

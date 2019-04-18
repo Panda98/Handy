@@ -5,29 +5,16 @@
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
-
     <!-- Web容器加载顺序 ServletContext:servletContext接口是Servlet中最大的一个接口,呈现了web应用的Servlet视图. / context-param /listener /filter/servlet -->
 
     <!-- 指定Spring的配置文件 -->
     <!-- 否则Spring会默认从WEB-INF下寻找配置文件,contextConfigLocation属性是Spring内部固定的 -->
     <!-- 通过ContextLoaderListener的父类ContextLoader的第120行发现CONFIG_LOCATION_PARAM固定为contextConfigLocation -->
-    <!--<context-param>                                                 &lt;!&ndash; Sping应用上下文参数：声明应用范围内的初始化参数. context-param元素声明应用范围内的初始化参数. &ndash;&gt;-->
-        <!--<param-name>contextConfigLocation</param-name>              &lt;!&ndash; 环境配置位置 &ndash;&gt;-->
-        <!--<param-value>classpath:spring/applicationContext.xml</param-value>-->
-    <!--</context-param>-->
-
-    <!--&lt;!&ndash; 实例化Spring容器 &ndash;&gt;-->
-    <!--&lt;!&ndash; 应用启动时,该监听器被执行,它会读取Spring相关配置文件,其默认会到WEB-INF中查找applicationContext.xml &ndash;&gt;-->
-    <!--&lt;!&ndash; Spring监听器:ContextLoaderListener的作用就是启动Web容器时,自动装配ApplicationContext的配置信息. &ndash;&gt;-->
-    <!--<listener>-->
-        <!--<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
-    <!--</listener>-->
-
-    <!--&lt;!&ndash; 防止Spring内存溢出监听器:保证在web 应用关闭的时候释放与掉这个web 应用相关的class loader 和由它管理的类. &ndash;&gt;-->
-    <!--<listener>-->
-        <!--<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>-->
-    <!--</listener>-->
-
+    <context-param>                                                 <!-- Sping应用上下文参数：声明应用范围内的初始化参数. context-param元素声明应用范围内的初始化参数. -->
+        <param-name>contextConfigLocation</param-name>              <!-- 环境配置位置 -->
+        <param-value>classpath:spring/applicationContext.xml</param-value>
+    </context-param>
+    <!---->
     <!--&lt;!&ndash; 编码过滤器 request和response都setCharacterEncoding("UTF-8") &ndash;&gt;-->
     <!--<filter>-->
         <!--<filter-name>SpringEncodingFilter</filter-name>-->
@@ -53,7 +40,9 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring/spring-*.xml</param-value>
+            <param-value>classpath*:spring/spring-service.xml,
+                        classpath*:spring/spring-dao.xml,
+                        classpath*:spring/spring-web.xml</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

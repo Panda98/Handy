@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import com.handy.support.service.Course.ICourseSevice;
+import com.handy.support.service.Course.ICourseService;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 public class CourseController {
     @Autowired
-    private ICourseSevice iCourseSevice;
+    private ICourseService iCourseService;
     @Autowired
     private Gson gson;
 
@@ -26,7 +26,7 @@ public class CourseController {
      */
     @RequestMapping(value = "/main/banner", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
     private String getBanner() {
-        List<CourseSimpleVO> list = iCourseSevice.getBannerList();
+        List<CourseSimpleVO> list = iCourseService.getBannerList();
         ErrorEnum error = null;
         if (list == null) {
             error = ErrorEnum.REQUEST_FAIL;
