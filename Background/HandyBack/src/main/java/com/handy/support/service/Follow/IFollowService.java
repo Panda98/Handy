@@ -10,4 +10,5 @@ import java.util.List;
 public interface IFollowService {
     List<Follow> getFollows(int uid, int page_no, int n);
     void unFollowOther(FollowDTO followDTO);
+    List<Follow> getFollowsAll(int uid);
 }

@@ -2,10 +2,78 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.handy.support.mapper.customMapper.MyCommentMapper">
+    <resultMap id="ReplyMap" type="com.handy.support.pojo.comment.vo.ReplyBrief">
+        <id column="reply_id" property="replyId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+        <result column="reply_content" property="replyContent" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result column="user_id" property="userId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+        <result column="comment_id" property="commentId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+        <result column="to_reply_id" property="toReplyId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+        <result column="update_time" property="updateTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <resultMap id="ReplyUserMap" type="com.handy.support.pojo.comment.vo.ReplyUserVO" >
+        <association property="reply" columnPrefix="reply_" resultMap="ReplyMap" />
+        <association property="user" columnPrefix="user_" resultMap="com.handy.support.mapper.customMapper.MyUsersCoursesMapper.UserMap"/>
+        <association property="toReplyUser" columnPrefix="toReplyUser_" resultMap="com.handy.support.mapper.customMapper.MyUsersCoursesMapper.UserMap"/>
+        <association property="commentUser" columnPrefix="commentUser_" resultMap="com.handy.support.mapper.customMapper.MyUsersCoursesMapper.UserMap"/>
+    </resultMap>
+    <resultMap id="CommentMap" type="com.handy.support.pojo.comment.vo.CommentBrief" >
+        <id column="comment_id" property="commentId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+        <result column="comment_content" property="commentContent" javaType="java.lang.String" jdbcType="VARCHAR" />
+        <result column="user_id" property="userId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+        <result column="course_id" property="courseId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+        <result column="update_time" property="updateTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <resultMap id="FullCommentMessageMap" type="com.handy.support.pojo.comment.dto.CommentDTO">
+        <association property="course" columnPrefix="course_" resultMap="com.handy.support.mapper.customMapper.MyUsersCoursesMapper.CourseMap" />
+        <association property="user" columnPrefix="user_" resultMap="com.handy.support.mapper.customMapper.MyUsersCoursesMapper.UserMap"/>
+        <association property="comment" columnPrefix="comment_" resultMap="CommentMap"/>
+    </resultMap>
+    <resultMap id="FullCommentCourseMap" type="com.handy.support.pojo.comment.dto.CommentDTO">
+        <association property="user" columnPrefix="user_" resultMap="com.handy.support.mapper.customMapper.MyUsersCoursesMapper.UserMap"/>
+        <association property="comment" columnPrefix="comment_" resultMap="CommentMap"/>
+    </resultMap>
     <select id="getCommentsByCourseLimited" resultMap="com.handy.support.mapper.CommentMapper.BaseResultMap">
         select * from comment where course_id=#{courseId} order by update_time desc limit #{startRow},#{size}
     </select>
     <select id="getCommentReplyByCommentIdLimited" resultMap="com.handy.support.mapper.CommentReplyMapper.BaseResultMap">
         select * from comment_reply where comment_id=#{commentId} order by update_time desc limit #{startRow},#{size}
+    </select>
+    <select id="getCommentsReplyUserLimited" resultMap="ReplyUserMap">
+ select u.user_id user_user_id,u.nick_name user_nick_name,u.user_pic user_user_pic,
+ u2.user_id toReplyUser_user_id,u2.nick_name toReplyUser_nick_name,u2.user_pic toReplyUser_user_pic,
+  u3.user_id commentUser_user_id,u3.nick_name commentUser_nick_name,u3.user_pic commentUser_user_pic,
+ r.update_time reply_update_time,r.reply_content reply_reply_content,r.comment_id reply_comment_id,
+ r.reply_id reply_reply_id,r.to_reply_id reply_to_reply_id
+        from (select * from comment_reply where comment_reply.comment_id = #{commentId}) r
+         inner join user u on r.user_id=u.user_id
+         inner join (select user_id from comment where comment.comment_id=#{commentId}) c
+         inner join user u3 on c.user_id=u3.user_id
+         left join comment_reply r2 on r.to_reply_id=r2.reply_id
+         left join user u2 on r2.user_id=u2.user_id
+        order by r.update_time desc limit #{startRow},#{size}
+    </select>
+    <select id="getFullCommentsCourseMessageLimited" resultMap="FullCommentMessageMap">
+        select u.user_id user_user_id,u.nick_name user_nick_name,u.user_pic user_user_pic,
+        c.update_time course_update_time,
+        c.course_cover course_course_cover,c.course_id course_course_id,c.course_title course_course_title
+        ,c.diy_label course_diy_label,c.level_id course_level_id,
+        co.update_time comment_update_time,
+        co.course_id comment_course_id,
+        co.comment_id comment_comment_id,co.comment_content comment_comment_content,co.user_id comment_user_id,
+        from (select * from comment where comment.course_id=#{courseId})co
+        inner join (select * from course where course.course_id=#{courseId} ) c
+        inner join user u
+        where
+        u.user_id=co.user_id  order by co.update_time desc limit #{startRow},#{size}
+    </select>
+    <select id="getFullCommentsByCourseLimited" resultMap="FullCommentCourseMap">
+        select u.user_id user_user_id,u.nick_name user_nick_name,u.user_pic user_user_pic,
+        co.update_time comment_update_time,
+        co.course_id comment_course_id,
+        co.comment_id comment_comment_id,co.comment_content comment_comment_content,co.user_id comment_user_id
+        from (select * from comment where comment.course_id=#{courseId})co
+        inner join user u
+        where
+        u.user_id=co.user_id  order by co.update_time desc limit #{startRow},#{size}
     </select>
 </mapper>

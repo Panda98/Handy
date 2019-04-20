@@ -6,11 +6,11 @@ import com.handy.support.entity.CommentReply;
 import com.handy.support.mapper.CommentMapper;
 import com.handy.support.mapper.CommentReplyMapper;
 import com.handy.support.mapper.customMapper.MyCommentMapper;
+import com.handy.support.pojo.comment.dto.CommentDTO;
 import com.handy.support.pojo.comment.dto.CommentPush;
+import com.handy.support.pojo.comment.dto.ReplyDTO;
 import com.handy.support.pojo.comment.dto.ReplyPush;
-import com.handy.support.pojo.comment.vo.ComPush;
-import com.handy.support.pojo.comment.vo.ComRepReq;
-import com.handy.support.pojo.comment.vo.CourseComReq;
+import com.handy.support.pojo.comment.vo.*;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,16 @@ public class CommentServiceImpl implements ICommentService {
     public List<Comment> getCourseComment(CourseComReq req){
         return commentMapper.getCommentsByCourseLimited(req.getCourse_id(),req.getPage_no()*req.getN(),req.getN());
     }
-
+    public List<CommentDTO> getFullCourseComment(CourseComReq req){
+        return commentMapper.getFullCommentsByCourseLimited(req.getCourse_id(),req.getPage_no()*req.getN(),req.getN());
+    }
+public List<ReplyUserVO> getCommentReplyUserLimited(ComRepReq req){
+    return commentMapper.getCommentsReplyUserLimited(req.getComment_id(),req.getPage_no()*req.getN(),req.getN());
+}
+    public List<ReplyDTO> getFullCommentReplyUserLimited(ComRepReq req){
+       //未写
+        return null;
+           }
     public void pushCommentToCourse(CommentPush req) {
         autoCommentMapper.insertSelective(req.getComment());
     }

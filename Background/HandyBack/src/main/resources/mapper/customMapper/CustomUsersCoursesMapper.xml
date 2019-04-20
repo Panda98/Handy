@@ -18,9 +18,7 @@
     <resultMap id="UsersCoursesBriefMap" type="com.handy.support.pojo.UserCourse.dto.UsersCoursesBrief">
         <association property="course" columnPrefix="course_" resultMap="CourseMap" />
         <association property="user" columnPrefix="user_" resultMap="UserMap"/>
-    </resultMap><!--u.user_id user_user_id,u.nick_name user_nick_name,u.user_pic user_user_pic,c.update_time course_update_time,
-        c.course_cover course_course_cover,c.course_id course_course_id,c.course_title course_course_title,c.course_intro course_course_intro
-        ,c.diy_label course_diy_label,c.level_id course_level_id-->
+    </resultMap>
     <select id="getUsersCoursesBrief" resultMap="UsersCoursesBriefMap">
         select u.user_id user_user_id,u.nick_name user_nick_name,u.user_pic user_user_pic,c.update_time course_update_time,
         c.course_cover course_course_cover,c.course_id course_course_id,c.course_title course_course_title
