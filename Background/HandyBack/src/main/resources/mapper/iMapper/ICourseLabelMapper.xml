@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.handy.support.mapper.iMapper.ICourseLabelMapper">
+
+    <!--根据course_id查找label list-->
+    <select id="listByCourseId" resultType="com.handy.support.entity.Label">
+        SELECT
+        l.label_id AS labelId,
+        label_name AS labelName,
+        flabel_id AS flabelId
+        FROM
+        course_label course
+        LEFT JOIN label l ON course.label_id = l.label_id
+        <where>
+                course_id=#{courseId}
+        </where>
+    </select>
+
+</mapper>

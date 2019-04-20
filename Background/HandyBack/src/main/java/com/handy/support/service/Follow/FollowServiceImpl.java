@@ -1,8 +1,6 @@
 package com.handy.support.service.Follow;
 
 import com.handy.support.entity.Follow;
-import com.handy.support.entity.FollowExample;
-import com.handy.support.entity.User;
 import com.handy.support.mapper.FollowMapper;
 import com.handy.support.mapper.customMapper.MyFollowMapper;
 import com.handy.support.mapper.customMapper.MyUsersCoursesMapper;

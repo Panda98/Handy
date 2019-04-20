@@ -1,7 +1,6 @@
 package com.handy.support.service.Comment;
 
 import com.handy.support.entity.Comment;
-import com.handy.support.entity.CommentExample;
 import com.handy.support.entity.CommentReply;
 import com.handy.support.mapper.CommentMapper;
 import com.handy.support.mapper.CommentReplyMapper;
@@ -10,10 +9,11 @@ import com.handy.support.pojo.comment.dto.CommentDTO;
 import com.handy.support.pojo.comment.dto.CommentPush;
 import com.handy.support.pojo.comment.dto.ReplyDTO;
 import com.handy.support.pojo.comment.dto.ReplyPush;
-import com.handy.support.pojo.comment.vo.*;
-import org.apache.ibatis.session.RowBounds;
+import com.handy.support.pojo.comment.vo.ComRepReq;
+import com.handy.support.pojo.comment.vo.CourseComReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 @Service("commentService")
