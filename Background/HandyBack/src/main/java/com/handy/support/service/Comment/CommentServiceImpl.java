@@ -11,6 +11,7 @@ import com.handy.support.pojo.comment.dto.ReplyDTO;
 import com.handy.support.pojo.comment.dto.ReplyPush;
 import com.handy.support.pojo.comment.vo.ComRepReq;
 import com.handy.support.pojo.comment.vo.CourseComReq;
+import com.handy.support.pojo.comment.vo.ReplyUserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,7 @@ public class CommentServiceImpl implements ICommentService {
 public List<ReplyUserVO> getCommentReplyUserLimited(ComRepReq req){
     return commentMapper.getCommentsReplyUserLimited(req.getComment_id(),req.getPage_no()*req.getN(),req.getN());
 }
-    public List<ReplyDTO> getFullCommentReplyUserLimited(ComRepReq req){
+    public List<ReplyDTO> getMessageCommentReplyUserLimited(ComRepReq req){
        //未写
         return null;
            }

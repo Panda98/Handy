@@ -15,11 +15,11 @@ public class CourseCommentVO {
     private String userPic;
 public CourseCommentVO(){}
 public CourseCommentVO(CommentDTO dto){
-    this.commentContent=dto.getComment().getCommentContent();
-    this.commentId=dto.getComment().getCommentId();
-    this.courseId=dto.getComment().getCourseId();
+    this.commentContent=dto.getCommentContent();
+    this.commentId=dto.getCommentId();
+    this.courseId=dto.getCourseId();
     this.nickName=dto.getUser().getNickName();
-    this.updateTime=dto.getComment().getUpdateTime();
+    this.updateTime=dto.getUpdateTime();
     this.userPic=dto.getUser().getUserPic();
     this.userId=dto.getUser().getUserId();
 }
