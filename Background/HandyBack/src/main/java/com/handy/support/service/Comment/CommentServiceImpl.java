@@ -34,10 +34,6 @@ public class CommentServiceImpl implements ICommentService {
 public List<ReplyUserVO> getCommentReplyUserLimited(ComRepReq req){
     return commentMapper.getCommentsReplyUserLimited(req.getComment_id(),req.getPage_no()*req.getN(),req.getN());
 }
-    public List<ReplyDTO> getMessageCommentReplyUserLimited(ComRepReq req){
-       //未写
-        return null;
-           }
     public void pushCommentToCourse(CommentPush req) {
         autoCommentMapper.insertSelective(req.getComment());
     }

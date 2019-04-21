@@ -2,14 +2,20 @@ package com.handy.support.pojo.comment.dto;
 
 import com.handy.support.pojo.Follow.vo.CourseBrief;
 import com.handy.support.pojo.comment.vo.CommentBrief;
+import com.handy.support.pojo.comment.vo.ReplyBrief;
 import com.handy.support.pojo.comment.vo.ReplyUserVO;
 
-public class ReplyDTO {
+public class ReplyDTO extends ReplyUserVO implements Comparable<ReplyDTO>{
     private CourseBrief course;
     private CommentBrief comment;
-    private ReplyUserVO reply;
-    public void setComment(CommentBrief comment) {
-        this.comment = comment;
+    private ReplyBrief toReply;
+
+    public ReplyBrief getToReply() {
+        return toReply;
+    }
+
+    public void setToReply(ReplyBrief toReply) {
+        this.toReply = toReply;
     }
 
     public CourseBrief getCourse() {
@@ -20,15 +26,20 @@ public class ReplyDTO {
         this.course = course;
     }
 
+    public void setComment(CommentBrief comment) {
+        this.comment = comment;
+    }
+
     public CommentBrief getComment() {
         return comment;
     }
 
-    public void setReply(ReplyUserVO reply) {
-        this.reply = reply;
-    }
-
-    public ReplyUserVO getReply() {
-        return reply;
+    public int compareTo(ReplyDTO o) {
+        if(o.getUpdateTime().after(this.getUpdateTime()))
+            return -1;
+        else if(o.getUpdateTime().before(this.getUpdateTime()))
+            return 1;
+        else
+            return 0;
     }
 }
