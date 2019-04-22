@@ -31,5 +31,6 @@
 
     <!--main-->
     <color name="main_status_bar_blue">#279ede</color>
+    <color name="main_pager_title">#5C5757</color>
 
 </resources>

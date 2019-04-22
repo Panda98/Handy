@@ -52,6 +52,7 @@
     <string name="failed_to_obtain_banner_data">获取广告数据失败</string>
     <string name="failed_to_obtain_article_list">获取文章列表数据失败</string>
     <string name="search_tint">搜索专辑或教程</string>
+    <string name="main_pager_labels">专区分类</string>
     <string name="recommend_album_title">推荐专辑</string>
     <string name="recommend_album_tint">一个适合新手入门的小合集～</string>
     <string name="recommend_course_title">推荐教程</string>
