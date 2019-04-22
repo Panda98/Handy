@@ -32,6 +32,9 @@ public enum ErrorEnum{
      */
     private String errorMsg;
 
+    ErrorEnum() {
+    }
+
     ErrorEnum(Integer errorCode, String errorMsg) {
         this.errorCode = errorCode;
         this.errorMsg = errorMsg;

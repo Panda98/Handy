@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class CourseVO {
 
+
     private Integer courseId;
 
     private String courseTitle;

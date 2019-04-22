@@ -2,24 +2,29 @@ package com.handy.support.service.Course;
 
 import com.handy.support.entity.*;
 import com.handy.support.mapper.*;
-import com.handy.support.pojo.course.dto.*;
-import com.handy.support.pojo.course.vo.*;
+import com.handy.support.mapper.iMapper.ICourseAlbumMapper;
+import com.handy.support.mapper.iMapper.ICourseItemMapper;
+import com.handy.support.mapper.iMapper.ICourseLabelMapper;
+import com.handy.support.mapper.iMapper.ICourseStepMapper;
+import com.handy.support.mapper.iMapper.IHotMapper;
+import com.handy.support.mapper.iMapper.IFavorMapper;
+import com.handy.support.mapper.iMapper.ICourseMapper;
+import com.handy.support.pojo.course.dto.CourseEditDTO;
+import com.handy.support.pojo.course.vo.CourseSimpleVO;
+import com.handy.support.pojo.course.vo.CourseDetailVO;
 
 
-
-import com.handy.support.service.Album.IAlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.awt.event.ActionListener;
 import java.util.*;
-import java.util.Collection;
+
 
 /**
  * Created by joanie on 2019/4/11.
  */
 @Service("courseService")
-public class CourseServiceImpl implements ICourseSevice  {
+public class CourseServiceImpl implements ICourseService {
 
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -27,19 +32,19 @@ public class CourseServiceImpl implements ICourseSevice  {
 
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    private ICourseMapper icourseMapper;
+    private ICourseMapper iCourseMapper;
 
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    private ICourseLabelMapper icourseLabelMapper;
+    private ICourseLabelMapper iCourseLabelMapper;
 
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    private ICourseItemMapper icourseItemMapper;
+    private ICourseItemMapper iCourseItemMapper;
 
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    private ICourseStepMapper icourseStepMapper;
+    private ICourseStepMapper iCourseStepMapper;
 
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -47,7 +52,7 @@ public class CourseServiceImpl implements ICourseSevice  {
 
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    private IHotMapper ihotMapper;
+    private IHotMapper iHotMapper;
 
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -55,7 +60,7 @@ public class CourseServiceImpl implements ICourseSevice  {
 
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    private ICourseAlbumMapper icourseAlbumMapper;
+    private ICourseAlbumMapper iCourseAlbumMapper;
 
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -63,11 +68,11 @@ public class CourseServiceImpl implements ICourseSevice  {
 
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    private ILikeMapper iLikeMapper;
+    private IFavorMapper iFavorMapper;
 
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
-    private LikeMapper likeMapper;
+    private FavorMapper favorMapper;
 
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -95,16 +100,16 @@ public class CourseServiceImpl implements ICourseSevice  {
 
 
     public List<Label> getLabelList(Integer courseId){
-        return icourseLabelMapper.listByCourseId(courseId);
+        return iCourseLabelMapper.listByCourseId(courseId);
     }
 
     public List<Item> getItemList(Integer courseId){
-        return icourseItemMapper.listByCourseId(courseId);
+        return iCourseItemMapper.listByCourseId(courseId);
     }
 
 
     public List<Step> getStepList(Integer courseId){
-        return icourseStepMapper.listByCourseId(courseId);
+        return iCourseStepMapper.listByCourseId(courseId);
     }
 
     public User getAuthor(Integer userId){
@@ -112,7 +117,7 @@ public class CourseServiceImpl implements ICourseSevice  {
     }
 
     public List<Hot> getHotList(Integer n){
-        return ihotMapper.listMax(n);
+        return iHotMapper.listMax(n);
     }
 
     public List<CourseSimpleVO> getBannerList(){
@@ -127,9 +132,9 @@ public class CourseServiceImpl implements ICourseSevice  {
         return simpleList;
     }
 
-    public List<CourseSimpleVO> getRecommendList(Integer page_no, Integer n){
+    public List<CourseSimpleVO> getRecommendList(Integer userId,Integer page_no, Integer n){
         List<CourseSimpleVO> simpleList=new ArrayList<CourseSimpleVO>();
-        List<Course> courseList=icourseMapper.getAll(page_no*n,n);
+        List<Course> courseList=iCourseMapper.getAll(page_no*n,n);
         for(Course c:courseList){
             Integer id=c.getCourseId();
             CourseSimpleVO simpleVO=new CourseSimpleVO(id,c.getCourseTitle(),c.getCourseCover(),c.getCourseIntro(),userMapper.selectByPrimaryKey(c.getUserId()).getNickName(),c.getLevelId(),this.getLabelList(id),c.getDiyLabel());
@@ -162,7 +167,7 @@ public class CourseServiceImpl implements ICourseSevice  {
     }
 
     public Integer uncollect(Integer albumId, Integer courseId) {
-        Integer count=icourseAlbumMapper.deleteOne(albumId,courseId);
+        Integer count=iCourseAlbumMapper.deleteOne(albumId,courseId);
         Course course=this.getCourseByID(courseId);
         Integer courseCollects=course.getCourseCollects();
         course.setCourseCollects(courseCollects-1);
@@ -171,12 +176,12 @@ public class CourseServiceImpl implements ICourseSevice  {
     }
 
     public Integer isCollected(Integer userId, Integer courseId){
-        return icourseAlbumMapper.isCollected(userId,courseId);
+        return iCourseAlbumMapper.isCollected(userId,courseId);
     }
 
     public Integer likeCourse(Integer userId, Integer courseId){
-        Like like=new Like(userId,courseId);
-        Integer count=likeMapper.insert(like);
+        Favor f=new Favor(userId,courseId);
+        Integer count=favorMapper.insert(f);
         Course course=this.getCourseByID(courseId);
         Integer courseLikes=course.getCourseLikes();
         course.setCourseLikes(courseLikes+1);
@@ -185,7 +190,7 @@ public class CourseServiceImpl implements ICourseSevice  {
     }
 
     public Integer unlikeCourse(Integer userId, Integer courseId){
-        Integer count=iLikeMapper.deleteOne(userId,courseId);
+        Integer count= iFavorMapper.deleteOne(userId,courseId);
         Course course=this.getCourseByID(courseId);
         Integer courseLikes=course.getCourseLikes();
         course.setCourseLikes(courseLikes-1);
@@ -194,12 +199,12 @@ public class CourseServiceImpl implements ICourseSevice  {
     }
 
     public Integer isLiked(Integer userId, Integer courseId){
-        return iLikeMapper.isLiked(userId,courseId);
+        return iFavorMapper.isLiked(userId,courseId);
     }
 
     public List<CourseSimpleVO> getCollectedCourse(Integer albumId){
         List<CourseSimpleVO> simpleList=new ArrayList<CourseSimpleVO>();
-        List<Course> courseList=icourseAlbumMapper.getCourseList(albumId);
+        List<Course> courseList=iCourseAlbumMapper.getCourseList(albumId);
         for(Course c:courseList){
             Integer id=c.getCourseId();
             CourseSimpleVO simpleVO=new CourseSimpleVO(id,c.getCourseTitle(),c.getCourseCover(),c.getCourseIntro(),userMapper.selectByPrimaryKey(c.getUserId()).getNickName(),c.getLevelId(),this.getLabelList(id),c.getDiyLabel());
@@ -210,7 +215,7 @@ public class CourseServiceImpl implements ICourseSevice  {
 
     public List<CourseSimpleVO> getMyCourse(Integer userId,Integer page_no,Integer n){
         List<CourseSimpleVO> simpleList=new ArrayList<CourseSimpleVO>();
-        List<Integer> courseIds=icourseMapper.getMyCourse(userId,page_no*n,n);
+        List<Integer> courseIds=iCourseMapper.getMyCourse(userId,page_no*n,n);
         for(Integer id:courseIds){
             Course c=this.getCourseByID(id);
             CourseSimpleVO simpleVO=new CourseSimpleVO(id,c.getCourseTitle(),c.getCourseCover(),c.getCourseIntro(),userMapper.selectByPrimaryKey(userId).getNickName(),c.getLevelId(),this.getLabelList(id),c.getDiyLabel());
@@ -229,24 +234,25 @@ public class CourseServiceImpl implements ICourseSevice  {
         c.setDiyLabel(e.getDiyLabel());
         c.setUserId(e.getUserId());
         c.setLevelId(e.getLevelId());
-        Integer count=icourseMapper.insertCourse(c);
+        Integer count=courseMapper.insertSelective(c);
+        Integer courseId=iCourseMapper.getLastId();
 
         List<Label> labelList=e.getLabelList();
         for(Label l:labelList){
-            CourseLabel cl=new CourseLabel(c.getCourseId(),l.getLabelId());
+            CourseLabel cl=new CourseLabel(courseId,l.getLabelId());
             courseLabelMapper.insert(cl);
         }
         List<Item> itemList=e.getItemList();
         for(Item i:itemList){
             itemMapper.insert(i);
-            CourseItem courseItem=new CourseItem(c.getCourseId(),i.getItemId());
+            CourseItem courseItem=new CourseItem(courseId,i.getItemId());
             courseItemMapper.insert(courseItem);
         }
         List<Step> stepList=e.getStepList();
 
         for(Step s:stepList){
             stepMapper.insert(s);
-            CourseStep courseStep=new CourseStep(c.getCourseId(),s.getStepId());
+            CourseStep courseStep=new CourseStep(courseId,s.getStepId());
             courseStepMapper.insert(courseStep);
         }
 

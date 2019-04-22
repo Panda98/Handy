@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.handy.support.mapper.iMapper.ICourseAlbumMapper">
+
+    <delete id="deleteOne">
+      delete from album_course
+      WHERE album_id=#{albumId} AND course_id=#{courseId};
+    </delete>
+
+    <select id="isCollected" resultType="Integer">
+        SELECT 1
+        FROM album_course ac
+        LEFT JOIN album a ON ac.album_id=a.album_id
+        WHERE user_id=#{userId} AND course_id=#{courseId} limit 1;
+    </select>
+    
+    <select id="getCourseList" resultType="com.handy.support.entity.Course">
+        SELECT
+        cc.course_id AS courseId,
+        course_title As courseTitle,
+        course_intro AS courseIntro,
+        course_note AS courseNote,
+        course_cover AS courseCover,
+        course_views AS courseViews,
+        course_collects AS courseCollects,
+        course_likes AS courseLikes,
+        user_id AS userId,
+        diy_label AS diyLabel,
+        update_time AS updateTime,
+        level_id AS levelId
+        FROM course cc
+        LEFT JOIN album_course ac ON cc.course_id=ac.course_id
+        WHERE ac.album_id=#{albumId};
+    </select>
+
+
+</mapper>

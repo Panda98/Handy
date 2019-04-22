@@ -2,12 +2,10 @@ package com.handy.web.controller;
 
 import com.handy.support.entity.Comment;
 import com.handy.support.entity.CommentReply;
+import com.handy.support.pojo.comment.dto.CommentDTO;
 import com.handy.support.pojo.comment.dto.CommentPush;
 import com.handy.support.pojo.comment.dto.ReplyPush;
-import com.handy.support.pojo.comment.vo.ComPush;
-import com.handy.support.pojo.comment.vo.ComRepReq;
-import com.handy.support.pojo.comment.vo.CourseComReq;
-import com.handy.support.pojo.comment.vo.RepComReq;
+import com.handy.support.pojo.comment.vo.*;
 import com.handy.support.pojo.user.vo.UserVO;
 import com.handy.support.service.Comment.CommentServiceImpl;
 import com.handy.support.utils.status.ReturnCode;
@@ -18,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -30,14 +30,18 @@ public class CommentController {
     CommentServiceImpl commentService;
     @RequestMapping(value="/all",method = GET)
    public String getCourseComment( CourseComReq req){
-        List<Comment>comments=commentService.getCourseComment(req);
-        ReturnCode<List<Comment>> code = new ReturnCode<List<Comment>>(comments);
+        List<CommentDTO>comments=commentService.getFullCourseComment(req);
+        List<CourseCommentVO>list=new ArrayList<CourseCommentVO>();
+        for(int i=0;i<comments.size();i++){
+            list.add(new CourseCommentVO(comments.get(i)));
+        }
+        ReturnCode<List<CourseCommentVO>> code = new ReturnCode<List<CourseCommentVO>>(list);
         return code.returnHandler();
    }
     @RequestMapping(value="/replyComment",method = GET)
     public String getCommentReply(ComRepReq req){
-        List<CommentReply>commentReplies=commentService.getCommentReply(req);
-        ReturnCode<List<CommentReply>> code = new ReturnCode<List<CommentReply>>(commentReplies);
+        List<ReplyUserVO>commentReplies=commentService.getCommentReplyUserLimited(req);
+        ReturnCode<List> code = new ReturnCode<List>(commentReplies);
         return code.returnHandler();
     }
     @RequestMapping(value="/push",method = RequestMethod.POST)

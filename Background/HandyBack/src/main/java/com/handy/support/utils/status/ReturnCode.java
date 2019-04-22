@@ -39,6 +39,9 @@ public class ReturnCode<T> {
         this.data = data;
     }
 
+    public ReturnCode() {
+    }
+
     public String returnHandler(){
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("errorCode",this.getErrorEnum().getErrorCode());
