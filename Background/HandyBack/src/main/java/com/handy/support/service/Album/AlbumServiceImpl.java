@@ -42,9 +42,21 @@ public class AlbumServiceImpl implements IAlbumService {
     @SuppressWarnings("SpringJavaAutowiringInspection")
     private UserMapper userMapper;
 
-    public List<AlbumVO> getRecommendedAlbum(int uid){
+    public List<AlbumDto> getRecommendedAlbum(int uid){
         //todo: 完成推荐算法后进行测试
-        return AlbumRecommend.getRecommendedAlbums(uid);
+//        return AlbumRecommend.getRecommendedAlbums(uid);
+        List<AlbumDto> albumDtos = new ArrayList<AlbumDto>();
+        List<Album> albums = albumMapper.selectByExample(new AlbumExample());
+        int i = 1;
+        for(Album album:albums){
+            AlbumDto dto = new AlbumDto();
+            BeanUtils.copyProperties(album,dto);
+            albumDtos.add(dto);
+            if(i == 3)
+                break;
+            i++;
+        }
+        return albumDtos;
     }
 
     public List<AlbumDto> getAlbumList(int uid){

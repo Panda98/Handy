@@ -15,17 +15,21 @@ public class UserVO {
     private String sex;
     private Date birthday;
     private String userPic;
+    private int followCount;
+    private int fansCount;
 
     public UserVO(){
         super();
     }
-    public UserVO(int id, String email, String nickname, String sex, Date birthday, String userPic) {
+    public UserVO(int id, String email, String nickname, String sex, Date birthday, String userPic, int followCount,int fansCount) {
         this.id = id;
         this.email = email;
         this.nickname = nickname;
         this.sex = sex;
         this.birthday = birthday;
         this.userPic = userPic;
+        this.followCount = followCount;
+        this.fansCount = fansCount;
     }
     public UserVO(UserDto dto){
         this.id = dto.getUserId();
@@ -83,5 +87,21 @@ public class UserVO {
 
     public void setUserPic(String userPic) {
         this.userPic = userPic;
+    }
+
+    public int getFollowCount() {
+        return followCount;
+    }
+
+    public void setFollowCount(int followCount) {
+        this.followCount = followCount;
+    }
+
+    public int getFansCount() {
+        return fansCount;
+    }
+
+    public void setFansCount(int fansCount) {
+        this.fansCount = fansCount;
     }
 }
