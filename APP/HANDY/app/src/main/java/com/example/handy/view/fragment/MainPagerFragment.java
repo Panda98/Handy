@@ -4,29 +4,32 @@ package com.example.handy.view.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.example.handy.R;
 import com.example.handy.app.Constants;
-import com.example.handy.app.HandyAPP;
 import com.example.handy.base.fragment.BaseRootFragment;
 import com.example.handy.contract.MainPagerContract;
 import com.example.handy.core.bean.BannerData;
-import com.example.handy.core.bean.RecommendAlbumListData;
-import com.example.handy.core.bean.RecommendCourseListData;
+import com.example.handy.core.bean.RecommendAlbumData;
+import com.example.handy.core.bean.RecommendCourseData;
 import com.example.handy.presenter.MainPagerPresenter;
+import com.example.handy.utils.CommonUtils;
+import com.example.handy.view.adapter.RecommendCourseAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.youth.banner.Banner;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -39,13 +42,20 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
 
     @BindView(R.id.normal_view)
     SmartRefreshLayout mRefreshLayout;
-    @BindView(R.id.main_pager_slider)
+
+    @BindView(R.id.main_pager_rv)
+    RecyclerView mRecyclerView;
+
+
+    LinearLayout linearLayout;
     SliderLayout sliderLayout;
-    @BindView(R.id.main_pager_indicator)
     PagerIndicator indicator;
 
-    private Banner mBanner;
+    private List<RecommendCourseData> recommendCourseData;
+    private RecommendCourseAdapter mAdapter;
+    private int articlePosition;
     private boolean isRecreate;
+
 
     @Override
     public void onAttach(Context context) {
@@ -56,16 +66,16 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
     @Override
     public void onResume() {
         super.onResume();
-        if (mBanner != null) {
-            mBanner.startAutoPlay();
+        if (sliderLayout != null) {
+            sliderLayout.startAutoCycle();
         }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (mBanner != null) {
-            mBanner.stopAutoPlay();
+        if (sliderLayout != null) {
+            sliderLayout.stopAutoCycle();
         }
     }
 
@@ -74,6 +84,19 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
         super.initEventAndData();
         setBanner();
         setRefresh();
+        if (loggedAndNotRebuilt()) {
+            mPresenter.loadMainPagerData();
+        } else {
+            mPresenter.autoRefresh(true);
+        }
+        if (CommonUtils.isNetworkConnected()) {
+            showLoading();
+        }
+    }
+
+    private boolean loggedAndNotRebuilt() {
+        return (mPresenter.getLoginAccount()!=0)
+                && !isRecreate;
     }
 
     private void setBanner() {
@@ -116,7 +139,24 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
     @Override
     protected void initView() {
         super.initView();
-        //initRecyclerView();
+        initRecyclerView();
+    }
+
+    private void initRecyclerView() {
+        recommendCourseData = new ArrayList<>();
+        mAdapter = new RecommendCourseAdapter(R.layout.item_recommend_course, recommendCourseData);
+        //mAdapter.setOnItemClickListener((adapter, view, position) -> startArticleDetailPager(view, position));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(_mActivity));
+        mRecyclerView.setHasFixedSize(true);
+
+        //add head banner
+        LinearLayout mHeaderGroup = ((LinearLayout) LayoutInflater.from(_mActivity).inflate(R.layout.main_pager_header, null));
+        linearLayout = mHeaderGroup.findViewById(R.id.main_pager_header);
+        sliderLayout = mHeaderGroup.findViewById(R.id.main_pager_slider);
+        indicator = mHeaderGroup.findViewById(R.id.main_pager_indicator);
+        mHeaderGroup.removeView(linearLayout);
+        mAdapter.addHeaderView(linearLayout);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -131,21 +171,36 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
 
     @Override
     public void showBannerData(List<BannerData> bannerDataList) {
-        for (BannerData i : bannerDataList) {
+        for (BannerData bannerData : bannerDataList) {
             DefaultSliderView sv = new DefaultSliderView(getActivity());
-            sv.image("http://www.pptbz.com/pptpic/UploadFiles_6909/201203/2012031220134655.jpg");
+            sv.image(bannerData.getCourseCover());
             sliderLayout.addSlider(sv);
         }
     }
 
     @Override
-    public void showRecommendAlbumList(List<RecommendAlbumListData> recommendAlbumListData) {
+    public void showRecommendAlbumList(List<RecommendAlbumData> recommendAlbumData) {
 
     }
 
     @Override
-    public void showRecommendCourseList(List<RecommendCourseListData> recommendCourseListData) {
-
+    public void showRecommendCourseList(List<RecommendCourseData> recommendCourseData, boolean isRefresh) {
+        if (mPresenter.getCurrentPage() == Constants.TYPE_MAIN_PAGER) {
+            mRecyclerView.setVisibility(View.VISIBLE);
+        } else {
+            mRecyclerView.setVisibility(View.INVISIBLE);
+        }
+        if (mAdapter == null) {
+            return;
+        }
+        if (isRefresh) {
+            this.recommendCourseData = recommendCourseData;
+            mAdapter.replaceData(recommendCourseData);
+        } else {
+            this.recommendCourseData.addAll(recommendCourseData);
+            mAdapter.addData(recommendCourseData);
+        }
+        showNormal();
     }
 
 }

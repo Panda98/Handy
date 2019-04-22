@@ -1,7 +1,7 @@
 package com.handy.support.service.Follow;
 
 import com.handy.support.entity.Follow;
-import com.handy.support.entity.User;
+import com.handy.support.entity.FollowExample;
 import com.handy.support.mapper.FollowMapper;
 import com.handy.support.mapper.customMapper.MyFollowMapper;
 import com.handy.support.mapper.customMapper.MyUsersCoursesMapper;
@@ -30,7 +30,13 @@ public class FollowServiceImpl implements IFollowService{
         //follower为当前用户，userId为其关注的人
         myFollowMapper.unFollowOther(followDTO.getFollow().getFollowerId(),followDTO.getFollow().getUserId());
     }
-   /* public List<UsersCoursesBrief> getFollowsUpdate(List<Integer>list,int page_no,int n){
+    public List<UsersCoursesBrief> getFollowsUpdate(List<Integer>list,int page_no,int n){
        return usersCoursesMapper.getUsersCoursesBrief(list,page_no,n);
-    }*/
+    }
+    public List<Follow> getFollowsAll(int uid){
+        FollowExample example=new FollowExample();
+        FollowExample.Criteria criteria=example.createCriteria();
+        criteria.andFollowerIdEqualTo(uid);
+        return followMapper.selectByExample(example);
+    }
 }

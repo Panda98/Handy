@@ -7,5 +7,5 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface MyUsersCoursesMapper {
-//List<UsersCoursesBrief> getUsersCoursesBrief(@Param("users")List<Integer>users,@Param("startRow")  int startRow, @Param("size") int size);
+List<UsersCoursesBrief> getUsersCoursesBrief(@Param("users")List<Integer>users,@Param("startRow")  int startRow, @Param("size") int size);
 }

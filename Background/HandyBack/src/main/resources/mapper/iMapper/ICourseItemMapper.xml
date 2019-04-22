@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.handy.support.mapper.iMapper.ICourseItemMapper">
+
+
+<!--根据course_id查找item list-->
+<select id="listByCourseId" resultType="com.handy.support.entity.Item">
+    SELECT
+    i.item_id AS itemId,
+    item_name AS itemName,
+    item_number AS itemNumber,
+    item_tag AS itemTag
+    FROM
+    course_item course
+    LEFT JOIN item i ON course.item_id = i.item_id
+    <where>
+            course_id=#{courseId}
+    </where>
+</select>
+
+</mapper>

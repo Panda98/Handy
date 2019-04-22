@@ -1,22 +1,17 @@
 package com.handy.web.controller;
 
-import com.handy.support.entity.Album;
-import com.handy.support.entity.Course;
 import com.handy.support.pojo.album.dto.AlbumCourseDto;
 import com.handy.support.pojo.album.dto.AlbumDto;
 import com.handy.support.pojo.album.vo.AlbumCourseVO;
 import com.handy.support.pojo.album.vo.AlbumVO;
 import com.handy.support.service.Album.IAlbumService;
-import com.handy.support.service.Course.ICourseSevice;
 import com.handy.support.utils.status.ErrorEnum;
 import com.handy.support.utils.status.ReturnCode;
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.activation.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 

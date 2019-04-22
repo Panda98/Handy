@@ -5,7 +5,6 @@
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
-
     <!-- Web容器加载顺序 ServletContext:servletContext接口是Servlet中最大的一个接口,呈现了web应用的Servlet视图. / context-param /listener /filter/servlet -->
 
     <!-- 指定Spring的配置文件 -->
@@ -15,37 +14,25 @@
         <param-name>contextConfigLocation</param-name>              <!-- 环境配置位置 -->
         <param-value>classpath:spring/applicationContext.xml</param-value>
     </context-param>
-
-    <!-- 实例化Spring容器 -->
-    <!-- 应用启动时,该监听器被执行,它会读取Spring相关配置文件,其默认会到WEB-INF中查找applicationContext.xml -->
-    <!-- Spring监听器:ContextLoaderListener的作用就是启动Web容器时,自动装配ApplicationContext的配置信息. -->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
-    <!-- 防止Spring内存溢出监听器:保证在web 应用关闭的时候释放与掉这个web 应用相关的class loader 和由它管理的类. -->
-    <listener>
-        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
-    </listener>
-
-    <!-- 编码过滤器 request和response都setCharacterEncoding("UTF-8") -->
-    <filter>
-        <filter-name>SpringEncodingFilter</filter-name>
-        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-        <async-supported>true</async-supported>
-        <init-param>
-            <param-name>encoding</param-name>
-            <param-value>UTF-8</param-value>
-        </init-param>
-        <init-param>
-            <param-name>forceEncoding</param-name>
-            <param-value>true</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>SpringEncodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>    							<!-- 指定过滤器负责过滤的URL.这里指定了*.jsp表示在访问任何一个jsp页面时都会先使用CharacterEncodingFilter过滤器进行过滤.如果写成login.jsp.则只有在访问login.jsp时才会调用该过滤器进行过滤. -->
-    </filter-mapping>
+    <!---->
+    <!--&lt;!&ndash; 编码过滤器 request和response都setCharacterEncoding("UTF-8") &ndash;&gt;-->
+    <!--<filter>-->
+        <!--<filter-name>SpringEncodingFilter</filter-name>-->
+        <!--<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>-->
+        <!--<async-supported>true</async-supported>-->
+        <!--<init-param>-->
+            <!--<param-name>encoding</param-name>-->
+            <!--<param-value>UTF-8</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>forceEncoding</param-name>-->
+            <!--<param-value>true</param-value>-->
+        <!--</init-param>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>SpringEncodingFilter</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>    							&lt;!&ndash; 指定过滤器负责过滤的URL.这里指定了*.jsp表示在访问任何一个jsp页面时都会先使用CharacterEncodingFilter过滤器进行过滤.如果写成login.jsp.则只有在访问login.jsp时才会调用该过滤器进行过滤. &ndash;&gt;-->
+    <!--</filter-mapping>-->
 
     <!--2.配置前置控制器 SpringMVC核心分发器:Spring MVC servlet-->
     <servlet>
@@ -53,7 +40,9 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring/spring-*.xml</param-value>
+            <param-value>classpath*:spring/spring-service.xml,
+                        classpath*:spring/spring-dao.xml,
+                        classpath*:spring/spring-web.xml</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

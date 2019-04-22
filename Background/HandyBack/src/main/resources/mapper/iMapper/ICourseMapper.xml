@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.handy.support.mapper.iMapper.ICourseMapper">
+    <resultMap id="BaseResultMap" type="com.handy.support.entity.Course">
+        <constructor>
+            <idArg column="course_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="course_title" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="course_intro" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="course_note" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="course_cover" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="course_views" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="course_collects" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="course_likes" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="diy_label" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="level_id" javaType="java.lang.Byte" jdbcType="TINYINT" />
+        </constructor>
+    </resultMap>
+
+<select id="getAll" resultType="com.handy.support.entity.Course">
+  SELECT
+    course_id AS courseId,
+    course_title As courseTitle,
+    course_intro AS courseIntro,
+    course_note AS courseNote,
+    course_cover AS courseCover,
+    course_views AS courseViews,
+    course_collects AS courseCollects,
+    course_likes AS courseLikes,
+    user_id AS userId,
+    diy_label AS diyLabel,
+    update_time AS updateTime,
+    level_id AS levelId
+  FROM
+     course
+  ORDER BY course_likes DESC limit #{start},#{n};
+</select>
+
+
+<select id="getMyCourse" resultType="Integer">
+    SELECT course_id
+    FROM course
+    WHERE user_id=#{userId} limit #{start},#{n};
+</select>
+
+
+    <!--<insert id="insertCourse" useGeneratedKeys="true" keyProperty="courseId" parameterType="com.handy.support.entity.Course">-->
+        <!--insert into course-->
+        <!--<trim prefix="(" suffix=")" suffixOverrides=",">-->
+            <!--<if test="courseId != null">-->
+                <!--course_id,-->
+            <!--</if>-->
+            <!--<if test="courseTitle != null">-->
+                <!--course_title,-->
+            <!--</if>-->
+            <!--<if test="courseIntro != null">-->
+                <!--course_intro,-->
+            <!--</if>-->
+            <!--<if test="courseNote != null">-->
+                <!--course_note,-->
+            <!--</if>-->
+            <!--<if test="courseCover != null">-->
+                <!--course_cover,-->
+            <!--</if>-->
+            <!--<if test="courseViews != null">-->
+                <!--course_views,-->
+            <!--</if>-->
+            <!--<if test="courseCollects != null">-->
+                <!--course_collects,-->
+            <!--</if>-->
+            <!--<if test="courseLikes != null">-->
+                <!--course_likes,-->
+            <!--</if>-->
+            <!--<if test="userId != null">-->
+                <!--user_id,-->
+            <!--</if>-->
+            <!--<if test="diyLabel != null">-->
+                <!--diy_label,-->
+            <!--</if>-->
+            <!--<if test="updateTime != null">-->
+                <!--update_time,-->
+            <!--</if>-->
+            <!--<if test="levelId != null">-->
+                <!--level_id,-->
+            <!--</if>-->
+        <!--</trim>-->
+        <!--<trim prefix="values (" suffix=")" suffixOverrides=",">-->
+            <!--<if test="courseId != null">-->
+                <!--#{courseId,jdbcType=INTEGER},-->
+            <!--</if>-->
+            <!--<if test="courseTitle != null">-->
+                <!--#{courseTitle,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="courseIntro != null">-->
+                <!--#{courseIntro,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="courseNote != null">-->
+                <!--#{courseNote,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="courseCover != null">-->
+                <!--#{courseCover,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="courseViews != null">-->
+                <!--#{courseViews,jdbcType=INTEGER},-->
+            <!--</if>-->
+            <!--<if test="courseCollects != null">-->
+                <!--#{courseCollects,jdbcType=INTEGER},-->
+            <!--</if>-->
+            <!--<if test="courseLikes != null">-->
+                <!--#{courseLikes,jdbcType=INTEGER},-->
+            <!--</if>-->
+            <!--<if test="userId != null">-->
+                <!--#{userId,jdbcType=INTEGER},-->
+            <!--</if>-->
+            <!--<if test="diyLabel != null">-->
+                <!--#{diyLabel,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="updateTime != null">-->
+                <!--#{updateTime,jdbcType=TIMESTAMP},-->
+            <!--</if>-->
+            <!--<if test="levelId != null">-->
+                <!--#{levelId,jdbcType=TINYINT},-->
+            <!--</if>-->
+        <!--</trim>-->
+    <!--</insert>-->
+
+    <select id="getLastId" resultType="Integer">
+        SELECT MAX(course_id)
+        FROM course;
+    </select>
+
+</mapper>

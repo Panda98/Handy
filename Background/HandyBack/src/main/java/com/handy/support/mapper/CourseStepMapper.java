@@ -3,6 +3,8 @@ package com.handy.support.mapper;
 import com.handy.support.entity.CourseStep;
 import com.handy.support.entity.CourseStepExample;
 import java.util.List;
+
+import com.handy.support.entity.Step;
 import org.apache.ibatis.annotations.Param;
 
 public interface CourseStepMapper {
@@ -61,4 +63,6 @@ public interface CourseStepMapper {
      * @mbggenerated
      */
     int updateByExample(@Param("record") CourseStep record, @Param("example") CourseStepExample example);
+
+
 }

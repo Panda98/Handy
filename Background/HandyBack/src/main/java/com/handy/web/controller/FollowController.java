@@ -46,9 +46,10 @@ public class FollowController {
         ReturnCode<Boolean> code = new ReturnCode<Boolean>(true);
         return code.returnHandler();
     }
-   /* @RequestMapping(value="/moments",method = RequestMethod.GET)
+    @RequestMapping(value="/moments",method = RequestMethod.GET)
     public String followsMoment(int uid,int page_no,int n){
-        List<Follow> followList=followService.getFollows(uid,page_no,n);
+       // List<Follow> followList=followService.getFollows(uid,page_no,n);
+        List<Follow> followList=followService.getFollowsAll(uid);
         List<Integer>follows=new LinkedList<Integer>();
         for(int i=0;i<followList.size();i++){
             follows.add(new Integer(followList.get(i).getUserId()));
@@ -56,5 +57,5 @@ public class FollowController {
         List<UsersCoursesBrief>list=followService.getFollowsUpdate(follows,page_no,n);
         ReturnCode<List> code = new ReturnCode<List>(list);
         return code.returnHandler();
-    }*/
+    }
 }

@@ -3,8 +3,8 @@ package com.example.handy.core;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
 import com.example.handy.core.bean.LoginData;
-import com.example.handy.core.bean.RecommendAlbumListData;
-import com.example.handy.core.bean.RecommendCourseListData;
+import com.example.handy.core.bean.RecommendAlbumData;
+import com.example.handy.core.bean.RecommendCourseData;
 import com.example.handy.core.http.HttpHelper;
 import com.example.handy.core.prefs.PreferenceHelper;
 import com.example.handy.core.vo.LoginView;
@@ -51,13 +51,13 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse<List<RecommendAlbumListData>>> getRecommendAlbumListData() {
-        return mHttpHelper.getRecommendAlbumListData();
+    public Observable<BaseResponse<List<RecommendAlbumData>>> getRecommendAlbumListData(int uid) {
+        return mHttpHelper.getRecommendAlbumListData(uid);
     }
 
     @Override
-    public Observable<BaseResponse<List<RecommendCourseListData>>> getRecommendCourseListData() {
-        return mHttpHelper.getRecommendCourseListData();
+    public Observable<BaseResponse<List<RecommendCourseData>>> getRecommendCourseListData(int uid, int currentPage, int n) {
+        return mHttpHelper.getRecommendCourseListData(uid, currentPage, n);
     }
 
 
@@ -103,6 +103,16 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     @Override
     public int getCurrentPage() {
         return mPreferenceHelper.getCurrentPage();
+    }
+
+    @Override
+    public boolean getNoImageState() {
+        return mPreferenceHelper.getNoImageState();
+    }
+
+    @Override
+    public void setNoImageState(boolean b) {
+        mPreferenceHelper.setNoImageState(b);
     }
 
 
