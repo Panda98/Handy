@@ -1,48 +1,79 @@
 package com.example.handy.core.bean;
 
+import java.util.List;
+
 public class RecommendCourseData {
 
-    private String title;
-    private String description;
-    private String author;
-    private String imgUrl;
+    private int courseId;
+    private String courseTitle;
+    private String courseCover;
+    private String courseIntro;
+    private String authorName;
+    private int levelId;
+    private List<LabelData> labelList;
+    private String diyLabel;
 
-    public RecommendCourseData(String title, String description, String author, String imgUrl) {
-        this.title = title;
-        this.description = description;
-        this.author = author;
-        this.imgUrl = imgUrl;
+    public int getCourseId() {
+        return courseId;
     }
 
-    public String getTitle() {
-        return title;
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getCourseTitle() {
+        return courseTitle;
     }
 
-    public String getDescription() {
-        return description;
+    public void setCourseTitle(String courseTitle) {
+        this.courseTitle = courseTitle;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getCourseCover() {
+        return courseCover;
     }
 
-    public String getAuthor() {
-        return author;
+    public void setCourseCover(String courseCover) {
+        this.courseCover = courseCover;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public String getCourseIntro() {
+        return courseIntro;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public void setCourseIntro(String courseIntro) {
+        this.courseIntro = courseIntro;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public int getLevelId() {
+        return levelId;
+    }
+
+    public void setLevelId(int levelId) {
+        this.levelId = levelId;
+    }
+
+    public List<LabelData> getLabelList() {
+        return labelList;
+    }
+
+    public void setLabelList(List<LabelData> labelList) {
+        this.labelList = labelList;
+    }
+
+    public String getDiyLabel() {
+        return diyLabel;
+    }
+
+    public void setDiyLabel(String diyLabel) {
+        this.diyLabel = diyLabel;
     }
 }

@@ -50,12 +50,12 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse<List<RecommendAlbumData>>> getRecommendAlbumListData() {
-        return mApis.getRecommendAlbumListData();
+    public Observable<BaseResponse<List<RecommendAlbumData>>> getRecommendAlbumListData(int uid) {
+        return mApis.getRecommendAlbumListData(uid);
     }
 
     @Override
-    public Observable<BaseResponse<List<RecommendCourseData>>> getRecommendCourseListData(int currentPage, int n) {
-        return mApis.getRecommendCourseListData(currentPage, n);
+    public Observable<BaseResponse<List<RecommendCourseData>>> getRecommendCourseListData(int uid, int currentPage, int n) {
+        return mApis.getRecommendCourseListData(uid, currentPage, n);
     }
 }

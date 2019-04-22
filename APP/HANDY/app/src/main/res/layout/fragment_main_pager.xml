@@ -15,185 +15,187 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <ScrollView
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_pager_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:paddingHorizontal="@dimen/dp_20">
+        </android.support.v7.widget.RecyclerView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/dp_20"
-                    >
+        <!--<ScrollView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
 
-                    <Button
-                        android:id="@+id/main_pager_publish"
-                        android:layout_width="@dimen/dp_40"
-                        android:layout_height="@dimen/dp_40"
-                        android:layout_weight="1"
-                        android:layout_gravity="center_vertical"
-                        android:background="@drawable/ic_add_black_24dp"/>
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@color/white"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingHorizontal="@dimen/dp_20">-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:layout_marginTop="@dimen/dp_20"-->
+                    <!--&gt;-->
+
+                    <!--<Button-->
+                        <!--android:id="@+id/main_pager_publish"-->
+                        <!--android:layout_width="@dimen/dp_40"-->
+                        <!--android:layout_height="@dimen/dp_40"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:layout_gravity="center_vertical"-->
+                        <!--android:background="@drawable/ic_add_black_24dp"/>-->
 
 
-                    <LinearLayout
-                        android:id="@+id/layout_search_find"
-                        android:layout_width="@dimen/dp_280"
-                        android:layout_height="@dimen/dp_35"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_weight="4"
-                        android:layout_marginLeft="@dimen/sp_20"
-                        android:orientation="horizontal"
-                        android:background="@drawable/bg_conner_search">
+                    <!--<LinearLayout-->
+                        <!--android:id="@+id/layout_search_find"-->
+                        <!--android:layout_width="@dimen/dp_280"-->
+                        <!--android:layout_height="@dimen/dp_35"-->
+                        <!--android:layout_gravity="center_horizontal"-->
+                        <!--android:layout_weight="4"-->
+                        <!--android:layout_marginLeft="@dimen/sp_20"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:background="@drawable/bg_conner_search">-->
 
-                        <ImageView
-                            android:layout_width="@dimen/dp_20"
-                            android:layout_height="@dimen/dp_20"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/dp_10"
-                            android:background="@drawable/ic_search_black_24dp" />
+                        <!--<ImageView-->
+                            <!--android:layout_width="@dimen/dp_20"-->
+                            <!--android:layout_height="@dimen/dp_20"-->
+                            <!--android:layout_gravity="center_vertical"-->
+                            <!--android:layout_marginStart="@dimen/dp_10"-->
+                            <!--android:background="@drawable/ic_search_black_24dp" />-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="10dp"
-                            android:text="@string/search_tint"
-                            android:textColor="@color/black" />
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_gravity="center_vertical"-->
+                            <!--android:layout_marginStart="10dp"-->
+                            <!--android:text="@string/search_tint"-->
+                            <!--android:textColor="@color/black" />-->
 
-                    </LinearLayout>
-                </LinearLayout>
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
 
-                <LinearLayout
-                    android:id="@+id/main_pager_banner"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp">
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/main_pager_banner"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="180dp">-->
 
-                    <com.daimajia.slider.library.SliderLayout
-                        android:id="@+id/main_pager_slider"
-                        android:layout_width="match_parent"
-                        android:layout_height="180dp">
+                    <!--<com.daimajia.slider.library.SliderLayout-->
+                        <!--android:id="@+id/main_pager_slider"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="180dp">-->
 
-                        <com.daimajia.slider.library.Indicators.PagerIndicator
-                            style="@style/AndroidImageSlider_Corner_Oval_Orange"
-                            android:id="@+id/main_pager_indicator"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginBottom="70dp"
-                            />
+                        <!--<com.daimajia.slider.library.Indicators.PagerIndicator-->
+                            <!--style="@style/AndroidImageSlider_Corner_Oval_Orange"-->
+                            <!--android:id="@+id/main_pager_indicator"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_alignParentBottom="true"-->
+                            <!--android:layout_centerHorizontal="true"-->
+                            <!--android:layout_marginBottom="70dp"-->
+                            <!--/>-->
 
-                    </com.daimajia.slider.library.SliderLayout>
-                </LinearLayout>
+                    <!--</com.daimajia.slider.library.SliderLayout>-->
+                <!--</LinearLayout>-->
 
-                <!--推荐专辑-->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:textSize="@dimen/sp_20"
-                    android:textColor="#000000"
-                    android:text="@string/recommend_album_title"/>
+                <!--&lt;!&ndash;推荐专辑&ndash;&gt;-->
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:textSize="@dimen/sp_20"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:text="@string/recommend_album_title"/>-->
 
-                <GridLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:columnCount="3"
-                    android:rowCount="1">
+                <!--<GridLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:columnCount="3"-->
+                    <!--android:rowCount="1">-->
 
-                    <LinearLayout
-                        android:gravity="left"
-                        android:orientation="vertical"
-                        android:layout_columnWeight="1"
-                        >
-                        <ImageView
-                            android:id="@+id/recommend_album_image_left"
-                            android:layout_width="@dimen/dp_80"
-                            android:layout_height="@dimen/dp_80"
-                            android:background="@drawable/loading_card"/>
-                        <TextView
-                            android:layout_width="@dimen/dp_80"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:textColor="#5C5757"
-                            android:maxLength="13"
-                            android:maxLines="2"
-                            android:text="@string/search_tint"/>
+                    <!--<LinearLayout-->
+                        <!--android:gravity="left"-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:layout_columnWeight="1"-->
+                        <!--&gt;-->
+                        <!--<ImageView-->
+                            <!--android:id="@+id/recommend_album_image_left"-->
+                            <!--android:layout_width="@dimen/dp_80"-->
+                            <!--android:layout_height="@dimen/dp_80"-->
+                            <!--android:background="@drawable/loading_card"/>-->
+                        <!--<TextView-->
+                            <!--android:layout_width="@dimen/dp_80"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginTop="@dimen/dp_10"-->
+                            <!--android:textColor="#5C5757"-->
+                            <!--android:maxLength="13"-->
+                            <!--android:maxLines="2"-->
+                            <!--android:text="@string/search_tint"/>-->
 
-                    </LinearLayout>
+                    <!--</LinearLayout>-->
 
-                    <LinearLayout
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:layout_columnWeight="1"
-                        >
-                        <ImageView
-                            android:id="@+id/recommend_album_image_middle"
-                            android:layout_width="@dimen/dp_80"
-                            android:layout_height="@dimen/dp_80"
-                            android:background="@drawable/loading_card"/>
-                        <TextView
-                            android:layout_width="@dimen/dp_80"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:textColor="#5C5757"
-                            android:maxLength="13"
-                            android:maxLines="2"
-                            android:text="@string/search_tint"/>
+                    <!--<LinearLayout-->
+                        <!--android:gravity="center"-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:layout_columnWeight="1"-->
+                        <!--&gt;-->
+                        <!--<ImageView-->
+                            <!--android:id="@+id/recommend_album_image_middle"-->
+                            <!--android:layout_width="@dimen/dp_80"-->
+                            <!--android:layout_height="@dimen/dp_80"-->
+                            <!--android:background="@drawable/loading_card"/>-->
+                        <!--<TextView-->
+                            <!--android:layout_width="@dimen/dp_80"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginTop="@dimen/dp_10"-->
+                            <!--android:textColor="#5C5757"-->
+                            <!--android:maxLength="13"-->
+                            <!--android:maxLines="2"-->
+                            <!--android:text="@string/search_tint"/>-->
 
-                    </LinearLayout>
+                    <!--</LinearLayout>-->
 
-                    <LinearLayout
-                        android:gravity="right"
-                        android:orientation="vertical"
-                        android:layout_columnWeight="1"
-                        >
-                        <ImageView
-                            android:id="@+id/recommend_album_image_right"
-                            android:layout_width="@dimen/dp_80"
-                            android:layout_height="@dimen/dp_80"
-                            android:background="@drawable/loading_card"/>
-                        <TextView
-                            android:layout_width="@dimen/dp_80"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:textColor="#5C5757"
-                            android:maxLength="13"
-                            android:maxLines="2"
-                            android:text="@string/search_tint"/>
+                    <!--<LinearLayout-->
+                        <!--android:gravity="right"-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:layout_columnWeight="1"-->
+                        <!--&gt;-->
+                        <!--<ImageView-->
+                            <!--android:id="@+id/recommend_album_image_right"-->
+                            <!--android:layout_width="@dimen/dp_80"-->
+                            <!--android:layout_height="@dimen/dp_80"-->
+                            <!--android:background="@drawable/loading_card"/>-->
+                        <!--<TextView-->
+                            <!--android:layout_width="@dimen/dp_80"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginTop="@dimen/dp_10"-->
+                            <!--android:textColor="#5C5757"-->
+                            <!--android:maxLength="13"-->
+                            <!--android:maxLines="2"-->
+                            <!--android:text="@string/search_tint"/>-->
 
-                    </LinearLayout>
-                </GridLayout>
+                    <!--</LinearLayout>-->
+                <!--</GridLayout>-->
 
-                <!--推荐教程-->
+                <!--&lt;!&ndash;推荐教程&ndash;&gt;-->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:textSize="@dimen/sp_20"
-                    android:textColor="#000000"
-                    android:text="@string/recommend_course_title"/>
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="20dp"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:textSize="@dimen/sp_20"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:text="@string/recommend_course_title"/>-->
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/main_pager_rv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <!---->
 
-                </android.support.v7.widget.RecyclerView>
+            <!--</LinearLayout>-->
 
-            </LinearLayout>
-
-        </ScrollView>
+        <!--</ScrollView>-->
 
         <com.scwang.smartrefresh.header.TaurusHeader
             android:layout_width="match_parent"

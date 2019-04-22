@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
@@ -19,6 +21,7 @@ import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.RecommendAlbumData;
 import com.example.handy.core.bean.RecommendCourseData;
 import com.example.handy.presenter.MainPagerPresenter;
+import com.example.handy.utils.CommonUtils;
 import com.example.handy.view.adapter.RecommendCourseAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.youth.banner.Banner;
@@ -39,12 +42,14 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
 
     @BindView(R.id.normal_view)
     SmartRefreshLayout mRefreshLayout;
-    @BindView(R.id.main_pager_slider)
-    SliderLayout sliderLayout;
-    @BindView(R.id.main_pager_indicator)
-    PagerIndicator indicator;
+
     @BindView(R.id.main_pager_rv)
     RecyclerView mRecyclerView;
+
+
+    LinearLayout linearLayout;
+    SliderLayout sliderLayout;
+    PagerIndicator indicator;
 
     private List<RecommendCourseData> recommendCourseData;
     private RecommendCourseAdapter mAdapter;
@@ -79,6 +84,19 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
         super.initEventAndData();
         setBanner();
         setRefresh();
+        if (loggedAndNotRebuilt()) {
+            mPresenter.loadMainPagerData();
+        } else {
+            mPresenter.autoRefresh(true);
+        }
+        if (CommonUtils.isNetworkConnected()) {
+            showLoading();
+        }
+    }
+
+    private boolean loggedAndNotRebuilt() {
+        return (mPresenter.getLoginAccount()!=0)
+                && !isRecreate;
     }
 
     private void setBanner() {
@@ -131,6 +149,13 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
         mRecyclerView.setLayoutManager(new LinearLayoutManager(_mActivity));
         mRecyclerView.setHasFixedSize(true);
 
+        //add head banner
+        LinearLayout mHeaderGroup = ((LinearLayout) LayoutInflater.from(_mActivity).inflate(R.layout.main_pager_header, null));
+        linearLayout = mHeaderGroup.findViewById(R.id.main_pager_header);
+        sliderLayout = mHeaderGroup.findViewById(R.id.main_pager_slider);
+        indicator = mHeaderGroup.findViewById(R.id.main_pager_indicator);
+        mHeaderGroup.removeView(linearLayout);
+        mAdapter.addHeaderView(linearLayout);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -146,9 +171,9 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
 
     @Override
     public void showBannerData(List<BannerData> bannerDataList) {
-        for (BannerData i : bannerDataList) {
+        for (BannerData bannerData : bannerDataList) {
             DefaultSliderView sv = new DefaultSliderView(getActivity());
-            sv.image("http://www.pptbz.com/pptpic/UploadFiles_6909/201203/2012031220134655.jpg");
+            sv.image(bannerData.getCourseCover());
             sliderLayout.addSlider(sv);
         }
     }

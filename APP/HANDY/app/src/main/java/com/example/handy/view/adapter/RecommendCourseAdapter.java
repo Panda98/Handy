@@ -29,21 +29,21 @@ public class RecommendCourseAdapter extends BaseQuickAdapter<RecommendCourseData
     @Override
     protected void convert(CourseViewHolder helper, RecommendCourseData item) {
         // 设置标题
-        if (!TextUtils.isEmpty(item.getTitle())) {
-            helper.setText(R.id.recommend_course_title, item.getTitle());
+        if (!TextUtils.isEmpty(item.getCourseTitle())) {
+            helper.setText(R.id.recommend_course_title, item.getCourseTitle());
         }
         //设置描述
-        if (!TextUtils.isEmpty(item.getDescription())) {
-            helper.setText(R.id.recommend_course_description, item.getDescription());
+        if (!TextUtils.isEmpty(item.getCourseIntro())) {
+            helper.setText(R.id.recommend_course_description, item.getCourseIntro());
         }
         // 设置作者
-        if (!TextUtils.isEmpty(item.getAuthor())) {
-            helper.setText(R.id.recommend_course_author, item.getAuthor());
+        if (!TextUtils.isEmpty(item.getAuthorName())) {
+            helper.setText(R.id.recommend_course_author, item.getAuthorName());
         }
 
         // 设置图片
-        if (!TextUtils.isEmpty(item.getImgUrl())) {
-            ImageLoader.load(mContext, item.getImgUrl(), helper.getView(R.id.recommend_course_image));
+        if (!TextUtils.isEmpty(item.getCourseCover())) {
+            ImageLoader.load(mContext, item.getCourseCover(), helper.getView(R.id.recommend_course_image));
         }
     }
 }

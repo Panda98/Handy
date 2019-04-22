@@ -15,7 +15,6 @@ import retrofit2.http.GET;
 public interface HttpHelper {
     /**
      * 登陆
-     * http://www.wanandroid.com/user/login
      *
      * @param loginView user name password
      * @return 项目类别数据
@@ -24,7 +23,6 @@ public interface HttpHelper {
 
     /**
      * 注册
-     * http://www.wanandroid.com/user/register
      *
      * @param loginView user name password
      * @return 登陆数据
@@ -33,14 +31,12 @@ public interface HttpHelper {
 
     /**
      * 退出登录
-     * http://www.wanandroid.com/user/logout/json
      */
     @GET("user/logout/json")
     Observable<BaseResponse<LoginData>> logout();
 
     /**
      * 热门推荐
-     * http://www.wanandroid.com/banner/json
      *
      * @return 轮播图数据
      */
@@ -48,17 +44,15 @@ public interface HttpHelper {
 
     /**
      * 推荐专辑
-     * http://www.wanandroid.com/album/recommend
      *
      * @return 专辑列表
      */
-    Observable<BaseResponse<List<RecommendAlbumData>>> getRecommendAlbumListData();
+    Observable<BaseResponse<List<RecommendAlbumData>>> getRecommendAlbumListData(int uid);
 
     /**
      * 推荐教程
-     * http://www.wanandroid.com/course/recommend
      *
      * @return 教程列表
      */
-    Observable<BaseResponse<List<RecommendCourseData>>> getRecommendCourseListData(int currentPage, int n);
+    Observable<BaseResponse<List<RecommendCourseData>>> getRecommendCourseListData(int uid, int currentPage, int n);
 }

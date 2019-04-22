@@ -24,7 +24,6 @@ public interface Apis {
 
     /**
      * 登陆
-     * http://www.wanandroid.com/user/login
      *
      * @param loginData name password
      * @return 登陆数据
@@ -34,7 +33,6 @@ public interface Apis {
 
     /**
      * 注册
-     * http://www.wanandroid.com/user/register
      *
      * @param loginData user name password
      * @return 注册数据
@@ -44,7 +42,6 @@ public interface Apis {
 
     /**
      * 退出登录
-     * http://www.wanandroid.com/user/logout/json
      *
      * @return 登陆数据
      */
@@ -53,28 +50,25 @@ public interface Apis {
 
     /**
      * 热门推荐
-     * http://www.wanandroid.com/banner/json
      *
      * @return 轮播数据
      */
-    @GET("banner/json")
+    @GET("main/banner")
     Observable<BaseResponse<List<BannerData>>> getBannerData();
 
     /**
      * 推荐专辑
-     * http://www.wanandroid.com/album/recommend
      *
      * @return 专辑列表
      */
     @GET("album/recommend")
-    Observable<BaseResponse<List<RecommendAlbumData>>> getRecommendAlbumListData();
+    Observable<BaseResponse<List<RecommendAlbumData>>> getRecommendAlbumListData(@Query("uid")int uid);
 
     /**
      * 推荐教程
-     * http://www.wanandroid.com/course/recommend
      *
      * @return 教程列表
      */
     @GET("course/recommend")
-    Observable<BaseResponse<List<RecommendCourseData>>> getRecommendCourseListData(@Query("currentPage")int currentPage,@Query("n")int n);
+    Observable<BaseResponse<List<RecommendCourseData>>> getRecommendCourseListData(@Query("uid")int uid, @Query("page_no") int currentPage,@Query("n")int n);
 }
