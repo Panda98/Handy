@@ -2,6 +2,7 @@ package com.example.handy.view.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.view.menu.MenuAdapter;
@@ -29,6 +30,8 @@ import com.example.handy.core.bean.RecommendAlbumData;
 import com.example.handy.core.bean.RecommendCourseData;
 import com.example.handy.presenter.MainPagerPresenter;
 import com.example.handy.utils.CommonUtils;
+import com.example.handy.view.activity.PublishCourseActivity;
+import com.example.handy.view.activity.RegisterActivity;
 import com.example.handy.view.adapter.RecommendAlbumAdapter;
 import com.example.handy.view.adapter.RecommendCourseAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -43,6 +46,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -105,6 +109,17 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
         super.onStop();
         if (sliderLayout != null) {
             sliderLayout.stopAutoCycle();
+        }
+    }
+
+    @OnClick({R.id.main_pager_publish})
+    void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.main_pager_publish:
+                startActivity(new Intent(getActivity(), PublishCourseActivity.class));
+                break;
+            default:
+                break;
         }
     }
 
