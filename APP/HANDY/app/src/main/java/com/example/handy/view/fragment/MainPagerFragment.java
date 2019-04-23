@@ -235,6 +235,7 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
 
     @Override
     public void showBannerData(List<BannerData> bannerDataList) {
+        sliderLayout.removeAllSliders();
         for (BannerData bannerData : bannerDataList) {
             DefaultSliderView sv = new DefaultSliderView(getActivity());
             sv.image(bannerData.getCourseCover());
