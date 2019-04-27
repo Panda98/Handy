@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/step_number_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/step_picture_upload_btn"
+        android:background="@drawable/btn_upload_pic"
+        android:textColor="#5C5757"
+        android:layout_marginTop="@dimen/dp_0"
+        android:layout_width="@dimen/dp_340"
+        android:layout_height="@dimen/dp_100"
+        android:layout_marginBottom="@dimen/dp_25"
+        android:text="@string/upload_step_picture"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_gravity="center"
+        />
+    <Button
+        android:id="@+id/step_add_step_explain_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_step_explain"
+        android:background="@color/white"
+        android:textColor="@color/publish_course_button_gray"
+        android:layout_marginLeft="@dimen/dp_50"
+        />
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<View-->
+            <!--android:id="@+id/step_placeholder"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_centerHorizontal="true"/>-->
+        <!--<Button-->
+            <!--android:id="@+id/step_add_row"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_alignRight="@+id/step_placeholder"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/add_row"-->
+            <!--android:textColor="@color/publish_course_button_red"-->
+            <!--android:background="@color/white"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--/>-->
+
+        <!--<Button-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignLeft="@+id/step_placeholder"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:background="@color/white"-->
+            <!--android:paddingLeft="@dimen/dp_50"-->
+            <!--android:text="@string/adjust_step"-->
+            <!--android:textColor="@color/publish_course_button_red" />-->
+    <!--</RelativeLayout>-->
+
+    <EditText
+        android:id="@+id/step_explain_ed"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
+        android:background="@drawable/edittext_bg"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginRight="@dimen/dp_25"
+        android:visibility="invisible"
+        />
+</LinearLayout>
