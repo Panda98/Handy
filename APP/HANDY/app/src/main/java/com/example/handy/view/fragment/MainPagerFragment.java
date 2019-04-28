@@ -112,6 +112,7 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
         }
     }
 
+    // 顶部发布教程按钮
     @OnClick({R.id.main_pager_publish})
     void onClick(View v) {
         switch (v.getId()) {

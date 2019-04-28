@@ -22,6 +22,8 @@ import com.example.handy.presenter.MainPresenter;
 import com.example.handy.utils.BottomNavigationViewHelper;
 import com.example.handy.utils.CommonAlertDialog;
 import com.example.handy.utils.StatusBarUtil;
+import com.example.handy.view.fragment.AccountPagerFragment;
+import com.example.handy.view.fragment.CollectPagerFragment;
 import com.example.handy.view.fragment.FollowPagerFragment;
 import com.example.handy.view.fragment.MainPagerFragment;
 
@@ -41,8 +43,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     FrameLayout mFrameGroup;
 
     private ArrayList<BaseFragment> mFragments;
+
     private MainPagerFragment mMainPagerFragment;
     private FollowPagerFragment mFollowPagerFragment;
+    private CollectPagerFragment mCollectPagerFragment;
+    private AccountPagerFragment mAccountPagerFragment;
+
     private int mLastFgIndex;
 
     @Override
@@ -105,11 +111,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                     break;
                 case R.id.tab_collect:
                     loadPager(getString(R.string.navigation_collect), 2,
-                            mMainPagerFragment, Constants.TYPE_COLLECT_PAGER);
+                            mCollectPagerFragment, Constants.TYPE_COLLECT_PAGER);
                     break;
                 case R.id.tab_account:
                     loadPager(getString(R.string.navigation_account), 3,
-                            mMainPagerFragment, Constants.TYPE_ACCOUNT_PAGER);
+                            mAccountPagerFragment, Constants.TYPE_ACCOUNT_PAGER);
                     break;
                 default:
                     break;
@@ -136,6 +142,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     private void initFragments() {
         mFollowPagerFragment = FollowPagerFragment.getInstance(null, null);
+        mCollectPagerFragment = CollectPagerFragment.getInstance(null, null);
+        mAccountPagerFragment = AccountPagerFragment.getInstance(null, null);
         //mWxArticleFragment = WxArticleFragment.getInstance(null, null);
         //mNavigationFragment = NavigationFragment.getInstance(null, null);
         //mProjectFragment = ProjectFragment.getInstance(null, null);
@@ -143,6 +151,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         //SettingFragment settingFragment = SettingFragment.getInstance(null, null);
         //
         mFragments.add(mFollowPagerFragment);
+        mFragments.add(mCollectPagerFragment);
+        mFragments.add(mAccountPagerFragment);
 
     }
 

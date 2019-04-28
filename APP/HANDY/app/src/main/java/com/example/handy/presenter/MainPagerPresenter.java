@@ -66,10 +66,6 @@ public class MainPagerPresenter extends BasePresenter<MainPagerContract.View> im
         return mDataManager.getLoginAccount();
     }
 
-    @Override
-    public String getLoginPassword() {
-        return mDataManager.getLoginPassword();
-    }
 
     @Override
     public void loadMainPagerData() {
@@ -121,7 +117,7 @@ public class MainPagerPresenter extends BasePresenter<MainPagerContract.View> im
                 .compose(RxUtils.rxSchedulerHelper())
                 .compose(RxUtils.handleResult())
                 .subscribeWith(new BaseObserver<List<RecommendCourseData>>(mView,
-                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_banner_data),
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_article_list),
                         isShowError) {
                     @Override
                     public void onNext(List<RecommendCourseData> recommendCourseList) {
