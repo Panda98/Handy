@@ -2,6 +2,7 @@ package com.example.handy.core.http.api;
 
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
+import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.RecommendAlbumData;
 import com.example.handy.core.bean.RecommendCourseData;
@@ -24,7 +25,6 @@ public interface Apis {
 
     /**
      * 登陆
-     * http://www.wanandroid.com/user/login
      *
      * @param loginData name password
      * @return 登陆数据
@@ -34,7 +34,6 @@ public interface Apis {
 
     /**
      * 注册
-     * http://www.wanandroid.com/user/register
      *
      * @param loginData user name password
      * @return 注册数据
@@ -44,7 +43,6 @@ public interface Apis {
 
     /**
      * 退出登录
-     * http://www.wanandroid.com/user/logout/json
      *
      * @return 登陆数据
      */
@@ -53,28 +51,33 @@ public interface Apis {
 
     /**
      * 热门推荐
-     * http://www.wanandroid.com/banner/json
      *
      * @return 轮播数据
      */
-    @GET("banner/json")
+    @GET("main/banner")
     Observable<BaseResponse<List<BannerData>>> getBannerData();
 
     /**
      * 推荐专辑
-     * http://www.wanandroid.com/album/recommend
      *
      * @return 专辑列表
      */
     @GET("album/recommend")
-    Observable<BaseResponse<List<RecommendAlbumData>>> getRecommendAlbumListData();
+    Observable<BaseResponse<List<RecommendAlbumData>>> getRecommendAlbumListData(@Query("uid")int uid);
 
     /**
      * 推荐教程
-     * http://www.wanandroid.com/course/recommend
      *
      * @return 教程列表
      */
     @GET("course/recommend")
-    Observable<BaseResponse<List<RecommendCourseData>>> getRecommendCourseListData(@Query("currentPage")int currentPage,@Query("n")int n);
+    Observable<BaseResponse<List<RecommendCourseData>>> getRecommendCourseListData(@Query("uid")int uid, @Query("page_no") int currentPage,@Query("n")int n);
+
+    /**
+     * 关注列表
+     *
+     * @return 关注列表
+     */
+    @GET("follow/moments")
+    Observable<BaseResponse<List<FollowData>>> getFollowDataList(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
 }

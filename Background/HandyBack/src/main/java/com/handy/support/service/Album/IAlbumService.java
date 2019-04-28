@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 public interface IAlbumService {
-    List<AlbumVO> getRecommendedAlbum(int uid);
+    List<AlbumDto> getRecommendedAlbum(int uid);
     List<AlbumDto> getAlbumList(int uid);
     AlbumCourseDto getAlbumDetail(int albumid,int start,int n);
 }

@@ -27,15 +27,20 @@ public class AlbumController {
     @RequestMapping(value = "/album/recommend",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
     public String getRecommendAlbum(int uid){
         //todo: 待开发
-        List<AlbumVO> dtos = albumService.getRecommendedAlbum(uid);
+        List<AlbumDto> dtos = albumService.getRecommendedAlbum(uid);
+        List<AlbumVO> vos = new ArrayList<AlbumVO>();
         ErrorEnum error = null;
         if(dtos== null){
             error = ErrorEnum.USER_NOT_EXIST;
         }else{
             error = ErrorEnum.SUCCESS;
+            for(AlbumDto dto:dtos){
+                AlbumVO vo = new AlbumVO(dto);
+                vos.add(vo);
+            }
         }
 
-        ReturnCode<List<AlbumVO>> code = new ReturnCode<List<AlbumVO>>(error,dtos);
+        ReturnCode<List<AlbumVO>> code = new ReturnCode<List<AlbumVO>>(error,vos);
         return code.returnHandler();
     }
 
