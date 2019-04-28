@@ -66,7 +66,7 @@
     // 关注
     <string name="follow_page_toolbar_title">关注</string>
 
-    
+
     <string name="upload_cover_picture">+上传封面图</string>
     <string name="material">用料</string>
     <string name="material_name">用料名:</string>
@@ -79,4 +79,5 @@
     <string name="adjust_step">调整步骤</string>
     <string name="step">步骤</string>
     <string name="publish_course">发布教程</string>
+    <string name="share_view">shareView</string>
 </resources>

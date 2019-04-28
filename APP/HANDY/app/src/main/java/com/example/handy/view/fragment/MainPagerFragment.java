@@ -1,6 +1,7 @@
 package com.example.handy.view.fragment;
 
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.example.handy.R;
 import com.example.handy.app.Constants;
@@ -30,6 +32,7 @@ import com.example.handy.core.bean.RecommendAlbumData;
 import com.example.handy.core.bean.RecommendCourseData;
 import com.example.handy.presenter.MainPagerPresenter;
 import com.example.handy.utils.CommonUtils;
+import com.example.handy.utils.JudgeUtils;
 import com.example.handy.view.activity.PublishCourseActivity;
 import com.example.handy.view.activity.RegisterActivity;
 import com.example.handy.view.adapter.RecommendAlbumAdapter;
@@ -290,7 +293,24 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
             this.recommendCourseData.addAll(recommendCourseData);
             mAdapter.addData(recommendCourseData);
         }
+
+        // 点击跳转事件
+        mAdapter.setOnItemClickListener((adapter, view, position) -> startCourseDetailPager(view, position));
+
+
         showNormal();
+    }
+
+    private void startCourseDetailPager(View view, int position) {
+        if (mAdapter.getData().size() <= 0 || mAdapter.getData().size() < position) {
+            return;
+        }
+
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, view, getString(R.string.share_view));
+        JudgeUtils.startCourseDetailActivity(_mActivity,
+                options,
+                mAdapter.getData().get(position).getCourseId()
+        );
     }
 
 }
