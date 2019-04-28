@@ -3,54 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/publish_course_footer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
     >
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <View
-            android:id="@+id/placeholder"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_centerHorizontal="true"/>
-        <Button
-            android:id="@+id/add_row"
-            android:layout_width="0dp"
-            android:layout_alignRight="@+id/placeholder"
-            android:layout_height="wrap_content"
-            android:text="@string/add_row"
-            android:textColor="@color/publish_course_button_red"
-            android:background="@color/white"
-            android:layout_alignParentLeft="true"
-            />
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/placeholder"
-            android:layout_alignParentRight="true"
-            android:background="@color/white"
-            android:paddingLeft="@dimen/dp_50"
-            android:text="@string/adjust_material"
-            android:textColor="@color/publish_course_button_red" />
-    </RelativeLayout>
-
-    <TextView
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/publish_course_step"
-        android:textSize="@dimen/sp_20"
-        android:textColor="#5C5757"
-        android:layout_marginBottom="@dimen/dp_25"
-        />
+        android:text="@string/publish_course"
+        android:background="@color/publish_course_button_green"
+        android:textColor="@color/white"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/publish_course_step_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

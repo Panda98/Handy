@@ -1,56 +1,44 @@
 package com.example.handy.view.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.handy.R;
 import com.example.handy.app.Constants;
 import com.example.handy.base.activity.BaseActivity;
 import com.example.handy.contract.PublishCourseContract;
 import com.example.handy.core.bean.MaterialItemData;
+import com.example.handy.core.bean.MultipleItem;
 import com.example.handy.presenter.PublishCoursePresenter;
 import com.example.handy.utils.StatusBarUtil;
-import com.example.handy.view.adapter.CourseEditorMaterialAdapter;
+import com.example.handy.view.adapter.CourseEditorMultiAdapter;
 import com.yuyh.library.imgsel.ISNav;
-import com.yuyh.library.imgsel.common.Constant;
 import com.yuyh.library.imgsel.common.ImageLoader;
 import com.yuyh.library.imgsel.config.ISListConfig;
 
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 
 public class PublishCourseActivity  extends BaseActivity<PublishCoursePresenter> implements PublishCourseContract.View {
@@ -61,20 +49,17 @@ public class PublishCourseActivity  extends BaseActivity<PublishCoursePresenter>
     @BindView(R.id.common_toolbar_title_tv)
     TextView mTitleTv;
     @BindView(R.id.publish_course_rv)
-    RecyclerView materialRecycleView;
+    RecyclerView recyclerView;
 
 
-    LinearLayout mHeaderGroup;
-    LinearLayout mFooterGroup;
-    LinearLayout headerLayout;
-    LinearLayout footerLayout;
-
-    Button picUploadBtn;
-    Button addRowBtn;
-
-    private CourseEditorMaterialAdapter courseEditorMaterialAdapter;
+    private CourseEditorMultiAdapter multiAdapter;
 
     private List<MaterialItemData> materialItemData;
+
+    private List<MultipleItem> data;
+
+    private int materialNum = 1;
+    private int stepNum = 2+materialNum;
 
     @Override
     protected int getLayoutId() {
@@ -88,9 +73,12 @@ public class PublishCourseActivity  extends BaseActivity<PublishCoursePresenter>
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayShowTitleEnabled(false);
+
         mTitleTv.setText(getString(R.string.publish_course_toolbar_title));
         StatusBarUtil.setStatusColor(getWindow(), ContextCompat.getColor(this, R.color.main_status_bar_blue), 1f);
         mToolbar.setNavigationOnClickListener(v -> onBackPressedSupport());
+
+        mToolbar.setBackground(new ColorDrawable(getResources().getColor(R.color.publish_course_button_green)));
 
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -104,53 +92,42 @@ public class PublishCourseActivity  extends BaseActivity<PublishCoursePresenter>
 
     }
 
-    private void initHeader() {
-        headerLayout = mHeaderGroup.findViewById(R.id.publish_course_header);
-        picUploadBtn = mHeaderGroup.findViewById(R.id.picture_upload);
 
-        picUploadBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                uploadPic(view);
-            }
-        });
-    }
-    private void initFooter(){
-        footerLayout = mFooterGroup.findViewById(R.id.publish_course_footer);
-        addRowBtn = mFooterGroup.findViewById(R.id.add_row);
 
-        addRowBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                addRow(view);
-            }
-        });
-    }
-
-    private void initRecyclerView() {
+    public void initRecyclerView(){
         materialItemData = new ArrayList<>();
-        MaterialItemData data = new MaterialItemData();
-        courseEditorMaterialAdapter = new CourseEditorMaterialAdapter(R.layout.item_material_view, materialItemData);
+        data = new ArrayList<>();
+        data.add(new MultipleItem(MultipleItem.HEADER));
+        data.add(new MultipleItem(MultipleItem.METERIAL_BTN_VIEW));
+        data.add(new MultipleItem(MultipleItem.STEP_VIEW));
+        data.add(new MultipleItem(MultipleItem.STEP_BTN_VIEW));
+        multiAdapter = new CourseEditorMultiAdapter(data);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setAutoMeasureEnabled(true);
+        recyclerView.setLayoutManager(layoutManager);
 
-        mHeaderGroup = ((LinearLayout) LayoutInflater.from(this).inflate(R.layout.publish_course_header, null));
-        mFooterGroup = ((LinearLayout) LayoutInflater.from(this).inflate(R.layout.publish_course_footer, null));
+        multiAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                int id = view.getId();
 
-        initHeader();
-        initFooter();
+                switch (id){
+                    case R.id.picture_upload:
+                        uploadPic(view);
+                        break;
+                    case R.id.add_material_row:
+                        addMaterialRow(view);
+                        break;
+                    case R.id.add_step_row:
+                        addStepRow(view);
+                        break;
 
-        mHeaderGroup.removeView(headerLayout);
-        mFooterGroup.removeView(footerLayout);
+                }
+            }
+        });
 
-        courseEditorMaterialAdapter.addHeaderView(headerLayout);
-        courseEditorMaterialAdapter.addFooterView(footerLayout);
 
-        materialRecycleView.setLayoutManager(layoutManager);
-        materialRecycleView.setHasFixedSize(true);
 
-        materialRecycleView.setAdapter(courseEditorMaterialAdapter);
-
+        recyclerView.setAdapter(multiAdapter);
     }
 
 
@@ -168,9 +145,18 @@ public class PublishCourseActivity  extends BaseActivity<PublishCoursePresenter>
 //        }
 //    }
 
-    protected void addRow(View view){
-        materialItemData.add(new MaterialItemData());
-        courseEditorMaterialAdapter.replaceData(materialItemData);
+    protected void addMaterialRow(View view){
+        data.add(materialNum,new MultipleItem(MultipleItem.MATERIAL_ITEM));
+        multiAdapter.replaceData(data);
+        materialNum++;
+        stepNum++;
+    }
+
+    protected void addStepRow(View view){
+
+        data.add(stepNum,new MultipleItem(MultipleItem.STEP_ITEM,stepNum-1-materialNum));
+        multiAdapter.replaceData(data);
+        stepNum++;
     }
 
     protected void uploadPic(View view){
