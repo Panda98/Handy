@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/material_btn_view">
+
+    <View
+        android:id="@+id/placeholder"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"/>
+    <Button
+        android:id="@+id/add_material_row"
+        android:layout_width="0dp"
+        android:layout_alignRight="@+id/placeholder"
+        android:layout_height="wrap_content"
+        android:text="@string/add_row"
+        android:textColor="@color/publish_course_button_red"
+        android:background="@color/white"
+        android:layout_alignParentLeft="true"
+        />
+
+    <Button
+        android:id="@+id/adjust_material"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/placeholder"
+        android:layout_alignParentRight="true"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_50"
+        android:text="@string/adjust_material"
+        android:textColor="@color/publish_course_button_red" />
+
+</RelativeLayout>

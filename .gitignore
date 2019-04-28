@@ -43,3 +43,5 @@ Background/HandyBack/target/*
 Background/HandyBack/out/*
 Background/HandyBack/HandyBack.iml
 APP/HANDY/local.properties
+Background/HandyBack/src/main/resources/properties/jdbc.properties
+

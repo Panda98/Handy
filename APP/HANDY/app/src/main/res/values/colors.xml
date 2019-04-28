@@ -31,6 +31,14 @@
 
     <!--main-->
     <color name="main_status_bar_blue">#279ede</color>
-    <color name="main_pager_title">#5C5757</color>
+    <color name="normal_text">#5C5757</color>
+
+    <!--follow-->
+    <color name="shallow_text">#A29D9D</color>
+
+    <!--publish_course-->
+    <color name="publish_course_button_red">#F67E7E</color>
+    <color name="publish_course_button_gray">#5C5757</color>
+    <color name="publish_course_button_green">#96CEB4</color>
 
 </resources>

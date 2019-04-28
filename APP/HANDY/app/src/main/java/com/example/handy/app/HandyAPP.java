@@ -10,6 +10,7 @@ import com.example.handy.di.module.base.AppModule;
 import com.example.handy.di.module.base.HttpModule;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import com.xuexiang.xupdate.XUpdate;
 
 import javax.inject.Inject;
 
@@ -43,6 +44,8 @@ public class HandyAPP extends Application implements HasActivityInjector {
                 .httpModule(new HttpModule())
                 .build();
         appComponent.inject(this);
+
+        XUpdate.get().init(this);
     }
 
     public static synchronized HandyAPP getInstance() {
