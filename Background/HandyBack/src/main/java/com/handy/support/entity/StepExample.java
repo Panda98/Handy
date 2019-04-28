@@ -264,52 +264,52 @@ public class StepExample {
             return (Criteria) this;
         }
 
-        public Criteria andStepTagEqualTo(Integer value) {
+        public Criteria andStepTagEqualTo(Byte value) {
             addCriterion("step_tag =", value, "stepTag");
             return (Criteria) this;
         }
 
-        public Criteria andStepTagNotEqualTo(Integer value) {
+        public Criteria andStepTagNotEqualTo(Byte value) {
             addCriterion("step_tag <>", value, "stepTag");
             return (Criteria) this;
         }
 
-        public Criteria andStepTagGreaterThan(Integer value) {
+        public Criteria andStepTagGreaterThan(Byte value) {
             addCriterion("step_tag >", value, "stepTag");
             return (Criteria) this;
         }
 
-        public Criteria andStepTagGreaterThanOrEqualTo(Integer value) {
+        public Criteria andStepTagGreaterThanOrEqualTo(Byte value) {
             addCriterion("step_tag >=", value, "stepTag");
             return (Criteria) this;
         }
 
-        public Criteria andStepTagLessThan(Integer value) {
+        public Criteria andStepTagLessThan(Byte value) {
             addCriterion("step_tag <", value, "stepTag");
             return (Criteria) this;
         }
 
-        public Criteria andStepTagLessThanOrEqualTo(Integer value) {
+        public Criteria andStepTagLessThanOrEqualTo(Byte value) {
             addCriterion("step_tag <=", value, "stepTag");
             return (Criteria) this;
         }
 
-        public Criteria andStepTagIn(List<Integer> values) {
+        public Criteria andStepTagIn(List<Byte> values) {
             addCriterion("step_tag in", values, "stepTag");
             return (Criteria) this;
         }
 
-        public Criteria andStepTagNotIn(List<Integer> values) {
+        public Criteria andStepTagNotIn(List<Byte> values) {
             addCriterion("step_tag not in", values, "stepTag");
             return (Criteria) this;
         }
 
-        public Criteria andStepTagBetween(Integer value1, Integer value2) {
+        public Criteria andStepTagBetween(Byte value1, Byte value2) {
             addCriterion("step_tag between", value1, value2, "stepTag");
             return (Criteria) this;
         }
 
-        public Criteria andStepTagNotBetween(Integer value1, Integer value2) {
+        public Criteria andStepTagNotBetween(Byte value1, Byte value2) {
             addCriterion("step_tag not between", value1, value2, "stepTag");
             return (Criteria) this;
         }

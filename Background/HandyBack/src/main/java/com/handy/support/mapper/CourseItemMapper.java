@@ -3,8 +3,6 @@ package com.handy.support.mapper;
 import com.handy.support.entity.CourseItem;
 import com.handy.support.entity.CourseItemExample;
 import java.util.List;
-
-import com.handy.support.entity.Item;
 import org.apache.ibatis.annotations.Param;
 
 public interface CourseItemMapper {
@@ -63,7 +61,4 @@ public interface CourseItemMapper {
      * @mbggenerated
      */
     int updateByExample(@Param("record") CourseItem record, @Param("example") CourseItemExample example);
-
-
-
 }

@@ -17,9 +17,9 @@
 
         <property name="url" value="jdbc:mysql://106.13.106.249:3306/handy" />
 
-        <property name="username" value="root" />
+        <property name="username" value="handy" />
 
-        <property name="password" value="123456" />
+        <property name="password" value="handycraft@205" />
     </bean>
 
 
