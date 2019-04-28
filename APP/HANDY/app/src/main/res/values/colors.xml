@@ -36,4 +36,9 @@
     <!--follow-->
     <color name="shallow_text">#A29D9D</color>
 
+    <!--publish_course-->
+    <color name="publish_course_button_red">#F67E7E</color>
+    <color name="publish_course_button_gray">#5C5757</color>
+    <color name="publish_course_button_green">#96CEB4</color>
+
 </resources>
