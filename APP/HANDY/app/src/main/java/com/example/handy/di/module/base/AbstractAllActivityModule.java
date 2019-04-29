@@ -1,7 +1,9 @@
 package com.example.handy.di.module.base;
 
+import com.example.handy.di.module.CourseDetailActivityModule;
 import com.example.handy.di.module.MainActivityModule;
 import com.example.handy.di.module.PublishCourseActivityModule;
+import com.example.handy.view.activity.CourseDetailActivity;
 import com.example.handy.view.activity.LoginActivity;
 import com.example.handy.view.activity.MainActivity;
 import com.example.handy.view.activity.PublishCourseActivity;
@@ -32,6 +34,9 @@ public abstract class AbstractAllActivityModule {
 
     @ContributesAndroidInjector(modules = PublishCourseActivityModule.class)
     abstract PublishCourseActivity contributesPublishCourseActivityInjector();
+
+    @ContributesAndroidInjector(modules = CourseDetailActivityModule.class)
+    abstract CourseDetailActivity contributesCourseDetailActivityInjector();
 
 
 }

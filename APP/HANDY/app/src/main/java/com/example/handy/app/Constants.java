@@ -101,4 +101,10 @@ public class Constants {
 
     public static final int PIC_REQUET_CODE = 0;
 
+
+    /**
+     * Course Detail
+     */
+    public static final String ARTICLE_ID = "article_id";
+
 }

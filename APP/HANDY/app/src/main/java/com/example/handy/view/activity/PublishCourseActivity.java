@@ -41,7 +41,7 @@ import java.util.List;
 import butterknife.BindView;
 
 
-public class PublishCourseActivity  extends BaseActivity<PublishCoursePresenter> implements PublishCourseContract.View {
+public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> implements PublishCourseContract.View {
 
 
     @BindView(R.id.common_toolbar)
