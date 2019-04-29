@@ -4,6 +4,7 @@ import com.handy.support.entity.Follow;
 import com.handy.support.pojo.Follow.dto.FollowDTO;
 import com.handy.support.pojo.Follow.vo.FollowVO;
 import com.handy.support.pojo.UserCourse.dto.UsersCoursesBrief;
+import com.handy.support.pojo.UserCourse.vo.UserCourseUpdate;
 import com.handy.support.service.Follow.FollowServiceImpl;
 import com.handy.support.utils.status.ReturnCode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,11 @@ public class FollowController {
             follows.add(new Integer(followList.get(i).getUserId()));
         }
         List<UsersCoursesBrief>list=followService.getFollowsUpdate(follows,page_no,n);
-        ReturnCode<List> code = new ReturnCode<List>(list);
+        List<UserCourseUpdate>update=new ArrayList<UserCourseUpdate>();
+        for(int i=0;i<list.size();i++){
+            update.add(new UserCourseUpdate(list.get(i)));
+        }
+        ReturnCode<List> code = new ReturnCode<List>(update);
         return code.returnHandler();
     }
 }

@@ -4,8 +4,7 @@ import com.handy.support.entity.Comment;
 import com.handy.support.entity.CommentReply;
 import com.handy.support.pojo.comment.dto.CommentDTO;
 import com.handy.support.pojo.comment.dto.ReplyDTO;
-import com.handy.support.pojo.comment.vo.ReplyBrief;
-import com.handy.support.pojo.comment.vo.ReplyUserVO;
+import com.handy.support.pojo.comment.dto.ReplyUserVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

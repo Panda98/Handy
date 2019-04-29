@@ -1,4 +1,4 @@
-package com.handy.support.pojo.Follow.vo;
+package com.handy.support.pojo.Follow.dto;
 
 public class UserBrief {
     private int userId;

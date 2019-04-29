@@ -1,8 +1,7 @@
 package com.handy.support.pojo.comment.dto;
 
-import com.handy.support.pojo.Follow.vo.CourseBrief;
-import com.handy.support.pojo.Follow.vo.UserBrief;
-import com.handy.support.pojo.comment.vo.CommentBrief;
+import com.handy.support.pojo.Follow.dto.CourseBrief;
+import com.handy.support.pojo.Follow.dto.UserBrief;
 
 public class CommentDTO extends CommentBrief{
     private UserBrief user;

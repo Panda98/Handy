@@ -1,4 +1,4 @@
-package com.handy.support.pojo.comment.vo;
+package com.handy.support.pojo.comment.dto;
 
 import java.util.Date;
 

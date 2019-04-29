@@ -1,9 +1,7 @@
 package com.handy.support.pojo.UserCourse.dto;
 
-import com.handy.support.entity.Course;
-import com.handy.support.entity.User;
-import com.handy.support.pojo.Follow.vo.CourseBrief;
-import com.handy.support.pojo.Follow.vo.UserBrief;
+import com.handy.support.pojo.Follow.dto.CourseBrief;
+import com.handy.support.pojo.Follow.dto.UserBrief;
 
 public class UsersCoursesBrief extends CourseBrief{
     private UserBrief user;
