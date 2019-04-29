@@ -7,6 +7,7 @@ public class UsersCoursesBrief extends CourseBrief{
     private UserBrief user;
 public UsersCoursesBrief(){
 }
+
     public void setUser(UserBrief user) {
         this.user = user;
     }

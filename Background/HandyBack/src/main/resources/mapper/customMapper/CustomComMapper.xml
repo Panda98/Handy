@@ -58,7 +58,7 @@
         select u.user_id user_user_id,u.nick_name user_nick_name,u.user_pic user_user_pic,
         c.update_time course_update_time,
         c.course_cover course_course_cover,c.course_id course_course_id,c.course_title course_course_title
-        ,c.diy_label course_diy_label,c.level_id course_level_id,
+        ,c.diy_label course_diy_label,c.level_id course_level_id,c.course_intro course_course_intro,
         co.update_time update_time,
         co.course_id course_id,
         co.comment_id comment_id,co.comment_content comment_content,co.user_id user_id
@@ -87,7 +87,7 @@
  co.update_time comment_update_time, co.comment_content comment_comment_content,
   c.update_time course_update_time,
         c.course_cover course_course_cover,c.course_id course_course_id,c.course_title course_course_title
-        ,c.diy_label course_diy_label,c.level_id course_level_id
+        ,c.diy_label course_diy_label,c.level_id course_level_id,c.course_intro course_course_intro
         from (select * from comment where comment.user_id=#{userId}) co
          inner join comment_reply r on r.comment_id=co.comment_id and r.to_reply_id=0
          inner join user u on r.user_id=u.user_id
@@ -109,7 +109,7 @@
  r2.reply_content toReply_reply_content,
  c.update_time course_update_time,
         c.course_cover course_course_cover,c.course_id course_course_id,c.course_title course_course_title
-        ,c.diy_label course_diy_label,c.level_id course_level_id
+        ,c.diy_label course_diy_label,c.level_id course_level_id,c.course_intro course_course_intro
         from (select * from comment_reply where comment_reply.user_id = #{userId}) r2
          inner join comment  co on co.comment_id=r2.comment_id
          inner join course c on c.course_id=co.course_id

@@ -24,7 +24,7 @@
     <select id="getUsersCoursesBrief" resultMap="UsersCoursesBriefMap">
         select u.user_id user_user_id,u.nick_name user_nick_name,u.user_pic user_user_pic,c.update_time update_time,
         c.course_cover course_cover,c.course_id course_id,c.course_title course_title
-        ,c.diy_label diy_label,c.level_id level_id
+        ,c.diy_label diy_label,c.level_id level_id,c.course_intro course_intro
         from user u
         inner join course c
         where u.user_id=c.user_id and u.user_id in <foreach collection="users" open="(" close=")" separator=","
