@@ -1,6 +1,7 @@
 package com.example.handy.view.fragment;
 
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,12 +22,15 @@ import com.example.handy.core.bean.RecommendCourseData;
 import com.example.handy.presenter.FollowPagerPresenter;
 import com.example.handy.presenter.MainPagerPresenter;
 import com.example.handy.utils.CommonUtils;
+import com.example.handy.utils.JudgeUtils;
 import com.example.handy.view.adapter.FollowAdapter;
 import com.example.handy.view.adapter.RecommendCourseAdapter;
+import com.jakewharton.rxbinding2.view.RxView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 
@@ -106,7 +110,7 @@ public class FollowPagerFragment extends BaseRootFragment<FollowPagerPresenter>
 
     @Override
     public void showFollowData(List<FollowData> followDataList, boolean isRefresh) {
-        if (mPresenter.getCurrentPage() == Constants.TYPE_MAIN_PAGER) {
+        if (mPresenter.getCurrentPage() == Constants.TYPE_FOLLOW_PAGER) {
             mRecyclerView.setVisibility(View.VISIBLE);
         } else {
             mRecyclerView.setVisibility(View.INVISIBLE);
@@ -122,5 +126,20 @@ public class FollowPagerFragment extends BaseRootFragment<FollowPagerPresenter>
             mAdapter.addData(followDataList);
         }
         showNormal();
+        // 点击跳转事件
+        mAdapter.setOnItemClickListener((adapter, view, position) -> startCourseDetailPager(view, position));
+    }
+
+    // 跳转
+    private void startCourseDetailPager(View view, int position) {
+        if (mAdapter.getData().size() <= 0 || mAdapter.getData().size() < position) {
+            return;
+        }
+
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, view, getString(R.string.share_view));
+        JudgeUtils.startCourseDetailActivity(_mActivity,
+                options,
+                mAdapter.getData().get(position).getCourseId()
+        );
     }
 }

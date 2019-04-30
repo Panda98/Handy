@@ -105,6 +105,7 @@ public class Constants {
     /**
      * Course Detail
      */
-    public static final String ARTICLE_ID = "article_id";
+    public static final String COURSE_ID = "course_id";
+    public static final String AUTHOR_ID = "author_id";
 
 }

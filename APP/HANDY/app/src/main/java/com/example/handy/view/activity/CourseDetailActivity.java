@@ -1,24 +1,21 @@
 package com.example.handy.view.activity;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.handy.R;
 import com.example.handy.app.Constants;
 import com.example.handy.base.activity.BaseActivity;
 import com.example.handy.contract.CourseDetailContract;
-import com.example.handy.contract.PublishCourseContract;
 import com.example.handy.presenter.CourseDetailPresenter;
-import com.example.handy.presenter.PublishCoursePresenter;
+import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.StatusBarUtil;
 
 import butterknife.BindView;
@@ -63,9 +60,20 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         //Toast.makeText(getBaseContext(),this.courseId,Toast.LENGTH_SHORT).show();
         bundle = getIntent().getExtras();
         assert bundle != null;
-        this.courseId = ((int) bundle.get(Constants.ARTICLE_ID));
+        this.courseId = ((int) bundle.get(Constants.COURSE_ID));
         System.out.println(this.courseId);
         Log.i("courseId",String.valueOf(this.courseId));
+    }
+
+    // 收藏事件
+    private void collectEvent() {
+        if (!mPresenter.getLoginStatus()) {
+            CommonUtils.showMessage(this, getString(R.string.login_tint));
+            startActivity(new Intent(this, LoginActivity.class));
+        } else {
+            //mPresenter.addCollectCourse(courseId);
+
+        }
     }
 
 }

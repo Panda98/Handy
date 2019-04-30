@@ -5,7 +5,7 @@
     android:id="@+id/common_toolbar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_54"
-    android:background="@drawable/blue_gradient_bg"
+    android:background="@color/light_tab_bac"
     app:navigationIcon="@drawable/ic_arrow_back_white_24dp">
 
     <TextView
