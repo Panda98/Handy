@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:http="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="httpSolrClient"
+          class="org.apache.solr.client.solrj.impl.HttpSolrClient">
+        <constructor-arg index="0" value="http://localhost:8983/solr/#/test"/>
+        <!-- 建立连接的最长时间 -->
+        <!--<property name="connectionTimeout"
+       value="${solr.connectionTimeout}"/>-->
+        <property name="connectionTimeout" value="3000"/>
+    </bean>
+
+</beans>
