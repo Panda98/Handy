@@ -2,8 +2,11 @@ package com.handy.web.controller;
 
 import com.handy.support.entity.Follow;
 import com.handy.support.pojo.Follow.dto.FollowDTO;
+import com.handy.support.pojo.Follow.dto.FollowUserInfo;
+import com.handy.support.pojo.Follow.vo.FollowUsersVO;
 import com.handy.support.pojo.Follow.vo.FollowVO;
 import com.handy.support.pojo.UserCourse.dto.UsersCoursesBrief;
+import com.handy.support.pojo.UserCourse.vo.UserCourseUpdate;
 import com.handy.support.service.Follow.FollowServiceImpl;
 import com.handy.support.utils.status.ReturnCode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +25,17 @@ public class FollowController {
     FollowServiceImpl followService;
     @RequestMapping(value="/follows",method = RequestMethod.GET)
     public String getFollowers(int uid,int page_no,int n){
-        List<Follow> followList=followService.getFollows(uid,page_no,n);
+       /* List<Follow> followList=followService.getFollows(uid,page_no,n);
         List<FollowVO>followVOS=new LinkedList<FollowVO>();
         for(int i=0;i<followList.size();i++){
             followVOS.add(new FollowVO(new FollowDTO(followList.get(i))));
-        }
-        ReturnCode<List> code = new ReturnCode<List>(followVOS);
+        }*/
+       List<FollowUserInfo> list=followService.getFollowUsersInfo(uid,page_no,n);
+       List<FollowUsersVO>follow=new ArrayList<FollowUsersVO>();
+       for(int i=0;i<list.size();i++){
+           follow.add(new FollowUsersVO(list.get(i)));
+       }
+        ReturnCode<List> code = new ReturnCode<List>(follow);
         return code.returnHandler();
     }
     @RequestMapping(value="/follow",method = RequestMethod.GET)
@@ -55,7 +63,11 @@ public class FollowController {
             follows.add(new Integer(followList.get(i).getUserId()));
         }
         List<UsersCoursesBrief>list=followService.getFollowsUpdate(follows,page_no,n);
-        ReturnCode<List> code = new ReturnCode<List>(list);
+        List<UserCourseUpdate>update=new ArrayList<UserCourseUpdate>();
+        for(int i=0;i<list.size();i++){
+            update.add(new UserCourseUpdate(list.get(i)));
+        }
+        ReturnCode<List> code = new ReturnCode<List>(update);
         return code.returnHandler();
     }
 }

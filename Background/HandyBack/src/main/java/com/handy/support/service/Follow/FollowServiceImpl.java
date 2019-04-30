@@ -6,6 +6,7 @@ import com.handy.support.mapper.FollowMapper;
 import com.handy.support.mapper.customMapper.MyFollowMapper;
 import com.handy.support.mapper.customMapper.MyUsersCoursesMapper;
 import com.handy.support.pojo.Follow.dto.FollowDTO;
+import com.handy.support.pojo.Follow.dto.FollowUserInfo;
 import com.handy.support.pojo.UserCourse.dto.UsersCoursesBrief;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,9 @@ public class FollowServiceImpl implements IFollowService{
     MyUsersCoursesMapper usersCoursesMapper;
     public List<Follow> getFollows(int uid,int page_no,int n){
       return  myFollowMapper.getFollowsByUidLimited(uid,page_no,n);
+    }
+    public List<FollowUserInfo> getFollowUsersInfo(int uid, int page_no,int n){
+        return myFollowMapper.getFollowsUserInfoListLimited(uid,page_no,n);
     }
     public void followOther(FollowDTO followDTO){
         followMapper.insertSelective(followDTO.getFollow());

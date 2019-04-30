@@ -7,11 +7,10 @@ import com.handy.support.mapper.CommentReplyMapper;
 import com.handy.support.mapper.customMapper.MyCommentMapper;
 import com.handy.support.pojo.comment.dto.CommentDTO;
 import com.handy.support.pojo.comment.dto.CommentPush;
-import com.handy.support.pojo.comment.dto.ReplyDTO;
 import com.handy.support.pojo.comment.dto.ReplyPush;
 import com.handy.support.pojo.comment.vo.ComRepReq;
 import com.handy.support.pojo.comment.vo.CourseComReq;
-import com.handy.support.pojo.comment.vo.ReplyUserVO;
+import com.handy.support.pojo.comment.dto.ReplyUserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

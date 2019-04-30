@@ -1,12 +1,11 @@
-package com.handy.support.pojo.UserCourse.dto;
+package com.handy.support.pojo.Message.dto;
 
 import com.handy.support.pojo.Follow.dto.CourseBrief;
 import com.handy.support.pojo.Follow.dto.UserBrief;
 
-public class UsersCoursesBrief extends CourseBrief{
+public class FavorDTO extends FavorBrief{
+    private CourseBrief course;
     private UserBrief user;
-public UsersCoursesBrief(){
-}
 
     public void setUser(UserBrief user) {
         this.user = user;
@@ -14,5 +13,13 @@ public UsersCoursesBrief(){
 
     public UserBrief getUser() {
         return user;
+    }
+
+    public void setCourse(CourseBrief course) {
+        this.course = course;
+    }
+
+    public CourseBrief getCourse() {
+        return course;
     }
 }
