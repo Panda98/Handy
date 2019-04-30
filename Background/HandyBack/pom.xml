@@ -209,6 +209,13 @@
             <version>1.09</version>
         </dependency>
 
+        <!--solr-->
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-solrj</artifactId>
+            <version>8.0.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
