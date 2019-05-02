@@ -50,4 +50,36 @@ public class CourseDetailPresenter extends BasePresenter<CourseDetailContract.Vi
                     }
                 }));
     }
+
+    @Override
+    public void follow(int followId) {
+        addSubscribe(mDataManager.follow(getLoginAccount(), followId)
+                .compose(RxUtils.rxSchedulerHelper())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new BaseObserver<Boolean>(mView,
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_course_detail)) {
+                    @Override
+                    public void onNext(Boolean status) {
+                        System.out.println(status);
+                        mView.showFollowView();
+                    }
+
+                }));
+    }
+
+    @Override
+    public void unFollow(int followId) {
+        addSubscribe(mDataManager.unFollow(getLoginAccount(), followId)
+                .compose(RxUtils.rxSchedulerHelper())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new BaseObserver<Boolean>(mView,
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_course_detail)) {
+                    @Override
+                    public void onNext(Boolean status) {
+                        System.out.println(status);
+                        mView.showUnFollowView();
+                    }
+
+                }));
+    }
 }

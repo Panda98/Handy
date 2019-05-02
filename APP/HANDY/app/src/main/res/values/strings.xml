@@ -68,6 +68,7 @@
 
     <!--follow-->
     <string name="follow">关注</string>
+    <string name="unFollow">取消关注</string>
 
 
     <string name="upload_cover_picture">+上传封面图</string>
