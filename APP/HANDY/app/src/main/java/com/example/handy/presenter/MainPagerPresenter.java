@@ -102,7 +102,7 @@ public class MainPagerPresenter extends BasePresenter<MainPagerContract.View> im
                 .compose(RxUtils.rxSchedulerHelper())
                 .compose(RxUtils.handleResult())
                 .subscribeWith(new BaseObserver<List<RecommendAlbumData>>(mView,
-                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_banner_data),
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_album_list),
                         isShowError) {
                     @Override
                     public void onNext(List<RecommendAlbumData> recommendAlbumList) {
@@ -117,7 +117,7 @@ public class MainPagerPresenter extends BasePresenter<MainPagerContract.View> im
                 .compose(RxUtils.rxSchedulerHelper())
                 .compose(RxUtils.handleResult())
                 .subscribeWith(new BaseObserver<List<RecommendCourseData>>(mView,
-                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_article_list),
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_course_list),
                         isShowError) {
                     @Override
                     public void onNext(List<RecommendCourseData> recommendCourseList) {
@@ -132,7 +132,7 @@ public class MainPagerPresenter extends BasePresenter<MainPagerContract.View> im
                 .compose(RxUtils.rxSchedulerHelper())
                 .compose(RxUtils.handleResult())
                 .subscribeWith(new BaseObserver<List<RecommendCourseData>>(mView,
-                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_article_list),
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_course_list),
                         false) {
                     @Override
                     public void onNext(List<RecommendCourseData> recommendCourseDataList) {

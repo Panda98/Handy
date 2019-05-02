@@ -1,7 +1,9 @@
 package com.example.handy.core;
 
+import com.example.handy.core.bean.AlbumListData;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
+import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.RecommendAlbumData;
@@ -11,8 +13,11 @@ import com.example.handy.core.prefs.PreferenceHelper;
 import com.example.handy.core.vo.LoginView;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class DataManager implements HttpHelper, PreferenceHelper {
 
@@ -64,6 +69,71 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     @Override
     public Observable<BaseResponse<List<FollowData>>> getFollowDataList(int uid, int currentPage, int n) {
         return mHttpHelper.getFollowDataList(uid, currentPage, n);
+    }
+
+    @Override
+    public Observable<BaseResponse<CourseDetailData>> getCourseDetail(int courseId) {
+        return mHttpHelper.getCourseDetail(courseId);
+    }
+
+    @Override
+    public Observable<BaseResponse> follow(int uid, int followId) {
+        return mHttpHelper.follow(uid, followId);
+    }
+
+    @Override
+    public Observable<BaseResponse> unFollow(int uid, int followId) {
+        return mHttpHelper.unFollow(uid, followId);
+    }
+
+    @Override
+    public Observable<BaseResponse<List<AlbumListData>>> getUserAlbumList(int userId) {
+        return mHttpHelper.getUserAlbumList(userId);
+    }
+
+    @Override
+    public Observable<BaseResponse<List<AlbumListData>>> getCollectAlbumList(int userId) {
+        return mHttpHelper.getCollectAlbumList(userId);
+    }
+
+    @Override
+    public Observable<BaseResponse> collect(int courseId, int albumId) {
+        return mHttpHelper.collect(courseId, albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse> unCollect(int courseId, int albumId) {
+        return mHttpHelper.unCollect(courseId, albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse> isCollect(int userId, int courseId) {
+        return mHttpHelper.isCollect(userId, courseId);
+    }
+
+    @Override
+    public Observable<BaseResponse> like(int userId, int courseId) {
+        return mHttpHelper.like(userId, courseId);
+    }
+
+    @Override
+    public Observable<BaseResponse> unLike(int userId, int courseId) {
+        return mHttpHelper.unLike(userId, courseId);
+    }
+
+    @Override
+    public Observable<BaseResponse> isLike(int userId, int courseId) {
+        return mHttpHelper.isLike(userId, courseId);
+    }
+
+    @Override
+    public Observable<BaseResponse<List<RecommendCourseData>>> getUserPublishCourse(int userId, int currentPage, int n) {
+        return mHttpHelper.getUserPublishCourse(userId, currentPage, n);
+    }
+
+    @Override
+    public Observable<BaseResponse> uploadCourse(Map<String, RequestBody> partMap, MultipartBody.Part... files) {
+        return mHttpHelper.uploadCourse(partMap, files);
     }
 
 

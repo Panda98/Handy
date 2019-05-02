@@ -58,7 +58,7 @@ public class FollowPagerPresenter extends BasePresenter<FollowPagerContract.View
                 .compose(RxUtils.rxSchedulerHelper())
                 .compose(RxUtils.handleResult())
                 .subscribeWith(new BaseObserver<List<FollowData>>(mView,
-                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_banner_data),
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_follow_data),
                         false) {
                     @Override
                     public void onNext(List<FollowData> followDataList) {
@@ -74,7 +74,7 @@ public class FollowPagerPresenter extends BasePresenter<FollowPagerContract.View
                 .compose(RxUtils.rxSchedulerHelper())
                 .compose(RxUtils.handleResult())
                 .subscribeWith(new BaseObserver<List<FollowData>>(mView,
-                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_banner_data),
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_follow_data),
                         isShowError) {
                     @Override
                     public void onNext(List<FollowData> followDataList) {

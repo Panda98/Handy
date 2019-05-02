@@ -11,6 +11,8 @@ import java.util.List;
 public interface ICourseMapper {
     List<Course> getAll(@Param("start") Integer start, @Param("n") Integer n);
 
+    Integer getLength();
+
     List<Integer> getMyCourse(@Param("userId")Integer userId,@Param("start") Integer start, @Param("n") Integer n);
 
     //Integer insertCourse(@Param("course")Course course);

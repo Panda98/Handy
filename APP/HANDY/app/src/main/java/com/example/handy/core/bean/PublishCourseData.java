@@ -1,5 +1,6 @@
 package com.example.handy.core.bean;
 
+import java.io.File;
 import java.util.List;
 
 public class PublishCourseData {
@@ -7,12 +8,13 @@ public class PublishCourseData {
     String courseTitle;
     String courseIntro;
     String courseNote;
-    String courseCover;
+    File courseCover;
     int levelId;
     List<LabelData> labelList;
     String diyLabel;
     List<MaterialItemData> itemList;
     List<CourseStepData> stepList;
+    String tips;
 
     public int getUserId() {
         return userId;
@@ -46,11 +48,11 @@ public class PublishCourseData {
         this.courseNote = courseNote;
     }
 
-    public String getCourseCover() {
+    public File getCourseCover() {
         return courseCover;
     }
 
-    public void setCourseCover(String courseCover) {
+    public void setCourseCover(File courseCover) {
         this.courseCover = courseCover;
     }
 
@@ -92,5 +94,13 @@ public class PublishCourseData {
 
     public void setStepList(List<CourseStepData> stepList) {
         this.stepList = stepList;
+    }
+
+    public String getTips() {
+        return tips;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips;
     }
 }

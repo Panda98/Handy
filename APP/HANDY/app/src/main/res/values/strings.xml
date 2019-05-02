@@ -50,7 +50,10 @@
     <!--<string name="install">安装</string>-->
     <string name="logout_tint">退出登录?</string>
     <string name="failed_to_obtain_banner_data">获取广告数据失败</string>
-    <string name="failed_to_obtain_article_list">获取文章列表数据失败</string>
+    <string name="failed_to_obtain_course_list">获取教程列表数据失败</string>
+    <string name="failed_to_obtain_album_list">获取教程专辑数据失败</string>
+    <string name="failed_to_obtain_course_detail">获取教程详情失败</string>
+    <string name="failed_to_obtain_follow_data">获取关注动态失败</string>
     <string name="search_tint">搜索专辑或教程</string>
     <string name="main_pager_labels">专区分类</string>
     <string name="recommend_album_title">推荐专辑</string>
@@ -63,8 +66,8 @@
     // 发布教程
     <string name="publish_course_toolbar_title">发布教程</string>
 
-    // 关注
-    <string name="follow_page_toolbar_title">关注</string>
+    <!--follow-->
+    <string name="follow">关注</string>
 
 
     <string name="upload_cover_picture">+上传封面图</string>
@@ -79,5 +82,16 @@
     <string name="adjust_step">调整步骤</string>
     <string name="step">步骤</string>
     <string name="publish_course">发布教程</string>
+    <string name="title_hint">标题</string>
+    <string name="tips">小贴士</string>
+    <string name="material_hint">输入你的用料</string>
     <string name="share_view">shareView</string>
+
+    <!--教程详情-->
+    <string name="course_abstract">简介</string>
+    <string name="course_material">材料</string>
+    <string name="course_step">步骤</string>
+    <string name="course_abstract_tint">树脂画是由树脂胶的透明特定性和可流动性逐层绘制、叠加而成，非传统绘画能达到的立体效果。也是近年来在国内兴起的一门新鲜艺术，树脂画材料一般为透明硬树脂胶和丙烯颜料。</string>
+
+
 </resources>

@@ -15,10 +15,11 @@ import com.example.handy.view.activity.CourseDetailActivity;
 
 public class JudgeUtils {
 
-    public static void startCourseDetailActivity(Context mActivity, ActivityOptions activityOptions, int courseId) {
+    public static void startCourseDetailActivity(Context mActivity, ActivityOptions activityOptions, int courseId, String courseTitle) {
 
         Intent intent = new Intent(mActivity, CourseDetailActivity.class);
-        intent.putExtra(Constants.ARTICLE_ID, courseId);
+        intent.putExtra(Constants.COURSE_ID, courseId);
+        intent.putExtra(Constants.COURSE_Title, courseTitle);
 
         if (activityOptions != null && !Build.MANUFACTURER.contains("samsung") && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             mActivity.startActivity(intent, activityOptions.toBundle());
