@@ -10,7 +10,7 @@
       <idArg column="item_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="item_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="item_number" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="item_tag" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="item_tag" javaType="java.lang.Byte" jdbcType="TINYINT" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -140,7 +140,7 @@
     insert into item (item_id, item_name, item_number, 
       item_tag)
     values (#{itemId,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, #{itemNumber,jdbcType=VARCHAR}, 
-      #{itemTag,jdbcType=INTEGER})
+      #{itemTag,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.handy.support.entity.Item">
     <!--
@@ -173,7 +173,7 @@
         #{itemNumber,jdbcType=VARCHAR},
       </if>
       <if test="itemTag != null">
-        #{itemTag,jdbcType=INTEGER},
+        #{itemTag,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -204,7 +204,7 @@
         item_number = #{record.itemNumber,jdbcType=VARCHAR},
       </if>
       <if test="record.itemTag != null">
-        item_tag = #{record.itemTag,jdbcType=INTEGER},
+        item_tag = #{record.itemTag,jdbcType=TINYINT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -220,7 +220,7 @@
     set item_id = #{record.itemId,jdbcType=INTEGER},
       item_name = #{record.itemName,jdbcType=VARCHAR},
       item_number = #{record.itemNumber,jdbcType=VARCHAR},
-      item_tag = #{record.itemTag,jdbcType=INTEGER}
+      item_tag = #{record.itemTag,jdbcType=TINYINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -239,7 +239,7 @@
         item_number = #{itemNumber,jdbcType=VARCHAR},
       </if>
       <if test="itemTag != null">
-        item_tag = #{itemTag,jdbcType=INTEGER},
+        item_tag = #{itemTag,jdbcType=TINYINT},
       </if>
     </set>
     where item_id = #{itemId,jdbcType=INTEGER}
@@ -252,7 +252,7 @@
     update item
     set item_name = #{itemName,jdbcType=VARCHAR},
       item_number = #{itemNumber,jdbcType=VARCHAR},
-      item_tag = #{itemTag,jdbcType=INTEGER}
+      item_tag = #{itemTag,jdbcType=TINYINT}
     where item_id = #{itemId,jdbcType=INTEGER}
   </update>
 </mapper>

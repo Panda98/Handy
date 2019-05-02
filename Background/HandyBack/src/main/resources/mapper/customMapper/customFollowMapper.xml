@@ -2,6 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.handy.support.mapper.customMapper.MyFollowMapper">
+    <resultMap id="FollowMap" type="com.handy.support.pojo.Follow.dto.FollowBrief">
+        <id column="follow_id" property="followId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+        <result column="follower_id" property="followerId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </resultMap>
+    <resultMap id="FollowInfoMap" type="com.handy.support.pojo.Follow.dto.FollowUserInfo"
+               extends="FollowMap">
+        <association property="user" columnPrefix="user_"
+                     resultMap="com.handy.support.mapper.customMapper.MyUsersCoursesMapper.UserMap"/>
+    </resultMap>
+    <select id="getFollowsUserInfoListLimited" resultMap="FollowInfoMap">
+          select f.user_id user_id,f.follower_id follower_id,f.follow_id follow_id,
+           u.user_id user_user_id,u.nick_name user_nick_name,u.user_pic user_user_pic from
+            follow f
+           inner join user u on u.user_id=f.user_id
+          where f.follower_id=#{userId}  limit #{startRow},#{size}
+    </select>
     <select id="getFollowsByUidLimited" resultMap="com.handy.support.mapper.FollowMapper.BaseResultMap">
         select * from follow where follower_id=#{userId}  limit #{startRow},#{size}
     </select>

@@ -10,9 +10,10 @@
     <color name="grey_divider">#E5E5E5</color>
     <color name="comment_text">#5b5d5c</color>
     <color name="colorBackground">#EEEEEE</color>
+    <color name="divide_color">#ECEAEA</color>
 
     <!--register-->
-    <color name="shallow_green">#FF36BC9B</color>
+    <color name="shallow_green">#C9EBDC</color>
     <color name="register_bac">#303c59</color>
     <!--bottom bar-->
     <color name="yellow">#f39c12</color>
@@ -31,11 +32,19 @@
 
     <!--main-->
     <color name="main_status_bar_blue">#279ede</color>
-    <color name="main_pager_title">#5C5757</color>
+    <color name="normal_text">#5C5757</color>
+
+    <!--follow-->
+    <color name="shallow_text">#A29D9D</color>
 
     <!--publish_course-->
     <color name="publish_course_button_red">#F67E7E</color>
     <color name="publish_course_button_gray">#5C5757</color>
     <color name="publish_course_button_green">#96CEB4</color>
+
+    <!--follow-->
+    <color name="follow_boarder">#C49E9E</color>
+    <color name="text_content">#908686</color>
+
 
 </resources>

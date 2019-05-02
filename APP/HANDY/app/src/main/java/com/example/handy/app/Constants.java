@@ -102,4 +102,11 @@ public class Constants {
     public static final int COURSE_COVER_UPLAD = 0;
     public static final int STEP_PIC_UPLOAD = 1;
 
+
+    /**
+     * Course Detail
+     */
+    public static final String COURSE_ID = "course_id";
+    public static final String AUTHOR_ID = "author_id";
+
 }

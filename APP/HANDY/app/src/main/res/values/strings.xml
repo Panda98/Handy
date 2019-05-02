@@ -62,7 +62,11 @@
 
     // 发布教程
     <string name="publish_course_toolbar_title">发布教程</string>
-    
+
+    <!--follow-->
+    <string name="follow">关注</string>
+
+
     <string name="upload_cover_picture">+上传封面图</string>
     <string name="material">用料</string>
     <string name="material_name">用料名:</string>
@@ -78,4 +82,13 @@
     <string name="title_hint">标题</string>
     <string name="tips">小贴士</string>
     <string name="material_hint">输入你的用料</string>
+    <string name="share_view">shareView</string>
+
+    <!--教程详情-->
+    <string name="course_abstract">简介</string>
+    <string name="course_material">材料</string>
+    <string name="course_step">步骤</string>
+    <string name="course_abstract_tint">树脂画是由树脂胶的透明特定性和可流动性逐层绘制、叠加而成，非传统绘画能达到的立体效果。也是近年来在国内兴起的一门新鲜艺术，树脂画材料一般为透明硬树脂胶和丙烯颜料。</string>
+
+
 </resources>

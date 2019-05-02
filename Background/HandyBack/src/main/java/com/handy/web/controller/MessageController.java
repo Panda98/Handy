@@ -1,11 +1,14 @@
 package com.handy.web.controller;
 
+import com.handy.support.pojo.Message.dto.FavorDTO;
 import com.handy.support.pojo.comment.dto.CommentDTO;
 import com.handy.support.pojo.comment.dto.ReplyDTO;
 import com.handy.support.pojo.comment.vo.CourseCommentVO;
+import com.handy.support.recommend.process.Recommend;
 import com.handy.support.service.Comment.CommentServiceImpl;
 import com.handy.support.service.Message.MessageServiceImpl;
 import com.handy.support.utils.status.ReturnCode;
+import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +42,16 @@ public class MessageController {
     }
     @RequestMapping(value = "/courseLike",method = GET)
     public String getMessageCourseComment(int uid,int page_no,int n){
-return null;
+            List<FavorDTO> list=messageService.getFavorMessage(uid,page_no,n);
+        ReturnCode<List> code = new ReturnCode<List>(list);
+        return code.returnHandler();
+    }
+    @RequestMapping(value = "/test",method = GET)
+    public String getRecommend(int uid,int page_no,int n){
+            Recommend recommend=new Recommend();
+            recommend.init();
+        List<RecommendedItem> list=recommend.getRecommend(uid);
+        ReturnCode<List> code = new ReturnCode<List>(list);
+        return code.returnHandler();
     }
 }

@@ -2,6 +2,7 @@ package com.example.handy.core;
 
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
+import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.RecommendAlbumData;
 import com.example.handy.core.bean.RecommendCourseData;
@@ -10,8 +11,11 @@ import com.example.handy.core.prefs.PreferenceHelper;
 import com.example.handy.core.vo.LoginView;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class DataManager implements HttpHelper, PreferenceHelper {
 
@@ -58,6 +62,16 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     @Override
     public Observable<BaseResponse<List<RecommendCourseData>>> getRecommendCourseListData(int uid, int currentPage, int n) {
         return mHttpHelper.getRecommendCourseListData(uid, currentPage, n);
+    }
+
+    @Override
+    public Observable<BaseResponse<List<FollowData>>> getFollowDataList(int uid, int currentPage, int n) {
+        return mHttpHelper.getFollowDataList(uid, currentPage, n);
+    }
+
+    @Override
+    public Observable<BaseResponse> uploadCourse(Map<String, RequestBody> partMap, MultipartBody.Part... files) {
+        return mHttpHelper.uploadCourse(partMap, files);
     }
 
 

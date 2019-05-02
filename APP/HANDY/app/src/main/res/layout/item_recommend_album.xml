@@ -16,7 +16,7 @@
         android:layout_width="@dimen/dp_80"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
-        android:textColor="@color/main_pager_title"
+        android:textColor="@color/normal_text"
         android:maxLength="13"
         android:maxLines="2"
         android:textAlignment="center"

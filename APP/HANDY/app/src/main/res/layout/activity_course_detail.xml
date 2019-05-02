@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".view.activity.CourseDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <include layout="@layout/common_toolbar_no_scroll" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_20"
+            android:orientation="vertical"
+            android:background="@color/white">
+
+            <!--封面-->
+            <com.shehuan.niv.NiceImageView
+                android:id="@+id/course_detail_cover"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_200"
+                android:src="#E8E8E8"
+                app:corner_radius="@dimen/dp_10"
+                 />
+
+            <!--author info-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <!--image-->
+                <ImageView
+                    android:id="@+id/course_detail_author_cover"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_100"
+                    android:src="#E8E8E8" />
+
+                <!--info-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:orientation="vertical">
+
+                    <!--username-->
+                    <TextView
+                        android:id="@+id/author_user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Wang"
+                        android:textColor="@color/normal_text"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"
+                        />
+                    <!--publish time-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:text="2019-03-22"
+                        android:textColor="@color/shallow_text"/>
+                    
+                </LinearLayout>
+                
+                <!--关注按钮-->
+                <TextView
+                    android:id="@+id/follow"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:text="@string/follow"
+                    android:textColor="@color/follow_boarder"
+                    android:textSize="@dimen/sp_16"
+                    android:gravity="center"
+                    android:background="@drawable/bg_follow"
+                    android:clickable="true"
+                    android:focusable="true"
+                    />
+
+            </LinearLayout>
+
+            <!--divide line-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@drawable/divide_line" />
+
+            <!--简介-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/course_abstract"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/sp_18"
+                    android:textColor="@color/normal_text"/>
+                <View
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_5"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:background="@color/shallow_green"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:textColor="@color/text_content"
+                    android:textSize="@dimen/sp_18"
+                    android:text="@string/course_abstract_tint"/>
+
+            </LinearLayout>
+
+            <!--材料-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/course_material"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/sp_18"
+                    android:textColor="@color/normal_text"/>
+                <View
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_5"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:background="@color/shallow_green"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:textColor="@color/text_content"
+                    android:textSize="@dimen/sp_18"
+                    android:lineHeight="@dimen/dp_25"
+                    android:text="毛画笔\n水晶滴胶（A、B两类）\n"/>
+
+            </LinearLayout>
+
+            <!--步骤-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/course_step"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/sp_18"
+                    android:textColor="@color/normal_text"/>
+                <View
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_5"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:background="@color/shallow_green"/>
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

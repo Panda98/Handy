@@ -1,6 +1,9 @@
-package com.handy.support.pojo.Follow.vo;
+package com.handy.support.pojo.Follow.dto;
+
+import com.handy.support.entity.Label;
 
 import java.util.Date;
+import java.util.List;
 
 public class CourseBrief {
     private int courseId;
@@ -9,6 +12,24 @@ public class CourseBrief {
          private String diyLabel;
          private Date updateTime;
          private Byte levelId;
+         private String courseIntro;
+        private List<Label> labelList;
+
+    public void setLabelList(List<Label> labelList) {
+        this.labelList = labelList;
+    }
+
+    public void setCourseIntro(String courseIntro) {
+        this.courseIntro = courseIntro;
+    }
+
+    public String getCourseIntro() {
+        return courseIntro;
+    }
+
+    public List<Label> getLabelList() {
+        return labelList;
+    }
 
     public Byte getLevelId() {
         return levelId;

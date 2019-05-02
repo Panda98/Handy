@@ -404,52 +404,52 @@ public class ItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andItemTagEqualTo(Integer value) {
+        public Criteria andItemTagEqualTo(Byte value) {
             addCriterion("item_tag =", value, "itemTag");
             return (Criteria) this;
         }
 
-        public Criteria andItemTagNotEqualTo(Integer value) {
+        public Criteria andItemTagNotEqualTo(Byte value) {
             addCriterion("item_tag <>", value, "itemTag");
             return (Criteria) this;
         }
 
-        public Criteria andItemTagGreaterThan(Integer value) {
+        public Criteria andItemTagGreaterThan(Byte value) {
             addCriterion("item_tag >", value, "itemTag");
             return (Criteria) this;
         }
 
-        public Criteria andItemTagGreaterThanOrEqualTo(Integer value) {
+        public Criteria andItemTagGreaterThanOrEqualTo(Byte value) {
             addCriterion("item_tag >=", value, "itemTag");
             return (Criteria) this;
         }
 
-        public Criteria andItemTagLessThan(Integer value) {
+        public Criteria andItemTagLessThan(Byte value) {
             addCriterion("item_tag <", value, "itemTag");
             return (Criteria) this;
         }
 
-        public Criteria andItemTagLessThanOrEqualTo(Integer value) {
+        public Criteria andItemTagLessThanOrEqualTo(Byte value) {
             addCriterion("item_tag <=", value, "itemTag");
             return (Criteria) this;
         }
 
-        public Criteria andItemTagIn(List<Integer> values) {
+        public Criteria andItemTagIn(List<Byte> values) {
             addCriterion("item_tag in", values, "itemTag");
             return (Criteria) this;
         }
 
-        public Criteria andItemTagNotIn(List<Integer> values) {
+        public Criteria andItemTagNotIn(List<Byte> values) {
             addCriterion("item_tag not in", values, "itemTag");
             return (Criteria) this;
         }
 
-        public Criteria andItemTagBetween(Integer value1, Integer value2) {
+        public Criteria andItemTagBetween(Byte value1, Byte value2) {
             addCriterion("item_tag between", value1, value2, "itemTag");
             return (Criteria) this;
         }
 
-        public Criteria andItemTagNotBetween(Integer value1, Integer value2) {
+        public Criteria andItemTagNotBetween(Byte value1, Byte value2) {
             addCriterion("item_tag not between", value1, value2, "itemTag");
             return (Criteria) this;
         }

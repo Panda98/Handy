@@ -1,10 +1,9 @@
-package com.handy.support.pojo.comment.vo;
+package com.handy.support.pojo.comment.dto;
 
-import com.handy.support.entity.CommentReply;
-import com.handy.support.pojo.Follow.vo.UserBrief;
+import com.handy.support.pojo.Follow.dto.UserBrief;
 
 
-public class ReplyUserVO extends ReplyBrief{
+public class ReplyUserVO extends ReplyBrief {
     private UserBrief user;//消息回复者的用户信息
     private UserBrief toReplyUser;//被回复者用户信息
     private UserBrief commentUser;//所在一级评论的用户信息

@@ -1,15 +1,12 @@
 package com.handy.web.controller;
 
-import com.handy.support.entity.Comment;
-import com.handy.support.entity.CommentReply;
 import com.handy.support.pojo.comment.dto.CommentDTO;
 import com.handy.support.pojo.comment.dto.CommentPush;
 import com.handy.support.pojo.comment.dto.ReplyPush;
+import com.handy.support.pojo.comment.dto.ReplyUserVO;
 import com.handy.support.pojo.comment.vo.*;
-import com.handy.support.pojo.user.vo.UserVO;
 import com.handy.support.service.Comment.CommentServiceImpl;
 import com.handy.support.utils.status.ReturnCode;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.handy.support.mapper.customMapper.MyMessageMapper">
+    <resultMap id="FavorMap" type="com.handy.support.pojo.Message.dto.FavorBrief">
+        <result column="user_id" property="userId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+        <result column="course_id" property="courseId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </resultMap>
+    <resultMap id="FavorCourse" type="com.handy.support.pojo.Message.dto.FavorDTO" extends="FavorMap">
+        <association property="course" columnPrefix="course_"
+                     resultMap="com.handy.support.mapper.customMapper.MyUsersCoursesMapper.CourseMap"/>
+        <association property="user" columnPrefix="user_"
+                     resultMap="com.handy.support.mapper.customMapper.MyUsersCoursesMapper.UserMap"/>
+    </resultMap>
+    <select id="getFavorMessage" resultMap="FavorCourse">
+         select u.user_id user_user_id,u.nick_name user_nick_name,u.user_pic user_user_pic,
+        c.update_time course_update_time,
+        c.course_cover course_course_cover,c.course_id course_course_id,c.course_title course_course_title
+        ,c.diy_label course_diy_label,c.level_id course_level_id,c.course_intro course_course_intro,
+        f.user_id user_id,f.course_id course_id
+        from (select * from course where user_id=#{userId}) c
+        inner join favor f on f.course_id=c.course_id
+        inner join user u on u.user_id=f.user_id
+         limit #{startRow},#{size}
+    </select>
+
+</mapper>

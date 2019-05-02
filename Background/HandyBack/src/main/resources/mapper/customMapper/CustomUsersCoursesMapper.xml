@@ -2,15 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.handy.support.mapper.customMapper.MyUsersCoursesMapper">
-    <resultMap id="CourseMap" type="com.handy.support.pojo.Follow.vo.CourseBrief" >
+    <resultMap id="CourseMap" type="com.handy.support.pojo.Follow.dto.CourseBrief" >
             <id column="course_id" property="courseId" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <result column="course_title" property="courseTitle" javaType="java.lang.String" jdbcType="VARCHAR" />
             <result column="course_cover" property="courseCover" javaType="java.lang.String" jdbcType="VARCHAR" />
             <result column="diy_label" property="diyLabel" javaType="java.lang.String" jdbcType="VARCHAR" />
             <result column="update_time" property="updateTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
             <result column="level_id" property="levelId" javaType="java.lang.Byte" jdbcType="TINYINT" />
+        <result column="course_intro" property="courseIntro" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <collection property="labelList" column="{courseId=course_id}"
+                    select="com.handy.support.mapper.iMapper.ICourseLabelMapper.listByCourseId"/>
     </resultMap>
-    <resultMap id="UserMap" type="com.handy.support.pojo.Follow.vo.UserBrief">
+    <resultMap id="UserMap" type="com.handy.support.pojo.Follow.dto.UserBrief">
             <id column="user_id" property="userId" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <result column="nick_name" property="nickName" javaType="java.lang.String" jdbcType="VARCHAR" />
             <result column="user_pic" property="userPic" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -21,12 +24,17 @@
     <select id="getUsersCoursesBrief" resultMap="UsersCoursesBriefMap">
         select u.user_id user_user_id,u.nick_name user_nick_name,u.user_pic user_user_pic,c.update_time update_time,
         c.course_cover course_cover,c.course_id course_id,c.course_title course_title
-        ,c.diy_label diy_label,c.level_id level_id
+        ,c.diy_label diy_label,c.level_id level_id,c.course_intro course_intro
         from user u
         inner join course c
-        where u.user_id=c.user_id and u.user_id in <foreach collection="users" open="(" close=")" separator=","
-    item="id" index="i">
-        #{id}
-    </foreach> order by c.update_time desc  limit #{startRow},#{size}
+        where u.user_id=c.user_id
+        <if test="users.size!=0">
+            and u.user_id in <foreach collection="users" open="(" close=")" separator=","
+                                       item="id" index="i">
+            #{id}
+        </foreach> </if>
+        <if test="users.size==0">
+            and u.user_id=0 
+        </if> order by c.update_time desc  limit #{startRow},#{size}
     </select>
 </mapper>

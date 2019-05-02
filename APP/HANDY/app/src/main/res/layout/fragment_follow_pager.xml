@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground">
+    android:background="@color/white">
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/normal_view"
@@ -14,12 +14,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/follow_pager_recycler_view"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorBackground"
-            android:visibility="invisible" />
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:text="@string/follow"
+                android:textColor="@color/normal_text"
+                android:textSize="@dimen/sp_28"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/follow_pager_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@color/colorBackground"
+                 />
+
+        </LinearLayout>
+
+
 
         <com.scwang.smartrefresh.header.TaurusHeader
             android:layout_width="match_parent"
