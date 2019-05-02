@@ -41,6 +41,7 @@
     <color name="publish_course_button_red">#F67E7E</color>
     <color name="publish_course_button_gray">#5C5757</color>
     <color name="publish_course_button_green">#96CEB4</color>
+    <color name="publish_course_button_orange">#D57E66</color>
 
     <!--follow-->
     <color name="follow_boarder">#C49E9E</color>

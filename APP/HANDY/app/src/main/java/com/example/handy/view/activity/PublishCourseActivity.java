@@ -30,12 +30,14 @@ import com.example.handy.app.Constants;
 import com.example.handy.base.activity.BaseActivity;
 import com.example.handy.contract.PublishCourseContract;
 import com.example.handy.core.bean.CourseStepData;
+import com.example.handy.core.bean.LabelData;
 import com.example.handy.core.bean.MaterialItemData;
 import com.example.handy.core.bean.MultipleItem;
 import com.example.handy.core.bean.PublishCourseData;
 import com.example.handy.presenter.PublishCoursePresenter;
 import com.example.handy.utils.StatusBarUtil;
 import com.example.handy.view.adapter.CourseEditorMultiAdapter;
+import com.example.handy.view.viewHolder.LabelViewHolder;
 import com.yuyh.library.imgsel.ISNav;
 import com.yuyh.library.imgsel.common.ImageLoader;
 import com.yuyh.library.imgsel.config.ISListConfig;
@@ -68,6 +70,8 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
     private List<CourseStepData> stepData;
 
     private List<MultipleItem> data;
+
+    private List<LabelData> preLabels;
 
 
 
@@ -120,7 +124,14 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         data.add(new MultipleItem(MultipleItem.STEP_BTN_VIEW));
         data.add(new MultipleItem(MultipleItem.TIPS_TEXT));
         data.add(new MultipleItem(MultipleItem.LABEL_VIEW));
-        multiAdapter = new CourseEditorMultiAdapter(data);
+
+        //todo: 获得label数据
+        preLabels = new ArrayList<>();
+        LabelData d = new LabelData();
+        d.setLabelName("布艺");
+        preLabels.add(d);
+        preLabels.add(d);
+        multiAdapter = new CourseEditorMultiAdapter(data,preLabels);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -271,6 +282,11 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
 
         System.out.println(data);
 
+        List<LabelData> selectedLabel = multiAdapter.getLabelViewHolder().getSelectedLabel();
+        String customLabel = multiAdapter.getLabelViewHolder().getCustomLabel();
+
+        courseData.setDiyLabel(customLabel);
+        courseData.setLabelList(selectedLabel);
 
     }
 

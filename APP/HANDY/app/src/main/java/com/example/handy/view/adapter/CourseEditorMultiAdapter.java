@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.util.MultiTypeDelegate;
 import com.example.handy.R;
+import com.example.handy.core.bean.LabelData;
 import com.example.handy.core.bean.MultipleItem;
 import com.example.handy.view.viewHolder.LabelViewHolder;
 
@@ -16,7 +17,10 @@ import java.util.List;
 
 public class CourseEditorMultiAdapter extends BaseMultiItemQuickAdapter<MultipleItem, BaseViewHolder> {
 
-    public CourseEditorMultiAdapter(List data){
+    private List<LabelData> preinstallLabels;
+    private LabelViewHolder labelViewHolder;
+
+    public CourseEditorMultiAdapter(List data,List<LabelData> preinstallLabels){
         super(data);
         addItemType(MultipleItem.STEP_VIEW,R.layout.step_text_view);
         addItemType(MultipleItem.METERIAL_BTN_VIEW,R.layout.material_btn_view);
@@ -26,6 +30,8 @@ public class CourseEditorMultiAdapter extends BaseMultiItemQuickAdapter<Multiple
         addItemType(MultipleItem.STEP_BTN_VIEW,R.layout.step_btn_view);
         addItemType(MultipleItem.TIPS_TEXT,R.layout.publish_course_tips_view);
         addItemType(MultipleItem.LABEL_VIEW,R.layout.publish_course_labels);
+
+        this.preinstallLabels = preinstallLabels;
 
 
     }
@@ -44,15 +50,21 @@ public class CourseEditorMultiAdapter extends BaseMultiItemQuickAdapter<Multiple
         if(item.getItemType() == MultipleItem.STEP_ITEM){
             helper.setText(R.id.step_number_text,"步骤"+item.getIndex());
         }
+        if(item.getItemType() == MultipleItem.LABEL_VIEW)
+            labelViewHolder = (LabelViewHolder) helper;
     }
 
     @Override
     protected BaseViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType){
         if(viewType == MultipleItem.LABEL_VIEW){
-            LabelViewHolder viewHolder = new LabelViewHolder(getItemView(R.layout.publish_course_labels,parent));
+            LabelViewHolder viewHolder = new LabelViewHolder(getItemView(R.layout.publish_course_labels,parent),preinstallLabels);
             return viewHolder;
         }
         return super.onCreateDefViewHolder(parent,viewType);
+    }
+
+    public LabelViewHolder getLabelViewHolder(){
+        return labelViewHolder;
     }
 
 }
