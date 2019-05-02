@@ -43,4 +43,11 @@ public class FollowServiceImpl implements IFollowService{
         criteria.andFollowerIdEqualTo(uid);
         return followMapper.selectByExample(example);
     }
+    public boolean hasFollowedSomeone(int uid,int followId){
+        Follow follow=myFollowMapper.hasFollowed(uid,followId);
+        if(follow==null)
+            return false;
+        else
+            return true;
+    }
 }

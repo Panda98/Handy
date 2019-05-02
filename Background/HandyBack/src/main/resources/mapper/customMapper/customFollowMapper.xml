@@ -25,4 +25,6 @@
    <delete id="unFollowOther" >
        delete from follow where user_id=#{followId} and follower_id=#{userId}
    </delete>
+    <select id="hasFollowed" resultMap="com.handy.support.mapper.FollowMapper.BaseResultMap">
+  select * from follow where follower_id=#{userId}  and user_id=#{followId} </select>
 </mapper>
