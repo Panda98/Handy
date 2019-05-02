@@ -13,6 +13,7 @@ public class PublishCourseData {
     String diyLabel;
     List<MaterialItemData> itemList;
     List<CourseStepData> stepList;
+    String tips;
 
     public int getUserId() {
         return userId;
@@ -92,5 +93,13 @@ public class PublishCourseData {
 
     public void setStepList(List<CourseStepData> stepList) {
         this.stepList = stepList;
+    }
+
+    public String getTips() {
+        return tips;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips;
     }
 }

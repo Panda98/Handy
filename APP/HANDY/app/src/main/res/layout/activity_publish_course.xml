@@ -17,22 +17,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="@dimen/dp_20"
         >
 
     </android.support.v7.widget.RecyclerView>
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1"-->
-        <!--&gt;-->
-
-    <!--</LinearLayout>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom">
         <Button
+            android:id="@+id/publish_course_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/publish_course"

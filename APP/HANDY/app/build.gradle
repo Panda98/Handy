@@ -217,6 +217,7 @@ dependencies {
 //    implementation "com.github.franmontiel:PersistentCookieJar:v1.0.1"
 
     implementation 'com.yuyh.imgsel:library:2.0.6'
+    implementation 'com.github.SheHuan:NiceImageView:1.0.5'
 }
 
 //解决支持库版本不兼容问题

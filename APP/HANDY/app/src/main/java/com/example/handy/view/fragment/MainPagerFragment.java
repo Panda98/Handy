@@ -309,7 +309,8 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, view, getString(R.string.share_view));
         JudgeUtils.startCourseDetailActivity(_mActivity,
                 options,
-                mAdapter.getData().get(position).getCourseId()
+                mAdapter.getData().get(position).getCourseId(),
+                mAdapter.getData().get(position).getCourseTitle()
         );
     }
 

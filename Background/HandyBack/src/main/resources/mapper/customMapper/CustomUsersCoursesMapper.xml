@@ -27,9 +27,14 @@
         ,c.diy_label diy_label,c.level_id level_id,c.course_intro course_intro
         from user u
         inner join course c
-        where u.user_id=c.user_id and u.user_id in <foreach collection="users" open="(" close=")" separator=","
-    item="id" index="i">
-        #{id}
-    </foreach> order by c.update_time desc  limit #{startRow},#{size}
+        where u.user_id=c.user_id
+        <if test="users.size!=0">
+            and u.user_id in <foreach collection="users" open="(" close=")" separator=","
+                                       item="id" index="i">
+            #{id}
+        </foreach> </if>
+        <if test="users.size==0">
+            and u.user_id=0 
+        </if> order by c.update_time desc  limit #{startRow},#{size}
     </select>
 </mapper>
