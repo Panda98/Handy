@@ -5,14 +5,18 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,13 +25,23 @@ import com.example.handy.app.Constants;
 import com.example.handy.base.activity.BaseActivity;
 import com.example.handy.contract.CourseDetailContract;
 import com.example.handy.core.bean.CourseDetailData;
+import com.example.handy.core.bean.FollowData;
+import com.example.handy.core.bean.ItemData;
+import com.example.handy.core.bean.StepData;
 import com.example.handy.presenter.CourseDetailPresenter;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.ImageLoader;
 import com.example.handy.utils.StatusBarUtil;
+import com.example.handy.view.adapter.CourseStepAdapter;
+import com.example.handy.view.adapter.FollowAdapter;
 import com.shehuan.niv.NiceImageView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import butterknife.BindView;
+import io.reactivex.functions.Function;
 
 public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> implements CourseDetailContract.View {
 
@@ -51,6 +65,9 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     @BindView(R.id.course_detail_follow_btn)
     TextView mFollowBtn;
 
+    @BindView(R.id.course_detail_abstract)
+    TextView mCourseIntro;
+
     @BindView(R.id.course_detail_item)
     ListView mItemLv;
 
@@ -58,7 +75,9 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     RecyclerView mStepRv;
 
     ArrayAdapter<String> mItemArrayAdapter;
+    CourseStepAdapter mCourseStepAdapter;
 
+    private List<StepData> stepDataList;
 
     private int courseId;
     private String courseTitle;
@@ -140,9 +159,58 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
 
         // 设置简介
         if (!TextUtils.isEmpty(courseDetailData.getCourseIntro())) {
-            mPublishTimeTv.setText(courseDetailData.getCourseIntro());
+            mCourseIntro.setText(courseDetailData.getCourseIntro());
         }
 
+        this.stepDataList = courseDetailData.getStepList();
 
+        String[] itemNameList = new String[courseDetailData.getItemList().size()];
+        for (ItemData i : courseDetailData.getItemList()) {
+            itemNameList[i.getItemTag()-1] = i.getItemName();
+        }
+        System.out.println(Arrays.toString(itemNameList));
+
+        mItemArrayAdapter = new ArrayAdapter<String>(
+                this,
+                R.layout.item_course_detail_material,
+                R.id.course_detail_item_name,
+                itemNameList
+        );
+        mItemLv.setAdapter(mItemArrayAdapter);
+        setListViewHeightBasedOnChildren(mItemLv);
+
+        initStep();
+
+    }
+
+    private void initStep() {
+        mCourseStepAdapter = new CourseStepAdapter(R.layout.item_course_detail_step, this.stepDataList);
+        //mAdapter.setOnItemClickListener((adapter, view, position) -> startArticleDetailPager(view, position));
+        mStepRv.setLayoutManager(new LinearLayoutManager(this));
+        mStepRv.setHasFixedSize(true);
+        mStepRv.setAdapter(mCourseStepAdapter);
+    }
+
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            // listItem.measure(0, 0);
+            listItem.measure(
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight
+                + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
     }
 }
