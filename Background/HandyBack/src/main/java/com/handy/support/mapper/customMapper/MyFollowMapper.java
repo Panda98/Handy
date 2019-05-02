@@ -12,5 +12,6 @@ public interface MyFollowMapper {
     List<Follow> getFollowsByUidLimited(@Param("userId") int userId, @Param("startRow")  int startRow, @Param("size") int size);
    void unFollowOther(@Param("userId") int userId,@Param("followId") int followId);
     List<FollowUserInfo> getFollowsUserInfoListLimited(@Param("userId") int userId, @Param("startRow")  int startRow, @Param("size") int size);
+    Follow hasFollowed(@Param("userId")int userId ,@Param("followId") int followId);
     // List<CommentReply> getCommentReplyByCommentIdLimited(@Param("commentId") int commentId, @Param("startRow")
 }
