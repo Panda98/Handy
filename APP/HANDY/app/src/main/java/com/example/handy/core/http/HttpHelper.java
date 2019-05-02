@@ -9,9 +9,13 @@ import com.example.handy.core.bean.RecommendCourseData;
 import com.example.handy.core.vo.LoginView;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.GET;
+import retrofit2.http.Part;
 
 public interface HttpHelper {
     /**
@@ -63,4 +67,11 @@ public interface HttpHelper {
      * @return 教程列表
      */
     Observable<BaseResponse<List<FollowData>>> getFollowDataList(int uid, int currentPage, int n);
+
+    /**
+     * 上传教程
+     *
+     * @return 教程列表
+     */
+    Observable<BaseResponse> uploadCourse(Map<String, RequestBody> partMap, MultipartBody.Part... files);
 }
