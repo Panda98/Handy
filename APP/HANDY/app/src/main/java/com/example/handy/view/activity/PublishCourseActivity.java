@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.ViewUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
@@ -41,6 +42,7 @@ import com.yuyh.library.imgsel.config.ISListConfig;
 
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -117,6 +119,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         data.add(new MultipleItem(MultipleItem.STEP_VIEW));
         data.add(new MultipleItem(MultipleItem.STEP_BTN_VIEW));
         data.add(new MultipleItem(MultipleItem.TIPS_TEXT));
+        data.add(new MultipleItem(MultipleItem.LABEL_VIEW));
         multiAdapter = new CourseEditorMultiAdapter(data);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
