@@ -1,5 +1,6 @@
 package com.example.handy.core.http;
 
+import com.example.handy.core.bean.AlbumListData;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
 import com.example.handy.core.bean.CourseDetailData;
@@ -76,6 +77,84 @@ public interface HttpHelper {
      * @return 教程详情信息
      */
     Observable<BaseResponse<CourseDetailData>> getCourseDetail(int courseId);
+
+    /**
+     * 关注
+     *
+     * @return 结果
+     */
+    Observable<BaseResponse> follow(int uid, int followId);
+
+    /**
+     * 取消关注
+     *
+     * @return 结果
+     */
+    Observable<BaseResponse> unFollow(int uid, int followId);
+
+    /**
+     * 获得用户专辑列表
+     *
+     * @return AlbumListData
+     */
+    Observable<BaseResponse<List<AlbumListData>>> getUserAlbumList(int userId);
+
+    /**
+     * 获得收藏专辑列表
+     *
+     * @return AlbumListData
+     */
+    Observable<BaseResponse<List<AlbumListData>>> getCollectAlbumList(int userId);
+
+    /**
+     * 收藏
+     *
+     * @return 结果
+     */
+    Observable<BaseResponse> collect(int courseId, int albumId);
+
+    /**
+     * 取消收藏
+     *
+     * @return 结果
+     */
+    Observable<BaseResponse> unCollect(int courseId, int albumId);
+
+    /**
+     * 获取收藏状态
+     *
+     * @return 结果
+     */
+    Observable<BaseResponse> isCollect(int userId, int courseId);
+
+    /**
+     * 点赞
+     *
+     * @return null
+     */
+    Observable<BaseResponse> like(int userId, int courseId);
+
+    /**
+     * 取消点赞
+     *
+     * @return null
+     */
+    Observable<BaseResponse> unLike(int userId, int courseId);
+
+    /**
+     * 获取点赞状态
+     *
+     * @return 结果
+     */
+    Observable<BaseResponse> isLike(int userId, int courseId);
+
+    /**
+     * 获取自己发布的教程
+     *
+     * @return 结果
+     */
+    Observable<BaseResponse<List<RecommendCourseData>>> getUserPublishCourse(int userId, int currentPage, int n);
+
 
     /**
      * 上传教程
