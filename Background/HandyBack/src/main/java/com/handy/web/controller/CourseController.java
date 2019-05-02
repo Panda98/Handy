@@ -5,8 +5,10 @@ import com.handy.support.entity.AlbumCourse;
 import com.handy.support.pojo.course.dto.CourseEditDTO;
 import com.handy.support.pojo.course.vo.CourseDetailVO;
 import com.handy.support.pojo.course.vo.CourseSimpleVO;
+import com.handy.support.service.Course.SolrConnect;
 import com.handy.support.utils.status.ErrorEnum;
 import com.handy.support.utils.status.ReturnCode;
+import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.handy.support.service.Course.ICourseService;
 
+import java.io.IOException;
 import java.util.List;
 
 
 @RestController
 public class CourseController {
+//    @Autowired
+//    private SolrConnect solrConnect;
     @Autowired
     private ICourseService iCourseService;
     @Autowired
@@ -180,6 +185,25 @@ public class CourseController {
         return code.returnHandler();
     }
 
+//    @RequestMapping(value = "/course/search", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
+//    public String getSearchedCourse(String text){
+//        List<CourseSimpleVO> list=null;
+//        try {
+//            list=solrConnect.courseQuery(text);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (SolrServerException e) {
+//            e.printStackTrace();
+//        }
+//        ErrorEnum error = null;
+//        if (list == null) {
+//            error = ErrorEnum.REQUEST_FAIL;
+//        } else {
+//            error = ErrorEnum.SUCCESS;
+//        }
+//        ReturnCode<List<CourseSimpleVO>> code = new ReturnCode<List<CourseSimpleVO>>(error, list);
+//        return code.returnHandler();
+//    }
 
 
 }

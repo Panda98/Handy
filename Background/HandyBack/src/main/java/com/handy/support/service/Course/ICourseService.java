@@ -1,9 +1,15 @@
 package com.handy.support.service.Course;
 
-import com.handy.support.entity.*;
+import com.handy.support.entity.Step;
+import com.handy.support.entity.Course;
+import com.handy.support.entity.Label;
+import com.handy.support.entity.Item;
+import com.handy.support.entity.User;
+import com.handy.support.entity.Hot;
 import com.handy.support.pojo.course.dto.*;
 import com.handy.support.pojo.course.vo.*;
-
+import org.apache.solr.client.solrj.*;
+import java.io.IOException;
 import java.util.List;
 /**
  * Created by joanie on 2019/4/11.
@@ -44,5 +50,11 @@ public interface ICourseService {
     List<CourseSimpleVO> getMyCourse(Integer userId,Integer page_no,Integer n);
 
     Integer publishCourse(CourseEditDTO e);
+
+    List<Item> sortItem(List<Item> itemList);
+
+    List<Step> sortStep(List<Step> stepList);
+
+//    List<CourseSimpleVO> getSearchedCourse(String text) throws IOException, SolrServerException;
 
 }

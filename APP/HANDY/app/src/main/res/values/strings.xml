@@ -50,7 +50,10 @@
     <!--<string name="install">安装</string>-->
     <string name="logout_tint">退出登录?</string>
     <string name="failed_to_obtain_banner_data">获取广告数据失败</string>
-    <string name="failed_to_obtain_article_list">获取文章列表数据失败</string>
+    <string name="failed_to_obtain_course_list">获取教程列表数据失败</string>
+    <string name="failed_to_obtain_album_list">获取教程专辑数据失败</string>
+    <string name="failed_to_obtain_course_detail">获取教程详情失败</string>
+    <string name="failed_to_obtain_follow_data">获取关注动态失败</string>
     <string name="search_tint">搜索专辑或教程</string>
     <string name="main_pager_labels">专区分类</string>
     <string name="recommend_album_title">推荐专辑</string>

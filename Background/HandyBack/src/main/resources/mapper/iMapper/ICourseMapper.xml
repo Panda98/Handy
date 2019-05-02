@@ -44,89 +44,15 @@
     WHERE user_id=#{userId} limit #{start},#{n};
 </select>
 
-
-    <!--<insert id="insertCourse" useGeneratedKeys="true" keyProperty="courseId" parameterType="com.handy.support.entity.Course">-->
-        <!--insert into course-->
-        <!--<trim prefix="(" suffix=")" suffixOverrides=",">-->
-            <!--<if test="courseId != null">-->
-                <!--course_id,-->
-            <!--</if>-->
-            <!--<if test="courseTitle != null">-->
-                <!--course_title,-->
-            <!--</if>-->
-            <!--<if test="courseIntro != null">-->
-                <!--course_intro,-->
-            <!--</if>-->
-            <!--<if test="courseNote != null">-->
-                <!--course_note,-->
-            <!--</if>-->
-            <!--<if test="courseCover != null">-->
-                <!--course_cover,-->
-            <!--</if>-->
-            <!--<if test="courseViews != null">-->
-                <!--course_views,-->
-            <!--</if>-->
-            <!--<if test="courseCollects != null">-->
-                <!--course_collects,-->
-            <!--</if>-->
-            <!--<if test="courseLikes != null">-->
-                <!--course_likes,-->
-            <!--</if>-->
-            <!--<if test="userId != null">-->
-                <!--user_id,-->
-            <!--</if>-->
-            <!--<if test="diyLabel != null">-->
-                <!--diy_label,-->
-            <!--</if>-->
-            <!--<if test="updateTime != null">-->
-                <!--update_time,-->
-            <!--</if>-->
-            <!--<if test="levelId != null">-->
-                <!--level_id,-->
-            <!--</if>-->
-        <!--</trim>-->
-        <!--<trim prefix="values (" suffix=")" suffixOverrides=",">-->
-            <!--<if test="courseId != null">-->
-                <!--#{courseId,jdbcType=INTEGER},-->
-            <!--</if>-->
-            <!--<if test="courseTitle != null">-->
-                <!--#{courseTitle,jdbcType=VARCHAR},-->
-            <!--</if>-->
-            <!--<if test="courseIntro != null">-->
-                <!--#{courseIntro,jdbcType=VARCHAR},-->
-            <!--</if>-->
-            <!--<if test="courseNote != null">-->
-                <!--#{courseNote,jdbcType=VARCHAR},-->
-            <!--</if>-->
-            <!--<if test="courseCover != null">-->
-                <!--#{courseCover,jdbcType=VARCHAR},-->
-            <!--</if>-->
-            <!--<if test="courseViews != null">-->
-                <!--#{courseViews,jdbcType=INTEGER},-->
-            <!--</if>-->
-            <!--<if test="courseCollects != null">-->
-                <!--#{courseCollects,jdbcType=INTEGER},-->
-            <!--</if>-->
-            <!--<if test="courseLikes != null">-->
-                <!--#{courseLikes,jdbcType=INTEGER},-->
-            <!--</if>-->
-            <!--<if test="userId != null">-->
-                <!--#{userId,jdbcType=INTEGER},-->
-            <!--</if>-->
-            <!--<if test="diyLabel != null">-->
-                <!--#{diyLabel,jdbcType=VARCHAR},-->
-            <!--</if>-->
-            <!--<if test="updateTime != null">-->
-                <!--#{updateTime,jdbcType=TIMESTAMP},-->
-            <!--</if>-->
-            <!--<if test="levelId != null">-->
-                <!--#{levelId,jdbcType=TINYINT},-->
-            <!--</if>-->
-        <!--</trim>-->
-    <!--</insert>-->
-
     <select id="getLastId" resultType="Integer">
         SELECT MAX(course_id)
+        FROM course;
+    </select>
+
+
+
+    <select id="getLength" resultType="Integer">
+        SELECT COUNT(*)
         FROM course;
     </select>
 
