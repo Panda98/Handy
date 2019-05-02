@@ -41,6 +41,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import io.reactivex.functions.Function;
 
 public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> implements CourseDetailContract.View {
@@ -80,6 +81,8 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     private List<StepData> stepDataList;
 
     private int courseId;
+    private int followId;
+    private boolean followStatus;
     private String courseTitle;
 
 
@@ -124,15 +127,48 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         System.out.println(this.courseTitle);
     }
 
+    @OnClick({R.id.course_detail_follow_btn})
+    void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.course_detail_follow_btn:
+                collectEvent();
+                break;
+            default:
+                break;
+        }
+    }
+
     // 收藏事件
     private void collectEvent() {
         if (!mPresenter.getLoginStatus()) {
             CommonUtils.showMessage(this, getString(R.string.login_tint));
             startActivity(new Intent(this, LoginActivity.class));
-        } else {
-            //mPresenter.addCollectCourse(courseId);
-
         }
+        else if(this.followStatus){
+            // 已关注
+            mPresenter.unFollow(followId);
+            unFollowBtnView();
+            this.followStatus = false;
+        }
+        else {
+            // 未关注
+            mPresenter.follow(followId);
+            followBtnView();
+            this.followStatus = true;
+        }
+    }
+
+
+    private void followBtnView() {
+        this.mFollowBtn.setTextColor(getResources().getColor(R.color.normal_text));
+        this.mFollowBtn.setBackground(getDrawable(R.drawable.bg_unfollow));
+        this.mFollowBtn.setText(getString(R.string.unFollow));
+    }
+
+    private void unFollowBtnView() {
+        this.mFollowBtn.setTextColor(getResources().getColor(R.color.follow_boarder));
+        this.mFollowBtn.setBackground(getDrawable(R.drawable.bg_follow));
+        this.mFollowBtn.setText(getString(R.string.follow));
     }
 
     @Override
@@ -162,6 +198,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
             mCourseIntro.setText(courseDetailData.getCourseIntro());
         }
 
+        this.followId = courseDetailData.getUserId();
         this.stepDataList = courseDetailData.getStepList();
 
         String[] itemNameList = new String[courseDetailData.getItemList().size()];
@@ -181,6 +218,18 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
 
         initStep();
 
+    }
+
+    @Override
+    public void showFollowView() {
+        CommonUtils.showMessage(this, getString(R.string.follow));
+        System.out.println(getString(R.string.follow));
+    }
+
+    @Override
+    public void showUnFollowView() {
+        CommonUtils.showMessage(this, getString(R.string.unFollow));
+        System.out.println(getString(R.string.unFollow));
     }
 
     private void initStep() {
