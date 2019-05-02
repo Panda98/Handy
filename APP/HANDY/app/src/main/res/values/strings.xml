@@ -75,4 +75,7 @@
     <string name="adjust_step">调整步骤</string>
     <string name="step">步骤</string>
     <string name="publish_course">发布教程</string>
+    <string name="title_hint">标题</string>
+    <string name="tips">小贴士</string>
+    <string name="material_hint">输入你的用料</string>
 </resources>

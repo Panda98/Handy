@@ -99,6 +99,7 @@ public class Constants {
     public static final String RECOMMEND_COURSE_DATA = "recommend_course_data";
     public static final String CURRENT_PAGE = "current_page";
 
-    public static final int PIC_REQUET_CODE = 0;
+    public static final int COURSE_COVER_UPLAD = 0;
+    public static final int STEP_PIC_UPLOAD = 1;
 
 }

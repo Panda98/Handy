@@ -7,6 +7,7 @@
     android:text="@string/publish_course_step"
     android:textSize="@dimen/sp_20"
     android:textColor="#5C5757"
-    android:layout_marginBottom="@dimen/dp_25">
+    android:layout_marginBottom="@dimen/dp_25"
+    android:paddingLeft="@dimen/dp_10">
 
 </TextView>
