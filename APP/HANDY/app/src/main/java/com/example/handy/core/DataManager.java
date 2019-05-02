@@ -2,6 +2,7 @@ package com.example.handy.core;
 
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
+import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.RecommendAlbumData;
@@ -67,6 +68,11 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     @Override
     public Observable<BaseResponse<List<FollowData>>> getFollowDataList(int uid, int currentPage, int n) {
         return mHttpHelper.getFollowDataList(uid, currentPage, n);
+    }
+
+    @Override
+    public Observable<BaseResponse<CourseDetailData>> getCourseDetail(int courseId) {
+        return mHttpHelper.getCourseDetail(courseId);
     }
 
     @Override

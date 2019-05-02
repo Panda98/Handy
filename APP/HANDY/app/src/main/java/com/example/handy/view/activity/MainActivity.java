@@ -1,5 +1,6 @@
 package com.example.handy.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -21,6 +22,7 @@ import com.example.handy.contract.MainContract;
 import com.example.handy.presenter.MainPresenter;
 import com.example.handy.utils.BottomNavigationViewHelper;
 import com.example.handy.utils.CommonAlertDialog;
+import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.StatusBarUtil;
 import com.example.handy.view.fragment.AccountPagerFragment;
 import com.example.handy.view.fragment.CollectPagerFragment;
@@ -106,14 +108,29 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                             mMainPagerFragment, Constants.TYPE_MAIN_PAGER);
                     break;
                 case R.id.tab_follow:
+                    if (!mPresenter.getLoginStatus()) {
+                        startActivity(new Intent(this, LoginActivity.class));
+                        CommonUtils.showMessage(this, getString(R.string.login_tint));
+                        break;
+                    }
                     loadPager(getString(R.string.navigation_follow), 1,
                             mFollowPagerFragment, Constants.TYPE_FOLLOW_PAGER);
                     break;
                 case R.id.tab_collect:
+                    if (!mPresenter.getLoginStatus()) {
+                        startActivity(new Intent(this, LoginActivity.class));
+                        CommonUtils.showMessage(this, getString(R.string.login_tint));
+                        break;
+                    }
                     loadPager(getString(R.string.navigation_collect), 2,
                             mCollectPagerFragment, Constants.TYPE_COLLECT_PAGER);
                     break;
                 case R.id.tab_account:
+                    if (!mPresenter.getLoginStatus()) {
+                        startActivity(new Intent(this, LoginActivity.class));
+                        CommonUtils.showMessage(this, getString(R.string.login_tint));
+                        break;
+                    }
                     loadPager(getString(R.string.navigation_account), 3,
                             mAccountPagerFragment, Constants.TYPE_ACCOUNT_PAGER);
                     break;

@@ -2,6 +2,7 @@ package com.example.handy.core.http;
 
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
+import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.RecommendAlbumData;
@@ -16,6 +17,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.GET;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface HttpHelper {
     /**
@@ -67,6 +69,13 @@ public interface HttpHelper {
      * @return 教程列表
      */
     Observable<BaseResponse<List<FollowData>>> getFollowDataList(int uid, int currentPage, int n);
+
+    /**
+     * 获得教程详情
+     *
+     * @return 教程详情信息
+     */
+    Observable<BaseResponse<CourseDetailData>> getCourseDetail(int courseId);
 
     /**
      * 上传教程

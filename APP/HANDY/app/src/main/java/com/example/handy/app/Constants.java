@@ -106,6 +106,7 @@ public class Constants {
      * Course Detail
      */
     public static final String COURSE_ID = "course_id";
+    public static final String COURSE_Title = "course_title";
     public static final String AUTHOR_ID = "author_id";
 
 }

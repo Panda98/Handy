@@ -2,6 +2,7 @@ package com.example.handy.core.http.api;
 
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
+import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.RecommendAlbumData;
@@ -86,6 +87,15 @@ public interface Apis {
      */
     @GET("follow/moments")
     Observable<BaseResponse<List<FollowData>>> getFollowDataList(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
+
+
+    /**
+     * 获得教程详情
+     *
+     * @return 教程详情信息
+     */
+    @GET("course/detail")
+    Observable<BaseResponse<CourseDetailData>> getCourseDetail(@Query("courseId")int courseId);
 
     /**
      * 上传教程

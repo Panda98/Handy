@@ -2,6 +2,7 @@ package com.example.handy.core.http;
 
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
+import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.RecommendAlbumData;
@@ -66,6 +67,11 @@ public class HttpHelperImpl implements HttpHelper {
     @Override
     public Observable<BaseResponse<List<FollowData>>> getFollowDataList(int uid, int currentPage, int n) {
         return mApis.getFollowDataList(uid, currentPage, n);
+    }
+
+    @Override
+    public Observable<BaseResponse<CourseDetailData>> getCourseDetail(int courseId) {
+        return mApis.getCourseDetail(courseId);
     }
 
     @Override
