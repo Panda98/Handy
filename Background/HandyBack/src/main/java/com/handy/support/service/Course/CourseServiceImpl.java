@@ -14,9 +14,15 @@ import com.handy.support.pojo.course.vo.CourseSimpleVO;
 import com.handy.support.pojo.course.vo.CourseDetailVO;
 
 
+import org.apache.solr.client.solrj.*;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.*;
 
 
@@ -25,6 +31,10 @@ import java.util.*;
  */
 @Service("courseService")
 public class CourseServiceImpl implements ICourseService {
+
+//    @Autowired
+//    @SuppressWarnings("SpringJavaAutowiringInspection")
+//    HttpSolrClient client;
 
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -135,10 +145,13 @@ public class CourseServiceImpl implements ICourseService {
     public List<CourseSimpleVO> getRecommendList(Integer userId,Integer page_no, Integer n){
         List<CourseSimpleVO> simpleList=new ArrayList<CourseSimpleVO>();
         List<Course> courseList=iCourseMapper.getAll(page_no*n,n);
+
         for(Course c:courseList){
-            Integer id=c.getCourseId();
-            CourseSimpleVO simpleVO=new CourseSimpleVO(id,c.getCourseTitle(),c.getCourseCover(),c.getCourseIntro(),userMapper.selectByPrimaryKey(c.getUserId()).getNickName(),c.getLevelId(),this.getLabelList(id),c.getDiyLabel());
-            simpleList.add(simpleVO);
+            if(c !=null) {
+                Integer id = c.getCourseId();
+                CourseSimpleVO simpleVO = new CourseSimpleVO(id, c.getCourseTitle(), c.getCourseCover(), c.getCourseIntro(), userMapper.selectByPrimaryKey(c.getUserId()).getNickName(), c.getLevelId(), this.getLabelList(id), c.getDiyLabel());
+                simpleList.add(simpleVO);
+            }
         }
         return simpleList;
     }
@@ -153,7 +166,7 @@ public class CourseServiceImpl implements ICourseService {
         view.setCourseId(courseId);
         viewMapper.insertSelective(view);
         User author=userMapper.selectByPrimaryKey(authorId);
-        return new CourseDetailVO(courseId,c.getCourseTitle(),c.getCourseIntro(),c.getCourseNote(),c.getCourseCover(),c.getCourseViews(),c.getCourseCollects(),c.getCourseLikes(),authorId,author.getNickName(),author.getUserPic(),c.getLevelId(),this.getLabelList(courseId),c.getDiyLabel(),c.getUpdateTime(),this.getItemList(courseId),this.getStepList(courseId));
+        return new CourseDetailVO(courseId,c.getCourseTitle(),c.getCourseIntro(),c.getCourseNote(),c.getCourseCover(),c.getCourseViews(),c.getCourseCollects(),c.getCourseLikes(),authorId,author.getNickName(),author.getUserPic(),c.getLevelId(),this.getLabelList(courseId),c.getDiyLabel(),c.getUpdateTime(),this.sortItem(this.getItemList(courseId)),this.sortStep(this.getStepList(courseId)));
     }
 
     public Integer collect(Integer albumId, Integer courseId){
@@ -224,6 +237,18 @@ public class CourseServiceImpl implements ICourseService {
         return simpleList;
     }
 
+    public List<Item> sortItem(List<Item> itemList){
+        SortList<Item> sortList=new SortList<Item>();
+        sortList.Sort(itemList,"getItemTag","asc");
+        return itemList;
+    }
+
+    public List<Step> sortStep(List<Step> stepList){
+        SortList<Step> sortList=new SortList<Step>();
+        sortList.Sort(stepList,"getStepTag","asc");
+        return stepList;
+    }
+
 
     public Integer publishCourse(CourseEditDTO e){
         Course c=new Course();
@@ -242,13 +267,13 @@ public class CourseServiceImpl implements ICourseService {
             CourseLabel cl=new CourseLabel(courseId,l.getLabelId());
             courseLabelMapper.insert(cl);
         }
-        List<Item> itemList=e.getItemList();
+        List<Item> itemList=this.sortItem(e.getItemList());
         for(Item i:itemList){
             itemMapper.insert(i);
             CourseItem courseItem=new CourseItem(courseId,i.getItemId());
             courseItemMapper.insert(courseItem);
         }
-        List<Step> stepList=e.getStepList();
+        List<Step> stepList=this.sortStep(e.getStepList());
 
         for(Step s:stepList){
             stepMapper.insert(s);
@@ -259,15 +284,25 @@ public class CourseServiceImpl implements ICourseService {
         return count;
     }
 
-
-
-
-
-
-
-
-
-
+//public List<CourseSimpleVO> getSearchedCourse(String text) throws IOException, SolrServerException{
+//
+//
+//
+//
+//
+//
+//
+//        return null;
+//    }
 
 
 }
+
+
+
+
+
+
+
+
+
