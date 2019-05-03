@@ -13,5 +13,7 @@ public interface MyFollowMapper {
    void unFollowOther(@Param("userId") int userId,@Param("followId") int followId);
     List<FollowUserInfo> getFollowsUserInfoListLimited(@Param("userId") int userId, @Param("startRow")  int startRow, @Param("size") int size);
     Follow hasFollowed(@Param("userId")int userId ,@Param("followId") int followId);
+    int getFansNum(@Param("userId")int userId);
+    int getFollowNum(@Param("userId")int userId);
     // List<CommentReply> getCommentReplyByCommentIdLimited(@Param("commentId") int commentId, @Param("startRow")
 }

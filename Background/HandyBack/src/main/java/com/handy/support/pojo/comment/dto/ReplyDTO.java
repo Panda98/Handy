@@ -2,7 +2,7 @@ package com.handy.support.pojo.comment.dto;
 
 import com.handy.support.pojo.Follow.dto.CourseBrief;
 
-public class ReplyDTO extends ReplyUserVO implements Comparable<ReplyDTO>{
+public class ReplyDTO extends ReplyUserDTO implements Comparable<ReplyDTO>{
     private CourseBrief course;
     private CommentBrief comment;
     private ReplyBrief toReply;

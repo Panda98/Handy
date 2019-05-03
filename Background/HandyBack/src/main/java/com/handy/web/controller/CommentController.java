@@ -3,7 +3,7 @@ package com.handy.web.controller;
 import com.handy.support.pojo.comment.dto.CommentDTO;
 import com.handy.support.pojo.comment.dto.CommentPush;
 import com.handy.support.pojo.comment.dto.ReplyPush;
-import com.handy.support.pojo.comment.dto.ReplyUserVO;
+import com.handy.support.pojo.comment.dto.ReplyUserDTO;
 import com.handy.support.pojo.comment.vo.*;
 import com.handy.support.service.Comment.CommentServiceImpl;
 import com.handy.support.utils.status.ReturnCode;
@@ -36,8 +36,12 @@ public class CommentController {
    }
     @RequestMapping(value="/replyComment",method = GET)
     public String getCommentReply(ComRepReq req){
-        List<ReplyUserVO>commentReplies=commentService.getCommentReplyUserLimited(req);
-        ReturnCode<List> code = new ReturnCode<List>(commentReplies);
+        List<ReplyUserDTO>commentReplies=commentService.getCommentReplyUserLimited(req);
+        List<ReplyUserVO>list=new ArrayList<ReplyUserVO>();
+        for(int i=0;i<commentReplies.size();i++){
+            list.add(new ReplyUserVO(commentReplies.get(i)));
+        }
+        ReturnCode<List> code = new ReturnCode<List>(list);
         return code.returnHandler();
     }
     @RequestMapping(value="/push",method = RequestMethod.POST)

@@ -27,4 +27,10 @@
    </delete>
     <select id="hasFollowed" resultMap="com.handy.support.mapper.FollowMapper.BaseResultMap">
   select * from follow where follower_id=#{userId}  and user_id=#{followId} </select>
+    <select id="getFansNum" resultType="java.lang.Integer">
+        select count(*) from follow where user_id=#{userId}
+    </select>
+    <select id="getFollowNum" resultType="java.lang.Integer">
+        select count(*) from follow where follower_id=#{userId}
+    </select>
 </mapper>
