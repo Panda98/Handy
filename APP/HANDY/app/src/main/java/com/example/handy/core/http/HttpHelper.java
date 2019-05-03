@@ -83,14 +83,14 @@ public interface HttpHelper {
      *
      * @return 结果
      */
-    Observable<BaseResponse> follow(int uid, int followId);
+    Observable<BaseResponse<Boolean>> follow(int uid, int followId);
 
     /**
      * 取消关注
      *
      * @return 结果
      */
-    Observable<BaseResponse> unFollow(int uid, int followId);
+    Observable<BaseResponse<Boolean>> unFollow(int uid, int followId);
 
     /**
      * 获得用户专辑列表

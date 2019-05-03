@@ -76,12 +76,12 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse> follow(int uid, int followId) {
+    public Observable<BaseResponse<Boolean>> follow(int uid, int followId) {
         return mApis.follow(uid, followId);
     }
 
     @Override
-    public Observable<BaseResponse> unFollow(int uid, int followId) {
+    public Observable<BaseResponse<Boolean>> unFollow(int uid, int followId) {
         return mApis.unFollow(uid, followId);
     }
 

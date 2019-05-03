@@ -10,11 +10,19 @@ public interface CourseDetailContract {
 
         void showCourseDetail(CourseDetailData courseDetailData);
 
+        void showFollowView();
+        void showUnFollowView();
+
     }
 
     interface Presenter extends AbstractPresenter<CourseDetailContract.View> {
 
+        // 获得教程详情
         void getCourseDetail(boolean isShowError, int courseId);
+        // 关注
+        void follow(int followId);
+        // 取消关注
+        void unFollow(int followId);
 
     }
 }

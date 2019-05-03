@@ -77,12 +77,12 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse> follow(int uid, int followId) {
+    public Observable<BaseResponse<Boolean>> follow(int uid, int followId) {
         return mHttpHelper.follow(uid, followId);
     }
 
     @Override
-    public Observable<BaseResponse> unFollow(int uid, int followId) {
+    public Observable<BaseResponse<Boolean>> unFollow(int uid, int followId) {
         return mHttpHelper.unFollow(uid, followId);
     }
 

@@ -105,7 +105,7 @@ public interface Apis {
      * @return 结果
      */
     @GET("follow/follow")
-    Observable<BaseResponse> follow(@Query("uid")int uid, @Query("follow_id")int followId);
+    Observable<BaseResponse<Boolean>> follow(@Query("uid")int uid, @Query("follow_id")int followId);
 
     /**
      * 取消关注
@@ -113,7 +113,7 @@ public interface Apis {
      * @return 结果
      */
     @GET("follow/unfollow")
-    Observable<BaseResponse> unFollow(@Query("uid")int uid, @Query("follow_id")int followId);
+    Observable<BaseResponse<Boolean>> unFollow(@Query("uid")int uid, @Query("follow_id")int followId);
 
     /**
      * 获得用户专辑列表
