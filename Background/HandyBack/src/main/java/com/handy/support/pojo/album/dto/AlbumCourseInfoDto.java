@@ -1,6 +1,9 @@
 package com.handy.support.pojo.album.dto;
 
+import com.handy.support.entity.Label;
 import com.handy.support.pojo.album.vo.AlbumCourseInfoVO;
+
+import java.util.List;
 
 /**
  * Created by Pan on 2019/4/15.
@@ -12,6 +15,9 @@ public class AlbumCourseInfoDto {
     private String courseCover;
     private String userNickname;
     private int userId;
+    private int levelId;
+    private List<Label> labelList;
+    private String diyLabel;
 
     public AlbumCourseInfoDto(){
         super();
@@ -73,13 +79,39 @@ public class AlbumCourseInfoDto {
         this.courseCover = courseCover;
     }
 
+    public int getLevelId() {
+        return levelId;
+    }
+
+    public void setLevelId(int levelId) {
+        this.levelId = levelId;
+    }
+
+    public List<Label> getLabelList() {
+        return labelList;
+    }
+
+    public void setLabelList(List<Label> labelList) {
+        this.labelList = labelList;
+    }
+
+    public String getDiyLabel() {
+        return diyLabel;
+    }
+
+    public void setDiyLabel(String diyLabel) {
+        this.diyLabel = diyLabel;
+    }
+
     public AlbumCourseInfoVO revert2VO(){
         AlbumCourseInfoVO vo = new AlbumCourseInfoVO();
         vo.setCourseId(this.getCourseId());
         vo.setAuthorName(this.getUserNickname());
         vo.setCourseIntro(this.getCourseIntro());
         vo.setCourseTitle(this.getCourseTitle());
-        vo.setCoursePic(this.getCourseCover());
+        vo.setCourseCover(this.getCourseCover());
+        vo.setLabelList(this.labelList);
+        vo.setDiyLabel(this.diyLabel);
         return vo;
     }
 }

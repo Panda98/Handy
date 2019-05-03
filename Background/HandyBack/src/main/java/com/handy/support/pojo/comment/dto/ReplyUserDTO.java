@@ -3,8 +3,8 @@ package com.handy.support.pojo.comment.dto;
 import com.handy.support.pojo.Follow.dto.UserBrief;
 
 
-public class ReplyUserVO extends ReplyBrief {
-    private UserBrief user;//消息回复者的用户信息
+public class ReplyUserDTO extends ReplyBrief {
+    private UserBrief courseUser;//课程发布者的用户信息
     private UserBrief toReplyUser;//被回复者用户信息
     private UserBrief commentUser;//所在一级评论的用户信息
     public UserBrief getToReplyUser() {
@@ -23,12 +23,11 @@ public class ReplyUserVO extends ReplyBrief {
         this.toReplyUser = toReplyUser;
     }
 
-    public UserBrief getUser() {
-        return user;
+    public UserBrief getCourseUser() {
+        return courseUser;
     }
 
-    public void setUser(UserBrief user) {
-        this.user = user;
+    public void setCourseUser(UserBrief courseUser) {
+        this.courseUser = courseUser;
     }
-
 }

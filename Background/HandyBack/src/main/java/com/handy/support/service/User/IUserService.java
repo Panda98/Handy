@@ -19,6 +19,8 @@ public interface IUserService {
 
     ErrorEnum addUserLabels(int uid, List<Integer>labels);
 
+    int getFanCount(int uid);
+
 
     UserVO revert2VO(User user);
 }

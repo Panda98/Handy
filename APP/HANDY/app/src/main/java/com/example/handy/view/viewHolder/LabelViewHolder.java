@@ -1,11 +1,15 @@
 package com.example.handy.view.viewHolder;
 
+import android.support.v7.widget.GridLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -20,7 +24,7 @@ import butterknife.ButterKnife;
 
 public class LabelViewHolder extends BaseViewHolder {
     @BindView(R.id.labels_preinstall)
-    public LinearLayout preinstallView;
+    public GridLayout preinstallView;
 
     @BindView(R.id.publish_course_custom_label)
     public EditText customLabelEd;
@@ -37,6 +41,15 @@ public class LabelViewHolder extends BaseViewHolder {
 
         selectedIndex = new ArrayList<>();
         this.labelData = labelData;
+
+//        GridLayoutManager manager = new GridLayoutManager(preinstallView.getContext(),5);
+//        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
+//            @Override
+//            public int getSpanSize(int position) {
+//                return 1;
+//            }
+//        });
+
 
         addButton();
         customLabelEd.addTextChangedListener(new TextWatcher() {
@@ -62,16 +75,23 @@ public class LabelViewHolder extends BaseViewHolder {
         for(int i = 0;i<labelData.size();i++){
             Button button = new Button(preinstallView.getContext());
             button.setText(labelData.get(i).getLabelName());
-            button.setTextSize(16);
+            button.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
             button.setTextColor(preinstallView.getContext().getResources().getColor(R.color.publish_course_button_orange));
             button.setBackgroundResource(R.drawable.label_button);
             button.setOnTouchListener(new MyLabelsButtonListener(i));
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(15,0,15,0);
-            button.setLayoutParams(params);
+            GridLayout.Spec rowSpec = GridLayout.spec(0);
+            GridLayout.Spec columnSpec = GridLayout.spec(i);
+            int columnCount = preinstallView.getColumnCount();
+            if(i>columnCount-1){
+                rowSpec = GridLayout.spec(i/columnCount);
+                columnSpec = GridLayout.spec(i%columnCount);
+            }
+            GridLayout.LayoutParams params = new GridLayout.LayoutParams(rowSpec,columnSpec);
+            params.setMargins(15,0,15,15);
 
-            preinstallView.addView(button);
+
+            preinstallView.addView(button,params);
         }
 
     }
