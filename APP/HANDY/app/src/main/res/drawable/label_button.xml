@@ -10,7 +10,7 @@
 
     <item android:state_pressed="false">
         <shape>
-            <stroke android:color="#D57E66" android:width="3dp"/>
+            <stroke android:color="#D57E66" android:width="2dp"/>
             <corners android:radius="@dimen/dp_10"/>
         </shape>
         <color android:color="#D57E66"/>
