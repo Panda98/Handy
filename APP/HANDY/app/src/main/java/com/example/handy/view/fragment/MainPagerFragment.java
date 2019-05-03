@@ -21,6 +21,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.example.handy.R;
 import com.example.handy.app.Constants;
@@ -258,8 +259,20 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
         for (BannerData bannerData : bannerDataList) {
             DefaultSliderView sv = new DefaultSliderView(getActivity());
             sv.image(bannerData.getCourseCover());
+            // 轮播图点击事件
+            sv.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                @Override
+                public void onSliderClick(BaseSliderView slider) {
+                    //ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, (View) slider, getString(R.string.share_view));
+                    JudgeUtils.startCourseDetailActivityWithoutOption(_mActivity,
+                            bannerData.getCourseId(),
+                            bannerData.getCourseTitle()
+                    );
+                }
+            });
             sliderLayout.addSlider(sv);
         }
+
     }
 
     @Override

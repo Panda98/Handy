@@ -8,9 +8,11 @@
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/dp_20">
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
         android:id="@+id/main_pager_banner"
         android:layout_width="match_parent"
+        app:cardCornerRadius="@dimen/dp_10"
+        app:cardElevation="0dp"
         android:layout_height="@dimen/dp_180"
         android:layout_marginTop="@dimen/dp_20">
 
@@ -30,7 +32,7 @@
                  />
 
          </com.daimajia.slider.library.SliderLayout>
-    </LinearLayout>
+    </android.support.v7.widget.CardView>
 
     <!--专区分类-->
     <TextView
