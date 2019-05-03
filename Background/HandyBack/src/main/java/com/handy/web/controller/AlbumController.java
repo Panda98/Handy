@@ -1,7 +1,10 @@
 package com.handy.web.controller;
 
+import com.handy.support.entity.AlbumCourse;
 import com.handy.support.pojo.album.dto.AlbumCourseDto;
+import com.handy.support.pojo.album.dto.AlbumCourseInfoDto;
 import com.handy.support.pojo.album.dto.AlbumDto;
+import com.handy.support.pojo.album.vo.AlbumCourseInfoVO;
 import com.handy.support.pojo.album.vo.AlbumCourseVO;
 import com.handy.support.pojo.album.vo.AlbumVO;
 import com.handy.support.service.Album.IAlbumService;
@@ -75,11 +78,33 @@ public class AlbumController {
 
     @RequestMapping(value = "/album/detail",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
     public String getListDetail(int uid, int albumid,int page,int n){
-        AlbumCourseDto list = albumService.getAlbumDetail(albumid,page,n);
-        AlbumCourseVO vo = list.revert2VO();
+        List<AlbumCourseInfoDto> list = albumService.getAlbumDetail(albumid,page,n);
+        List<AlbumCourseInfoVO> vos = new ArrayList<AlbumCourseInfoVO>();
+        for(AlbumCourseInfoDto dto:list){
+            AlbumCourseInfoVO vo = dto.revert2VO();
+            vos.add(vo);
+        }
 
-        ReturnCode<AlbumCourseVO> code = new ReturnCode<AlbumCourseVO>(vo);
+        ReturnCode<List<AlbumCourseInfoVO>> code = new ReturnCode<List<AlbumCourseInfoVO>>(vos);
         return code.returnHandler();
+    }
+
+    @RequestMapping(value = "/album/brief",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
+    public String getAlbumBriefInfo(int albumid){
+        AlbumDto dto = albumService.getAlbumBriefInfo(albumid);
+        AlbumVO vo = new AlbumVO(dto);
+
+        ReturnCode<AlbumVO> code = new ReturnCode<AlbumVO>(vo);
+        return code.returnHandler();
+    }
+
+    @RequestMapping(value = "/album/collect",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
+    public String collectAlbum(int uid,int albumid){
+        ErrorEnum errorEnum = albumService.collect(uid,albumid);
+
+        ReturnCode<String> returnCode = new ReturnCode<String>();
+        returnCode.setErrorEnum(errorEnum);
+        return returnCode.returnHandler();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.handy.view.viewHolder;
 
+import android.content.res.ColorStateList;
 import android.support.v7.widget.GridLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,6 +9,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
@@ -33,6 +35,8 @@ public class LabelViewHolder extends BaseViewHolder {
 
     private List<LabelData> labelData;
     private String customLabel;
+
+    private List<CheckBox> checkBoxes;
 
 
     public LabelViewHolder(View view,List<LabelData> labelData) {
@@ -71,14 +75,41 @@ public class LabelViewHolder extends BaseViewHolder {
 
     }
 
+//    private void addButton(){
+//        for(int i = 0;i<labelData.size();i++){
+//            Button button = new Button(preinstallView.getContext());
+//            button.setText(labelData.get(i).getLabelName());
+//            button.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
+//            button.setTextColor(preinstallView.getContext().getResources().getColor(R.color.publish_course_button_orange));
+//            button.setBackgroundResource(R.drawable.label_button);
+//            button.setOnTouchListener(new MyLabelsButtonListener(i));
+//
+//            GridLayout.Spec rowSpec = GridLayout.spec(0);
+//            GridLayout.Spec columnSpec = GridLayout.spec(i);
+//            int columnCount = preinstallView.getColumnCount();
+//            if(i>columnCount-1){
+//                rowSpec = GridLayout.spec(i/columnCount);
+//                columnSpec = GridLayout.spec(i%columnCount);
+//            }
+//            GridLayout.LayoutParams params = new GridLayout.LayoutParams(rowSpec,columnSpec);
+//            params.setMargins(15,0,15,15);
+//
+//
+//            preinstallView.addView(button,params);
+//        }
+//
+//    }
     private void addButton(){
+        checkBoxes = new ArrayList<>();
         for(int i = 0;i<labelData.size();i++){
-            Button button = new Button(preinstallView.getContext());
+            CheckBox button = new CheckBox(preinstallView.getContext());
             button.setText(labelData.get(i).getLabelName());
             button.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
-            button.setTextColor(preinstallView.getContext().getResources().getColor(R.color.publish_course_button_orange));
+            button.setTextColor(preinstallView.getResources().getColorStateList(R.color.label_button_text));
             button.setBackgroundResource(R.drawable.label_button);
-            button.setOnTouchListener(new MyLabelsButtonListener(i));
+            button.setButtonDrawable(null);
+            button.setPadding(30,30,30,30);
+//            button.setOnTouchListener(new MyLabelsButtonListener(i));
 
             GridLayout.Spec rowSpec = GridLayout.spec(0);
             GridLayout.Spec columnSpec = GridLayout.spec(i);
@@ -91,9 +122,10 @@ public class LabelViewHolder extends BaseViewHolder {
             params.setMargins(15,0,15,15);
 
 
-            preinstallView.addView(button,params);
-        }
 
+            preinstallView.addView(button,params);
+            checkBoxes.add(button);
+        }
     }
 
 
@@ -132,9 +164,11 @@ public class LabelViewHolder extends BaseViewHolder {
 
     public List<LabelData> getSelectedLabel() {
         List<LabelData> selected = new ArrayList<>();
-        for(int i = 0;i<selectedIndex.size();i++){
-            LabelData label = labelData.get(selectedIndex.get(i));
-            selected.add(label);
+        for(int i = 0;i<checkBoxes.size();i++){
+            if(checkBoxes.get(i).isChecked()){
+                LabelData label = labelData.get(i);
+                selected.add(label);
+            }
         }
         return selected;
     }
