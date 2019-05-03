@@ -43,7 +43,7 @@ public class RecommendCourseAdapter extends BaseQuickAdapter<RecommendCourseData
 
         // 设置图片
         if (!TextUtils.isEmpty(item.getCourseCover())) {
-            ImageLoader.load(mContext, item.getCourseCover(), helper.getView(R.id.recommend_course_image));
+            ImageLoader.loadToNIV(mContext, item.getCourseCover(), helper.getView(R.id.recommend_course_image));
         }
     }
 }

@@ -72,8 +72,8 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
     private List<Map<String,Object>> dataList;
     private int[] icon =
             {
-                    R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,
-                    R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher
+                    R.drawable.ic_class1, R.drawable.ic_class2, R.drawable.ic_class3, R.drawable.ic_class4,
+                    R.drawable.ic_class5, R.drawable.ic_class6, R.drawable.ic_class7, R.drawable.ic_class8
             };
     private String[] iconName =
             {

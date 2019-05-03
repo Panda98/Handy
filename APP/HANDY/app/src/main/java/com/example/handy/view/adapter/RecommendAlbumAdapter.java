@@ -55,7 +55,7 @@ public class RecommendAlbumAdapter extends ArrayAdapter<RecommendAlbumData> {
 
         // 设置图片
         if (!TextUtils.isEmpty(mGridData.get(position).getAlbumPic())) {
-            ImageLoader.load(mContext, mGridData.get(position).getAlbumPic(), holder.getView(R.id.recommend_album_image));
+            ImageLoader.loadToNIV(mContext, mGridData.get(position).getAlbumPic(), holder.getView(R.id.recommend_album_image));
         }
 
         return convertView;
