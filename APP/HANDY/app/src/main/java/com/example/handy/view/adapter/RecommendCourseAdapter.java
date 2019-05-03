@@ -1,23 +1,22 @@
 package com.example.handy.view.adapter;
 
 import android.support.annotation.Nullable;
-import android.text.Html;
 import android.text.TextUtils;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.handy.R;
-import com.example.handy.core.bean.RecommendCourseData;
+import com.example.handy.core.bean.CourseData;
 import com.example.handy.utils.ImageLoader;
 import com.example.handy.view.viewHolder.CourseViewHolder;
 
 import java.util.List;
 
-public class RecommendCourseAdapter extends BaseQuickAdapter<RecommendCourseData, CourseViewHolder> {
+public class RecommendCourseAdapter extends BaseQuickAdapter<CourseData, CourseViewHolder> {
 
     private boolean isMainPage;
 
 
-    public RecommendCourseAdapter(int layoutResId, @Nullable List<RecommendCourseData> data) {
+    public RecommendCourseAdapter(int layoutResId, @Nullable List<CourseData> data) {
         super(layoutResId, data);
     }
 
@@ -27,7 +26,7 @@ public class RecommendCourseAdapter extends BaseQuickAdapter<RecommendCourseData
     }
 
     @Override
-    protected void convert(CourseViewHolder helper, RecommendCourseData item) {
+    protected void convert(CourseViewHolder helper, CourseData item) {
         // 设置标题
         if (!TextUtils.isEmpty(item.getCourseTitle())) {
             helper.setText(R.id.recommend_course_title, item.getCourseTitle());

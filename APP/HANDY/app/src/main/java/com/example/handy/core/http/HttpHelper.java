@@ -1,15 +1,16 @@
 package com.example.handy.core.http;
 
+import com.example.handy.core.bean.AlbumCoverData;
 import com.example.handy.core.bean.AlbumListData;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
 import com.example.handy.core.bean.CommentData;
 import com.example.handy.core.bean.CommentReplyData;
+import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.RecommendAlbumData;
-import com.example.handy.core.bean.RecommendCourseData;
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.vo.LoginView;
 import com.example.handy.core.vo.PostCommentView;
@@ -21,10 +22,7 @@ import java.util.Map;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface HttpHelper {
@@ -76,7 +74,7 @@ public interface HttpHelper {
      *
      * @return 教程列表
      */
-    Observable<BaseResponse<List<RecommendCourseData>>> getRecommendCourseListData(int uid, int currentPage, int n);
+    Observable<BaseResponse<List<CourseData>>> getRecommendCourseListData(int uid, int currentPage, int n);
 
     /**
      * 推荐教程
@@ -128,25 +126,25 @@ public interface HttpHelper {
     Observable<BaseResponse<List<AlbumListData>>> getCollectAlbumList(int userId);
 
     /**
-     * 收藏
+     * 收藏教程
      *
      * @return 结果
      */
-    Observable<BaseResponse> collect(int courseId, int albumId);
+    Observable<BaseResponse> collectCourse(int courseId, int albumId);
 
     /**
-     * 取消收藏
+     * 取消收藏教程
      *
      * @return 结果
      */
-    Observable<BaseResponse> unCollect(int courseId, int albumId);
+    Observable<BaseResponse> unCollectCourse(int courseId, int albumId);
 
     /**
-     * 获取收藏状态
+     * 获取教程收藏状态
      *
      * @return 结果
      */
-    Observable<BaseResponse> isCollect(int userId, int courseId);
+    Observable<BaseResponse> isCollectCourse(int userId, int courseId);
 
     /**
      * 点赞
@@ -174,7 +172,7 @@ public interface HttpHelper {
      *
      * @return 结果
      */
-    Observable<BaseResponse<List<RecommendCourseData>>> getUserPublishCourse(int userId, int currentPage, int n);
+    Observable<BaseResponse<List<CourseData>>> getUserPublishCourse(int userId, int currentPage, int n);
 
 
     /**
@@ -213,5 +211,19 @@ public interface HttpHelper {
      * @return 回复信息
      */
     Observable<BaseResponse<CommentReplyData>> getCommentReply(int course_id, int currentPage, int n);
+
+    /**
+     * 获取专辑中的教程信息
+     *
+     * @return 教程信息
+     */
+    Observable<BaseResponse<List<CourseData>>> getAlbumCourseData(int uid, int albumId, int currentPage, int n);
+
+    /**
+     * 获取专辑封面信息
+     *
+     * @return 回复信息
+     */
+    Observable<BaseResponse<AlbumCoverData>> getAlbumCoverData(int albumId);
 
 }
