@@ -172,7 +172,8 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
                     case R.id.publish_tips_ed:
                         setTipsEditorListener(view);
                         break;
-
+                    case R.id.publish_course_intro:
+                        setIntroEditorListener(view);
 
                 }
             }
@@ -469,6 +470,33 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
                 @Override
                 public void afterTextChanged(Editable editable) {
                     courseData.setTips(editable.toString());
+                }
+            });
+        }
+    }
+
+    private void setIntroEditorListener(View view){
+        EditText editText = (EditText)view;
+        if(editText.getTag() == null) {
+            editText.setTag("intro");
+            editText.setFocusable(true);
+            editText.setFocusableInTouchMode(true);
+            editText.requestFocus();
+            editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    courseData.setCourseIntro(editable.toString());
                 }
             });
         }
