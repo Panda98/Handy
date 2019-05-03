@@ -41,4 +41,20 @@ public class AccountPagerPresenter extends BasePresenter<AccountPagerContract.Vi
     public void loadMoreData() {
 
     }
+
+    @Override
+    public void getMyCourse(boolean isShowError) {
+
+    }
+
+    @Override
+    public void getMyAlbum(boolean isShowError) {
+
+    }
+
+    @Override
+    public void getUserInfo(boolean isShowError){
+
+
+    }
 }
