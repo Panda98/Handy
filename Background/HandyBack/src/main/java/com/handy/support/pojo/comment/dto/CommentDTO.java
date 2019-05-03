@@ -6,6 +6,15 @@ import com.handy.support.pojo.Follow.dto.UserBrief;
 public class CommentDTO extends CommentBrief{
     private UserBrief user;
     private CourseBrief course;
+private int replyNum;
+
+    public int getReplyNum() {
+        return replyNum;
+    }
+
+    public void setReplyNum(int replyNum) {
+        this.replyNum = replyNum;
+    }
 
     public void setCourse(CourseBrief course) {
         this.course = course;

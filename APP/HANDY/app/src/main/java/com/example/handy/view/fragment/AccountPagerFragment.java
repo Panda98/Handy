@@ -54,6 +54,7 @@ public class AccountPagerFragment extends BaseRootFragment<AccountPagerPresenter
     protected void initEventAndData() {
         super.initEventAndData();
         setRefresh();
+
         if (CommonUtils.isNetworkConnected()) {
             showLoading();
         }
