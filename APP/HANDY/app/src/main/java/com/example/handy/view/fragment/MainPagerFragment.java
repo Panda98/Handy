@@ -283,8 +283,7 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
         albumGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(),"我是"+iconName[i],Toast.LENGTH_SHORT).show();
-                Log.i("tag","我是"+iconName[i]);
+                startAlbumDetailPager(view,i);
             }
         });
     }
@@ -324,6 +323,18 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
                 options,
                 mAdapter.getData().get(position).getCourseId(),
                 mAdapter.getData().get(position).getCourseTitle()
+        );
+    }
+
+    private void startAlbumDetailPager(View view, int position) {
+        if (albumAdapter.getData().size() <= 0 || mAdapter.getData().size() < position) {
+            return;
+        }
+
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, view, getString(R.string.share_view));
+        JudgeUtils.startAlbumDetailActivity(_mActivity,
+                options,
+                albumAdapter.getData().get(position).getAlbumId()
         );
     }
 
