@@ -6,6 +6,7 @@ import com.handy.support.pojo.user.dto.UserDto;
 import com.handy.support.pojo.user.vo.UserAuthVO;
 import com.handy.support.pojo.user.vo.UserLabelVO;
 import com.handy.support.pojo.user.vo.UserVO;
+import com.handy.support.service.Follow.IFollowService;
 import com.handy.support.utils.GsonSetting;
 import com.handy.support.utils.status.ErrorEnum;
 import com.handy.support.utils.status.ReturnCode;
@@ -22,6 +23,9 @@ import com.handy.support.service.User.IUserService;
 public class UserController {
     @Autowired
     private IUserService iUserService;
+
+    @Autowired
+    private IFollowService followService;
     @Autowired
     private Gson gson;
 
@@ -109,6 +113,13 @@ public class UserController {
     @RequestMapping(value = "/user", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
     public String getUserInfo(int uid){
         UserDto user = iUserService.getUserByID(uid);
+        int followCount = followService.getFollowNum(uid);
+
+        //todo: fanCount
+        int fansCount = followService.getFansNum(uid);
+        user.setFollowCount(followCount);
+        user.setFansCount(fansCount);
+
         ErrorEnum error = null;
         UserVO vo = null;
         if(user == null){
@@ -121,5 +132,6 @@ public class UserController {
         ReturnCode<UserVO> code = new ReturnCode<UserVO>(error,vo);
         return code.returnHandler();
     }
+
 
 }

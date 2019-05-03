@@ -21,6 +21,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.example.handy.R;
 import com.example.handy.app.Constants;
@@ -72,8 +73,8 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
     private List<Map<String,Object>> dataList;
     private int[] icon =
             {
-                    R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,
-                    R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher
+                    R.drawable.ic_class1, R.drawable.ic_class2, R.drawable.ic_class3, R.drawable.ic_class4,
+                    R.drawable.ic_class5, R.drawable.ic_class6, R.drawable.ic_class7, R.drawable.ic_class8
             };
     private String[] iconName =
             {
@@ -258,8 +259,20 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
         for (BannerData bannerData : bannerDataList) {
             DefaultSliderView sv = new DefaultSliderView(getActivity());
             sv.image(bannerData.getCourseCover());
+            // 轮播图点击事件
+            sv.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                @Override
+                public void onSliderClick(BaseSliderView slider) {
+                    //ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, (View) slider, getString(R.string.share_view));
+                    JudgeUtils.startCourseDetailActivityWithoutOption(_mActivity,
+                            bannerData.getCourseId(),
+                            bannerData.getCourseTitle()
+                    );
+                }
+            });
             sliderLayout.addSlider(sv);
         }
+
     }
 
     @Override
@@ -270,8 +283,7 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
         albumGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(),"我是"+iconName[i],Toast.LENGTH_SHORT).show();
-                Log.i("tag","我是"+iconName[i]);
+                startAlbumDetailPager(view,i);
             }
         });
     }
@@ -311,6 +323,18 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
                 options,
                 mAdapter.getData().get(position).getCourseId(),
                 mAdapter.getData().get(position).getCourseTitle()
+        );
+    }
+
+    private void startAlbumDetailPager(View view, int position) {
+        if (albumAdapter.getData().size() <= 0 || mAdapter.getData().size() < position) {
+            return;
+        }
+
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, view, getString(R.string.share_view));
+        JudgeUtils.startAlbumDetailActivity(_mActivity,
+                options,
+                albumAdapter.getData().get(position).getAlbumId()
         );
     }
 

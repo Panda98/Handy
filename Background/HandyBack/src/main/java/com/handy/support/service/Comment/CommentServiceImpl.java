@@ -10,7 +10,7 @@ import com.handy.support.pojo.comment.dto.CommentPush;
 import com.handy.support.pojo.comment.dto.ReplyPush;
 import com.handy.support.pojo.comment.vo.ComRepReq;
 import com.handy.support.pojo.comment.vo.CourseComReq;
-import com.handy.support.pojo.comment.dto.ReplyUserVO;
+import com.handy.support.pojo.comment.dto.ReplyUserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +30,7 @@ public class CommentServiceImpl implements ICommentService {
     public List<CommentDTO> getFullCourseComment(CourseComReq req){
         return commentMapper.getFullCommentsByCourseLimited(req.getCourse_id(),req.getPage_no()*req.getN(),req.getN());
     }
-public List<ReplyUserVO> getCommentReplyUserLimited(ComRepReq req){
+public List<ReplyUserDTO> getCommentReplyUserLimited(ComRepReq req){
     return commentMapper.getCommentsReplyUserLimited(req.getComment_id(),req.getPage_no()*req.getN(),req.getN());
 }
     public void pushCommentToCourse(CommentPush req) {

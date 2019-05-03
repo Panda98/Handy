@@ -11,16 +11,15 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.ViewUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
@@ -37,16 +36,16 @@ import com.example.handy.core.bean.PublishCourseData;
 import com.example.handy.presenter.PublishCoursePresenter;
 import com.example.handy.utils.StatusBarUtil;
 import com.example.handy.view.adapter.CourseEditorMultiAdapter;
-import com.example.handy.view.viewHolder.LabelViewHolder;
+import com.example.handy.view.viewHolder.PublishStepViewHolder;
 import com.yuyh.library.imgsel.ISNav;
 import com.yuyh.library.imgsel.common.ImageLoader;
 import com.yuyh.library.imgsel.config.ISListConfig;
 
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -123,12 +122,17 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         data.add(new MultipleItem(MultipleItem.STEP_VIEW));
         data.add(new MultipleItem(MultipleItem.STEP_BTN_VIEW));
         data.add(new MultipleItem(MultipleItem.TIPS_TEXT));
+        data.add(new MultipleItem(MultipleItem.LEVEL_VIEW));
         data.add(new MultipleItem(MultipleItem.LABEL_VIEW));
 
         //todo: 获得label数据
         preLabels = new ArrayList<>();
         LabelData d = new LabelData();
         d.setLabelName("布艺");
+        preLabels.add(d);
+        preLabels.add(d);
+        preLabels.add(d);
+        preLabels.add(d);
         preLabels.add(d);
         preLabels.add(d);
         multiAdapter = new CourseEditorMultiAdapter(data,preLabels);
@@ -142,7 +146,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
 
                 switch (id){
                     case R.id.picture_upload:
-                        uploadPic(view,position);
+                        uploadPic(view,position,Constants.COURSE_COVER_UPLOAD);
                         break;
                     case R.id.add_material_row:
                         addMaterialRow(view);
@@ -150,8 +154,9 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
                     case R.id.add_step_row:
                         addStepRow(view);
                         break;
-                    case R.id.step_picture_upload_btn:
-                        uploadPic(view,position);
+                    case R.id.step_picture_upload:
+                        int stepIndex = ((MultipleItem)adapter.getItem(position)).getIndex();
+                        uploadPic(view,position,Constants.STEP_PIC_UPLOAD+stepIndex);
                         break;
                     case R.id.material_name_edtext:
                         int index = ((MultipleItem)adapter.getItem(position)).getIndex();
@@ -167,7 +172,8 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
                     case R.id.publish_tips_ed:
                         setTipsEditorListener(view);
                         break;
-
+                    case R.id.publish_course_intro:
+                        setIntroEditorListener(view);
 
                 }
             }
@@ -198,13 +204,25 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         stepNum++;
     }
 
-    protected void uploadPic(View view,int position){
+    protected void uploadPic(View view,int position,int type){
         ISNav.getInstance().init(new ImageLoader() {
             @Override
             public void displayImage(Context context, String path, ImageView imageView) {
                 Glide.with(context).load(path).into(imageView);
             }
         });
+        int cropAspectX,cropAspectY,outputX,outputY;
+        if(type == Constants.COURSE_COVER_UPLOAD){
+            cropAspectX = 400;
+            cropAspectY = 250;
+            outputX = 400;
+            outputY = 250;
+        }else{
+            cropAspectX = 300;
+            cropAspectY = 200;
+            outputX = 300;
+            outputY = 200;
+        }
         // 自由配置选项
         ISListConfig config = new ISListConfig.Builder()
                 // 是否多选, 默认true
@@ -224,7 +242,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
                 // TitleBar背景色
                 .titleBgColor(Color.parseColor("#3F51B5"))
                 // 裁剪大小。needCrop为true的时候配置
-                .cropSize(1, 1, 200, 200)
+                .cropSize(cropAspectX, cropAspectY, outputX, outputY)
                 .needCrop(true)
                 // 第一个是否显示相机，默认true
                 .needCamera(true)
@@ -234,13 +252,13 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
 
 // 跳转到图片选择器
 
-        switch (position){
-            case 0:
-                ISNav.getInstance().toListActivity(this, config, Constants.COURSE_COVER_UPLAD);
+        switch (type){
+            case Constants.COURSE_COVER_UPLOAD:
+                ISNav.getInstance().toListActivity(this, config, type);
                 break;
-                default:
-                    ISNav.getInstance().toListActivity(this, config, Constants.STEP_PIC_UPLOAD+position-stepNum);
-                    break;
+            default:
+                ISNav.getInstance().toListActivity(this, config, type);
+                break;
         }
     }
 
@@ -248,15 +266,43 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // 图片选择结果回调
-        if (requestCode == Constants.COURSE_COVER_UPLAD && resultCode == RESULT_OK && data != null) {
+        if (requestCode == Constants.COURSE_COVER_UPLOAD && resultCode == RESULT_OK && data != null) {
             //todo: 处理封面图上传
             List<String> pathList = data.getStringArrayListExtra("result");
+            ImageView view = recyclerView.findViewById(R.id.publish_course_header).findViewById(R.id.picture_upload);
+            view.setImageBitmap(loadImg(pathList.get(0)));
+
+            TextView textView = recyclerView.findViewById(R.id.publish_course_header).findViewById(R.id.cover_pic_text);
+            textView.setVisibility(View.INVISIBLE);
 
             System.out.println(pathList);
         }
         if(requestCode >= Constants.STEP_PIC_UPLOAD && resultCode == RESULT_OK && data != null){
             //todo: 处理步骤图上传
-            int index = requestCode;
+            int index = requestCode-Constants.STEP_PIC_UPLOAD-1;//从0开始
+            List<String> pathList = data.getStringArrayListExtra("result");
+
+
+            PublishStepViewHolder viewHolder = multiAdapter.getStepViewHolders().get(index);
+            ImageView view = viewHolder.getImageView();
+            view.setImageBitmap(loadImg(pathList.get(0)));
+
+            TextView textView = viewHolder.getTextView();
+            textView.setVisibility(View.INVISIBLE);
+
+            System.out.println(pathList);
+
+        }
+    }
+
+    private Bitmap loadImg(String url){
+        try {
+            FileInputStream fis = new FileInputStream(url);
+            return BitmapFactory.decodeStream(fis);  ///把流转化为Bitmap图片
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -276,18 +322,41 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
     }
 
     private void publish(){
-
-        courseData.setItemList(materialItemData);
-        courseData.setStepList(stepData);
-
-        System.out.println(data);
-
+        int level = multiAdapter.getLevelViewHolder().getLevel();
         List<LabelData> selectedLabel = multiAdapter.getLabelViewHolder().getSelectedLabel();
         String customLabel = multiAdapter.getLabelViewHolder().getCustomLabel();
 
+
+
+        courseData.setItemList(materialItemData);
+        courseData.setStepList(stepData);
         courseData.setDiyLabel(customLabel);
         courseData.setLabelList(selectedLabel);
+        courseData.setLevelId(level);
 
+        if(checkInput()){
+            //todo： 上传
+        }
+    }
+
+    private boolean checkInput(){
+        if(courseData.getCourseTitle() == null) {
+            Toast.makeText(this, "请输入标题", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(courseData.getCourseCover() == null) {
+            Toast.makeText(this, "请上传一张封面图", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(courseData.getStepList() == null) {
+            Toast.makeText(this, "请至少填写一项步骤", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(courseData.getLevelId() == 0) {
+            Toast.makeText(this, "请选择难度等级", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     private void setMaterialTextEditorListener(View view, int index){
@@ -401,6 +470,33 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
                 @Override
                 public void afterTextChanged(Editable editable) {
                     courseData.setTips(editable.toString());
+                }
+            });
+        }
+    }
+
+    private void setIntroEditorListener(View view){
+        EditText editText = (EditText)view;
+        if(editText.getTag() == null) {
+            editText.setTag("intro");
+            editText.setFocusable(true);
+            editText.setFocusableInTouchMode(true);
+            editText.requestFocus();
+            editText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    courseData.setCourseIntro(editable.toString());
                 }
             });
         }

@@ -25,11 +25,14 @@
         android:orientation="horizontal">
 
         <!--image-->
-        <ImageView
+        <com.shehuan.niv.NiceImageView
             android:id="@+id/recommend_course_image"
             android:layout_width="@dimen/dp_80"
             android:layout_height="@dimen/dp_80"
             android:layout_marginStart="@dimen/dp_10"
+            app:corner_radius="@dimen/dp_10"
+            android:background="@drawable/loading_card"
+            android:scaleType="centerCrop"
             android:layout_gravity="center_vertical" />
 
         <!--description-->

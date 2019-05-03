@@ -38,6 +38,8 @@ public class UserVO {
         this.sex = dto.getSex() != null?(dto.getSex() == 1?"男":"女"):null;
         this.birthday = dto.getBirthday();
         this.userPic = dto.getUserPic();
+        this.followCount = dto.getFollowCount();
+        this.fansCount = dto.getFansCount();
 
     }
 

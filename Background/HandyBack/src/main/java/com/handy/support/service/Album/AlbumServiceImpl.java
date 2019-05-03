@@ -10,6 +10,7 @@ import com.handy.support.pojo.album.dto.AlbumCourseDto;
 import com.handy.support.pojo.album.dto.AlbumCourseInfoDto;
 import com.handy.support.pojo.album.dto.AlbumDto;
 import com.handy.support.pojo.album.vo.AlbumVO;
+import com.handy.support.utils.status.ErrorEnum;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,21 +75,48 @@ public class AlbumServiceImpl implements IAlbumService {
         return albumDtos;
     }
 
-    public AlbumCourseDto getAlbumDetail(int albumid,int start,int n){
+    public List<AlbumCourseInfoDto> getAlbumDetail(int albumid,int start,int n){
         List<AlbumCourse> list = myAlbumCoursesMapper.getCoursesByAlbumLimited(albumid,start,n);
         AlbumCourseDto albumCourseDto = new AlbumCourseDto();
-        if(list.size()!=0)
-            albumCourseDto.setAlbumId(list.get(0).getAlbumId());
+        List<AlbumCourseInfoDto> dtoList = new ArrayList<AlbumCourseInfoDto>();
         for(AlbumCourse albumCourse:list){
             Course course = courseMapper.selectByPrimaryKey(albumCourse.getCourseId());
             User author = userMapper.selectByPrimaryKey(course.getUserId());
             AlbumCourseInfoDto dto = new AlbumCourseInfoDto();
             BeanUtils.copyProperties(author,dto);
             BeanUtils.copyProperties(course,dto);
-            albumCourseDto.getCourseList().add(dto);
+//            albumCourseDto.getCourseList().add(dto);
+            dtoList.add(dto);
         }
-        return albumCourseDto;
+        return dtoList;
     }
 
+    public AlbumDto getAlbumBriefInfo(int albumid){
+        Album album= albumMapper.selectByPrimaryKey(albumid);
+        AlbumDto dto = new AlbumDto();
+        BeanUtils.copyProperties(album,dto);
+
+
+        return dto;
+
+    }
+
+    public ErrorEnum collect(int uid,int albumid){
+        Album album = albumMapper.selectByPrimaryKey(albumid);
+        album.setAlbumState(false);
+        album.setUserId(uid);
+        albumMapper.insert(album);
+        return ErrorEnum.SUCCESS;
+    }
+
+    public ErrorEnum uncollect(int uid, int albumid){
+        AlbumExample example = new AlbumExample();
+        AlbumExample.Criteria criteria = example.createCriteria();
+        criteria.andAlbumIdEqualTo(albumid).andUserIdEqualTo(uid);
+        example.or(criteria);
+        albumMapper.deleteByExample(example);
+        return ErrorEnum.SUCCESS;
+
+    }
 
 }

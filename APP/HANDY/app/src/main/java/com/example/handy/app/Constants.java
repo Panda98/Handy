@@ -99,7 +99,7 @@ public class Constants {
     public static final String RECOMMEND_COURSE_DATA = "recommend_course_data";
     public static final String CURRENT_PAGE = "current_page";
 
-    public static final int COURSE_COVER_UPLAD = 0;
+    public static final int COURSE_COVER_UPLOAD = 0;
     public static final int STEP_PIC_UPLOAD = 1;
 
 
@@ -109,5 +109,11 @@ public class Constants {
     public static final String COURSE_ID = "course_id";
     public static final String COURSE_Title = "course_title";
     public static final String AUTHOR_ID = "author_id";
+
+    /**
+     * Album Detail
+     */
+    public static final String ALBUM_ID = "album_id";
+
 
 }

@@ -10,8 +10,8 @@
         <result column="to_reply_id" property="toReplyId" javaType="java.lang.Integer" jdbcType="INTEGER" />
         <result column="update_time" property="updateTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </resultMap>
-    <resultMap id="ReplyUserMap" type="com.handy.support.pojo.comment.dto.ReplyUserVO" extends="ReplyMap" >
-        <association property="user" columnPrefix="user_" resultMap="com.handy.support.mapper.customMapper.MyUsersCoursesMapper.UserMap"/>
+    <resultMap id="ReplyUserMap" type="com.handy.support.pojo.comment.dto.ReplyUserDTO" extends="ReplyMap" >
+        <association property="courseUser" columnPrefix="courseUser_" resultMap="com.handy.support.mapper.customMapper.MyUsersCoursesMapper.UserMap"/>
         <association property="toReplyUser" columnPrefix="toReplyUser_" resultMap="com.handy.support.mapper.customMapper.MyUsersCoursesMapper.UserMap"/>
         <association property="commentUser" columnPrefix="commentUser_" resultMap="com.handy.support.mapper.customMapper.MyUsersCoursesMapper.UserMap"/>
     </resultMap>
@@ -42,13 +42,13 @@
         select * from comment_reply where comment_id=#{commentId} order by update_time desc limit #{startRow},#{size}
     </select>
     <select id="getCommentsReplyUserLimited" resultMap="ReplyUserMap">
- select u.user_id user_user_id,u.nick_name user_nick_name,u.user_pic user_user_pic,
+ select <!--u.user_id user_user_id,u.nick_name user_nick_name,u.user_pic user_user_pic,-->
  u2.user_id toReplyUser_user_id,u2.nick_name toReplyUser_nick_name,u2.user_pic toReplyUser_user_pic,
   u3.user_id commentUser_user_id,u3.nick_name commentUser_nick_name,u3.user_pic commentUser_user_pic,
  r.update_time update_time,r.reply_content reply_content,r.comment_id comment_id,
  r.reply_id reply_id,r.to_reply_id to_reply_id
         from (select * from comment_reply where comment_reply.comment_id = #{commentId}) r
-         inner join user u on r.user_id=u.user_id
+       <!--  inner join user u on r.user_id=u.user_id-->
          inner join (select user_id from comment where comment.comment_id=#{commentId}) c
          inner join user u3 on c.user_id=u3.user_id
          left join comment_reply r2 on r.to_reply_id=r2.reply_id
@@ -79,9 +79,10 @@
         left join comment_reply r on r.comment_id=co.comment_id group by co.comment_id
           order by co.update_time desc limit #{startRow},#{size}
     </select>
+
     <select id="getMessageCommentsReplyUserLimited" resultMap="ReplyCourseUserMap">
  select u.user_id user_user_id,u.nick_name user_nick_name,u.user_pic user_user_pic,
- u2.user_id toReplyUser_user_id,u2.nick_name toReplyUser_nick_name,u2.user_pic toReplyUser_user_pic,
+ u2.user_id courseUser_user_id,u2.nick_name courseUser_nick_name,u2.user_pic courseUser_user_pic,
   u3.user_id commentUser_user_id,u3.nick_name commentUser_nick_name,u3.user_pic commentUser_user_pic,
  r.update_time update_time,r.reply_content reply_content,r.comment_id comment_id,
  r.reply_id reply_id,r.to_reply_id to_reply_id,
@@ -94,13 +95,14 @@
          inner join comment_reply r on r.comment_id=co.comment_id and r.to_reply_id=0
          inner join user u on r.user_id=u.user_id
          inner join user u3 on co.user_id=u3.user_id
-         inner join user u2 on co.user_id=u3.user_id
          inner join course c on c.course_id=co.course_id
+          inner join user u2 on u2.user_id=c.user_id
         order by r.update_time desc limit #{startRow},#{size}
     </select>
+
     <select id="getMessageReplyReplyUserLimited" resultMap="ReplyCourseUserMap">
  select u.user_id user_user_id,u.nick_name user_nick_name,u.user_pic user_user_pic,
- u2.user_id toReplyUser_user_id,u2.nick_name toReplyUser_nick_name,u2.user_pic toReplyUser_user_pic,
+u2.user_id courseUser_user_id,u2.nick_name courseUser_nick_name,u2.user_pic courseUser_user_pic,
   u3.user_id commentUser_user_id,u3.nick_name commentUser_nick_name,u3.user_pic commentUser_user_pic,
  r.update_time update_time,r.reply_content reply_content,r.comment_id comment_id,
  r.reply_id reply_id,r.to_reply_id to_reply_id,
@@ -115,10 +117,10 @@
         from (select * from comment_reply where comment_reply.user_id = #{userId}) r2
          inner join comment  co on co.comment_id=r2.comment_id
          inner join course c on c.course_id=co.course_id
-         inner join user u3 on c.user_id=u3.user_id
-         inner join comment_reply r on r2.to_reply_id=r.reply_id
-          inner join user u on r.user_id=u.user_id
-         inner join user u2 on r2.user_id=u2.user_id
+         inner join user u3 on co.user_id=u3.user_id
+         inner join comment_reply r on r.to_reply_id=r2.reply_id <!--收到的回复-->
+          inner join user u on r.user_id=u.user_id<!--此条回复的发出者-->
+        inner join user u2 on u2.user_id=c.user_id
         order by r.update_time desc limit #{startRow},#{size}
     </select>
 </mapper>

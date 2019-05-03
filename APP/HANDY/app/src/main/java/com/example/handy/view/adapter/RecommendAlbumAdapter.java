@@ -41,6 +41,10 @@ public class RecommendAlbumAdapter extends ArrayAdapter<RecommendAlbumData> {
         notifyDataSetChanged();
     }
 
+    public List<RecommendAlbumData> getData() {
+        return this.mGridData;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -55,7 +59,7 @@ public class RecommendAlbumAdapter extends ArrayAdapter<RecommendAlbumData> {
 
         // 设置图片
         if (!TextUtils.isEmpty(mGridData.get(position).getAlbumPic())) {
-            ImageLoader.load(mContext, mGridData.get(position).getAlbumPic(), holder.getView(R.id.recommend_album_image));
+            ImageLoader.loadToNIV(mContext, mGridData.get(position).getAlbumPic(), holder.getView(R.id.recommend_album_image));
         }
 
         return convertView;
