@@ -17,4 +17,5 @@ public interface IFollowService {
     boolean hasFollowedSomeone(int uid,int followId);
     List<Follow> getFollowsAll(int uid);
     int getFollowNum(int uid);
+    public int getFansNum(int uid);
 }
