@@ -2,6 +2,7 @@ package com.example.handy.view.viewHolder;
 
 import android.media.Image;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +20,8 @@ public class PublishStepViewHolder extends BaseViewHolder {
     ImageView imageView;
     @BindView(R.id.step_pic_text)
     TextView textView;
+    @BindView(R.id.step_explain_ed)
+    EditText detailText;
 
     private int index;
 
@@ -40,5 +43,9 @@ public class PublishStepViewHolder extends BaseViewHolder {
 
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    public EditText getDetailText() {
+        return detailText;
     }
 }
