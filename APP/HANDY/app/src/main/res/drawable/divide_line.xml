@@ -3,8 +3,8 @@
     android:shape="line">
 
     <stroke
-        android:width="@dimen/dp_1"
-        android:color="@color/divide_color"
+        android:width="@dimen/dp_2"
+        android:color="@color/black"
         />
 
 </shape>
