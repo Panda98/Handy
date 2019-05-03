@@ -28,4 +28,14 @@ public class JudgeUtils {
         }
 
     }
+
+    public static void startCourseDetailActivityWithoutOption(Context mActivity, int courseId, String courseTitle) {
+
+        Intent intent = new Intent(mActivity, CourseDetailActivity.class);
+        intent.putExtra(Constants.COURSE_ID, courseId);
+        intent.putExtra(Constants.COURSE_Title, courseTitle);
+        mActivity.startActivity(intent);
+
+
+    }
 }
