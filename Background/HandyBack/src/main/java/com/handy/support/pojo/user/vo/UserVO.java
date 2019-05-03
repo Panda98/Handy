@@ -39,6 +39,7 @@ public class UserVO {
         this.birthday = dto.getBirthday();
         this.userPic = dto.getUserPic();
         this.followCount = dto.getFollowCount();
+        this.fansCount = dto.getFansCount();
 
     }
 

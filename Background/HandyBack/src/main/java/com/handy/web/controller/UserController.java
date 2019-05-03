@@ -113,9 +113,12 @@ public class UserController {
     @RequestMapping(value = "/user", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
     public String getUserInfo(int uid){
         UserDto user = iUserService.getUserByID(uid);
-        int followCount = followService.getFollowsAll(uid).size();
+        int followCount = followService.getFollowNum(uid);
 
         //todo: fanCount
+        int fansCount = followService.getFansNum(uid);
+        user.setFollowCount(followCount);
+        user.setFansCount(fansCount);
 
         ErrorEnum error = null;
         UserVO vo = null;
