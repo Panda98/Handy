@@ -13,6 +13,7 @@ public class CourseCommentVO {
     private Date updateTime;
     private String nickName;
     private String userPic;
+    private int replyNum;
 public CourseCommentVO(){}
 public CourseCommentVO(CommentDTO dto){
     this.commentContent=dto.getCommentContent();
@@ -22,6 +23,7 @@ public CourseCommentVO(CommentDTO dto){
     this.updateTime=dto.getUpdateTime();
     this.userPic=dto.getUser().getUserPic();
     this.userId=dto.getUser().getUserId();
+    this.replyNum=dto.getReplyNum();
 }
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;

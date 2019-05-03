@@ -32,6 +32,7 @@
         <association property="user" columnPrefix="user_" resultMap="com.handy.support.mapper.customMapper.MyUsersCoursesMapper.UserMap"/>
     </resultMap>
     <resultMap id="FullCommentCourseMap" type="com.handy.support.pojo.comment.dto.CommentDTO" extends="CommentMap">
+        <result column="reply_num" property="replyNum" javaType="java.lang.Integer" jdbcType="INTEGER"></result>
         <association property="user" columnPrefix="user_" resultMap="com.handy.support.mapper.customMapper.MyUsersCoursesMapper.UserMap"/>
     </resultMap>
     <select id="getCommentsByCourseLimited" resultMap="com.handy.support.mapper.CommentMapper.BaseResultMap">
@@ -71,11 +72,12 @@
         select u.user_id user_user_id,u.nick_name user_nick_name,u.user_pic user_user_pic,
         co.update_time update_time,
         co.course_id course_id,
-        co.comment_id comment_id,co.comment_content comment_content,co.user_id user_id
+        co.comment_id comment_id,co.comment_content comment_content,co.user_id user_id,
+        count(r.reply_id) reply_num
         from (select * from comment where comment.course_id=#{courseId})co
-        inner join user u
-        where
-        u.user_id=co.user_id  order by co.update_time desc limit #{startRow},#{size}
+        inner join user u on u.user_id=co.user_id
+        left join comment_reply r on r.comment_id=co.comment_id group by co.comment_id
+          order by co.update_time desc limit #{startRow},#{size}
     </select>
     <select id="getMessageCommentsReplyUserLimited" resultMap="ReplyCourseUserMap">
  select u.user_id user_user_id,u.nick_name user_nick_name,u.user_pic user_user_pic,
