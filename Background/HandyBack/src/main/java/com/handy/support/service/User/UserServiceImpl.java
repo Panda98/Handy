@@ -89,4 +89,8 @@ public class UserServiceImpl implements IUserService{
         return new UserVO(dto);
     }
 
+    public int getFanCount(int uid){
+        return 0;
+    }
+
 }

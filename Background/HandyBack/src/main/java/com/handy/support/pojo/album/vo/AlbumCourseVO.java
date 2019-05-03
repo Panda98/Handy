@@ -1,8 +1,10 @@
 package com.handy.support.pojo.album.vo;
 
+import com.handy.support.entity.Album;
 import com.handy.support.entity.AlbumCourse;
 import com.handy.support.entity.Course;
 import com.handy.support.pojo.album.dto.AlbumCourseDto;
+import com.handy.support.pojo.course.vo.CourseVO;
 import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;

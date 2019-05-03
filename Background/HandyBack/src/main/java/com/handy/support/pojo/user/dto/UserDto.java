@@ -13,6 +13,8 @@ public class UserDto {
     private String userPic;
     private Date birthday;
     private Byte levelId;
+    private int fansCount;
+    private int followCount;
 
     public Integer getUserId() {
         return userId;
@@ -68,5 +70,21 @@ public class UserDto {
 
     public void setLevelId(Byte levelId) {
         this.levelId = levelId;
+    }
+
+    public int getFansCount() {
+        return fansCount;
+    }
+
+    public void setFansCount(int fansCount) {
+        this.fansCount = fansCount;
+    }
+
+    public int getFollowCount() {
+        return followCount;
+    }
+
+    public void setFollowCount(int followCount) {
+        this.followCount = followCount;
     }
 }

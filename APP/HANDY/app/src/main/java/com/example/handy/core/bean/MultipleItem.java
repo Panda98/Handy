@@ -11,6 +11,7 @@ public class MultipleItem implements MultiItemEntity {
     public static final int TIPS_TEXT = 6;
     public static final int HEADER = 7;
     public static final int LABEL_VIEW = 8;
+    public static final int LEVEL_VIEW = 9;
 
 
 

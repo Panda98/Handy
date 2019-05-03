@@ -91,6 +91,13 @@
     <string name="publish_select_labels">请从下方选择一个或多个标签</string>
     <string name="publish_custom_labels">或输入一个自定义标签</string>
     <string name="publish_course_label_hint">自定义标签</string>
+    <string name="publish_level">难度等级</string>
+    <string name="publish_select_level">请选择一个合适的难度等级</string>
+    <string name="level_1">入门</string>
+    <string name="level_2">进阶</string>
+    <string name="level_3">熟练</string>
+    <string name="level_4">挑战</string>
+
 
     <!--教程详情-->
     <string name="course_abstract">简介</string>
