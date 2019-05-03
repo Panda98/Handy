@@ -1,6 +1,7 @@
 package com.handy.web.controller;
 
 import com.handy.support.pojo.Message.dto.FavorDTO;
+import com.handy.support.pojo.Message.vo.ReplyMessageVO;
 import com.handy.support.pojo.comment.dto.CommentDTO;
 import com.handy.support.pojo.comment.dto.ReplyDTO;
 import com.handy.support.pojo.comment.vo.CourseCommentVO;
@@ -35,9 +36,24 @@ public class MessageController {
     @RequestMapping(value = "/commentReply",method = GET)
     public String getMessageCommentReply(int uid,int page_no,int n){
             List<ReplyDTO>list=messageService.getCommentReplyMessage(uid,page_no,n);
-            list.addAll(messageService.getReplyReplyMessage(uid,page_no,n));
-        Collections.sort(list);
-        ReturnCode<List> code = new ReturnCode<List>(list);
+            List<ReplyMessageVO> message=new ArrayList<ReplyMessageVO>();
+            for(int i=0;i<list.size();i++){
+                ReplyDTO dto=list.get(i);
+                message.add(new ReplyMessageVO(dto,1));
+            }
+            List<ReplyDTO> list2=messageService.getReplyReplyMessage(uid,page_no,n);
+        List<ReplyMessageVO> message2=new ArrayList<ReplyMessageVO>();
+        for(int i=0;i<list2.size();i++){
+            ReplyDTO dto=list2.get(i);
+            message2.add(new ReplyMessageVO(dto,2));
+        }
+        message.addAll(message2);
+        Collections.sort(message);
+        List<ReplyMessageVO> result=new ArrayList<ReplyMessageVO>();
+        for(int i=0;i<n&&i<message.size();i++){
+            result.add(message.get(i));
+        }
+        ReturnCode<List> code = new ReturnCode<List>(result);
         return code.returnHandler();
     }
     @RequestMapping(value = "/courseLike",method = GET)
@@ -48,10 +64,10 @@ public class MessageController {
     }
     @RequestMapping(value = "/test",method = GET)
     public String getRecommend(int uid,int page_no,int n){
-            Recommend recommend=new Recommend();
+           /* Recommend recommend=new Recommend();
             recommend.init();
-        List<RecommendedItem> list=recommend.getRecommend(uid);
-        ReturnCode<List> code = new ReturnCode<List>(list);
+        List<RecommendedItem> list=recommend.getRecommend(uid);*/
+        ReturnCode<List> code = new ReturnCode<List>();
         return code.returnHandler();
     }
 }

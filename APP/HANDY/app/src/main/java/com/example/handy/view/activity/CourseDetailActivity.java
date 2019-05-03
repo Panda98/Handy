@@ -24,6 +24,7 @@ import com.example.handy.R;
 import com.example.handy.app.Constants;
 import com.example.handy.base.activity.BaseActivity;
 import com.example.handy.contract.CourseDetailContract;
+import com.example.handy.core.bean.CommentData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.ItemData;
@@ -32,8 +33,10 @@ import com.example.handy.presenter.CourseDetailPresenter;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.ImageLoader;
 import com.example.handy.utils.StatusBarUtil;
+import com.example.handy.view.adapter.CommentAdapter;
 import com.example.handy.view.adapter.CourseStepAdapter;
 import com.example.handy.view.adapter.FollowAdapter;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.shehuan.niv.NiceImageView;
 
 import java.util.ArrayList;
@@ -50,6 +53,8 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     Toolbar mToolbar;
     @BindView(R.id.common_toolbar_title_tv)
     TextView mTitleTv;
+    @BindView(R.id.normal_view)
+    SmartRefreshLayout mRefreshLayout;
 
     @BindView(R.id.course_detail_cover)
     NiceImageView mCourseCoverNIv;
@@ -75,9 +80,14 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     @BindView(R.id.course_detail_step)
     RecyclerView mStepRv;
 
+    @BindView(R.id.course_detail_comment)
+    RecyclerView mCommentRv;
+
     ArrayAdapter<String> mItemArrayAdapter;
     CourseStepAdapter mCourseStepAdapter;
+    private CommentAdapter mCommentAdapter;
 
+    private List<CommentData> commentDataList;
     private List<StepData> stepDataList;
 
     private int courseId;
@@ -111,11 +121,30 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
 
     @Override
     protected void initEventAndData() {
+        setRefresh();
         mPresenter.getCourseDetail(true, this.courseId);
+        mPresenter.getCommentList(true,this.courseId);
         if (CommonUtils.isNetworkConnected()) {
             showLoading();
         }
 
+    }
+
+    private void setRefresh() {
+        mRefreshLayout.setOnRefreshListener(refreshLayout -> {
+            mPresenter.autoRefresh(false);
+            refreshLayout.finishRefresh(1000);
+        });
+        mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
+            mPresenter.loadMore();
+            refreshLayout.finishLoadMore(1000);
+        });
+    }
+
+    @Override
+    protected void onViewCreated() {
+        super.onViewCreated();
+        initCommentRecyclerView();
     }
 
     private void initBundleData() {
@@ -199,6 +228,9 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         }
 
         this.followId = courseDetailData.getUserId();
+        // 获得关注状态
+        mPresenter.isFollow(this.followId);
+
         this.stepDataList = courseDetailData.getStepList();
 
         String[] itemNameList = new String[courseDetailData.getItemList().size()];
@@ -220,6 +252,31 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
 
     }
 
+    private void initCommentRecyclerView() {
+        commentDataList = new ArrayList<>();
+        mCommentAdapter = new CommentAdapter(R.layout.item_comment, commentDataList);
+        //mAdapter.setOnItemClickListener((adapter, view, position) -> startArticleDetailPager(view, position));
+        mCommentRv.setLayoutManager(new LinearLayoutManager(this));
+        mCommentRv.setHasFixedSize(true);
+        mCommentRv.setAdapter(mCommentAdapter);
+    }
+
+    @Override
+    public void showCommentData(List<CommentData> commentDataList, boolean isRefresh) {
+
+        if (mCommentAdapter == null) {
+            return;
+        }
+        if (isRefresh) {
+            this.commentDataList = commentDataList;
+            mCommentAdapter.replaceData(commentDataList);
+        } else {
+            this.commentDataList.addAll(commentDataList);
+            mCommentAdapter.addData(commentDataList);
+        }
+        showNormal();
+    }
+
     @Override
     public void showFollowView() {
         CommonUtils.showMessage(this, getString(R.string.follow));
@@ -230,6 +287,20 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     public void showUnFollowView() {
         CommonUtils.showMessage(this, getString(R.string.unFollow));
         System.out.println(getString(R.string.unFollow));
+    }
+
+    @Override
+    public void setFollowStatus(boolean isFollow) {
+        if(isFollow){
+            // 已关注
+            unFollowBtnView();
+            this.followStatus = true;
+        }
+        else {
+            // 未关注
+            followBtnView();
+            this.followStatus = false;
+        }
     }
 
     private void initStep() {

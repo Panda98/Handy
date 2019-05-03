@@ -54,6 +54,12 @@
             </LinearLayout>
 
 
+            <com.shehuan.niv.NiceImageView
+                android:id="@+id/account_pager_user_image"
+                android:layout_width="@dimen/dp_100"
+                android:layout_height="@dimen/dp_100"
+                app:is_circle="true"/>
+
         </LinearLayout>
 
 

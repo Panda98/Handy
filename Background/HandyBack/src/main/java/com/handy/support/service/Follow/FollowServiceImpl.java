@@ -50,4 +50,10 @@ public class FollowServiceImpl implements IFollowService{
         else
             return true;
     }
+    public int getFansNum(int uid){
+       return myFollowMapper.getFansNum(uid);
+    }
+    public int getFollowNum(int uid){
+        return myFollowMapper.getFollowNum(uid);
+    }
 }

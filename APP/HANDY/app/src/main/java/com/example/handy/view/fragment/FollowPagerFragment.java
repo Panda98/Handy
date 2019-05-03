@@ -7,25 +7,18 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
+
 
 import com.example.handy.R;
 import com.example.handy.app.Constants;
 import com.example.handy.base.fragment.BaseRootFragment;
 import com.example.handy.contract.FollowPagerContract;
-import com.example.handy.contract.MainPagerContract;
 import com.example.handy.core.bean.FollowData;
-import com.example.handy.core.bean.RecommendCourseData;
 import com.example.handy.presenter.FollowPagerPresenter;
-import com.example.handy.presenter.MainPagerPresenter;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.JudgeUtils;
 import com.example.handy.view.adapter.FollowAdapter;
-import com.example.handy.view.adapter.RecommendCourseAdapter;
-import com.jakewharton.rxbinding2.view.RxView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;

@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
 @RestController
 @RequestMapping(value="/follow",produces = "application/json; charset=utf-8")
 public class FollowController {
@@ -74,6 +76,11 @@ public class FollowController {
             update.add(new UserCourseUpdate(list.get(i)));
         }
         ReturnCode<List> code = new ReturnCode<List>(update);
+        return code.returnHandler();
+    }
+    @RequestMapping(value = "/test",method = GET)
+    public String getRecommend(int uid){
+        ReturnCode<Integer> code = new ReturnCode<Integer>(followService.getFollowNum(uid));
         return code.returnHandler();
     }
 }

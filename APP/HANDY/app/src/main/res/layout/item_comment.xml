@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:padding="@dimen/dp_10"
+    android:orientation="vertical">
+
+    <!--user_info-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <!--image-->
+        <com.shehuan.niv.NiceImageView
+            android:id="@+id/comment_user_image"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_60"
+            android:layout_marginStart="@dimen/dp_10"
+            app:corner_radius="@dimen/dp_10"
+            android:src="@color/grey"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center_vertical" />
+
+        <!--detail-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/dp_20"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/comment_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/normal_text"
+                android:text="哈哈哈"
+                android:textStyle="bold"
+                android:textSize="@dimen/sp_20"
+                />
+
+            <TextView
+                android:id="@+id/comment_publish_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:maxLines="2"
+                android:textSize="@dimen/sp_15"
+                android:textColor="@color/shallow_text"
+                android:text="2019-03-29 18:09"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--course_info-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:layout_marginStart="@dimen/dp_88"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/comment_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_16"
+            android:textColor="@color/normal_text"
+            android:text="这个做的好逼真啊！666"/>
+
+        <!--toolbar-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20">
+
+
+            <TextView
+                android:id="@+id/comment_reply_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/shallow_text"
+                android:clickable="true"
+                android:text="回复"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/comment_reply_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_30"
+                android:textColor="@color/shallow_text"
+                android:text="0"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

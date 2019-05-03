@@ -3,13 +3,18 @@ package com.example.handy.core.http;
 import com.example.handy.core.bean.AlbumListData;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
+import com.example.handy.core.bean.CommentData;
+import com.example.handy.core.bean.CommentReplyData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.RecommendAlbumData;
 import com.example.handy.core.bean.RecommendCourseData;
+import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.http.api.Apis;
 import com.example.handy.core.vo.LoginView;
+import com.example.handy.core.vo.PostCommentView;
+import com.example.handy.core.vo.ReplyCommentView;
 
 import java.util.List;
 import java.util.Map;
@@ -51,6 +56,11 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
+    public Observable<BaseResponse<UserInfoData>> getUserInfo(int uid) {
+        return mApis.getUserInfo(uid);
+    }
+
+    @Override
     public Observable<BaseResponse<List<BannerData>>> getBannerData() {
         return mApis.getBannerData();
     }
@@ -83,6 +93,11 @@ public class HttpHelperImpl implements HttpHelper {
     @Override
     public Observable<BaseResponse<Boolean>> unFollow(int uid, int followId) {
         return mApis.unFollow(uid, followId);
+    }
+
+    @Override
+    public Observable<BaseResponse<Boolean>> isFollow(int uid, int followId) {
+        return mApis.isFollow(uid, followId);
     }
 
     @Override
@@ -133,5 +148,25 @@ public class HttpHelperImpl implements HttpHelper {
     @Override
     public Observable<BaseResponse> uploadCourse(Map<String, RequestBody> partMap, MultipartBody.Part... files) {
         return mApis.uploadCourse(partMap, files);
+    }
+
+    @Override
+    public Observable<BaseResponse<Boolean>> postComment(PostCommentView commentView) {
+        return mApis.postComment(commentView);
+    }
+
+    @Override
+    public Observable<BaseResponse<Boolean>> postCommentReply(ReplyCommentView replyCommentView) {
+        return mApis.postCommentReply(replyCommentView);
+    }
+
+    @Override
+    public Observable<BaseResponse<List<CommentData>>> getComment(int course_id, int currentPage, int n) {
+        return mApis.getComment(course_id, currentPage, n);
+    }
+
+    @Override
+    public Observable<BaseResponse<CommentReplyData>> getCommentReply(int course_id, int currentPage, int n) {
+        return mApis.getCommentReply(course_id, currentPage, n);
     }
 }
