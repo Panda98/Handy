@@ -2,9 +2,8 @@ package com.example.handy.contract;
 
 import com.example.handy.base.presenter.AbstractPresenter;
 import com.example.handy.base.view.AbstractView;
-import com.example.handy.core.bean.AlbumDetailData;
-import com.example.handy.core.bean.FollowData;
-import com.example.handy.core.bean.RecommendCourseData;
+import com.example.handy.core.bean.AlbumCoverData;
+import com.example.handy.core.bean.CourseData;
 
 import java.util.List;
 
@@ -14,16 +13,16 @@ public interface AlbumDetailContract {
         /**
          * Show album data 显示专辑信息
          *
-         * @param albumDetailData AlbumDetailData
+         * @param albumCoverData AlbumCoverData
          */
-        void showAlbumCoverData(AlbumDetailData albumDetailData);
+        void showAlbumCoverData(AlbumCoverData albumCoverData);
 
         /**
          * Show album data 显示专辑内的教程信息
          *
-         * @param courseDataList List<RecommendCourseData>
+         * @param courseDataList List<CourseData>
          */
-        void showAlbumCourseData(List<RecommendCourseData> courseDataList, boolean isRefresh);
+        void showAlbumCourseData(List<CourseData> courseDataList, boolean isRefresh);
     }
 
     interface Presenter extends AbstractPresenter<AlbumDetailContract.View> {

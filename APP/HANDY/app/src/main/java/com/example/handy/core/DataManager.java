@@ -1,15 +1,16 @@
 package com.example.handy.core;
 
+import com.example.handy.core.bean.AlbumCoverData;
 import com.example.handy.core.bean.AlbumListData;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
 import com.example.handy.core.bean.CommentData;
 import com.example.handy.core.bean.CommentReplyData;
+import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.RecommendAlbumData;
-import com.example.handy.core.bean.RecommendCourseData;
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.http.HttpHelper;
 import com.example.handy.core.prefs.PreferenceHelper;
@@ -72,7 +73,7 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse<List<RecommendCourseData>>> getRecommendCourseListData(int uid, int currentPage, int n) {
+    public Observable<BaseResponse<List<CourseData>>> getRecommendCourseListData(int uid, int currentPage, int n) {
         return mHttpHelper.getRecommendCourseListData(uid, currentPage, n);
     }
 
@@ -112,18 +113,18 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse> collect(int courseId, int albumId) {
-        return mHttpHelper.collect(courseId, albumId);
+    public Observable<BaseResponse> collectCourse(int courseId, int albumId) {
+        return mHttpHelper.collectCourse(courseId, albumId);
     }
 
     @Override
-    public Observable<BaseResponse> unCollect(int courseId, int albumId) {
-        return mHttpHelper.unCollect(courseId, albumId);
+    public Observable<BaseResponse> unCollectCourse(int courseId, int albumId) {
+        return mHttpHelper.unCollectCourse(courseId, albumId);
     }
 
     @Override
-    public Observable<BaseResponse> isCollect(int userId, int courseId) {
-        return mHttpHelper.isCollect(userId, courseId);
+    public Observable<BaseResponse> isCollectCourse(int userId, int courseId) {
+        return mHttpHelper.isCollectCourse(userId, courseId);
     }
 
     @Override
@@ -142,7 +143,7 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse<List<RecommendCourseData>>> getUserPublishCourse(int userId, int currentPage, int n) {
+    public Observable<BaseResponse<List<CourseData>>> getUserPublishCourse(int userId, int currentPage, int n) {
         return mHttpHelper.getUserPublishCourse(userId, currentPage, n);
     }
 
@@ -169,6 +170,16 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     @Override
     public Observable<BaseResponse<CommentReplyData>> getCommentReply(int course_id, int currentPage, int n) {
         return mHttpHelper.getCommentReply(course_id, currentPage, n);
+    }
+
+    @Override
+    public Observable<BaseResponse<List<CourseData>>> getAlbumCourseData(int uid, int albumId, int currentPage, int n) {
+        return mHttpHelper.getAlbumCourseData(uid, albumId, currentPage, n);
+    }
+
+    @Override
+    public Observable<BaseResponse<AlbumCoverData>> getAlbumCoverData(int albumId) {
+        return mHttpHelper.getAlbumCoverData(albumId);
     }
 
 

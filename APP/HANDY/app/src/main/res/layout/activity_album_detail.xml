@@ -14,9 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp_54"
-        app:srlPrimaryColor="@color/colorPrimary">
+        app:srlPrimaryColor="@color/white">
 
-        <com.scwang.smartrefresh.header.PhoenixHeader
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -26,7 +26,7 @@
 
         </LinearLayout>
 
-        <com.scwang.smartrefresh.header.TaurusHeader
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>

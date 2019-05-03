@@ -1,16 +1,40 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_20"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/follow"
+            android:textColor="@color/normal_text"
+            android:textSize="@dimen/sp_24"/>
+
+    </LinearLayout>
+
+    <!--divide line-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/divide_color"
+        />
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/normal_view"
-        app:srlPrimaryColor="@color/colorPrimary"
+        app:srlPrimaryColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.scwang.smartrefresh.header.PhoenixHeader
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -20,19 +44,11 @@
             android:orientation="vertical"
             android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_20"
-                android:text="@string/follow"
-                android:textColor="@color/normal_text"
-                android:textSize="@dimen/sp_28"/>
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/follow_pager_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_10"
                 android:background="@color/colorBackground"
                  />
 
@@ -40,8 +56,8 @@
 
 
 
-        <com.scwang.smartrefresh.header.TaurusHeader
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-</FrameLayout>
+</LinearLayout>

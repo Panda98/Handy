@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.handy.R;
 import com.example.handy.core.bean.FollowData;
-import com.example.handy.core.bean.RecommendCourseData;
 import com.example.handy.utils.ImageLoader;
 import com.example.handy.view.viewHolder.FollowViewHolder;
 

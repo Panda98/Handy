@@ -1,5 +1,6 @@
 package com.example.handy.core.http;
 
+import com.example.handy.core.bean.AlbumCoverData;
 import com.example.handy.core.bean.AlbumListData;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
@@ -9,7 +10,7 @@ import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.RecommendAlbumData;
-import com.example.handy.core.bean.RecommendCourseData;
+import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.http.api.Apis;
 import com.example.handy.core.vo.LoginView;
@@ -71,7 +72,7 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse<List<RecommendCourseData>>> getRecommendCourseListData(int uid, int currentPage, int n) {
+    public Observable<BaseResponse<List<CourseData>>> getRecommendCourseListData(int uid, int currentPage, int n) {
         return mApis.getRecommendCourseListData(uid, currentPage, n);
     }
 
@@ -111,18 +112,18 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse> collect(int courseId, int albumId) {
-        return mApis.collect(courseId, albumId);
+    public Observable<BaseResponse> collectCourse(int courseId, int albumId) {
+        return mApis.collectCourse(courseId, albumId);
     }
 
     @Override
-    public Observable<BaseResponse> unCollect(int courseId, int albumId) {
-        return mApis.unCollect(courseId, albumId);
+    public Observable<BaseResponse> unCollectCourse(int courseId, int albumId) {
+        return mApis.unCollectCourse(courseId, albumId);
     }
 
     @Override
-    public Observable<BaseResponse> isCollect(int userId, int courseId) {
-        return mApis.isCollect(userId, courseId);
+    public Observable<BaseResponse> isCollectCourse(int userId, int courseId) {
+        return mApis.isCollectCourse(userId, courseId);
     }
 
     @Override
@@ -141,7 +142,7 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse<List<RecommendCourseData>>> getUserPublishCourse(int userId, int currentPage, int n) {
+    public Observable<BaseResponse<List<CourseData>>> getUserPublishCourse(int userId, int currentPage, int n) {
         return mApis.getUserPublishCourse(userId, currentPage, n);
     }
 
@@ -168,5 +169,15 @@ public class HttpHelperImpl implements HttpHelper {
     @Override
     public Observable<BaseResponse<CommentReplyData>> getCommentReply(int course_id, int currentPage, int n) {
         return mApis.getCommentReply(course_id, currentPage, n);
+    }
+
+    @Override
+    public Observable<BaseResponse<List<CourseData>>> getAlbumCourseData(int uid, int albumId, int currentPage, int n) {
+        return mApis.getAlbumCourseData(uid, albumId, currentPage, n);
+    }
+
+    @Override
+    public Observable<BaseResponse<AlbumCoverData>> getAlbumCoverData(int albumId) {
+        return mApis.getAlbumCoverData(albumId);
     }
 }

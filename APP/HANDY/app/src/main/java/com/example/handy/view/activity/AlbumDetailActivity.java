@@ -3,7 +3,6 @@ package com.example.handy.view.activity;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.WindowManager;
@@ -13,11 +12,9 @@ import com.example.handy.R;
 import com.example.handy.app.Constants;
 import com.example.handy.base.activity.BaseActivity;
 import com.example.handy.contract.AlbumDetailContract;
-import com.example.handy.contract.LoginContract;
-import com.example.handy.core.bean.AlbumDetailData;
-import com.example.handy.core.bean.RecommendCourseData;
+import com.example.handy.core.bean.AlbumCoverData;
+import com.example.handy.core.bean.CourseData;
 import com.example.handy.presenter.AlbumDetailPresenter;
-import com.example.handy.presenter.LoginPresenter;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.StatusBarUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -90,12 +87,12 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
     }
 
     @Override
-    public void showAlbumCoverData(AlbumDetailData albumDetailData) {
+    public void showAlbumCoverData(AlbumCoverData albumCoverData) {
 
     }
 
     @Override
-    public void showAlbumCourseData(List<RecommendCourseData> courseDataList, boolean isRefresh) {
+    public void showAlbumCourseData(List<CourseData> courseDataList, boolean isRefresh) {
 
     }
 }
