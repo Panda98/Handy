@@ -3,12 +3,17 @@ package com.example.handy.core.http;
 import com.example.handy.core.bean.AlbumListData;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
+import com.example.handy.core.bean.CommentData;
+import com.example.handy.core.bean.CommentReplyData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.RecommendAlbumData;
 import com.example.handy.core.bean.RecommendCourseData;
+import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.vo.LoginView;
+import com.example.handy.core.vo.PostCommentView;
+import com.example.handy.core.vo.ReplyCommentView;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +21,9 @@ import java.util.Map;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
 
@@ -42,6 +49,13 @@ public interface HttpHelper {
      */
     @GET("user/logout/json")
     Observable<BaseResponse<LoginData>> logout();
+
+    /**
+     * 获得用户信息
+     *
+     * @return 用户信息
+     */
+    Observable<BaseResponse<UserInfoData>> getUserInfo(int uid);
 
     /**
      * 热门推荐
@@ -91,6 +105,13 @@ public interface HttpHelper {
      * @return 结果
      */
     Observable<BaseResponse<Boolean>> unFollow(int uid, int followId);
+
+    /**
+     * 获取关注状态
+     *
+     * @return 结果
+     */
+    Observable<BaseResponse<Boolean>> isFollow(int uid, int followId);
 
     /**
      * 获得用户专辑列表
@@ -162,4 +183,35 @@ public interface HttpHelper {
      * @return 教程列表
      */
     Observable<BaseResponse> uploadCourse(Map<String, RequestBody> partMap, MultipartBody.Part... files);
+
+    /**
+     * 上传评论
+     *
+     * @param commentView PostCommentView
+     * @return 状态
+     */
+    Observable<BaseResponse<Boolean>> postComment(PostCommentView commentView);
+
+    /**
+     * 回复评论
+     *
+     * @param replyCommentView ReplyCommentView
+     * @return 状态
+     */
+    Observable<BaseResponse<Boolean>> postCommentReply(ReplyCommentView replyCommentView);
+
+    /**
+     * 获取教程评论
+     *
+     * @return 评论信息
+     */
+    Observable<BaseResponse<List<CommentData>>> getComment(int course_id, int currentPage, int n);
+
+    /**
+     * 获取评论回复
+     *
+     * @return 回复信息
+     */
+    Observable<BaseResponse<CommentReplyData>> getCommentReply(int course_id, int currentPage, int n);
+
 }

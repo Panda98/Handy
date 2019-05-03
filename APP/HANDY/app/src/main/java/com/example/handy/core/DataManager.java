@@ -3,14 +3,19 @@ package com.example.handy.core;
 import com.example.handy.core.bean.AlbumListData;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
+import com.example.handy.core.bean.CommentData;
+import com.example.handy.core.bean.CommentReplyData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.RecommendAlbumData;
 import com.example.handy.core.bean.RecommendCourseData;
+import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.http.HttpHelper;
 import com.example.handy.core.prefs.PreferenceHelper;
 import com.example.handy.core.vo.LoginView;
+import com.example.handy.core.vo.PostCommentView;
+import com.example.handy.core.vo.ReplyCommentView;
 
 import java.util.List;
 import java.util.Map;
@@ -45,6 +50,11 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     @Override
     public Observable<BaseResponse<LoginData>> logout() {
         return mHttpHelper.logout();
+    }
+
+    @Override
+    public Observable<BaseResponse<UserInfoData>> getUserInfo(int uid) {
+        return mHttpHelper.getUserInfo(uid);
     }
 
     /*
@@ -84,6 +94,11 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     @Override
     public Observable<BaseResponse<Boolean>> unFollow(int uid, int followId) {
         return mHttpHelper.unFollow(uid, followId);
+    }
+
+    @Override
+    public Observable<BaseResponse<Boolean>> isFollow(int uid, int followId) {
+        return mHttpHelper.isFollow(uid, followId);
     }
 
     @Override
@@ -134,6 +149,26 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     @Override
     public Observable<BaseResponse> uploadCourse(Map<String, RequestBody> partMap, MultipartBody.Part... files) {
         return mHttpHelper.uploadCourse(partMap, files);
+    }
+
+    @Override
+    public Observable<BaseResponse<Boolean>> postComment(PostCommentView commentView) {
+        return mHttpHelper.postComment(commentView);
+    }
+
+    @Override
+    public Observable<BaseResponse<Boolean>> postCommentReply(ReplyCommentView replyCommentView) {
+        return mHttpHelper.postCommentReply(replyCommentView);
+    }
+
+    @Override
+    public Observable<BaseResponse<List<CommentData>>> getComment(int course_id, int currentPage, int n) {
+        return mHttpHelper.getComment(course_id, currentPage, n);
+    }
+
+    @Override
+    public Observable<BaseResponse<CommentReplyData>> getCommentReply(int course_id, int currentPage, int n) {
+        return mHttpHelper.getCommentReply(course_id, currentPage, n);
     }
 
 
