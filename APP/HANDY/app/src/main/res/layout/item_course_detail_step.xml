@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/dp_20"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:orientation="vertical">
 
     <!--step-->
     <LinearLayout
@@ -16,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/course_step"
-            android:textSize="@dimen/sp_20"
+            android:textSize="@dimen/sp_18"
             android:textColor="@color/normal_text"
             android:textStyle="bold"/>
 
@@ -24,7 +23,7 @@
             android:id="@+id/course_detail_step_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_20"
+            android:textSize="@dimen/sp_18"
             android:textColor="@color/normal_text"
             android:text="1"
             android:textStyle="bold"/>
@@ -46,6 +45,7 @@
         android:id="@+id/course_detail_step_image"
         android:layout_width="@dimen/dp_300"
         android:layout_height="@dimen/dp_200"
+        android:layout_gravity="center"
         android:layout_marginTop="@dimen/dp_10"
         app:corner_radius="@dimen/dp_10"
         android:scaleType="centerCrop"

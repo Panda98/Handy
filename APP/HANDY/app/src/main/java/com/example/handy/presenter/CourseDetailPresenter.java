@@ -6,6 +6,7 @@ import com.example.handy.app.HandyAPP;
 import com.example.handy.base.presenter.BasePresenter;
 import com.example.handy.contract.CourseDetailContract;
 import com.example.handy.core.DataManager;
+import com.example.handy.core.bean.CommentData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.utils.RxUtils;
@@ -18,6 +19,8 @@ import javax.inject.Inject;
 public class CourseDetailPresenter extends BasePresenter<CourseDetailContract.View> implements CourseDetailContract.Presenter {
 
     private DataManager mDataManager;
+    private int mCurrentPage;
+    private boolean isRefresh = true;
 
     @Inject
     public CourseDetailPresenter(DataManager dataManager) {
@@ -80,6 +83,52 @@ public class CourseDetailPresenter extends BasePresenter<CourseDetailContract.Vi
                         mView.showUnFollowView();
                     }
 
+                }));
+    }
+
+    @Override
+    public void isFollow(int followId) {
+        addSubscribe(mDataManager.isFollow(getLoginAccount(), followId)
+                .compose(RxUtils.rxSchedulerHelper())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new BaseObserver<Boolean>(mView,
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_course_detail)) {
+                    @Override
+                    public void onNext(Boolean status) {
+                        System.out.println(status);
+                        mView.setFollowStatus(status);
+                    }
+
+                }));
+    }
+
+    @Override
+    public void autoRefresh(boolean isShowError) {
+
+    }
+
+    @Override
+    public void loadMore() {
+
+    }
+
+    @Override
+    public void loadMoreData() {
+
+    }
+
+    @Override
+    public void getCommentList(boolean isShowError, int courseId) {
+        addSubscribe(mDataManager.getComment(courseId, mCurrentPage, Constants.LOAD_NUM)
+                .compose(RxUtils.rxSchedulerHelper())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new BaseObserver<List<CommentData>>(mView,
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_follow_data),
+                        isShowError) {
+                    @Override
+                    public void onNext(List<CommentData> commentDataList) {
+                        mView.showCommentData(commentDataList, isRefresh);
+                    }
                 }));
     }
 }

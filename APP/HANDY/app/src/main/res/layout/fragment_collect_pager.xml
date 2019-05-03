@@ -14,6 +14,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="我的收藏"
+                android:textColor="@color/normal_text"
+                android:textSize="@dimen/sp_28"/>
+        </LinearLayout>
+
 
 
         <com.scwang.smartrefresh.header.TaurusHeader

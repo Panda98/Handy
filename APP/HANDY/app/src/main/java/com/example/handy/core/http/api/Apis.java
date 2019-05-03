@@ -4,12 +4,17 @@ import com.example.handy.core.bean.AlbumDetailData;
 import com.example.handy.core.bean.AlbumListData;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
+import com.example.handy.core.bean.CommentData;
+import com.example.handy.core.bean.CommentReplyData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.RecommendAlbumData;
 import com.example.handy.core.bean.RecommendCourseData;
+import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.vo.LoginView;
+import com.example.handy.core.vo.PostCommentView;
+import com.example.handy.core.vo.ReplyCommentView;
 
 import java.util.List;
 import java.util.Map;
@@ -57,6 +62,14 @@ public interface Apis {
      */
     @GET("user/logout/json")
     Observable<BaseResponse<LoginData>> logout();
+
+    /**
+     * 获得用户信息
+     *
+     * @return 用户信息
+     */
+    @GET("user")
+    Observable<BaseResponse<UserInfoData>> getUserInfo(@Query("uid")int uid);
 
     /**
      * 热门推荐
@@ -114,6 +127,14 @@ public interface Apis {
      */
     @GET("follow/unfollow")
     Observable<BaseResponse<Boolean>> unFollow(@Query("uid")int uid, @Query("follow_id")int followId);
+
+    /**
+     * 获取关注状态
+     *
+     * @return 结果
+     */
+    @GET("follow/hasFollowed")
+    Observable<BaseResponse<Boolean>> isFollow(@Query("uid")int uid, @Query("follow_id")int followId);
 
     /**
      * 获得用户专辑列表
@@ -197,5 +218,38 @@ public interface Apis {
     @POST("course/publish")
     Observable<BaseResponse> uploadCourse(@PartMap Map<String, RequestBody> partMap, @Part MultipartBody.Part... files);
 
+    /**
+     * 上传评论
+     *
+     * @param commentView PostCommentView
+     * @return 状态
+     */
+    @POST("comment/push")
+    Observable<BaseResponse<Boolean>> postComment(@Body PostCommentView commentView);
+
+    /**
+     * 回复评论
+     *
+     * @param replyCommentView ReplyCommentView
+     * @return 状态
+     */
+    @POST("comment/push")
+    Observable<BaseResponse<Boolean>> postCommentReply(@Body ReplyCommentView replyCommentView);
+
+    /**
+     * 获取教程评论
+     *
+     * @return 评论信息
+     */
+    @GET("comment/all")
+    Observable<BaseResponse<List<CommentData>>> getComment(@Query("course_id")int course_id, @Query("page_no") int currentPage, @Query("n")int n);
+
+    /**
+     * 获取评论回复
+     *
+     * @return 回复信息
+     */
+    @GET("comment/all")
+    Observable<BaseResponse<CommentReplyData>> getCommentReply(@Query("comment_id")int course_id, @Query("page_no") int currentPage, @Query("n")int n);
 
 }

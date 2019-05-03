@@ -14,6 +14,54 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingHorizontal="20dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp">
+
+                <Button
+                    android:id="@+id/main_pager_publish"
+                    android:layout_width="24dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_add_black_24dp"/>
+
+                <LinearLayout
+                    android:layout_width="280dp"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="100dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="个人中心"
+                    android:textColor="@color/normal_text"
+                    android:textSize="@dimen/sp_24"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <com.shehuan.niv.NiceImageView
+                android:id="@+id/account_pager_user_image"
+                android:layout_width="@dimen/dp_100"
+                android:layout_height="@dimen/dp_100"
+                app:is_circle="true"/>
+
+        </LinearLayout>
+
 
 
         <com.scwang.smartrefresh.header.TaurusHeader
