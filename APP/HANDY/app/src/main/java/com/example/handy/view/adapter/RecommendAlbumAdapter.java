@@ -41,6 +41,10 @@ public class RecommendAlbumAdapter extends ArrayAdapter<RecommendAlbumData> {
         notifyDataSetChanged();
     }
 
+    public List<RecommendAlbumData> getData() {
+        return this.mGridData;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
