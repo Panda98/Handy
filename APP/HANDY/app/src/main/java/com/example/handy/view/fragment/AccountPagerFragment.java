@@ -4,6 +4,7 @@ package com.example.handy.view.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,13 @@ import com.example.handy.app.Constants;
 import com.example.handy.base.fragment.BaseRootFragment;
 import com.example.handy.contract.AccountPagerContract;
 import com.example.handy.contract.CollectPagerContract;
+import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.presenter.AccountPagerPresenter;
 import com.example.handy.presenter.CollectPagerPresenter;
 import com.example.handy.utils.CommonUtils;
+import com.example.handy.utils.ImageLoader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.shehuan.niv.NiceImageView;
 
 import butterknife.BindView;
 
@@ -29,6 +33,9 @@ public class AccountPagerFragment extends BaseRootFragment<AccountPagerPresenter
 
     @BindView(R.id.normal_view)
     SmartRefreshLayout mRefreshLayout;
+
+    @BindView(R.id.account_pager_user_image)
+    NiceImageView mUserImage;
 
     @Override
     public void onAttach(Context context) {
@@ -54,6 +61,7 @@ public class AccountPagerFragment extends BaseRootFragment<AccountPagerPresenter
     protected void initEventAndData() {
         super.initEventAndData();
         setRefresh();
+        mPresenter.getUserInfo(true);
 
         if (CommonUtils.isNetworkConnected()) {
             showLoading();
@@ -76,4 +84,11 @@ public class AccountPagerFragment extends BaseRootFragment<AccountPagerPresenter
         super.initView();
     }
 
+    @Override
+    public void showUserInfo(UserInfoData userInfoData) {
+        // 设置用户头像
+        if (!TextUtils.isEmpty(userInfoData.getUserPic())) {
+            ImageLoader.loadToNIV(_mActivity, userInfoData.getUserPic(), mUserImage);
+        }
+    }
 }
