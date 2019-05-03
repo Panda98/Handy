@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/publish_course_labels"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/publish_labels"
+        android:textSize="@dimen/sp_20"
+        android:textColor="#5C5757"
+        android:padding="@dimen/dp_10"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/publish_select_labels"
+        android:paddingLeft="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"/>
+
+    <LinearLayout
+        android:id="@+id/labels_preinstall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/publish_custom_labels"
+        android:paddingStart="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"/>
+    <EditText
+        android:id="@+id/publish_course_custom_label"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_45"
+        android:background="@drawable/edittext_bg"
+        android:hint="@string/publish_course_label_hint"
+        android:paddingStart="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_10"/>
+
+
+</LinearLayout>

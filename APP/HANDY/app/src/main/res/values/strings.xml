@@ -68,6 +68,7 @@
 
     <!--follow-->
     <string name="follow">关注</string>
+    <string name="unFollow">取消关注</string>
 
 
     <string name="upload_cover_picture">+上传封面图</string>
@@ -86,6 +87,10 @@
     <string name="tips">小贴士</string>
     <string name="material_hint">输入你的用料</string>
     <string name="share_view">shareView</string>
+    <string name="publish_labels">分类标签</string>
+    <string name="publish_select_labels">请从下方选择一个或多个标签</string>
+    <string name="publish_custom_labels">或输入一个自定义标签</string>
+    <string name="publish_course_label_hint">自定义标签</string>
 
     <!--教程详情-->
     <string name="course_abstract">简介</string>

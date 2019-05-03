@@ -1,5 +1,6 @@
 package com.example.handy.core.http;
 
+import com.example.handy.core.bean.AlbumListData;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
 import com.example.handy.core.bean.CourseDetailData;
@@ -72,6 +73,61 @@ public class HttpHelperImpl implements HttpHelper {
     @Override
     public Observable<BaseResponse<CourseDetailData>> getCourseDetail(int courseId) {
         return mApis.getCourseDetail(courseId);
+    }
+
+    @Override
+    public Observable<BaseResponse<Boolean>> follow(int uid, int followId) {
+        return mApis.follow(uid, followId);
+    }
+
+    @Override
+    public Observable<BaseResponse<Boolean>> unFollow(int uid, int followId) {
+        return mApis.unFollow(uid, followId);
+    }
+
+    @Override
+    public Observable<BaseResponse<List<AlbumListData>>> getUserAlbumList(int userId) {
+        return mApis.getUserAlbumList(userId);
+    }
+
+    @Override
+    public Observable<BaseResponse<List<AlbumListData>>> getCollectAlbumList(int userId) {
+        return mApis.getCollectAlbumList(userId);
+    }
+
+    @Override
+    public Observable<BaseResponse> collect(int courseId, int albumId) {
+        return mApis.collect(courseId, albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse> unCollect(int courseId, int albumId) {
+        return mApis.unCollect(courseId, albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse> isCollect(int userId, int courseId) {
+        return mApis.isCollect(userId, courseId);
+    }
+
+    @Override
+    public Observable<BaseResponse> like(int userId, int courseId) {
+        return mApis.like(userId, courseId);
+    }
+
+    @Override
+    public Observable<BaseResponse> unLike(int userId, int courseId) {
+        return mApis.unLike(userId, courseId);
+    }
+
+    @Override
+    public Observable<BaseResponse> isLike(int userId, int courseId) {
+        return mApis.isLike(userId, courseId);
+    }
+
+    @Override
+    public Observable<BaseResponse<List<RecommendCourseData>>> getUserPublishCourse(int userId, int currentPage, int n) {
+        return mApis.getUserPublishCourse(userId, currentPage, n);
     }
 
     @Override

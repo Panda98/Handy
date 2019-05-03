@@ -54,6 +54,12 @@ public class FollowController {
         ReturnCode<Boolean> code = new ReturnCode<Boolean>(true);
         return code.returnHandler();
     }
+    @RequestMapping(value="/hasFollowed",method = RequestMethod.GET)
+    public String hasFollowedSomeone(int uid,int follow_id){
+        boolean judge=followService.hasFollowedSomeone(uid,follow_id);
+        ReturnCode<Boolean> code = new ReturnCode<Boolean>(judge);
+        return code.returnHandler();
+    }
     @RequestMapping(value="/moments",method = RequestMethod.GET)
     public String followsMoment(int uid,int page_no,int n){
        // List<Follow> followList=followService.getFollows(uid,page_no,n);
