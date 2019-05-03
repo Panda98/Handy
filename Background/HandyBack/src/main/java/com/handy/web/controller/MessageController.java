@@ -64,10 +64,10 @@ public class MessageController {
     }
     @RequestMapping(value = "/test",method = GET)
     public String getRecommend(int uid,int page_no,int n){
-           /* Recommend recommend=new Recommend();
+            Recommend recommend=new Recommend();
             recommend.init();
-        List<RecommendedItem> list=recommend.getRecommend(uid);*/
-        ReturnCode<List> code = new ReturnCode<List>();
+        List<RecommendedItem> list=recommend.getRecommend(uid);
+        ReturnCode<List> code = new ReturnCode<List>(list);
         return code.returnHandler();
     }
 }

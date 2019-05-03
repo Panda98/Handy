@@ -79,7 +79,7 @@ public class FollowController {
         return code.returnHandler();
     }
     @RequestMapping(value = "/test",method = GET)
-    public String getRecommend(int uid){
+    public String getTest(int uid){
         ReturnCode<Integer> code = new ReturnCode<Integer>(followService.getFollowNum(uid));
         return code.returnHandler();
     }
