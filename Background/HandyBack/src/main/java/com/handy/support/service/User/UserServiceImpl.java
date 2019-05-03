@@ -83,14 +83,10 @@ public class UserServiceImpl implements IUserService{
         return ErrorEnum.SUCCESS;
     }
 
-    public UserVO revert2VO(User user){
+    public UserVO revert2VO(User user) {
         UserDto dto = new UserDto();
-        BeanUtils.copyProperties(user,dto);
+        BeanUtils.copyProperties(user, dto);
         return new UserVO(dto);
-    }
-
-    public int getFanCount(int uid){
-        return 0;
     }
 
 }
