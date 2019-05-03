@@ -80,7 +80,7 @@
             android:background="@drawable/label_button"
             android:button="@null"
             android:padding="@dimen/dp_10"
-            android:textColor="@color/publish_course_button_orange"
+            android:textColor="@color/label_button_text"
             android:layout_marginStart="@dimen/dp_10"
             android:layout_marginEnd="@dimen/dp_10"/>
         <RadioButton
@@ -91,7 +91,7 @@
             android:background="@drawable/label_button"
             android:button="@null"
             android:padding="@dimen/dp_10"
-            android:textColor="@color/publish_course_button_orange"
+            android:textColor="@color/label_button_text"
             android:layout_marginStart="@dimen/dp_10"
             android:layout_marginEnd="@dimen/dp_10"/>
         <RadioButton
@@ -102,7 +102,7 @@
             android:background="@drawable/label_button"
             android:button="@null"
             android:padding="@dimen/dp_10"
-            android:textColor="@color/publish_course_button_orange"
+            android:textColor="@color/label_button_text"
             android:layout_marginStart="@dimen/dp_10"
             android:layout_marginEnd="@dimen/dp_10"/>
         <RadioButton
@@ -113,7 +113,7 @@
             android:background="@drawable/label_button"
             android:button="@null"
             android:padding="@dimen/dp_10"
-            android:textColor="@color/publish_course_button_orange"
+            android:textColor="@color/label_button_text"
             android:layout_marginStart="@dimen/dp_10"
             android:layout_marginEnd="@dimen/dp_10"/>
 
