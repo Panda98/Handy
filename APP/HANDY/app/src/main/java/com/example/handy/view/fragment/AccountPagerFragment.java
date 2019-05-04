@@ -60,7 +60,6 @@ public class AccountPagerFragment extends BaseRootFragment<AccountPagerPresenter
     @Override
     protected void initEventAndData() {
         super.initEventAndData();
-        setRefresh();
         mPresenter.getUserInfo(true);
 
         if (CommonUtils.isNetworkConnected()) {
@@ -68,16 +67,6 @@ public class AccountPagerFragment extends BaseRootFragment<AccountPagerPresenter
         }
     }
 
-    private void setRefresh() {
-        mRefreshLayout.setOnRefreshListener(refreshLayout -> {
-            mPresenter.autoRefresh(false);
-            refreshLayout.finishRefresh(1000);
-        });
-        mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
-            mPresenter.loadMore();
-            refreshLayout.finishLoadMore(1000);
-        });
-    }
 
     @Override
     protected void initView() {
