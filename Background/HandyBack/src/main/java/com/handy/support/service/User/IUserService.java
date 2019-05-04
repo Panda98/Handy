@@ -19,6 +19,7 @@ public interface IUserService {
 
     ErrorEnum addUserLabels(int uid, List<Integer>labels);
 
+    ErrorEnum modify(UserDto dto);
 
     UserVO revert2VO(User user);
 }
