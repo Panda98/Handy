@@ -33,4 +33,7 @@
     <select id="getFollowNum" resultType="java.lang.Integer">
         select count(*) from follow where follower_id=#{userId}
     </select>
+    <select id="getUserSubmitCourses" resultType="java.lang.Integer">
+        select course_id from course where user_id=#{userId}  limit #{startRow},#{size}
+    </select>
 </mapper>

@@ -12,6 +12,7 @@ public enum ErrorEnum{
     REGISTER_FAIL(2001,"注册失败！"),
     EMAIL_FAIL(2002,"该邮箱已被使用！"),
     DATABASE_BUSY(3001,"数据库忙!"),
+    UPLOAD_FAIL(4002,"上传失败！"),
     PUBLISH_FAIL(4001,"发布失败！"),
     QUERY_FAIL(5001,"查询失败!"),
     REQUEST_FAIL(5002,"请求失败！"),
@@ -20,7 +21,8 @@ public enum ErrorEnum{
     UNCOLLECT_FAIL(6002,"取消收藏失败!"),
     LIKE_FAIL(8001,"点赞失败"),
     UNLIKE_FAIL(8002,"取消点赞失败!"),
-    COMMENT_FAIL(9001,"评论失败!");
+    COMMENT_FAIL(9001,"评论失败!"),
+    ALBUM_CREATE_FAIL(7001,"创建专辑失败！");
 
     /**
      * 状态码
