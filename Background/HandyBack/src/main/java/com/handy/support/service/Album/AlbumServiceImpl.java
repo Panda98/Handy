@@ -173,4 +173,12 @@ public class AlbumServiceImpl implements IAlbumService {
 
     }
 
+    public ErrorEnum deleteAlbum(int albumid){
+        int code = albumMapper.deleteByPrimaryKey(albumid);
+        //todo: 删除失败
+        if(code == 0)
+            return ErrorEnum.REQUEST_FAIL;
+        return ErrorEnum.SUCCESS;
+    }
+
 }

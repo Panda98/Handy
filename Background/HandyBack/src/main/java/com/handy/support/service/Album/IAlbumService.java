@@ -23,4 +23,5 @@ public interface IAlbumService {
     AlbumDto getAlbumBriefInfo(int albumid);
     ErrorEnum collect(int uid, int albumid);
     ErrorEnum uncollect(int uid, int albumid);
+    ErrorEnum deleteAlbum(int albumid);
 }

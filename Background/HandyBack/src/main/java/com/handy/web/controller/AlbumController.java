@@ -137,4 +137,13 @@ public class AlbumController {
         return returnCode.returnHandler();
     }
 
+    @RequestMapping(value = "/album/delete",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
+    public String deleteAlbum(int albumid){
+        ErrorEnum errorEnum = albumService.deleteAlbum(albumid);
+
+        ReturnCode<String> returnCode = new ReturnCode<String>();
+        returnCode.setErrorEnum(errorEnum);
+        return returnCode.returnHandler();
+    }
+
 }
