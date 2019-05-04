@@ -116,14 +116,14 @@ public interface HttpHelper {
      *
      * @return AlbumListData
      */
-    Observable<BaseResponse<List<AlbumListData>>> getUserPrivateAlbumList(int userId);
+    Observable<BaseResponse<List<AlbumCoverData>>> getUserPrivateAlbumList(int userId);
 
     /**
      * 获得用户分享的专辑列表
      *
      * @return AlbumListData
      */
-    Observable<BaseResponse<List<AlbumListData>>> getUserSharedAlbumList(int userId);
+    Observable<BaseResponse<List<AlbumCoverData>>> getUserSharedAlbumList(int userId);
 
     /**
      * 获得收藏专辑列表

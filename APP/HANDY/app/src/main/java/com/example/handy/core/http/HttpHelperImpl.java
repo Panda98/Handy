@@ -102,13 +102,13 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse<List<AlbumListData>>> getUserPrivateAlbumList(int userId) {
+    public Observable<BaseResponse<List<AlbumCoverData>>> getUserPrivateAlbumList(int userId) {
         return mApis.getUserPrivateAlbumList(userId);
     }
 
     @Override
-    public Observable<BaseResponse<List<AlbumListData>>> getUserSharedAlbumList(int userId) {
-        return mApis.getUserPrivateAlbumList(userId);
+    public Observable<BaseResponse<List<AlbumCoverData>>> getUserSharedAlbumList(int userId) {
+        return mApis.getUserSharedAlbumList(userId);
     }
 
     @Override
