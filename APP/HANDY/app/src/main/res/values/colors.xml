@@ -47,5 +47,12 @@
     <color name="follow_boarder">#C49E9E</color>
     <color name="text_content">#908686</color>
 
+    <!--label-->
+    <color name="label_color">#D57E66</color>
+
+    <!--album detail-->
+    <color name="album_detail_user_name">#8B8484</color>
+    <color name="album_detail_collect">#867E7E</color>
+
 
 </resources>

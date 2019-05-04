@@ -8,8 +8,8 @@ public class UserInfoData {
     private String sex;
     private String birthday;
     private String userPic;
-    private int fanCount;
     private int followCount;
+    private int fansCount;
 
     public int getId() {
         return id;
@@ -36,7 +36,7 @@ public class UserInfoData {
     }
 
     public int getFanCount() {
-        return fanCount;
+        return fansCount;
     }
 
     public int getFollowCount() {

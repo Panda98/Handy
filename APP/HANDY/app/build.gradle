@@ -76,6 +76,7 @@ dependencies {
     implementation rootProject.ext.dependencies["VerticalTabLayout"]
     implementation rootProject.ext.dependencies["flowlayout-lib"]
     implementation rootProject.ext.dependencies["agentweb"]
+    implementation rootProject.ext.dependencies["LabelView"]
 
     //net
     implementation rootProject.ext.dependencies["gson"]

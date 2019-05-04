@@ -32,14 +32,14 @@ public interface AlbumDetailContract {
          *
          * @param isShowError If show error
          */
-        void getAlbumCoverData(boolean isShowError);
+        void getAlbumCoverData(boolean isShowError, int albumId);
 
         /**
          * Auto refresh 自动刷新
          *
          * @param isShowError If show error
          */
-        void autoRefresh(boolean isShowError);
+        void autoRefresh(boolean isShowError, int albumId);
 
         /**
          * Load more 加载更多
@@ -56,7 +56,7 @@ public interface AlbumDetailContract {
          *
          * @param isShowError If show error
          */
-        void getAlbumDetailData(boolean isShowError);
+        void getAlbumDetailData(boolean isShowError, int albumId);
 
         /**
          * Collect Album 收藏专辑
