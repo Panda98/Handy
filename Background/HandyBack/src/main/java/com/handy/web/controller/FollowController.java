@@ -8,6 +8,7 @@ import com.handy.support.pojo.Follow.vo.FollowVO;
 import com.handy.support.pojo.UserCourse.dto.UsersCoursesBrief;
 import com.handy.support.pojo.UserCourse.vo.UserCourseUpdate;
 import com.handy.support.service.Follow.FollowServiceImpl;
+import com.handy.support.service.Recommend.RecommendServiceImpl;
 import com.handy.support.utils.status.ReturnCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class FollowController {
     @Autowired
     FollowServiceImpl followService;
+    @Autowired
+    RecommendServiceImpl recommendService;
     @RequestMapping(value="/follows",method = RequestMethod.GET)
     public String getFollowers(int uid,int page_no,int n){
        /* List<Follow> followList=followService.getFollows(uid,page_no,n);
