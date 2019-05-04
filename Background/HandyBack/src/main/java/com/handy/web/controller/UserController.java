@@ -5,6 +5,7 @@ import com.handy.support.entity.User;
 import com.handy.support.pojo.user.dto.UserDto;
 import com.handy.support.pojo.user.vo.UserAuthVO;
 import com.handy.support.pojo.user.vo.UserLabelVO;
+import com.handy.support.pojo.user.vo.UserModifyVO;
 import com.handy.support.pojo.user.vo.UserVO;
 import com.handy.support.service.Follow.IFollowService;
 import com.handy.support.utils.GsonSetting;
@@ -130,6 +131,15 @@ public class UserController {
         }
 
         ReturnCode<UserVO> code = new ReturnCode<UserVO>(error,vo);
+        return code.returnHandler();
+    }
+
+    @RequestMapping(value = "/user/modify", produces = "application/json; charset=utf-8",method = RequestMethod.POST)
+    public String modify(@RequestBody UserModifyVO vo){
+        UserDto dto = vo.revert2DTO();
+        ErrorEnum error = iUserService.modify(dto);
+        ReturnCode<String> code = new ReturnCode<String>();
+        code.setErrorEnum(error);
         return code.returnHandler();
     }
 

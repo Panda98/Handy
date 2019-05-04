@@ -89,4 +89,13 @@ public class UserServiceImpl implements IUserService{
         return new UserVO(dto);
     }
 
+    public ErrorEnum modify(UserDto dto){
+        User user = new User();
+        BeanUtils.copyProperties(dto,user);
+        int code = userMapper.updateByPrimaryKeySelective(user);
+        if(code == 0)
+            return ErrorEnum.UPDATE_FAIL;
+        return ErrorEnum.SUCCESS;
+    }
+
 }
