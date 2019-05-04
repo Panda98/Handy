@@ -1,7 +1,10 @@
 package com.handy.support.pojo.user.vo;
 
 import com.handy.support.pojo.user.dto.UserDto;
+import org.springframework.beans.BeanUtils;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -106,4 +109,6 @@ public class UserVO {
     public void setFansCount(int fansCount) {
         this.fansCount = fansCount;
     }
+
+
 }

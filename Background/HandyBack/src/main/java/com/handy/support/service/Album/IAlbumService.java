@@ -15,10 +15,13 @@ import java.util.List;
  */
 
 public interface IAlbumService {
+    ErrorEnum createAlbum(AlbumDto dto);
     List<AlbumDto> getRecommendedAlbum(int uid);
-    List<AlbumDto> getAlbumList(int uid);
+    List<AlbumDto> getAlbumListByUserID(int uid);
+    List<AlbumDto> getCollectedAlbum(int uid);
     List<AlbumCourseInfoDto> getAlbumDetail(int albumid, int start, int n);
     AlbumDto getAlbumBriefInfo(int albumid);
     ErrorEnum collect(int uid, int albumid);
     ErrorEnum uncollect(int uid, int albumid);
+    ErrorEnum deleteAlbum(int albumid);
 }

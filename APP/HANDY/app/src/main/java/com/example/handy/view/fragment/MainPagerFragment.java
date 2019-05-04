@@ -152,6 +152,7 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
         sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
 
     }
+
     private void setRefresh() {
         mRefreshLayout.setOnRefreshListener(refreshLayout -> {
             mPresenter.autoRefresh(false);

@@ -19,7 +19,7 @@
 
 
         <!--jdbc的数据库连接 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="${mysql.url}" userId="${mysql.uid}" password="${mysql.pwd}">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="${mysql.url}" userId="${mysql.userId}" password="${mysql.pwd}">
         </jdbcConnection>
 
 

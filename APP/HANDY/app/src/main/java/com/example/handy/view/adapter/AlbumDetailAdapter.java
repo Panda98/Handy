@@ -4,28 +4,23 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.donkingliang.labels.LabelsView;
 import com.example.handy.R;
+import com.example.handy.base.fragment.BaseRootFragment;
+import com.example.handy.contract.AlbumDetailContract;
+import com.example.handy.contract.MainPagerContract;
+import com.example.handy.core.bean.AlbumCoverData;
 import com.example.handy.core.bean.CourseData;
-import com.example.handy.core.bean.LabelData;
+import com.example.handy.presenter.AlbumDetailPresenter;
+import com.example.handy.presenter.MainPagerPresenter;
 import com.example.handy.utils.ImageLoader;
 import com.example.handy.view.viewHolder.CourseViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class RecommendCourseAdapter extends BaseQuickAdapter<CourseData, CourseViewHolder> {
+public class AlbumDetailAdapter extends BaseQuickAdapter<CourseData, CourseViewHolder> {
 
-    private boolean isMainPage;
-
-
-    public RecommendCourseAdapter(int layoutResId, @Nullable List<CourseData> data) {
+    public AlbumDetailAdapter(int layoutResId, @Nullable List<CourseData> data) {
         super(layoutResId, data);
-    }
-
-    public void isCollectPage() {
-        isMainPage = true;
-        notifyDataSetChanged();
     }
 
     @Override
@@ -47,19 +42,5 @@ public class RecommendCourseAdapter extends BaseQuickAdapter<CourseData, CourseV
         if (!TextUtils.isEmpty(item.getCourseCover())) {
             ImageLoader.loadToNIV(mContext, item.getCourseCover(), helper.getView(R.id.recommend_course_image));
         }
-
-        // 设置标签
-        if (item.getLabelList() != null) {
-
-            ArrayList<String> label = new ArrayList<>();
-
-            for (LabelData labelData : item.getLabelList()) {
-                label.add(labelData.getLabelName());
-            }
-
-            LabelsView labelsView = (LabelsView) helper.getView(R.id.course_labels);
-            labelsView.setLabels(label);
-        }
-
     }
 }

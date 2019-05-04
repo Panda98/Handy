@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.donkingliang.labels.LabelsView;
 import com.example.handy.R;
 import com.shehuan.niv.NiceImageView;
 
@@ -22,6 +23,8 @@ public class CourseViewHolder extends BaseViewHolder {
     TextView courseDesc;
     @BindView(R.id.recommend_course_author)
     TextView courseAuthor;
+    @BindView(R.id.course_labels)
+    LabelsView courseLabels;
 
 
     public CourseViewHolder(View view) {
