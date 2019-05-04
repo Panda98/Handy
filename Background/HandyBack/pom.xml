@@ -256,7 +256,7 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.6</version>
-        </dependency>！
+        </dependency>
 
 
         <!-- 时间操作组件 -->
