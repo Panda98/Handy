@@ -79,5 +79,7 @@ public class AccountPagerFragment extends BaseRootFragment<AccountPagerPresenter
         if (!TextUtils.isEmpty(userInfoData.getUserPic())) {
             ImageLoader.loadToNIV(_mActivity, userInfoData.getUserPic(), mUserImage);
         }
+
+        showNormal();
     }
 }
