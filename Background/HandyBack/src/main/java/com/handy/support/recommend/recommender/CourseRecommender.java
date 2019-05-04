@@ -10,6 +10,7 @@ import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
 import org.apache.mahout.cf.taste.impl.similarity.EuclideanDistanceSimilarity;
 import org.apache.mahout.cf.taste.impl.similarity.GenericUserSimilarity;
 import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
+import org.apache.mahout.cf.taste.impl.similarity.UncenteredCosineSimilarity;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
 import org.apache.mahout.cf.taste.recommender.IDRescorer;
@@ -30,7 +31,7 @@ public class CourseRecommender implements Recommender{
     private  final DataModel model;
     public CourseRecommender(DataModel model)throws TasteException,IOException{
         UserSimilarity similarity=
-                new PearsonCorrelationSimilarity(model);
+                new UncenteredCosineSimilarity(model);
         UserNeighborhood neighborhood=
                 new NearestNUserNeighborhood(2,similarity,model);
         this.model=model;

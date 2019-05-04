@@ -121,7 +121,6 @@ public class AlbumCourse {
         this.updateTime = updateTime;
     }
 
-
     public AlbumCourse(Integer albumId, Integer courseId) {
         this.albumId = albumId;
         this.courseId = courseId;

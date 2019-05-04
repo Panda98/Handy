@@ -15,5 +15,6 @@ public interface MyFollowMapper {
     Follow hasFollowed(@Param("userId")int userId ,@Param("followId") int followId);
     int getFansNum(@Param("userId")int userId);
     int getFollowNum(@Param("userId")int userId);
+    List<Integer> getUserSubmitCourses(@Param("userId")int uid,@Param("startRow") int page_no,@Param("size") int n);
     // List<CommentReply> getCommentReplyByCommentIdLimited(@Param("commentId") int commentId, @Param("startRow")
 }
