@@ -137,12 +137,20 @@ public interface Apis {
     Observable<BaseResponse<Boolean>> isFollow(@Query("uid")int uid, @Query("follow_id")int followId);
 
     /**
-     * 获得用户专辑列表
+     * 获得用户私有专辑列表
      *
      * @return AlbumListData
      */
-    @GET("album/mylist")
-    Observable<BaseResponse<List<AlbumListData>>> getUserAlbumList(@Query("uid")int userId);
+    @GET("album/my_private_list")
+    Observable<BaseResponse<List<AlbumListData>>> getUserPrivateAlbumList(@Query("uid")int userId);
+
+    /**
+     * 获得用户分享的专辑列表
+     *
+     * @return AlbumListData
+     */
+    @GET("album/my_private_list")
+    Observable<BaseResponse<List<AlbumListData>>> getUserSharedAlbumList(@Query("uid")int userId);
 
     /**
      * 获得收藏专辑列表
