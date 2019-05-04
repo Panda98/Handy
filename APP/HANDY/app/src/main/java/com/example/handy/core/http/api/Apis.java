@@ -35,7 +35,8 @@ import retrofit2.http.Query;
  * @date 2019/04/07
  */
 public interface Apis {
-    String HOST = "http://106.13.106.249:8080/";
+    //String HOST = "http://106.13.106.249:8080/";
+    String HOST = "http://192.168.1.105:8080/Handy/";
 
     /**
      * 登陆
@@ -142,15 +143,15 @@ public interface Apis {
      * @return AlbumListData
      */
     @GET("album/my_private_list")
-    Observable<BaseResponse<List<AlbumListData>>> getUserPrivateAlbumList(@Query("uid")int userId);
+    Observable<BaseResponse<List<AlbumCoverData>>> getUserPrivateAlbumList(@Query("uid")int userId);
 
     /**
      * 获得用户分享的专辑列表
      *
      * @return AlbumListData
      */
-    @GET("album/my_private_list")
-    Observable<BaseResponse<List<AlbumListData>>> getUserSharedAlbumList(@Query("uid")int userId);
+    @GET("album/my_shared_list")
+    Observable<BaseResponse<List<AlbumCoverData>>> getUserSharedAlbumList(@Query("uid")int userId);
 
     /**
      * 获得收藏专辑列表

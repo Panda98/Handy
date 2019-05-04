@@ -35,5 +35,4 @@ public abstract class AbstractAllFragmentModule {
     @ContributesAndroidInjector(modules = AccountPagerFragmentModule.class)
     abstract AccountPagerFragment contributesAccountPagerFragmentInject();
 
-
 }
