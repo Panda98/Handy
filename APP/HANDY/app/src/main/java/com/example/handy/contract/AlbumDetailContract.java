@@ -2,9 +2,8 @@ package com.example.handy.contract;
 
 import com.example.handy.base.presenter.AbstractPresenter;
 import com.example.handy.base.view.AbstractView;
-import com.example.handy.core.bean.AlbumDetailData;
-import com.example.handy.core.bean.FollowData;
-import com.example.handy.core.bean.RecommendCourseData;
+import com.example.handy.core.bean.AlbumCoverData;
+import com.example.handy.core.bean.CourseData;
 
 import java.util.List;
 
@@ -14,16 +13,16 @@ public interface AlbumDetailContract {
         /**
          * Show album data 显示专辑信息
          *
-         * @param albumDetailData AlbumDetailData
+         * @param albumCoverData AlbumCoverData
          */
-        void showAlbumCoverData(AlbumDetailData albumDetailData);
+        void showAlbumCoverData(AlbumCoverData albumCoverData);
 
         /**
          * Show album data 显示专辑内的教程信息
          *
-         * @param courseDataList List<RecommendCourseData>
+         * @param courseDataList List<CourseData>
          */
-        void showAlbumCourseData(List<RecommendCourseData> courseDataList, boolean isRefresh);
+        void showAlbumCourseData(List<CourseData> courseDataList, boolean isRefresh);
     }
 
     interface Presenter extends AbstractPresenter<AlbumDetailContract.View> {
@@ -33,14 +32,14 @@ public interface AlbumDetailContract {
          *
          * @param isShowError If show error
          */
-        void getAlbumCoverData(boolean isShowError);
+        void getAlbumCoverData(boolean isShowError, int albumId);
 
         /**
          * Auto refresh 自动刷新
          *
          * @param isShowError If show error
          */
-        void autoRefresh(boolean isShowError);
+        void autoRefresh(boolean isShowError, int albumId);
 
         /**
          * Load more 加载更多
@@ -57,7 +56,7 @@ public interface AlbumDetailContract {
          *
          * @param isShowError If show error
          */
-        void getAlbumDetailData(boolean isShowError);
+        void getAlbumDetailData(boolean isShowError, int albumId);
 
         /**
          * Collect Album 收藏专辑

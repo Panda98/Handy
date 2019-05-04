@@ -92,7 +92,7 @@
                         <!--关注按钮-->
                         <TextView
                             android:id="@+id/course_detail_follow_btn"
-                            android:layout_width="@dimen/dp_70"
+                            android:layout_width="@dimen/dp_80"
                             android:layout_height="@dimen/dp_30"
                             android:layout_marginStart="@dimen/dp_20"
                             android:background="@drawable/bg_follow"

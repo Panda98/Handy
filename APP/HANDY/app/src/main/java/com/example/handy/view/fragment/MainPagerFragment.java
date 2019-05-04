@@ -6,40 +6,33 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.view.menu.MenuAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.example.handy.R;
 import com.example.handy.app.Constants;
-import com.example.handy.app.HandyAPP;
 import com.example.handy.base.fragment.BaseRootFragment;
 import com.example.handy.contract.MainPagerContract;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.RecommendAlbumData;
-import com.example.handy.core.bean.RecommendCourseData;
+import com.example.handy.core.bean.CourseData;
 import com.example.handy.presenter.MainPagerPresenter;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.JudgeUtils;
 import com.example.handy.view.activity.PublishCourseActivity;
-import com.example.handy.view.activity.RegisterActivity;
 import com.example.handy.view.adapter.RecommendAlbumAdapter;
 import com.example.handy.view.adapter.RecommendCourseAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.youth.banner.Banner;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
@@ -86,7 +79,7 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
     SliderLayout sliderLayout;
     PagerIndicator indicator;
 
-    private List<RecommendCourseData> recommendCourseData;
+    private List<CourseData> recommendCourseData;
     private RecommendCourseAdapter mAdapter;
     private SimpleAdapter menuAdapter;
     private RecommendAlbumAdapter albumAdapter;
@@ -159,6 +152,7 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
         sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
 
     }
+
     private void setRefresh() {
         mRefreshLayout.setOnRefreshListener(refreshLayout -> {
             mPresenter.autoRefresh(false);
@@ -289,7 +283,7 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
     }
 
     @Override
-    public void showRecommendCourseList(List<RecommendCourseData> recommendCourseData, boolean isRefresh) {
+    public void showRecommendCourseList(List<CourseData> recommendCourseData, boolean isRefresh) {
         if (mPresenter.getCurrentPage() == Constants.TYPE_MAIN_PAGER) {
             mRecyclerView.setVisibility(View.VISIBLE);
         } else {

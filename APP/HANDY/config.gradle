@@ -36,6 +36,7 @@ ext {
             "VerticalTabLayout"                 : "q.rorbin:VerticalTabLayout:1.2.5",
             "flowlayout-lib"                    : "com.hyman:flowlayout-lib:1.1.2",
             "agentweb"                          : "com.just.agentweb:agentweb:4.0.2",
+            "LabelView"                         : 'com.github.donkingliang:LabelsView:1.4.1',
 
             //net
             "gson"                              : "com.google.code.gson:gson:2.8.2",

@@ -1,27 +1,37 @@
 package com.example.handy.view.activity;
 
+import android.app.ActivityOptions;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.handy.R;
 import com.example.handy.app.Constants;
 import com.example.handy.base.activity.BaseActivity;
 import com.example.handy.contract.AlbumDetailContract;
-import com.example.handy.contract.LoginContract;
-import com.example.handy.core.bean.AlbumDetailData;
-import com.example.handy.core.bean.RecommendCourseData;
+import com.example.handy.core.bean.AlbumCoverData;
+import com.example.handy.core.bean.CourseData;
 import com.example.handy.presenter.AlbumDetailPresenter;
-import com.example.handy.presenter.LoginPresenter;
 import com.example.handy.utils.CommonUtils;
+import com.example.handy.utils.ImageLoader;
+import com.example.handy.utils.JudgeUtils;
 import com.example.handy.utils.StatusBarUtil;
+import com.example.handy.view.adapter.AlbumDetailAdapter;
+import com.example.handy.view.adapter.RecommendCourseAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.shehuan.niv.NiceImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,6 +44,21 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
     TextView mTitleTv;
     @BindView(R.id.normal_view)
     SmartRefreshLayout mRefreshLayout;
+    @BindView(R.id.album_detail_course_rv)
+    RecyclerView mRecyclerView;
+    @BindView(R.id.album_detail_cover)
+    NiceImageView mAlbumCover;
+    @BindView(R.id.album_detail_title)
+    TextView mAlbumTitle;
+    @BindView(R.id.album_detail_author_name)
+    TextView mAlbumAuthor;
+    @BindView(R.id.album_detail_collect_num)
+    TextView mAlbumCollectNum;
+
+    private AlbumCoverData albumCoverData;
+    private List<CourseData> courseDataList;
+
+    private AlbumDetailAdapter mAdapter;
 
     private int albumId;
     private boolean followStatus;
@@ -46,6 +71,8 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
     @Override
     protected void initToolbar() {
         initBundleData();
+        initRecyclerView();
+
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
@@ -70,7 +97,8 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
     @Override
     protected void initEventAndData() {
         setRefresh();
-        //mPresenter.getCourseDetail(true, this.courseId);
+        mPresenter.getAlbumCoverData(true, albumId);
+        mPresenter.getAlbumDetailData(true, albumId);
         //mPresenter.getCommentList(true,this.courseId);
         if (CommonUtils.isNetworkConnected()) {
             showLoading();
@@ -80,7 +108,7 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
 
     private void setRefresh() {
         mRefreshLayout.setOnRefreshListener(refreshLayout -> {
-            mPresenter.autoRefresh(false);
+            mPresenter.autoRefresh(false, albumId);
             refreshLayout.finishRefresh(1000);
         });
         mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
@@ -89,13 +117,65 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
         });
     }
 
-    @Override
-    public void showAlbumCoverData(AlbumDetailData albumDetailData) {
+    private void initRecyclerView() {
+        courseDataList = new ArrayList<>();
+        mAdapter = new AlbumDetailAdapter(R.layout.item_recommend_course, courseDataList);
+        //mAdapter.setOnItemClickListener((adapter, view, position) -> startArticleDetailPager(view, position));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setHasFixedSize(true);
 
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+
+    @Override
+    public void showAlbumCoverData(AlbumCoverData albumCoverData) {
+        // 设置封面
+        if (!TextUtils.isEmpty(albumCoverData.getAlbumPic())) {
+            ImageLoader.loadToNIV(this, albumCoverData.getAlbumPic(), mAlbumCover);
+        }
+
+        // 设置专辑名
+        if (!TextUtils.isEmpty(albumCoverData.getAlbumName())) {
+            mAlbumTitle.setText(albumCoverData.getAlbumName());
+        }
+
+        // 设置作者
+        //if (!TextUtils.isEmpty(albumCoverData.getAuthorId())) {
+        //    mAlbumTitle.setText(albumCoverData.getAlbumName());
+        //}
     }
 
     @Override
-    public void showAlbumCourseData(List<RecommendCourseData> courseDataList, boolean isRefresh) {
+    public void showAlbumCourseData(List<CourseData> courseDataList, boolean isRefresh) {
 
+        if (mAdapter == null) {
+            return;
+        }
+        if (isRefresh) {
+            this.courseDataList = courseDataList;
+            mAdapter.replaceData(courseDataList);
+        } else {
+            this.courseDataList.addAll(courseDataList);
+            mAdapter.addData(courseDataList);
+        }
+
+        // 点击跳转事件
+        mAdapter.setOnItemClickListener((adapter, view, position) -> startCourseDetailPager(view, position));
+
+        showNormal();
+    }
+
+    private void startCourseDetailPager(View view, int position) {
+        if (mAdapter.getData().size() <= 0 || mAdapter.getData().size() < position) {
+            return;
+        }
+
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, view, getString(R.string.share_view));
+        JudgeUtils.startCourseDetailActivity(this,
+                options,
+                mAdapter.getData().get(position).getCourseId(),
+                mAdapter.getData().get(position).getCourseTitle()
+        );
     }
 }
