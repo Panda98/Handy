@@ -9,6 +9,7 @@ public class AlbumDto {
     private String albumDetail;
     private Boolean albumState;
     private Integer userId;
+    private String userName;
     private String albumPic;
 
     public String getAlbumPic() {
@@ -60,7 +61,11 @@ public class AlbumDto {
         this.userId = userId;
     }
 
+    public String getUserName() {
+        return userName;
+    }
 
-
-
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 }

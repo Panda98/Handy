@@ -10,7 +10,7 @@ public class AlbumVO {
     private Integer albumId;
     private String albumName;
     private String albumDetail;
-    private Integer authorId;
+    private String authorName;
     private String albumPic;
 
     public AlbumVO(){
@@ -18,7 +18,7 @@ public class AlbumVO {
     }
     public AlbumVO(AlbumDto dto){
         BeanUtils.copyProperties(dto,this);
-        this.authorId = dto.getUserId();
+        this.authorName = dto.getUserName();
     }
 
     public Integer getAlbumId() {
@@ -45,12 +45,12 @@ public class AlbumVO {
         this.albumDetail = albumDetail;
     }
 
-    public Integer getAuthorId() {
-        return authorId;
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public void setAuthorId(Integer userId) {
-        this.authorId = userId;
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 
     public String getAlbumPic() {

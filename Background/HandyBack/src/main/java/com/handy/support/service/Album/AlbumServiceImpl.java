@@ -61,6 +61,8 @@ public class AlbumServiceImpl implements IAlbumService {
         for(Album album:albums){
             AlbumDto dto = new AlbumDto();
             BeanUtils.copyProperties(album,dto);
+            User user = userMapper.selectByPrimaryKey(album.getUserId());
+            dto.setUserName(user.getNickName());
             albumDtos.add(dto);
             if(i == 3)
                 break;
@@ -79,6 +81,8 @@ public class AlbumServiceImpl implements IAlbumService {
         for(Album album: albums){
             AlbumDto dto = new AlbumDto();
             BeanUtils.copyProperties(album,dto);
+            User author = userMapper.selectByPrimaryKey(album.getUserId());
+            dto.setUserName(author.getNickName());
             albumDtos.add(dto);
         }
         return albumDtos;
@@ -117,8 +121,8 @@ public class AlbumServiceImpl implements IAlbumService {
         Album album= albumMapper.selectByPrimaryKey(albumid);
         AlbumDto dto = new AlbumDto();
         BeanUtils.copyProperties(album,dto);
-
-
+        User user = userMapper.selectByPrimaryKey(album.getUserId());
+        dto.setUserName(user.getNickName());
         return dto;
 
     }
@@ -157,6 +161,8 @@ public class AlbumServiceImpl implements IAlbumService {
             Album album = albumMapper.selectByPrimaryKey(userAlbum.getAlbumId());
             AlbumDto dto = new AlbumDto();
             BeanUtils.copyProperties(album,dto);
+            User user = userMapper.selectByPrimaryKey(album.getUserId());
+            dto.setUserName(user.getNickName());
             albumDtos.add(dto);
         }
         return albumDtos;
