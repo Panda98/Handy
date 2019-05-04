@@ -42,6 +42,10 @@ public class AlbumServiceImpl implements IAlbumService {
 
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
+    private UserAlbumMapper userAlbumMapper;
+
+    @Autowired
+    @SuppressWarnings("SpringJavaAutowiringInspection")
     private CourseLabelMapper courseLabelMapper;
 
     @Autowired
@@ -65,7 +69,7 @@ public class AlbumServiceImpl implements IAlbumService {
         return albumDtos;
     }
 
-    public List<AlbumDto> getAlbumList(int uid){
+    public List<AlbumDto> getAlbumListByUserID(int uid){
         AlbumExample example = new AlbumExample();
         AlbumExample.Criteria criteria = example.createCriteria();
         criteria.andUserIdEqualTo(uid);
@@ -120,19 +124,51 @@ public class AlbumServiceImpl implements IAlbumService {
     }
 
     public ErrorEnum collect(int uid,int albumid){
-        Album album = albumMapper.selectByPrimaryKey(albumid);
-        album.setAlbumState(false);
-        album.setUserId(uid);
-        albumMapper.insert(album);
+        UserAlbum userAlbum = new UserAlbum();
+        userAlbum.setUserId(uid);
+        userAlbum.setAlbumId(albumid);
+        int code = userAlbumMapper.insert(userAlbum);
+        if(code == 0)
+            return ErrorEnum.COLLECT_FAIL;
         return ErrorEnum.SUCCESS;
     }
 
     public ErrorEnum uncollect(int uid, int albumid){
-        AlbumExample example = new AlbumExample();
-        AlbumExample.Criteria criteria = example.createCriteria();
-        criteria.andAlbumIdEqualTo(albumid).andUserIdEqualTo(uid);
+        UserAlbumExample example = new UserAlbumExample();
+        UserAlbumExample.Criteria criteria = example.createCriteria();
+        criteria.andAlbumIdEqualTo(albumid);
+        criteria.andUserIdEqualTo(uid);
         example.or(criteria);
-        albumMapper.deleteByExample(example);
+        int code = userAlbumMapper.deleteByExample(example);
+        if(code == 0)
+            return ErrorEnum.UNCOLLECT_FAIL;
+        return ErrorEnum.SUCCESS;
+
+    }
+
+    public List<AlbumDto> getCollectedAlbum(int uid){
+        UserAlbumExample example = new UserAlbumExample();
+        UserAlbumExample.Criteria criteria = example.createCriteria();
+        criteria.andUserIdEqualTo(uid);
+        example.or(criteria);
+        List<UserAlbum> userAlbums = userAlbumMapper.selectByExample(example);
+        List<AlbumDto> albumDtos = new ArrayList<AlbumDto>();
+        for(UserAlbum userAlbum:userAlbums){
+            Album album = albumMapper.selectByPrimaryKey(userAlbum.getAlbumId());
+            AlbumDto dto = new AlbumDto();
+            BeanUtils.copyProperties(album,dto);
+            albumDtos.add(dto);
+        }
+        return albumDtos;
+    }
+
+    public ErrorEnum createAlbum(AlbumDto dto){
+        Album album = new Album();
+        BeanUtils.copyProperties(dto,album);
+        int code = albumMapper.insert(album);
+        //todo: 创建专辑失败
+        if(code == 0)
+            return ErrorEnum.UPDATE_FAIL;
         return ErrorEnum.SUCCESS;
 
     }
