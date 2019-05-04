@@ -83,14 +83,19 @@ public class UserServiceImpl implements IUserService{
         return ErrorEnum.SUCCESS;
     }
 
-    public UserVO revert2VO(User user){
+    public UserVO revert2VO(User user) {
         UserDto dto = new UserDto();
-        BeanUtils.copyProperties(user,dto);
+        BeanUtils.copyProperties(user, dto);
         return new UserVO(dto);
     }
 
-    public int getFanCount(int uid){
-        return 0;
+    public ErrorEnum modify(UserDto dto){
+        User user = new User();
+        BeanUtils.copyProperties(dto,user);
+        int code = userMapper.updateByPrimaryKeySelective(user);
+        if(code == 0)
+            return ErrorEnum.UPDATE_FAIL;
+        return ErrorEnum.SUCCESS;
     }
 
 }

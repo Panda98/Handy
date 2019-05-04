@@ -65,7 +65,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         assert actionBar != null;
         actionBar.setDisplayShowTitleEnabled(false);
         mTitleTv.setText(getString(R.string.navigation_home_pager));
-        StatusBarUtil.setStatusColor(getWindow(), ContextCompat.getColor(this, R.color.main_status_bar_blue), 1f);
+        StatusBarUtil.setStatusColor(getWindow(), ContextCompat.getColor(this, R.color.publish_course_button_green), 1f);
         mToolbar.setNavigationOnClickListener(v -> onBackPressedSupport());
     }
 

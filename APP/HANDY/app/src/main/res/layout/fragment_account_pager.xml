@@ -1,71 +1,235 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+﻿<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!--tool bar-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp">
+
+        <Button
+            android:id="@+id/main_pager_publish"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="@dimen/dp_40"
+            android:background="@drawable/ic_add_black_24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="个人中心"
+            android:textColor="@color/normal_text"
+            android:gravity="center"
+            android:textSize="@dimen/sp_24" />
+
+    </RelativeLayout>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/normal_view"
-        app:srlPrimaryColor="@color/colorPrimary"
+        app:srlPrimaryColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.scwang.smartrefresh.header.PhoenixHeader
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:paddingHorizontal="20dp"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dp_10"
             android:orientation="vertical">
 
+            <!--user info-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/sp_10">
+
+                <!--头像-->
+                <com.shehuan.niv.NiceImageView
+                    android:id="@+id/account_pager_user_image"
+                    android:layout_gravity="center_vertical"
+                    app:is_circle="true"
+                    android:layout_marginStart="@dimen/sp_36"
+                    android:layout_width="@dimen/dp_80"
+                    android:layout_height="@dimen/dp_80" />
+
+                <TextView
+                    android:id="@+id/account_pager_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/sp_36"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/sp_24"
+                    android:text="UserName"
+                    android:textColor="@color/normal_text"/>
+
+            </LinearLayout>
+
+            <!--setting segment-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp">
+                android:layout_marginTop="@dimen/sp_20"
+                android:gravity="center_vertical"
+                >
 
-                <Button
-                    android:id="@+id/main_pager_publish"
-                    android:layout_width="24dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/ic_add_black_24dp"/>
-
+                <!--粉丝/关注数-->
                 <LinearLayout
-                    android:layout_width="280dp"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="100dp">
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+                    <!--fan-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/normal_text"
+                            android:text="粉丝"
+                            />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="个人中心"
-                    android:textColor="@color/normal_text"
-                    android:textSize="@dimen/sp_24"/>
+                        <TextView
+                            android:id="@+id/account_pager_user_follower"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dp_10"
+                            android:textColor="@color/normal_text"
+                            android:text="0"
+                            />
+
+                    </LinearLayout>
+
+                    <!--follow-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/normal_text"
+                            android:text="关注"/>
+
+                        <TextView
+                            android:id="@+id/account_pager_user_follow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/normal_text"
+                            android:layout_marginStart="@dimen/dp_10"
+                            android:text="0"/>
+
+                    </LinearLayout>
+
 
                 </LinearLayout>
 
+                <!--divide line-->
+                <View
+                    android:layout_width="@dimen/dp_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/divide_color"
+                    />
+
+                <!--消息-->
+                <LinearLayout
+                    android:id="@+id/account_page_message_btn"
+                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_36"
+                        android:layout_height="@dimen/dp_36"
+                        android:src="@drawable/loading_card"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:textColor="@color/normal_text"
+                        android:text="消息"/>
+
+                </LinearLayout>
+
+                <!--浏览历史-->
+                <LinearLayout
+                    android:id="@+id/account_page_history_btn"
+                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_36"
+                        android:layout_height="@dimen/dp_36"
+                        android:src="@drawable/loading_card"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:textColor="@color/normal_text"
+                        android:text="浏览历史"/>
+
+
+                </LinearLayout>
+
+                <!--设置-->
+                <LinearLayout
+                    android:id="@+id/account_page_setting_btn"
+                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_36"
+                        android:layout_height="@dimen/dp_36"
+                        android:src="@drawable/loading_card"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:textColor="@color/normal_text"
+                        android:text="设置"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-
-            <com.shehuan.niv.NiceImageView
-                android:id="@+id/account_pager_user_image"
-                android:layout_width="@dimen/dp_100"
-                android:layout_height="@dimen/dp_100"
-                app:is_circle="true"/>
+            <!--divide line-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/divide_color"/>
 
         </LinearLayout>
 
 
 
-        <com.scwang.smartrefresh.header.TaurusHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-</FrameLayout>
+
+</LinearLayout>

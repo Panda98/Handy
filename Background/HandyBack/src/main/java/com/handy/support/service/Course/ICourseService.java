@@ -8,8 +8,12 @@ import com.handy.support.entity.User;
 import com.handy.support.entity.Hot;
 import com.handy.support.pojo.course.dto.*;
 import com.handy.support.pojo.course.vo.*;
+import org.apache.commons.net.ftp.FTPClient;
 import org.apache.solr.client.solrj.*;
+import sun.net.ftp.FtpClient;
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 /**
  * Created by joanie on 2019/4/11.
@@ -55,6 +59,14 @@ public interface ICourseService {
 
     List<Step> sortStep(List<Step> stepList);
 
+
 //    List<CourseSimpleVO> getSearchedCourse(String text) throws IOException, SolrServerException;
+
+    FTPClient getFTPClient(String ftpHost, String ftpUserName,
+                           String ftpPassword, int ftpPort);
+   String uploadImg(String ftpHost, String ftpUserName,
+                    String ftpPassword, int ftpPort, String ftpPath,
+                    String fileName,InputStream input);
+
 
 }

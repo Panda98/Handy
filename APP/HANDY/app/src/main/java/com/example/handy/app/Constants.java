@@ -110,4 +110,10 @@ public class Constants {
     public static final String COURSE_Title = "course_title";
     public static final String AUTHOR_ID = "author_id";
 
+    /**
+     * Album Detail
+     */
+    public static final String ALBUM_ID = "album_id";
+
+
 }

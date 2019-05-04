@@ -24,50 +24,100 @@
         android:textColor="#5C5757"
         />
 
-    <LinearLayout
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+        <!--<Button-->
+            <!--android:id="@+id/publish_level_1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@drawable/label_button"-->
+            <!--android:text="@string/level_1"-->
+            <!--android:textColor="@color/publish_course_button_orange"-->
+            <!--android:textSize="16sp"-->
+            <!--android:layout_marginEnd="@dimen/dp_10"-->
+            <!--/>-->
+        <!--<Button-->
+            <!--android:id="@+id/publish_level_2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@drawable/label_button"-->
+            <!--android:text="@string/level_2"-->
+            <!--android:textColor="@color/publish_course_button_orange"-->
+            <!--android:textSize="16sp"-->
+            <!--android:layout_marginEnd="@dimen/dp_10"-->
+            <!--/>-->
+        <!--<Button-->
+            <!--android:id="@+id/publish_level_3"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@drawable/label_button"-->
+            <!--android:text="@string/level_3"-->
+            <!--android:textColor="@color/publish_course_button_orange"-->
+            <!--android:textSize="16sp"-->
+            <!--android:layout_marginEnd="@dimen/dp_10"-->
+            <!--/>-->
+        <!--<Button-->
+            <!--android:id="@+id/publish_level_4"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@drawable/label_button"-->
+            <!--android:text="@string/level_4"-->
+            <!--android:textColor="@color/publish_course_button_orange"-->
+            <!--android:textSize="16sp"-->
+            <!--/>-->
+    <!--</LinearLayout>-->
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <Button
+        <RadioButton
             android:id="@+id/publish_level_1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/label_button"
             android:text="@string/level_1"
-            android:textColor="@color/publish_course_button_orange"
-            android:textSize="16sp"
-            android:layout_marginEnd="@dimen/dp_10"
-            />
-        <Button
+            android:background="@drawable/label_button"
+            android:button="@null"
+            android:padding="@dimen/dp_10"
+            android:textColor="@color/label_button_text"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"/>
+        <RadioButton
             android:id="@+id/publish_level_2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/label_button"
             android:text="@string/level_2"
-            android:textColor="@color/publish_course_button_orange"
-            android:textSize="16sp"
-            android:layout_marginEnd="@dimen/dp_10"
-            />
-        <Button
+            android:background="@drawable/label_button"
+            android:button="@null"
+            android:padding="@dimen/dp_10"
+            android:textColor="@color/label_button_text"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"/>
+        <RadioButton
             android:id="@+id/publish_level_3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/label_button"
             android:text="@string/level_3"
-            android:textColor="@color/publish_course_button_orange"
-            android:textSize="16sp"
-            android:layout_marginEnd="@dimen/dp_10"
-            />
-        <Button
+            android:background="@drawable/label_button"
+            android:button="@null"
+            android:padding="@dimen/dp_10"
+            android:textColor="@color/label_button_text"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"/>
+        <RadioButton
             android:id="@+id/publish_level_4"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/label_button"
             android:text="@string/level_4"
-            android:textColor="@color/publish_course_button_orange"
-            android:textSize="16sp"
-            />
-    </LinearLayout>
+            android:background="@drawable/label_button"
+            android:button="@null"
+            android:padding="@dimen/dp_10"
+            android:textColor="@color/label_button_text"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"/>
+
+    </RadioGroup>
 
 
 

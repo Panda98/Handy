@@ -293,12 +293,12 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     public void setFollowStatus(boolean isFollow) {
         if(isFollow){
             // 已关注
-            unFollowBtnView();
+            followBtnView();
             this.followStatus = true;
         }
         else {
             // 未关注
-            followBtnView();
+            unFollowBtnView();
             this.followStatus = false;
         }
     }

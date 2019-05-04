@@ -2,7 +2,7 @@ package com.example.handy.core.bean;
 
 import java.util.List;
 
-public class RecommendCourseData {
+public class CourseData {
 
     private int courseId;
     private String courseTitle;

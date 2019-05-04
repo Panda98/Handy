@@ -25,11 +25,14 @@
         android:orientation="horizontal">
 
         <!--image-->
-        <ImageView
+        <com.shehuan.niv.NiceImageView
             android:id="@+id/recommend_course_image"
             android:layout_width="@dimen/dp_80"
             android:layout_height="@dimen/dp_80"
             android:layout_marginStart="@dimen/dp_10"
+            app:corner_radius="@dimen/dp_10"
+            android:background="@drawable/loading_card"
+            android:scaleType="centerCrop"
             android:layout_gravity="center_vertical" />
 
         <!--description-->
@@ -59,15 +62,43 @@
                 android:textColor="@color/black"
                 android:text="Android Handler: 手把手带你深入分析Handler机制源码"/>
 
-            <TextView
-                android:id="@+id/recommend_course_author"
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5"
-                android:maxLines="1"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/black"
-                android:text="wang"/>
+                android:layout_height="wrap_content">
+
+
+
+                <com.donkingliang.labels.LabelsView
+                    android:id="@+id/course_labels"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    app:labelBackground="@drawable/label_bg"
+                    app:labelTextColor="@color/label_color"
+                    app:labelTextSize="10sp"
+                    app:labelTextPaddingTop="2dp"
+                    app:labelTextPaddingBottom="2dp"
+                    app:labelTextPaddingLeft="5dp"
+                    app:labelTextPaddingRight="5dp"
+                    app:lineMargin="5dp"
+                    app:wordMargin="5dp"
+                    app:selectType="NONE"
+                    />
+
+                <TextView
+                    android:id="@+id/recommend_course_author"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:maxLines="1"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/black"
+                    android:text="wang"/>
+
+            </RelativeLayout>
+
+
         </LinearLayout>
     </LinearLayout>
 

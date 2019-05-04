@@ -1,5 +1,8 @@
 package com.handy.support.pojo.user.dto;
 
+import com.handy.support.entity.User;
+import org.springframework.beans.BeanUtils;
+
 import java.util.Date;
 
 /**
@@ -87,4 +90,5 @@ public class UserDto {
     public void setFollowCount(int followCount) {
         this.followCount = followCount;
     }
+
 }

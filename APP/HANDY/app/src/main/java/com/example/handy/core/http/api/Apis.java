@@ -1,16 +1,16 @@
 package com.example.handy.core.http.api;
 
-import com.example.handy.core.bean.AlbumDetailData;
+import com.example.handy.core.bean.AlbumCoverData;
 import com.example.handy.core.bean.AlbumListData;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
 import com.example.handy.core.bean.CommentData;
 import com.example.handy.core.bean.CommentReplyData;
+import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.RecommendAlbumData;
-import com.example.handy.core.bean.RecommendCourseData;
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.vo.LoginView;
 import com.example.handy.core.vo.PostCommentView;
@@ -93,7 +93,7 @@ public interface Apis {
      * @return 教程列表
      */
     @GET("course/recommend")
-    Observable<BaseResponse<List<RecommendCourseData>>> getRecommendCourseListData(@Query("uid")int uid, @Query("page_no") int currentPage,@Query("n")int n);
+    Observable<BaseResponse<List<CourseData>>> getRecommendCourseListData(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
 
     /**
      * 关注列表
@@ -137,12 +137,20 @@ public interface Apis {
     Observable<BaseResponse<Boolean>> isFollow(@Query("uid")int uid, @Query("follow_id")int followId);
 
     /**
-     * 获得用户专辑列表
+     * 获得用户私有专辑列表
      *
      * @return AlbumListData
      */
-    @GET("album/mylist")
-    Observable<BaseResponse<List<AlbumListData>>> getUserAlbumList(@Query("uid")int userId);
+    @GET("album/my_private_list")
+    Observable<BaseResponse<List<AlbumListData>>> getUserPrivateAlbumList(@Query("uid")int userId);
+
+    /**
+     * 获得用户分享的专辑列表
+     *
+     * @return AlbumListData
+     */
+    @GET("album/my_private_list")
+    Observable<BaseResponse<List<AlbumListData>>> getUserSharedAlbumList(@Query("uid")int userId);
 
     /**
      * 获得收藏专辑列表
@@ -153,28 +161,28 @@ public interface Apis {
     Observable<BaseResponse<List<AlbumListData>>> getCollectAlbumList(@Query("uid")int userId);
 
     /**
-     * 收藏
+     * 收藏教程
      *
      * @return 结果
      */
-    @GET("course/collect")
-    Observable<BaseResponse> collect(@Query("courseId")int courseId, @Query("albumId")int albumId);
+    @GET("course/collectCourse")
+    Observable<BaseResponse> collectCourse(@Query("courseId")int courseId, @Query("albumId")int albumId);
 
     /**
-     * 取消收藏
+     * 取消收藏教程
      *
      * @return 结果
      */
     @GET("course/uncollect")
-    Observable<BaseResponse> unCollect(@Query("courseId")int courseId, @Query("albumId")int albumId);
+    Observable<BaseResponse> unCollectCourse(@Query("courseId")int courseId, @Query("albumId")int albumId);
 
     /**
-     * 获取收藏状态
+     * 获取教程收藏状态
      *
      * @return 结果
      */
     @GET("course/iscollected")
-    Observable<BaseResponse> isCollect(@Query("userId")int userId, @Query("courseId")int courseId);
+    Observable<BaseResponse> isCollectCourse(@Query("userId")int userId, @Query("courseId")int courseId);
 
     /**
      * 点赞
@@ -206,7 +214,7 @@ public interface Apis {
      * @return 结果
      */
     @GET("course")
-    Observable<BaseResponse<List<RecommendCourseData>>> getUserPublishCourse(@Query("uid")int userId, @Query("page_no") int currentPage, @Query("n")int n);
+    Observable<BaseResponse<List<CourseData>>> getUserPublishCourse(@Query("uid")int userId, @Query("page_no") int currentPage, @Query("n")int n);
 
 
     /**
@@ -252,4 +260,19 @@ public interface Apis {
     @GET("comment/all")
     Observable<BaseResponse<CommentReplyData>> getCommentReply(@Query("comment_id")int course_id, @Query("page_no") int currentPage, @Query("n")int n);
 
+    /**
+     * 获取专辑中的教程信息
+     *
+     * @return 教程信息
+     */
+    @GET("album/detail")
+    Observable<BaseResponse<List<CourseData>>> getAlbumCourseData(@Query("uid")int uid, @Query("albumid") int albumId, @Query("page")int currentPage, @Query("n")int n);
+
+    /**
+     * 获取专辑封面信息
+     *
+     * @return 回复信息
+     */
+    @GET("album/brief")
+    Observable<BaseResponse<AlbumCoverData>> getAlbumCoverData(@Query("albumid") int albumId);
 }

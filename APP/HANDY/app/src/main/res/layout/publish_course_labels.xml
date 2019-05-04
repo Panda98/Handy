@@ -31,7 +31,8 @@
         android:id="@+id/labels_preinstall"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:columnCount="4">
+        android:columnCount="5"
+        android:padding="@dimen/dp_10">
 
     </GridLayout>
 

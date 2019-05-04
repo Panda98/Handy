@@ -34,22 +34,6 @@ public class AccountPagerPresenter extends BasePresenter<AccountPagerContract.Vi
         return mDataManager.getLoginAccount();
     }
 
-    @Override
-    public void autoRefresh(boolean isShowError) {
-        isRefresh = true;
-        mCurrentPage = 0;
-    }
-
-    @Override
-    public void loadMore() {
-        isRefresh = false;
-        mCurrentPage++;
-    }
-
-    @Override
-    public void loadMoreData() {
-
-    }
 
     @Override
     public void getMyCourse(boolean isShowError) {
