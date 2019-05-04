@@ -1,10 +1,7 @@
 package com.handy.support.service.Album;
 
 import com.handy.support.entity.*;
-import com.handy.support.mapper.AlbumCourseMapper;
-import com.handy.support.mapper.AlbumMapper;
-import com.handy.support.mapper.CourseMapper;
-import com.handy.support.mapper.UserMapper;
+import com.handy.support.mapper.*;
 import com.handy.support.mapper.customMapper.MyAlbumCoursesMapper;
 import com.handy.support.pojo.album.dto.AlbumCourseDto;
 import com.handy.support.pojo.album.dto.AlbumCourseInfoDto;
@@ -42,6 +39,14 @@ public class AlbumServiceImpl implements IAlbumService {
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     private UserMapper userMapper;
+
+    @Autowired
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    private CourseLabelMapper courseLabelMapper;
+
+    @Autowired
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    private LabelMapper labelMapper;
 
     public List<AlbumDto> getRecommendedAlbum(int uid){
         //todo: 完成推荐算法后进行测试
@@ -82,8 +87,21 @@ public class AlbumServiceImpl implements IAlbumService {
         for(AlbumCourse albumCourse:list){
             Course course = courseMapper.selectByPrimaryKey(albumCourse.getCourseId());
             User author = userMapper.selectByPrimaryKey(course.getUserId());
+
+            CourseLabelExample example = new CourseLabelExample();
+            CourseLabelExample.Criteria criteria = example.createCriteria();
+            criteria.andCourseIdEqualTo(course.getCourseId());
+            example.or(criteria);
+            List<CourseLabel> labels = courseLabelMapper.selectByExample(example);
+            List<Label> labelList = new ArrayList<Label>();
+            for(CourseLabel label:labels){
+                Label l = labelMapper.selectByPrimaryKey(label.getLabelId());
+                labelList.add(l);
+            }
             AlbumCourseInfoDto dto = new AlbumCourseInfoDto();
+            dto.setLabelList(labelList);
             BeanUtils.copyProperties(author,dto);
+            dto.setUserNickname(author.getNickName());
             BeanUtils.copyProperties(course,dto);
 //            albumCourseDto.getCourseList().add(dto);
             dtoList.add(dto);
