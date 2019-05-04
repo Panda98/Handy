@@ -38,23 +38,6 @@
                 android:textSize="@dimen/sp_18"
                 android:textColor="@color/normal_text"/>
 
-            <!--<com.donkingliang.labels.LabelsView-->
-            <!--android:id="@+id/album_detail_label"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="@dimen/dp_10"-->
-            <!--app:labelBackground="@drawable/label_bg"-->
-            <!--app:labelTextColor="@color/label_color"-->
-            <!--app:labelTextSize="14sp"-->
-            <!--app:labelTextPaddingTop="5dp"-->
-            <!--app:labelTextPaddingBottom="5dp"-->
-            <!--app:lineMargin="10dp"-->
-            <!--app:wordMargin="10dp"-->
-            <!--app:selectType="NONE"-->
-            <!--&gt;-->
-
-            <!--</com.donkingliang.labels.LabelsView>-->
-
             <!--author name-->
             <TextView
                 android:id="@+id/album_detail_author_name"
