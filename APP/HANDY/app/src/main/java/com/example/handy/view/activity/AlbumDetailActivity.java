@@ -46,13 +46,13 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.album_detail_course_rv)
     RecyclerView mRecyclerView;
-
-    // header
-    LinearLayout mHeaderGroup;
-    LinearLayout mHeader;
+    @BindView(R.id.album_detail_cover)
     NiceImageView mAlbumCover;
+    @BindView(R.id.album_detail_title)
     TextView mAlbumTitle;
+    @BindView(R.id.album_detail_author_name)
     TextView mAlbumAuthor;
+    @BindView(R.id.album_detail_collect_num)
     TextView mAlbumCollectNum;
 
     private AlbumCoverData albumCoverData;
@@ -67,8 +67,6 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
     protected int getLayoutId() {
         return R.layout.activity_album_detail;
     }
-
-
 
     @Override
     protected void initToolbar() {
@@ -126,21 +124,9 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
 
-        // header
-        mHeaderGroup = ((LinearLayout) LayoutInflater.from(this).inflate(R.layout.album_detail_header, null));
-        initHeader();
-        mHeaderGroup.removeView(mHeader);
-        mAdapter.addHeaderView(mHeader);
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    private void initHeader() {
-        mHeader = mHeaderGroup.findViewById(R.id.album_detail_header);
-        mAlbumCover = mHeaderGroup.findViewById(R.id.album_detail_cover);
-        mAlbumTitle = mHeaderGroup.findViewById(R.id.album_detail_title);
-        mAlbumAuthor = mHeaderGroup.findViewById(R.id.album_detail_author_name);
-        mAlbumCollectNum = mHeaderGroup.findViewById(R.id.album_detail_collect_num);
-    }
 
     @Override
     public void showAlbumCoverData(AlbumCoverData albumCoverData) {
