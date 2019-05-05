@@ -151,4 +151,10 @@ public class Step {
     public void setStepDetail(String stepDetail) {
         this.stepDetail = stepDetail == null ? null : stepDetail.trim();
     }
+
+    public Step(Byte stepTag, String stepImg, String stepDetail) {
+        this.stepTag = stepTag;
+        this.stepImg = stepImg;
+        this.stepDetail = stepDetail;
+    }
 }

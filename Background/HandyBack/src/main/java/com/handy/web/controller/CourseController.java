@@ -117,11 +117,13 @@ public class CourseController {
     @RequestMapping(value = "/course/iscollected", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
     public String isCollected(int userId, int courseId){
         Integer result=iCourseService.isCollected(userId,courseId);
+        Boolean b=true;
+
         if(result == null){
-            result=0;
+            b=false;
         }
         ErrorEnum error=ErrorEnum.SUCCESS;
-        ReturnCode<Integer> code=new ReturnCode<Integer>(error,result);
+        ReturnCode<Boolean> code=new ReturnCode<Boolean>(error,b);
         return code.returnHandler();
     }
 
@@ -154,11 +156,12 @@ public class CourseController {
     @RequestMapping(value = "/course/isliked", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
     public String isLiked(int userId, int courseId){
         Integer result=iCourseService.isLiked(userId,courseId);
+        Boolean b=true;
         if(result == null){
-            result=0;
+            b=false;
         }
         ErrorEnum error=ErrorEnum.SUCCESS;
-        ReturnCode<Integer> code=new ReturnCode<Integer>(error,result);
+        ReturnCode<Boolean> code=new ReturnCode<Boolean>(error,b);
         return code.returnHandler();
     }
 
@@ -208,7 +211,7 @@ public class CourseController {
 //        return code.returnHandler();
 //    }
 
-    @RequestMapping(value = "/uploadImg",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
+    @RequestMapping(value = "/uploadImg",produces = "application/json; charset=utf-8",method = RequestMethod.POST)
     public String getUploadUrL(byte[] data) {
  //       String path ="/Users/joanie/Desktop/img/2.jpg";
 //        byte[] data = iCourseService.image2byte(path);
