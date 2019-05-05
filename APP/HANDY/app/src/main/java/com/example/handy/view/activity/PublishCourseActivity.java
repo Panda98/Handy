@@ -269,11 +269,19 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         if (requestCode == Constants.COURSE_COVER_UPLOAD && resultCode == RESULT_OK && data != null) {
             //todo: 处理封面图上传
             List<String> pathList = data.getStringArrayListExtra("result");
+
+            // UI图片显示
             ImageView view = recyclerView.findViewById(R.id.publish_course_header).findViewById(R.id.picture_upload);
             view.setImageBitmap(loadImg(pathList.get(0)));
 
             TextView textView = recyclerView.findViewById(R.id.publish_course_header).findViewById(R.id.cover_pic_text);
             textView.setVisibility(View.INVISIBLE);
+
+            //图片byte数组上传
+            byte[] imgArr = pic2Byte(pathList.get(0));
+            String picURL = mPresenter.uploadPic(imgArr);
+            courseData.setCourseCover(picURL);
+
 
             System.out.println(pathList);
         }
@@ -289,6 +297,10 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
 
             TextView textView = viewHolder.getTextView();
             textView.setVisibility(View.INVISIBLE);
+
+            byte[] imgArr = pic2Byte(pathList.get(0));
+            String picURL = mPresenter.uploadPic(imgArr);
+            courseData.getStepList().get(index).setStepImg(picURL);
 
             System.out.println(pathList);
 
@@ -306,7 +318,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         }
     }
 
-    private String pic2String(String imgPath){
+    private byte[] pic2Byte(String imgPath){
         BitmapFactory.Options options = null;
         options = new BitmapFactory.Options();
         options.inSampleSize = 3;
@@ -314,11 +326,11 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
                 options);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         // 压缩图片
-        bitmap.compress(Bitmap.CompressFormat.PNG, 50, stream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byte_arr = stream.toByteArray();
         // Base64图片转码为String
         String encodedString = Base64.encodeToString(byte_arr, 0);
-        return encodedString;
+        return byte_arr;
     }
 
     private void publish(){
