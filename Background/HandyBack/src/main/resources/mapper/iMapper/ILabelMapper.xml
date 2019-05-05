@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.handy.support.mapper.iMapper.ILabelMapper">
+    <resultMap id="BaseResultMap" type="com.handy.support.entity.Label">
+        <constructor>
+            <idArg column="label_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="label_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="flabel_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+        </constructor>
+    </resultMap>
+
+    <select id="getAll" resultType="com.handy.support.entity.Label">
+        SELECT
+        label_id AS labelId,
+        label_name AS labelName,
+        flabel_id AS flabelId
+        FROM label
+    </select>
+</mapper>
