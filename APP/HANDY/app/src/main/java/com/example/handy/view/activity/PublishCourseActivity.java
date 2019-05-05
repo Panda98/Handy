@@ -504,7 +504,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
 
                 @Override
                 public void afterTextChanged(Editable editable) {
-                    courseData.setTips(editable.toString());
+                    courseData.setCourseNote(editable.toString());
                 }
             });
         }

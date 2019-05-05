@@ -9,6 +9,7 @@ import com.example.handy.core.bean.CommentReplyData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
+import com.example.handy.core.bean.PublishCourseData;
 import com.example.handy.core.bean.RecommendAlbumData;
 import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.UserInfoData;
@@ -152,9 +153,15 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse> uploadCourse(Map<String, RequestBody> partMap, MultipartBody.Part... files) {
-        return mApis.uploadCourse(partMap, files);
+    public Observable<BaseResponse> uploadCourse(PublishCourseData publishCourseData) {
+        return mApis.uploadCourse(publishCourseData);
     }
+
+    @Override
+    public Observable<BaseResponse> uploadImage(byte[] data) {
+        return mApis.uploadImage(data);
+    }
+
 
     @Override
     public Observable<BaseResponse<Boolean>> postComment(PostCommentView commentView) {

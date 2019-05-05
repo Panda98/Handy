@@ -3,12 +3,14 @@ package com.example.handy.di.module.base;
 import com.example.handy.di.component.BaseFragmentComponent;
 import com.example.handy.di.module.AccountPagerFragmentModule;
 import com.example.handy.di.module.CollectPagerFragmentModule;
+import com.example.handy.di.module.CommentDialogFragmentModule;
 import com.example.handy.di.module.FollowPagerFragmentModule;
 import com.example.handy.di.module.MainPagerFragmentModule;
 import com.example.handy.di.module.ReceivedCommentFragmentModule;
 import com.example.handy.di.module.ReceivedLikeFragmentModule;
 import com.example.handy.di.module.ReceivedReplyFragmentModule;
 import com.example.handy.di.module.SelectAlbumFragmentModule;
+import com.example.handy.view.fragment.CommentDialogFragment;
 import com.example.handy.view.fragment.SelectAlbumFragment;
 import com.example.handy.view.fragment.main.AccountPagerFragment;
 import com.example.handy.view.fragment.main.CollectPagerFragment;
@@ -54,5 +56,8 @@ public abstract class AbstractAllFragmentModule {
 
     @ContributesAndroidInjector(modules = SelectAlbumFragmentModule.class)
     abstract SelectAlbumFragment contributesSelectAlbumFragmentInject();
+
+    @ContributesAndroidInjector(modules = CommentDialogFragmentModule.class)
+    abstract CommentDialogFragment contributesCommentDialogFragmentInject();
 
 }
