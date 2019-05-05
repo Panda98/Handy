@@ -109,6 +109,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     private int followId;
     private boolean followStatus;
     private String courseTitle;
+    private int userId;
 
 
     @Override
@@ -134,6 +135,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
     }
+
 
     private void initLikeButton() {
         //likeButton.setLiked(true);
@@ -260,8 +262,13 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         this.mFollowBtn.setText(getString(R.string.follow));
     }
 
+
+
     @Override
     public void showCourseDetail(CourseDetailData courseDetailData) {
+
+        this.userId = courseDetailData.getUserId();
+
         // 设置教程封面
         if (!TextUtils.isEmpty(courseDetailData.getCourseCover())) {
             ImageLoader.loadToNIV(this, courseDetailData.getCourseCover(), mCourseCoverNIv);
@@ -368,6 +375,13 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         likeButton.setLiked(isLike);
         //likeButton.setLiked(true);
 
+    }
+
+    @Override
+    public void setFollowVisibility(int userId) {
+        if (this.userId == userId) {
+            mFollowBtn.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void initStep() {

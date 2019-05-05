@@ -96,7 +96,9 @@ public class CourseDetailPresenter extends BasePresenter<CourseDetailContract.Vi
                     @Override
                     public void onNext(Boolean status) {
                         System.out.println(status);
+                        mView.setFollowVisibility(getLoginAccount());
                         mView.setFollowStatus(status);
+
                     }
 
                 }));
