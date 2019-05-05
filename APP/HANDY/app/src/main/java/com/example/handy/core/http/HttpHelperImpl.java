@@ -158,7 +158,7 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse> uploadImage(byte[] data) {
+    public Observable<BaseResponse<String>> uploadImage(byte[] data) {
         return mApis.uploadImage(data);
     }
 
