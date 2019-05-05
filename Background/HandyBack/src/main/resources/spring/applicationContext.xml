@@ -13,14 +13,28 @@
     <context:property-placeholder  ignore-resource-not-found="true" location="classpath:properties/*.properties" />
 
     <!-- 在spring里加载除了controller的Bean-->
-    <context:component-scan base-package="com.handy">
+    <context:component-scan base-package="com.handy,other">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
+    <!--context:component-scan base-package="com.handy.support.pojo">
+    </context:component-scan>
+    <context:component-scan base-package="com.handy.support.entity">
+    </context:component-scan>
+    <context:component-scan base-package="com.handy.support.mapper">
+    </context:component-scan>
+    <context:component-scan base-package="com.handy.support.service">
+        </context:component-scan>
+    <context:component-scan base-package="com.handy.support.utils">
+    </context:component-scan>
+    <context:component-scan base-package="com.handy.web">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan-->
     <import resource="classpath:spring/spring-dao.xml" />
-
     <import resource="classpath:spring/spring-web.xml"/>
-
     <import resource="classpath:spring/spring-service.xml"/>
+
+
+
 
 
 </beans>
