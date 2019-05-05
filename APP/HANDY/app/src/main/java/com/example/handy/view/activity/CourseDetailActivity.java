@@ -2,6 +2,7 @@ package com.example.handy.view.activity;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
@@ -9,17 +10,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.handy.R;
 import com.example.handy.app.Constants;
@@ -27,7 +26,6 @@ import com.example.handy.base.activity.BaseActivity;
 import com.example.handy.contract.CourseDetailContract;
 import com.example.handy.core.bean.CommentData;
 import com.example.handy.core.bean.CourseDetailData;
-import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.ItemData;
 import com.example.handy.core.bean.StepData;
 import com.example.handy.presenter.CourseDetailPresenter;
@@ -36,8 +34,9 @@ import com.example.handy.utils.ImageLoader;
 import com.example.handy.utils.StatusBarUtil;
 import com.example.handy.view.adapter.CommentAdapter;
 import com.example.handy.view.adapter.CourseStepAdapter;
-import com.example.handy.view.adapter.FollowAdapter;
 import com.example.handy.view.fragment.SelectAlbumFragment;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.shehuan.niv.NiceImageView;
 
@@ -46,6 +45,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.functions.Function;
 
@@ -88,6 +88,9 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     @BindView(R.id.collect_button)
     LinearLayout collectBtn;
 
+    @BindView(R.id.like_course_button)
+    LikeButton likeButton;
+
     ArrayAdapter<String> mItemArrayAdapter;
     CourseStepAdapter mCourseStepAdapter;
     private CommentAdapter mCommentAdapter;
@@ -110,6 +113,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     @Override
     protected void initToolbar() {
         initBundleData();
+        initLikeButton();
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
@@ -125,12 +129,28 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
 
     }
 
+    private void initLikeButton() {
+        //likeButton.setLiked(true);
+        likeButton.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                System.out.println("liked");
+                mPresenter.likeCourse(courseId);
+            }
 
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                System.out.println("unliked");
+                mPresenter.unlikeCourse(courseId);
+            }
+        });
+    }
     @Override
     protected void initEventAndData() {
         setRefresh();
         mPresenter.getCourseDetail(true, this.courseId);
         mPresenter.getCommentList(true,this.courseId);
+        mPresenter.getLikeStatus(this.courseId);
         if (CommonUtils.isNetworkConnected()) {
             showLoading();
         }
@@ -153,6 +173,8 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         super.onViewCreated();
         initCommentRecyclerView();
     }
+
+
 
     private void initBundleData() {
         Bundle bundle = getIntent().getExtras();
@@ -185,6 +207,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
                 break;
         }
     }
+
 
     // 关注
     private void collectEvent() {
@@ -320,6 +343,13 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
             unFollowBtnView();
             this.followStatus = false;
         }
+    }
+
+    @Override
+    public void setLikeStatus(boolean isLike) {
+        likeButton.setLiked(isLike);
+        //likeButton.setLiked(true);
+
     }
 
     private void initStep() {

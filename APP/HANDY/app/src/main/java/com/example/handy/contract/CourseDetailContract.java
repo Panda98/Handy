@@ -17,6 +17,7 @@ public interface CourseDetailContract {
         void showFollowView();
         void showUnFollowView();
         void setFollowStatus(boolean isFollow);
+        void setLikeStatus(boolean isLike);
 
     }
 
@@ -71,6 +72,25 @@ public interface CourseDetailContract {
          * @param isShowError If show error
          */
         void getCommentList(boolean isShowError, int courseId);
+
+
+        /**
+         * like 点赞教程
+         *
+         */
+        void likeCourse(int courseId);
+
+        /**
+         * unlike 取消点赞教程
+         *un
+         */
+        void unlikeCourse(int courseId);
+
+        /**
+         * get like status
+         *
+         */
+        void getLikeStatus(int courseId);
 
     }
 }
