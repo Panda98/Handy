@@ -159,7 +159,7 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse> uploadImage(byte[] data) {
+    public Observable<BaseResponse<String>> uploadImage(byte[] data) {
         return mHttpHelper.uploadImage(data);
     }
 

@@ -198,7 +198,7 @@ public interface HttpHelper {
      * @return url
      */
     @Multipart
-    Observable<BaseResponse> uploadImage(byte[] data);
+    Observable<BaseResponse<String>> uploadImage(byte[] data);
 
 
     /**
