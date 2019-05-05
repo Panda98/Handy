@@ -1,12 +1,11 @@
 package com.example.handy.presenter;
 
-import android.provider.MediaStore;
-
 import com.example.handy.base.presenter.BasePresenter;
-import com.example.handy.contract.LoginContract;
 import com.example.handy.contract.PublishCourseContract;
 import com.example.handy.core.DataManager;
 import com.example.handy.core.bean.PublishCourseData;
+import com.example.handy.utils.RxUtils;
+import com.example.handy.wigdet.BaseObserver;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -61,9 +60,18 @@ public class PublishCoursePresenter extends BasePresenter<PublishCourseContract.
     }
 
     @Override
-    public String uploadPic(byte[] imgArr){
+    public void uploadPic(byte[] imgArr){
         //todo: 上传图片
-
-        return null;
+//        addSubscribe(mDataManager.uploadImage(imgArr)
+//                .compose(RxUtils.rxSchedulerHelper())
+//                .compose(RxUtils.handleResult())
+//                .subscribeWith(new BaseObserver<B>(mView,
+//                        false) {
+//                    @Override
+//                    public void onNext(String status) {
+//                        mView.afterUploadPic(true);
+//                    }
+//
+//                }));
     }
 }
