@@ -2,13 +2,19 @@ package com.example.handy.contract;
 
 import com.example.handy.base.presenter.AbstractPresenter;
 import com.example.handy.base.view.AbstractView;
+import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.UserInfoData;
+
+import java.util.List;
 
 public interface AccountPagerContract {
 
     interface View extends AbstractView {
 
         void showUserInfo(UserInfoData userInfoData);
+
+        void showUserPublishData(List<CourseData> courseData);
+
     }
 
     interface Presenter extends AbstractPresenter<AccountPagerContract.View> {
