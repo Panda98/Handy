@@ -277,13 +277,21 @@
             <LinearLayout
                 android:id="@+id/collect_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center">
+
+                <com.like.LikeButton
+                    android:id="@+id/course_detail_step_collect_button"
+                    app:icon_type="Star"
+                    app:icon_size="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/navigation_collect"
+                    android:layout_gravity="center_vertical"
                     android:textColor="@color/normal_text"
                     android:textSize="@dimen/sp_16"/>
 
@@ -300,13 +308,14 @@
             <LinearLayout
                 android:id="@+id/comment_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center">
 
                 <TextView
                     android:id="@+id/comment_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:text="0"
                     android:textColor="@color/normal_text"
                     android:textSize="@dimen/sp_16"/>
@@ -316,28 +325,38 @@
         </FrameLayout>
 
         <!--点赞-->
-        <FrameLayout
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center">
 
             <LinearLayout
                 android:id="@+id/like_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center">
+
+                <com.like.LikeButton
+                    app:icon_type="Thumb"
+                    app:icon_size="20dp"
+                    android:id="@+id/star_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
 
                 <TextView
                     android:id="@+id/like_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:text="0"
                     android:textColor="@color/normal_text"
                     android:textSize="@dimen/sp_16"/>
 
             </LinearLayout>
 
-        </FrameLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

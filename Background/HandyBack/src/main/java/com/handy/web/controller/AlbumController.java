@@ -1,16 +1,16 @@
 package com.handy.web.controller;
 
-import com.handy.support.entity.AlbumCourse;
-import com.handy.support.pojo.album.dto.AlbumCourseDto;
 import com.handy.support.pojo.album.dto.AlbumCourseInfoDto;
 import com.handy.support.pojo.album.dto.AlbumDto;
 import com.handy.support.pojo.album.vo.AlbumCourseInfoVO;
-import com.handy.support.pojo.album.vo.AlbumCourseVO;
+import com.handy.support.pojo.album.vo.AlbumCreateVO;
 import com.handy.support.pojo.album.vo.AlbumVO;
 import com.handy.support.service.Album.IAlbumService;
 import com.handy.support.utils.status.ErrorEnum;
 import com.handy.support.utils.status.ReturnCode;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,9 +47,9 @@ public class AlbumController {
         return code.returnHandler();
     }
 
-    @RequestMapping(value = "/album/mylist",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
-    public String getMyAlbumList(int uid){
-        List<AlbumDto> dtos = albumService.getAlbumList(uid);
+    @RequestMapping(value = "/album/my_shared_list",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
+    public String getMySharedAlbumList(int uid){
+        List<AlbumDto> dtos = albumService.getAlbumListByUserID(uid);
         List<AlbumVO> vos = new ArrayList<AlbumVO>();
         for(AlbumDto dto:dtos){
             if(dto.getAlbumState()){
@@ -60,16 +60,27 @@ public class AlbumController {
         ReturnCode<List<AlbumVO>> code = new ReturnCode<List<AlbumVO>>(vos);
         return code.returnHandler();
     }
-
-    @RequestMapping(value = "/album/collection",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
-    public String getListCollection(int uid){
-        List<AlbumDto> dtos = albumService.getAlbumList(uid);
+    @RequestMapping(value = "/album/my_private_list",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
+    public String getMyPrivateAlbumList(int uid){
+        List<AlbumDto> dtos = albumService.getAlbumListByUserID(uid);
         List<AlbumVO> vos = new ArrayList<AlbumVO>();
         for(AlbumDto dto:dtos){
             if(!dto.getAlbumState()){
                 AlbumVO vo = new AlbumVO(dto);
                 vos.add(vo);
             }
+        }
+        ReturnCode<List<AlbumVO>> code = new ReturnCode<List<AlbumVO>>(vos);
+        return code.returnHandler();
+    }
+
+    @RequestMapping(value = "/album/collection",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
+    public String getListCollection(int uid){
+        List<AlbumDto> dtos = albumService.getCollectedAlbum(uid);
+        List<AlbumVO> vos = new ArrayList<AlbumVO>();
+        for(AlbumDto dto:dtos){
+            AlbumVO vo = new AlbumVO(dto);
+            vos.add(vo);
         }
         ReturnCode<List<AlbumVO>> code = new ReturnCode<List<AlbumVO>>(vos);
         return code.returnHandler();
@@ -101,6 +112,34 @@ public class AlbumController {
     @RequestMapping(value = "/album/collect",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
     public String collectAlbum(int uid,int albumid){
         ErrorEnum errorEnum = albumService.collect(uid,albumid);
+
+        ReturnCode<String> returnCode = new ReturnCode<String>();
+        returnCode.setErrorEnum(errorEnum);
+        return returnCode.returnHandler();
+    }
+    @RequestMapping(value = "/album/uncollect",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
+    public String uncollectAlbum(int uid,int albumid){
+        ErrorEnum errorEnum = albumService.uncollect(uid,albumid);
+
+        ReturnCode<String> returnCode = new ReturnCode<String>();
+        returnCode.setErrorEnum(errorEnum);
+        return returnCode.returnHandler();
+    }
+
+    @RequestMapping(value = "/album/create",produces = "application/json; charset=utf-8",method = RequestMethod.POST)
+    public String createAlbum(@RequestBody AlbumCreateVO albumVO){
+        AlbumDto dto = new AlbumDto();
+        BeanUtils.copyProperties(albumVO,dto);
+        ErrorEnum errorEnum = albumService.createAlbum(dto);
+
+        ReturnCode<String> returnCode = new ReturnCode<String>();
+        returnCode.setErrorEnum(errorEnum);
+        return returnCode.returnHandler();
+    }
+
+    @RequestMapping(value = "/album/delete",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
+    public String deleteAlbum(int albumid){
+        ErrorEnum errorEnum = albumService.deleteAlbum(albumid);
 
         ReturnCode<String> returnCode = new ReturnCode<String>();
         returnCode.setErrorEnum(errorEnum);

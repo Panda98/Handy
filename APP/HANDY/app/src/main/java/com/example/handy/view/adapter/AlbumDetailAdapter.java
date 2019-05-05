@@ -5,13 +5,7 @@ import android.text.TextUtils;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.handy.R;
-import com.example.handy.base.fragment.BaseRootFragment;
-import com.example.handy.contract.AlbumDetailContract;
-import com.example.handy.contract.MainPagerContract;
-import com.example.handy.core.bean.AlbumCoverData;
 import com.example.handy.core.bean.CourseData;
-import com.example.handy.presenter.AlbumDetailPresenter;
-import com.example.handy.presenter.MainPagerPresenter;
 import com.example.handy.utils.ImageLoader;
 import com.example.handy.view.viewHolder.CourseViewHolder;
 

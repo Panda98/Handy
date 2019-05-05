@@ -20,7 +20,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.activity.AlbumDetailActivity"></activity>
+        <activity android:name=".view.activity.MessageActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".view.activity.MyPublishAlbumActivity"></activity>
+        <activity android:name=".view.activity.MyPublishCourseActivity"></activity>
+        <activity android:name=".view.activity.AlbumDetailActivity" />
         <activity android:name=".view.activity.CourseDetailActivity" />
         <activity android:name=".view.activity.PublishCourseActivity">
 

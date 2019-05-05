@@ -1,4 +1,4 @@
-package com.example.handy.view.fragment;
+package com.example.handy.view.fragment.main;
 
 
 import android.app.ActivityOptions;

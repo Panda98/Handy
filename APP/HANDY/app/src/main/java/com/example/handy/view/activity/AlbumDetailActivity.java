@@ -58,7 +58,7 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
     private AlbumCoverData albumCoverData;
     private List<CourseData> courseDataList;
 
-    private AlbumDetailAdapter mAdapter;
+    private RecommendCourseAdapter mAdapter;
 
     private int albumId;
     private boolean followStatus;
@@ -119,7 +119,7 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
 
     private void initRecyclerView() {
         courseDataList = new ArrayList<>();
-        mAdapter = new AlbumDetailAdapter(R.layout.item_recommend_course, courseDataList);
+        mAdapter = new RecommendCourseAdapter(R.layout.item_recommend_course, courseDataList);
         //mAdapter.setOnItemClickListener((adapter, view, position) -> startArticleDetailPager(view, position));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);

@@ -112,11 +112,18 @@ public interface HttpHelper {
     Observable<BaseResponse<Boolean>> isFollow(int uid, int followId);
 
     /**
-     * 获得用户专辑列表
+     * 获得用户私有专辑列表
      *
      * @return AlbumListData
      */
-    Observable<BaseResponse<List<AlbumListData>>> getUserAlbumList(int userId);
+    Observable<BaseResponse<List<AlbumCoverData>>> getUserPrivateAlbumList(int userId);
+
+    /**
+     * 获得用户分享的专辑列表
+     *
+     * @return AlbumListData
+     */
+    Observable<BaseResponse<List<AlbumCoverData>>> getUserSharedAlbumList(int userId);
 
     /**
      * 获得收藏专辑列表

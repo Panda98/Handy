@@ -14,15 +14,23 @@ import com.handy.support.pojo.course.vo.CourseSimpleVO;
 import com.handy.support.pojo.course.vo.CourseDetailVO;
 
 
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPReply;
+
 import org.apache.solr.client.solrj.*;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
+
+import javax.imageio.stream.FileImageInputStream;
+import java.io.*;
+import java.net.SocketException;
 import java.util.*;
 
 
@@ -294,6 +302,94 @@ public class CourseServiceImpl implements ICourseService {
 //
 //        return null;
 //    }
+
+
+    public FTPClient getFTPClient(String ftpHost, String ftpUserName,
+                                  String ftpPassword, int ftpPort) {
+        FTPClient ftpClient = new FTPClient();
+        try {
+            ftpClient = new FTPClient();
+            ftpClient.connect(ftpHost, ftpPort);// 连接FTP服务器
+            ftpClient.login(ftpUserName, ftpPassword);// 登陆FTP服务器
+            if (!FTPReply.isPositiveCompletion(ftpClient.getReplyCode())) {
+                System.out.println("未连接到FTP，用户名或密码错误。");
+                ftpClient.disconnect();
+            } else {
+                System.out.println("FTP连接成功。");
+            }
+        } catch (SocketException e) {
+            e.printStackTrace();
+            System.out.println("FTP的IP地址可能错误，请正确配置。");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("FTP的端口错误,请正确配置。");
+        }
+        return ftpClient;
+    }
+    public String uploadImg(String ftpHost, String ftpUserName,
+                            String ftpPassword, int ftpPort, String ftpPath,
+                            String fileName, InputStream input){
+        String imgUrl=null;
+
+        FTPClient ftpClient = null;
+        try {
+            int reply;
+            ftpClient = this.getFTPClient(ftpHost, ftpUserName, ftpPassword, ftpPort);
+            reply = ftpClient.getReplyCode();
+            if (!FTPReply.isPositiveCompletion(reply)) {
+                ftpClient.disconnect();
+                return imgUrl;
+            }
+            ftpClient.setControlEncoding("UTF-8"); // 中文支持
+            ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
+            ftpClient.enterLocalPassiveMode();
+            ftpClient.changeWorkingDirectory(ftpPath);
+            if(ftpClient.storeFile(fileName, input)){
+                imgUrl="http://106.13.106.249:8080/static/img/upload/"+fileName;
+            }
+
+
+            input.close();
+            ftpClient.logout();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (ftpClient.isConnected()) {
+                try {
+                    ftpClient.disconnect();
+                } catch (IOException ioe) {
+                }
+            }
+        }
+
+        return imgUrl;
+    }
+
+    public byte[] image2byte(String path) {
+        // 定义byte数组
+        byte[] data = null;
+        // 输入流
+        FileImageInputStream input = null;
+        try {
+            input = new FileImageInputStream(new File(path));
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            int numBytesRead = 0;
+            while ((numBytesRead = input.read(buf)) != -1) {
+                output.write(buf, 0, numBytesRead);
+            }
+            data = output.toByteArray();
+            output.close();
+            input.close();
+        } catch (FileNotFoundException ex1) {
+            ex1.printStackTrace();
+        } catch (IOException ex1) {
+            ex1.printStackTrace();
+        }
+        return data;
+    }
+
 
 
 }

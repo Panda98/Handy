@@ -1,4 +1,4 @@
-package com.example.handy.view.fragment;
+﻿package com.example.handy.view.fragment.main;
 
 
 import android.content.Context;
@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.example.handy.R;
 import com.example.handy.app.Constants;
 import com.example.handy.base.fragment.BaseRootFragment;
@@ -19,7 +18,6 @@ import com.example.handy.contract.CollectPagerContract;
 import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.presenter.AccountPagerPresenter;
-import com.example.handy.presenter.CollectPagerPresenter;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.ImageLoader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;

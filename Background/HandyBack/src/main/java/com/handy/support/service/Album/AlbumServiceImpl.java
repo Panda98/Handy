@@ -1,10 +1,7 @@
 package com.handy.support.service.Album;
 
 import com.handy.support.entity.*;
-import com.handy.support.mapper.AlbumCourseMapper;
-import com.handy.support.mapper.AlbumMapper;
-import com.handy.support.mapper.CourseMapper;
-import com.handy.support.mapper.UserMapper;
+import com.handy.support.mapper.*;
 import com.handy.support.mapper.customMapper.MyAlbumCoursesMapper;
 import com.handy.support.pojo.album.dto.AlbumCourseDto;
 import com.handy.support.pojo.album.dto.AlbumCourseInfoDto;
@@ -43,6 +40,18 @@ public class AlbumServiceImpl implements IAlbumService {
     @SuppressWarnings("SpringJavaAutowiringInspection")
     private UserMapper userMapper;
 
+    @Autowired
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    private UserAlbumMapper userAlbumMapper;
+
+    @Autowired
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    private CourseLabelMapper courseLabelMapper;
+
+    @Autowired
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    private LabelMapper labelMapper;
+
     public List<AlbumDto> getRecommendedAlbum(int uid){
         //todo: 完成推荐算法后进行测试
 //        return AlbumRecommend.getRecommendedAlbums(uid);
@@ -52,6 +61,8 @@ public class AlbumServiceImpl implements IAlbumService {
         for(Album album:albums){
             AlbumDto dto = new AlbumDto();
             BeanUtils.copyProperties(album,dto);
+            User user = userMapper.selectByPrimaryKey(album.getUserId());
+            dto.setUserName(user.getNickName());
             albumDtos.add(dto);
             if(i == 3)
                 break;
@@ -60,7 +71,7 @@ public class AlbumServiceImpl implements IAlbumService {
         return albumDtos;
     }
 
-    public List<AlbumDto> getAlbumList(int uid){
+    public List<AlbumDto> getAlbumListByUserID(int uid){
         AlbumExample example = new AlbumExample();
         AlbumExample.Criteria criteria = example.createCriteria();
         criteria.andUserIdEqualTo(uid);
@@ -70,6 +81,8 @@ public class AlbumServiceImpl implements IAlbumService {
         for(Album album: albums){
             AlbumDto dto = new AlbumDto();
             BeanUtils.copyProperties(album,dto);
+            User author = userMapper.selectByPrimaryKey(album.getUserId());
+            dto.setUserName(author.getNickName());
             albumDtos.add(dto);
         }
         return albumDtos;
@@ -82,8 +95,21 @@ public class AlbumServiceImpl implements IAlbumService {
         for(AlbumCourse albumCourse:list){
             Course course = courseMapper.selectByPrimaryKey(albumCourse.getCourseId());
             User author = userMapper.selectByPrimaryKey(course.getUserId());
+
+            CourseLabelExample example = new CourseLabelExample();
+            CourseLabelExample.Criteria criteria = example.createCriteria();
+            criteria.andCourseIdEqualTo(course.getCourseId());
+            example.or(criteria);
+            List<CourseLabel> labels = courseLabelMapper.selectByExample(example);
+            List<Label> labelList = new ArrayList<Label>();
+            for(CourseLabel label:labels){
+                Label l = labelMapper.selectByPrimaryKey(label.getLabelId());
+                labelList.add(l);
+            }
             AlbumCourseInfoDto dto = new AlbumCourseInfoDto();
+            dto.setLabelList(labelList);
             BeanUtils.copyProperties(author,dto);
+            dto.setUserNickname(author.getNickName());
             BeanUtils.copyProperties(course,dto);
 //            albumCourseDto.getCourseList().add(dto);
             dtoList.add(dto);
@@ -95,28 +121,70 @@ public class AlbumServiceImpl implements IAlbumService {
         Album album= albumMapper.selectByPrimaryKey(albumid);
         AlbumDto dto = new AlbumDto();
         BeanUtils.copyProperties(album,dto);
-
-
+        User user = userMapper.selectByPrimaryKey(album.getUserId());
+        dto.setUserName(user.getNickName());
         return dto;
 
     }
 
     public ErrorEnum collect(int uid,int albumid){
-        Album album = albumMapper.selectByPrimaryKey(albumid);
-        album.setAlbumState(false);
-        album.setUserId(uid);
-        albumMapper.insert(album);
+        UserAlbum userAlbum = new UserAlbum();
+        userAlbum.setUserId(uid);
+        userAlbum.setAlbumId(albumid);
+        int code = userAlbumMapper.insert(userAlbum);
+        if(code == 0)
+            return ErrorEnum.COLLECT_FAIL;
         return ErrorEnum.SUCCESS;
     }
 
     public ErrorEnum uncollect(int uid, int albumid){
-        AlbumExample example = new AlbumExample();
-        AlbumExample.Criteria criteria = example.createCriteria();
-        criteria.andAlbumIdEqualTo(albumid).andUserIdEqualTo(uid);
+        UserAlbumExample example = new UserAlbumExample();
+        UserAlbumExample.Criteria criteria = example.createCriteria();
+        criteria.andAlbumIdEqualTo(albumid);
+        criteria.andUserIdEqualTo(uid);
         example.or(criteria);
-        albumMapper.deleteByExample(example);
+        int code = userAlbumMapper.deleteByExample(example);
+        if(code == 0)
+            return ErrorEnum.UNCOLLECT_FAIL;
         return ErrorEnum.SUCCESS;
 
+    }
+
+    public List<AlbumDto> getCollectedAlbum(int uid){
+        UserAlbumExample example = new UserAlbumExample();
+        UserAlbumExample.Criteria criteria = example.createCriteria();
+        criteria.andUserIdEqualTo(uid);
+        example.or(criteria);
+        List<UserAlbum> userAlbums = userAlbumMapper.selectByExample(example);
+        List<AlbumDto> albumDtos = new ArrayList<AlbumDto>();
+        for(UserAlbum userAlbum:userAlbums){
+            Album album = albumMapper.selectByPrimaryKey(userAlbum.getAlbumId());
+            AlbumDto dto = new AlbumDto();
+            BeanUtils.copyProperties(album,dto);
+            User user = userMapper.selectByPrimaryKey(album.getUserId());
+            dto.setUserName(user.getNickName());
+            albumDtos.add(dto);
+        }
+        return albumDtos;
+    }
+
+    public ErrorEnum createAlbum(AlbumDto dto){
+        Album album = new Album();
+        BeanUtils.copyProperties(dto,album);
+        int code = albumMapper.insert(album);
+        //todo: 创建专辑失败
+        if(code == 0)
+            return ErrorEnum.UPDATE_FAIL;
+        return ErrorEnum.SUCCESS;
+
+    }
+
+    public ErrorEnum deleteAlbum(int albumid){
+        int code = albumMapper.deleteByPrimaryKey(albumid);
+        //todo: 删除失败
+        if(code == 0)
+            return ErrorEnum.REQUEST_FAIL;
+        return ErrorEnum.SUCCESS;
     }
 
 }

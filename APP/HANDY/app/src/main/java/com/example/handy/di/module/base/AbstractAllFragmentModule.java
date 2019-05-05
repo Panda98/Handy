@@ -5,10 +5,16 @@ import com.example.handy.di.module.AccountPagerFragmentModule;
 import com.example.handy.di.module.CollectPagerFragmentModule;
 import com.example.handy.di.module.FollowPagerFragmentModule;
 import com.example.handy.di.module.MainPagerFragmentModule;
-import com.example.handy.view.fragment.AccountPagerFragment;
-import com.example.handy.view.fragment.CollectPagerFragment;
-import com.example.handy.view.fragment.FollowPagerFragment;
-import com.example.handy.view.fragment.MainPagerFragment;
+import com.example.handy.di.module.ReceivedCommentFragmentModule;
+import com.example.handy.di.module.ReceivedLikeFragmentModule;
+import com.example.handy.di.module.ReceivedReplyFragmentModule;
+import com.example.handy.view.fragment.main.AccountPagerFragment;
+import com.example.handy.view.fragment.main.CollectPagerFragment;
+import com.example.handy.view.fragment.main.FollowPagerFragment;
+import com.example.handy.view.fragment.main.MainPagerFragment;
+import com.example.handy.view.fragment.message.ReceivedCommentFragment;
+import com.example.handy.view.fragment.message.ReceivedLikeFragment;
+import com.example.handy.view.fragment.message.ReceivedReplyFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -34,6 +40,15 @@ public abstract class AbstractAllFragmentModule {
 
     @ContributesAndroidInjector(modules = AccountPagerFragmentModule.class)
     abstract AccountPagerFragment contributesAccountPagerFragmentInject();
+
+    @ContributesAndroidInjector(modules = ReceivedCommentFragmentModule.class)
+    abstract ReceivedCommentFragment contributesReceivedCommentFragmentInject();
+
+    @ContributesAndroidInjector(modules = ReceivedReplyFragmentModule.class)
+    abstract ReceivedReplyFragment contributesReceivedReplyFragmentInject();
+
+    @ContributesAndroidInjector(modules = ReceivedLikeFragmentModule.class)
+    abstract ReceivedLikeFragment contributesReceivedLikeFragmentInject();
 
 
 }

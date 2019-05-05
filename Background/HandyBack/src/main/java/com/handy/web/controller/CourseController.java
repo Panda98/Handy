@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.handy.support.service.Course.ICourseService;
 
-import java.io.IOException;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -204,6 +206,28 @@ public class CourseController {
 //        ReturnCode<List<CourseSimpleVO>> code = new ReturnCode<List<CourseSimpleVO>>(error, list);
 //        return code.returnHandler();
 //    }
+
+    @RequestMapping(value = "/uploadImg",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
+    public String getUploadUrL(byte[] data) {
+ //       String path ="/Users/joanie/Desktop/img/2.jpg";
+//        byte[] data = iCourseService.image2byte(path);
+        InputStream fr =new ByteArrayInputStream(data);
+        String imgUrl = null;
+        ErrorEnum error = null;
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_HH_mm_ss");
+        String date = df.format(new Date());
+        if (fr!= null) {
+            imgUrl = iCourseService.uploadImg("106.13.106.249", "handy", "handy", 21, "/usr/local/tomcat/apache-tomcat-9.0.17/webapps/HandyBack_war_exploded/static/img/upload", date+".jpg", fr);
+        }
+        if(imgUrl==null){
+            error = ErrorEnum.UPLOAD_FAIL;
+        }else{
+            error=ErrorEnum.SUCCESS;
+        }
+        ReturnCode<String> code=new ReturnCode<String>(error,imgUrl);
+        return code.returnHandler();
+
+    }
 
 
 }

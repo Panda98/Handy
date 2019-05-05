@@ -8,6 +8,7 @@ import com.handy.support.pojo.comment.vo.CourseCommentVO;
 import com.handy.support.recommend.process.Recommend;
 import com.handy.support.service.Comment.CommentServiceImpl;
 import com.handy.support.service.Message.MessageServiceImpl;
+import com.handy.support.service.Recommend.RecommendServiceImpl;
 import com.handy.support.utils.status.ReturnCode;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class MessageController {
     @Autowired
     MessageServiceImpl messageService;
+    @Autowired
+    RecommendServiceImpl recommendService;
         @RequestMapping(value = "/courseComment",method = GET)
     public String getMessageComment(int uid,int page_no,int n){
         List<CommentDTO> comments=messageService.getCourseCommentMessage(uid,page_no,n);
@@ -64,10 +67,13 @@ public class MessageController {
     }
     @RequestMapping(value = "/test",method = GET)
     public String getRecommend(int uid,int page_no,int n){
-            Recommend recommend=new Recommend();
+       /*  recommendService.UserLikeItem(3,1);
+         recommendService.UserlikeAlbum(3,1);
+               Recommend recommend=new Recommend();
             recommend.init();
         List<RecommendedItem> list=recommend.getRecommend(uid);
-        ReturnCode<List> code = new ReturnCode<List>(list);
+        ReturnCode<List> code = new ReturnCode<List>(list);*/
+        ReturnCode<Integer> code = new ReturnCode<Integer>(1);
         return code.returnHandler();
     }
 }

@@ -103,8 +103,13 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse<List<AlbumListData>>> getUserAlbumList(int userId) {
-        return mHttpHelper.getUserAlbumList(userId);
+    public Observable<BaseResponse<List<AlbumCoverData>>> getUserPrivateAlbumList(int userId) {
+        return mHttpHelper.getUserPrivateAlbumList(userId);
+    }
+
+    @Override
+    public Observable<BaseResponse<List<AlbumCoverData>>> getUserSharedAlbumList(int userId) {
+        return mHttpHelper.getUserSharedAlbumList(userId);
     }
 
     @Override

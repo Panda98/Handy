@@ -19,7 +19,7 @@
 
 
         <!--jdbc的数据库连接 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="${mysql.url}" userId="${mysql.uid}" password="${mysql.pwd}">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="${mysql.url}" userId="${mysql.userId}" password="${mysql.pwd}">
         </jdbcConnection>
 
 
@@ -64,13 +64,13 @@
         </javaClientGenerator>
         <!-- 指定数据库表 -->
         <!--<table schema="handy" tableName="album"/>-->
-        <table schema="handy" tableName="album_course"/>
+        <!--<table schema="handy" tableName="album_course"/>-->
         <!--<table schema="handy" tableName="comment"/>-->
         <!--<table schema="handy" tableName="course"/>-->
         <!--<table schema="handy" tableName="course_item"/>-->
         <!--<table schema="handy" tableName="course_step"/>-->
         <!--<table schema="handy" tableName="course_label"/>-->
-        <table schema="handy" tableName="follow"/>
+        <!--<table schema="handy" tableName="follow"/>-->
         <!--<table schema="handy" tableName="item"/>-->
         <!--<table schema="handy" tableName="label"/>-->
         <!--<table schema="handy" tableName="level"/>-->
@@ -80,6 +80,7 @@
         <!--<table schema="handy" tableName="view"/>-->
         <!--<table schema="handy" tableName="comment_reply"/>-->
         <!--<table schema="handy" tableName="hot"/>-->
-        <table schema="handy" tableName="favor"/>
+        <!--<table schema="handy" tableName="favor"/>-->
+        <table schema="handy" tableName="user_album"/>
     </context>
 </generatorConfiguration>

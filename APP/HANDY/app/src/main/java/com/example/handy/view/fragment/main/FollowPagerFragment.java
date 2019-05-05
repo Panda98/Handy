@@ -1,4 +1,4 @@
-package com.example.handy.view.fragment;
+package com.example.handy.view.fragment.main;
 
 
 import android.app.ActivityOptions;
@@ -23,7 +23,6 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 
