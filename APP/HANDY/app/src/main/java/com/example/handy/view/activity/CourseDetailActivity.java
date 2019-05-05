@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ import com.example.handy.utils.StatusBarUtil;
 import com.example.handy.view.adapter.CommentAdapter;
 import com.example.handy.view.adapter.CourseStepAdapter;
 import com.example.handy.view.adapter.FollowAdapter;
+import com.example.handy.view.fragment.SelectAlbumFragment;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.shehuan.niv.NiceImageView;
 
@@ -83,9 +85,13 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     @BindView(R.id.course_detail_comment)
     RecyclerView mCommentRv;
 
+    @BindView(R.id.collect_button)
+    LinearLayout collectBtn;
+
     ArrayAdapter<String> mItemArrayAdapter;
     CourseStepAdapter mCourseStepAdapter;
     private CommentAdapter mCommentAdapter;
+    private SelectAlbumFragment searchDialogFragment;
 
     private List<CommentData> commentDataList;
     private List<StepData> stepDataList;
@@ -118,6 +124,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
     }
+
 
     @Override
     protected void initEventAndData() {
@@ -156,18 +163,30 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         System.out.println(this.courseTitle);
     }
 
-    @OnClick({R.id.course_detail_follow_btn})
+    @OnClick({R.id.course_detail_follow_btn,R.id.collect_button})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.course_detail_follow_btn:
                 collectEvent();
+                break;
+            case R.id.collect_button:
+                if (searchDialogFragment == null) {
+                    searchDialogFragment = new SelectAlbumFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("courseId", this.courseId);
+                    searchDialogFragment.setArguments(bundle);
+                }
+                if (!isDestroyed() && searchDialogFragment.isAdded()) {
+                    searchDialogFragment.dismiss();
+                }
+                searchDialogFragment.show(getSupportFragmentManager(), "SearchDialogFragment");
                 break;
             default:
                 break;
         }
     }
 
-    // 收藏事件
+    // 关注
     private void collectEvent() {
         if (!mPresenter.getLoginStatus()) {
             CommonUtils.showMessage(this, getString(R.string.login_tint));
