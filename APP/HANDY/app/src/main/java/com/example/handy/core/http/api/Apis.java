@@ -10,6 +10,7 @@ import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
+import com.example.handy.core.bean.PublishCourseData;
 import com.example.handy.core.bean.RecommendAlbumData;
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.vo.LoginView;
@@ -35,8 +36,9 @@ import retrofit2.http.Query;
  * @date 2019/04/07
  */
 public interface Apis {
-    //String HOST = "http://106.13.106.249:8080/";
-    String HOST = "http://192.168.1.105:8080/Handy/";
+    String HOST = "http://106.13.106.249:8080/";
+    //String HOST = "http://192.168.2.28:8080/Handy/";
+    //String HOST = "http://192.168.2.7:8080/";
 
     /**
      * 登陆
@@ -166,7 +168,7 @@ public interface Apis {
      *
      * @return 结果
      */
-    @GET("course/collectCourse")
+    @GET("course/collect")
     Observable<BaseResponse> collectCourse(@Query("courseId")int courseId, @Query("albumId")int albumId);
 
     /**
@@ -207,7 +209,7 @@ public interface Apis {
      * @return 结果
      */
     @GET("course/isliked")
-    Observable<BaseResponse> isLike(@Query("userId")int userId, @Query("courseId")int courseId);
+    Observable<BaseResponse<Boolean>> isLike(@Query("userId")int userId, @Query("courseId")int courseId);
 
     /**
      * 获取自己发布的教程
@@ -219,13 +221,22 @@ public interface Apis {
 
 
     /**
-     * 上传教程
+     * 发布教程
      *
      * @return 上传结果
      */
-    @Multipart
     @POST("course/publish")
-    Observable<BaseResponse> uploadCourse(@PartMap Map<String, RequestBody> partMap, @Part MultipartBody.Part... files);
+    Observable<BaseResponse> uploadCourse(@Body PublishCourseData publishCourseData);
+
+    /**
+     * 上传图片
+     *
+     * @return url
+     */
+    @Multipart
+    @POST("uploadImg")
+    Observable<BaseResponse<String>> uploadImage(@Query("data") byte[] data);
+
 
     /**
      * 上传评论

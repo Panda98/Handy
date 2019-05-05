@@ -1,16 +1,17 @@
 package com.example.handy.presenter;
 
 import com.example.handy.R;
-import com.example.handy.app.Constants;
 import com.example.handy.app.HandyAPP;
 import com.example.handy.base.presenter.BasePresenter;
 import com.example.handy.contract.AccountPagerContract;
-import com.example.handy.contract.CollectPagerContract;
 import com.example.handy.core.DataManager;
+
+import com.example.handy.core.bean.AlbumCoverData;
+import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.FollowData;
+
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.utils.RxUtils;
-import com.example.handy.view.fragment.AccountPagerFragment;
 import com.example.handy.wigdet.BaseObserver;
 
 import java.util.List;
@@ -37,11 +38,34 @@ public class AccountPagerPresenter extends BasePresenter<AccountPagerContract.Vi
 
     @Override
     public void getMyCourse(boolean isShowError) {
+        addSubscribe(mDataManager.getUserPublishCourse(getLoginAccount(),0,2)
+                .compose(RxUtils.rxSchedulerHelper())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new BaseObserver<List<CourseData>>(mView,
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_follow_data),
+                        isShowError) {
+                    @Override
+                    public void onNext(List<CourseData> courseData) {
+                        mView.showUserPublishData(courseData);
+                    }
+                }));
 
     }
 
     @Override
     public void getMyAlbum(boolean isShowError) {
+        addSubscribe(mDataManager.getUserSharedAlbumList(getLoginAccount())
+                .compose(RxUtils.rxSchedulerHelper())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new BaseObserver<List<AlbumCoverData>>(mView,
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_follow_data),
+                        isShowError) {
+                    @Override
+                    public void onNext(List<AlbumCoverData> albumCoverData) {
+                        mView.showUserPublishAlbum(albumCoverData);
+                    }
+                }));
+
 
     }
 

@@ -2,13 +2,7 @@ package com.handy.support.service.Course;
 
 import com.handy.support.entity.*;
 import com.handy.support.mapper.*;
-import com.handy.support.mapper.iMapper.ICourseAlbumMapper;
-import com.handy.support.mapper.iMapper.ICourseItemMapper;
-import com.handy.support.mapper.iMapper.ICourseLabelMapper;
-import com.handy.support.mapper.iMapper.ICourseStepMapper;
-import com.handy.support.mapper.iMapper.IHotMapper;
-import com.handy.support.mapper.iMapper.IFavorMapper;
-import com.handy.support.mapper.iMapper.ICourseMapper;
+import com.handy.support.mapper.iMapper.*;
 import com.handy.support.pojo.course.dto.CourseEditDTO;
 import com.handy.support.pojo.course.vo.CourseSimpleVO;
 import com.handy.support.pojo.course.vo.CourseDetailVO;
@@ -28,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import javax.imageio.stream.FileImageInputStream;
 import java.io.*;
 import java.net.SocketException;
 import java.util.*;
@@ -110,6 +105,10 @@ public class CourseServiceImpl implements ICourseService {
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     private StepMapper stepMapper;
+
+    @Autowired
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    private ILabelMapper iLabelMapper;
 
     public Course getCourseByID(Integer courseId){
         return courseMapper.selectByPrimaryKey(courseId);
@@ -364,6 +363,33 @@ public class CourseServiceImpl implements ICourseService {
 
         return imgUrl;
     }
+
+    public byte[] image2byte(String path) {
+        // 定义byte数组
+        byte[] data = null;
+        // 输入流
+        FileImageInputStream input = null;
+        try {
+            input = new FileImageInputStream(new File(path));
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            int numBytesRead = 0;
+            while ((numBytesRead = input.read(buf)) != -1) {
+                output.write(buf, 0, numBytesRead);
+            }
+            data = output.toByteArray();
+            output.close();
+            input.close();
+        } catch (FileNotFoundException ex1) {
+            ex1.printStackTrace();
+        } catch (IOException ex1) {
+            ex1.printStackTrace();
+        }
+        return data;
+    }
+public List<Label> getLabels(){
+   return iLabelMapper.getAll();
+}
 
 
 }

@@ -2,6 +2,7 @@ package com.handy.web.controller;
 
 import com.google.gson.Gson;
 import com.handy.support.entity.AlbumCourse;
+import com.handy.support.entity.Label;
 import com.handy.support.pojo.course.dto.CourseEditDTO;
 import com.handy.support.pojo.course.vo.CourseDetailVO;
 import com.handy.support.pojo.course.vo.CourseSimpleVO;
@@ -16,10 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.handy.support.service.Course.ICourseService;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -211,18 +209,15 @@ public class CourseController {
 //    }
 
     @RequestMapping(value = "/uploadImg",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
-    public String getUploadUrL(String localPath) {
-        FileInputStream fr = null;
-        try {
-            fr = new FileInputStream(localPath);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    public String getUploadUrL(byte[] data) {
+ //       String path ="/Users/joanie/Desktop/img/2.jpg";
+//        byte[] data = iCourseService.image2byte(path);
+        InputStream fr =new ByteArrayInputStream(data);
         String imgUrl = null;
         ErrorEnum error = null;
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_HH_mm_ss");
         String date = df.format(new Date());
-        if (fr != null) {
+        if (fr!= null) {
             imgUrl = iCourseService.uploadImg("106.13.106.249", "handy", "handy", 21, "/usr/local/tomcat/apache-tomcat-9.0.17/webapps/HandyBack_war_exploded/static/img/upload", date+".jpg", fr);
         }
         if(imgUrl==null){
@@ -234,6 +229,21 @@ public class CourseController {
         return code.returnHandler();
 
     }
+
+    @RequestMapping(value = "/course/label", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
+    public String getLabels(){
+        List<Label> list=iCourseService.getLabels();
+        ErrorEnum error = null;
+        if (list == null) {
+            error = ErrorEnum.REQUEST_FAIL;
+        } else {
+            error = ErrorEnum.SUCCESS;
+        }
+        ReturnCode<List<Label>> code=new ReturnCode<List<Label>>(error, list);
+        return code.returnHandler();
+    }
+
+
 
 
 }

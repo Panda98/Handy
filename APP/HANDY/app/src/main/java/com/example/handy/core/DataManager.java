@@ -10,6 +10,7 @@ import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
+import com.example.handy.core.bean.PublishCourseData;
 import com.example.handy.core.bean.RecommendAlbumData;
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.http.HttpHelper;
@@ -143,7 +144,7 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse> isLike(int userId, int courseId) {
+    public Observable<BaseResponse<Boolean>> isLike(int userId, int courseId) {
         return mHttpHelper.isLike(userId, courseId);
     }
 
@@ -153,9 +154,15 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse> uploadCourse(Map<String, RequestBody> partMap, MultipartBody.Part... files) {
-        return mHttpHelper.uploadCourse(partMap, files);
+    public Observable<BaseResponse> uploadCourse(PublishCourseData publishCourseData) {
+        return mHttpHelper.uploadCourse(publishCourseData);
     }
+
+    @Override
+    public Observable<BaseResponse<String>> uploadImage(byte[] data) {
+        return mHttpHelper.uploadImage(data);
+    }
+
 
     @Override
     public Observable<BaseResponse<Boolean>> postComment(PostCommentView commentView) {

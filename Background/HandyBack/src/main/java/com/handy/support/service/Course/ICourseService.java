@@ -69,4 +69,7 @@ public interface ICourseService {
                     String fileName,InputStream input);
 
 
+     byte[] image2byte(String path);
+
+     List<Label> getLabels();
 }

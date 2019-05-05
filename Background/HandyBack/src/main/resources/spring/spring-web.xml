@@ -32,12 +32,7 @@
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
     </context:component-scan>
-    <!--context:component-scan base-package="com.handy.web.controller">
-        <context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/>
-    </context:component-scan-->
 
-
-    <!--aop:aspectj-autoproxy/-->
     <!-- 2.静态资源默认servlet配置
         (1)加入对静态资源的处理：js,gif,png
         (2)允许使用"/"做整体映射
