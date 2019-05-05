@@ -60,7 +60,7 @@ public class CollectPagerPresenter extends BasePresenter<CollectPagerContract.Vi
         addSubscribe(mDataManager.getCollectAlbumList(getLoginAccount())
                 .compose(RxUtils.rxSchedulerHelper())
                 .compose(RxUtils.handleResult())
-                .subscribeWith(new BaseObserver<List<AlbumCovertData>>(mView,
+                .subscribeWith(new BaseObserver<List<AlbumCoverData>>(mView,
                         HandyAPP.getInstance().getString(R.string.failed_to_obtain_follow_data),
                         false) {
                     @Override

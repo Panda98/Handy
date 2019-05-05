@@ -5,6 +5,7 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -21,6 +22,7 @@ import com.example.handy.utils.JudgeUtils;
 import com.example.handy.view.adapter.AlbumCoverDataAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -41,7 +43,7 @@ public class CollectPagerFragment extends BaseRootFragment<CollectPagerPresenter
     RecyclerView mAlbumRecyclerView;
 
     private AlbumCoverDataAdapter mAdapter;
-    private List<AlbumListData> mCollectedAlbumList;
+    private List<AlbumCoverData> mCollectedAlbumList;
 
 
     @Override
@@ -55,6 +57,9 @@ public class CollectPagerFragment extends BaseRootFragment<CollectPagerPresenter
     }
 
 
+
+
+
     public static CollectPagerFragment getInstance(String param1, String param2) {
         CollectPagerFragment fragment = new CollectPagerFragment();
         Bundle args = new Bundle();
@@ -66,8 +71,8 @@ public class CollectPagerFragment extends BaseRootFragment<CollectPagerPresenter
 
     @Override
     protected void initEventAndData() {
-        super.initEventAndData();
         setRefresh();
+        mPresenter.getCollectedAlbumDataList(true);
         if (CommonUtils.isNetworkConnected()) {
             showLoading();
         }
@@ -87,6 +92,7 @@ public class CollectPagerFragment extends BaseRootFragment<CollectPagerPresenter
     @Override
     protected void initView() {
         super.initView();
+        initRecyclerView();
     }
 
     @Override
@@ -116,12 +122,23 @@ public class CollectPagerFragment extends BaseRootFragment<CollectPagerPresenter
             return;
         }
 
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, view, getString(R.string.share_view));
-        JudgeUtils.startAlbumDetailActivity(this,
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, view, getString(R.string.share_view));
+        JudgeUtils.startAlbumDetailActivity(_mActivity,
                 options,
                 mAdapter.getData().get(position).getAlbumId()
         );
     }
+
+    private void initRecyclerView() {
+        mCollectedAlbumList = new ArrayList<>();
+        mAdapter = new AlbumCoverDataAdapter(R.layout.item_album_abstract, mCollectedAlbumList);
+        //mAdapter.setOnItemClickListener((adapter, view, position) -> startArticleDetailPager(view, position));
+        mAlbumRecyclerView.setLayoutManager(new LinearLayoutManager(_mActivity));
+        mAlbumRecyclerView.setHasFixedSize(true);
+        mAlbumRecyclerView.setAdapter(mAdapter);
+    }
+
+
 
 
 
