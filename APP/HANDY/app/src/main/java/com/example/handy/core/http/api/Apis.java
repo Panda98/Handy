@@ -5,13 +5,16 @@ import com.example.handy.core.bean.AlbumListData;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
 import com.example.handy.core.bean.CommentData;
+import com.example.handy.core.bean.CommentMessageData;
 import com.example.handy.core.bean.CommentReplyData;
 import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
+import com.example.handy.core.bean.LikeMessageData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.PublishCourseData;
 import com.example.handy.core.bean.RecommendAlbumData;
+import com.example.handy.core.bean.ReplyMessageData;
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.vo.LoginView;
 import com.example.handy.core.vo.PostCommentView;
@@ -286,4 +289,30 @@ public interface Apis {
      */
     @GET("album/brief")
     Observable<BaseResponse<AlbumCoverData>> getAlbumCoverData(@Query("albumid") int albumId);
+
+    /**
+     * 消息——收到的评论
+     *
+     * @return 回复信息
+     */
+    @GET("message/courseComment")
+    Observable<BaseResponse<CommentMessageData>> getCommentMessage(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
+
+    /**
+     * 消息——收到的回复
+     *
+     * @return 回复信息
+     */
+    @GET("message/commentReply")
+    Observable<BaseResponse<ReplyMessageData>> getReplyMessage(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
+
+    /**
+     * 消息——收到的赞
+     *
+     * @return 回复信息
+     */
+    @GET("message/courseLike")
+    Observable<BaseResponse<LikeMessageData>> getLikeMessage(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
+
+
 }

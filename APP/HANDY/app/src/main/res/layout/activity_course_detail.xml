@@ -48,7 +48,7 @@
                         app:corner_radius="@dimen/dp_10" />
 
                     <!--author info-->
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
@@ -59,6 +59,7 @@
                             android:id="@+id/course_detail_author_cover"
                             android:layout_width="@dimen/dp_100"
                             android:layout_height="@dimen/dp_100"
+                            android:layout_alignParentStart="true"
                             android:src="#E8E8E8"
                             app:is_circle="true" />
 
@@ -66,6 +67,7 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
                             android:layout_marginStart="@dimen/dp_20"
                             android:orientation="vertical">
 
@@ -91,6 +93,9 @@
 
                         <!--关注按钮-->
                         <TextView
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="@dimen/dp_30"
+                            android:layout_centerVertical="true"
                             android:id="@+id/course_detail_follow_btn"
                             android:layout_width="@dimen/dp_80"
                             android:layout_height="@dimen/dp_30"
@@ -103,7 +108,7 @@
                             android:textColor="@color/follow_boarder"
                             android:textSize="@dimen/sp_16" />
 
-                    </LinearLayout>
+                    </RelativeLayout>
 
                     <!--divide line-->
                     <View
@@ -232,9 +237,9 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:descendantFocusability="blocksDescendants"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:background="@color/white">
+                    android:background="@color/white"
+                    android:descendantFocusability="blocksDescendants">
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/course_detail_comment"
