@@ -134,7 +134,7 @@ public interface HttpHelper {
      *
      * @return AlbumListData
      */
-    Observable<BaseResponse<List<AlbumListData>>> getCollectAlbumList(int userId);
+    Observable<BaseResponse<List<AlbumCoverData>>> getCollectAlbumList(int userId);
 
     /**
      * 收藏教程

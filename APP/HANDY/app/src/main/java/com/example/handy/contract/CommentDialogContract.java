@@ -22,9 +22,10 @@ public interface CommentDialogContract {
         /**
          * comment 评论
          *
-         * @param status boolean
+         * @param courseId int
+         * @param content String
          *
          */
-        void comment(Boolean status);
+        void comment(int courseId, String content);
     }
 }

@@ -34,6 +34,7 @@ import com.example.handy.utils.ImageLoader;
 import com.example.handy.utils.StatusBarUtil;
 import com.example.handy.view.adapter.CommentAdapter;
 import com.example.handy.view.adapter.CourseStepAdapter;
+import com.example.handy.view.fragment.CommentDialogFragment;
 import com.example.handy.view.fragment.SelectAlbumFragment;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
@@ -88,13 +89,18 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     @BindView(R.id.collect_button)
     LinearLayout collectBtn;
 
+    @BindView(R.id.comment_btn)
+    TextView commentBtn;
+
     @BindView(R.id.like_course_button)
     LikeButton likeButton;
 
     ArrayAdapter<String> mItemArrayAdapter;
     CourseStepAdapter mCourseStepAdapter;
     private CommentAdapter mCommentAdapter;
+
     private SelectAlbumFragment searchDialogFragment;
+    private CommentDialogFragment commentDialogFragment;
 
     private List<CommentData> commentDataList;
     private List<StepData> stepDataList;
@@ -185,7 +191,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         System.out.println(this.courseTitle);
     }
 
-    @OnClick({R.id.course_detail_follow_btn,R.id.collect_button})
+    @OnClick({R.id.course_detail_follow_btn, R.id.collect_button, R.id.comment_btn})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.course_detail_follow_btn:
@@ -201,7 +207,19 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
                 if (!isDestroyed() && searchDialogFragment.isAdded()) {
                     searchDialogFragment.dismiss();
                 }
-                searchDialogFragment.show(getSupportFragmentManager(), "SearchDialogFragment");
+                searchDialogFragment.show(getSupportFragmentManager(), "SelectAlbumFragment");
+                break;
+            case R.id.comment_btn:
+                if (commentDialogFragment == null) {
+                    commentDialogFragment = new CommentDialogFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("courseId", this.courseId);
+                    commentDialogFragment.setArguments(bundle);
+                }
+                if (!isDestroyed() && commentDialogFragment.isAdded()) {
+                    commentDialogFragment.dismiss();
+                }
+                commentDialogFragment.show(getSupportFragmentManager(), "CommentDialogFragment");
                 break;
             default:
                 break;
@@ -360,6 +378,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         mStepRv.setAdapter(mCourseStepAdapter);
     }
 
+    //ListView 高度
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) {

@@ -161,7 +161,7 @@ public interface Apis {
      * @return AlbumListData
      */
     @GET("album/collection")
-    Observable<BaseResponse<List<AlbumListData>>> getCollectAlbumList(@Query("uid")int userId);
+    Observable<BaseResponse<List<AlbumCoverData>>> getCollectAlbumList(@Query("uid")int userId);
 
     /**
      * 收藏教程
@@ -233,7 +233,6 @@ public interface Apis {
      *
      * @return url
      */
-    @Multipart
     @POST("uploadImg")
     Observable<BaseResponse<String>> uploadImage(@Query("data") byte[] data);
 
