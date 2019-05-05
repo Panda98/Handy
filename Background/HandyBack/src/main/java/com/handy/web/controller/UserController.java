@@ -42,20 +42,24 @@ public class UserController {
         User user = iUserService.getUserByEmail(userAuthVO.getUsername());
 
         ErrorEnum error = null;
+        UserDto dto = new UserDto();
+        UserVO vo=null;
+        ReturnCode<UserVO> code = new ReturnCode<UserVO>(vo);
         if(user == null){
             error = ErrorEnum.USER_NOT_EXIST;
         }
         else if(!user.getLoginPassword().equals(userAuthVO.getPassword())){
             error = ErrorEnum.WRONG_PASSWORD;
         }
-        UserDto dto = new UserDto();
-        BeanUtils.copyProperties(user,dto);
 
-        UserVO vo=null;
+
         if(error == null) {
-           vo = new UserVO(dto);
+            BeanUtils.copyProperties(user,dto);
+            vo = new UserVO(dto);
+            code = new ReturnCode<UserVO>(vo);
+            error = ErrorEnum.SUCCESS;
         }
-        ReturnCode<UserVO> code = new ReturnCode<UserVO>(vo);
+        code.setErrorEnum(error);
         return code.returnHandler();
     }
 

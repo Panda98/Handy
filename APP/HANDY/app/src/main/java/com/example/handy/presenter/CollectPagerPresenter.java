@@ -1,8 +1,18 @@
 package com.example.handy.presenter;
 
+import com.example.handy.R;
+import com.example.handy.app.Constants;
+import com.example.handy.app.HandyAPP;
 import com.example.handy.base.presenter.BasePresenter;
 import com.example.handy.contract.CollectPagerContract;
 import com.example.handy.core.DataManager;
+import com.example.handy.core.bean.AlbumCoverData;
+import com.example.handy.core.bean.AlbumListData;
+import com.example.handy.core.bean.CourseData;
+import com.example.handy.utils.RxUtils;
+import com.example.handy.wigdet.BaseObserver;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -44,5 +54,27 @@ public class CollectPagerPresenter extends BasePresenter<CollectPagerContract.Vi
     public void loadMoreData() {
 
     }
+
+    @Override
+    public void getCollectedAlbumDataList(boolean isShowError){
+        addSubscribe(mDataManager.getCollectAlbumList(getLoginAccount())
+                .compose(RxUtils.rxSchedulerHelper())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new BaseObserver<List<AlbumCoverData>>(mView,
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_follow_data),
+                        false) {
+                    @Override
+                    public void onNext(List<AlbumCoverData> albumCoverDataList) {
+                        mView.showMyCollectedAlbumData(albumCoverDataList, isRefresh);
+                    }
+                }));
+    };
+
+    @Override
+    public void getCollectedCourseDataList(boolean isShowError){
+
+    };
+
+
 
 }

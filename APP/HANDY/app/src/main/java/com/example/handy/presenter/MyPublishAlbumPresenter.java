@@ -42,8 +42,8 @@ public class MyPublishAlbumPresenter extends BasePresenter<MyPublishAlbumContrac
                         HandyAPP.getInstance().getString(R.string.failed_to_obtain_follow_data),
                         false) {
                     @Override
-                    public void onNext(List<AlbumCoverData> albumCoverDataList) {
-                        mView.showMyPublishAlbumData(albumCoverDataList, isRefresh);
+                    public void onNext(List<AlbumCoverData> albumListDataList) {
+                        mView.showMyPublishAlbumData(albumListDataList, isRefresh);
                     }
                 }));
     }
