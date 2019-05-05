@@ -1,4 +1,4 @@
-﻿package com.example.handy.view.fragment.main;
+package com.example.handy.view.fragment.main;
 
 
 import android.content.Context;

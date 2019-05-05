@@ -13,6 +13,8 @@ import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.utils.RxUtils;
 import com.example.handy.wigdet.BaseObserver;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 public class AccountPagerPresenter extends BasePresenter<AccountPagerContract.View> implements AccountPagerContract.Presenter {
