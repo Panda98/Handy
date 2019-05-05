@@ -333,9 +333,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
     }
 
     private void publish(){
-
-
-
+        mPresenter.publish(courseData);
     }
 
     private boolean checkInput(){
@@ -502,8 +500,15 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
     }
 
     @Override
-    public void afterUploadPic(boolean res){
-
+    public void afterUploadPic(String url,int index){
+        imgPath.add(index,url);
+        if(imgPath.size() == stepData.size()+1){
+            publish();
+        }
+    }
+    @Override
+    public void afterPublish(String message){
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
 
     private void beforePublish(){
@@ -532,14 +537,10 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         courseData.setLevelId(level);
 
         if(checkInput()){
-            //todo： 上传
             //上传图片，获得url
-            byte[] coverArr = pic2Byte(imgPath.get(0));
-            mPresenter.uploadPic(coverArr);
-
-            for(int i=1;i<imgPath.size();i++){
+            for(int i=0;i<imgPath.size();i++){
                 byte[] imgArr = pic2Byte(imgPath.get(0));
-                mPresenter.uploadPic(imgArr);
+                mPresenter.uploadPic(imgArr,i);
             }
         }
     }
