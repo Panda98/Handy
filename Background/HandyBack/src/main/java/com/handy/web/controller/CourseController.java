@@ -2,6 +2,7 @@ package com.handy.web.controller;
 
 import com.google.gson.Gson;
 import com.handy.support.entity.AlbumCourse;
+import com.handy.support.entity.Label;
 import com.handy.support.pojo.course.dto.CourseEditDTO;
 import com.handy.support.pojo.course.vo.CourseDetailVO;
 import com.handy.support.pojo.course.vo.CourseSimpleVO;
@@ -227,6 +228,19 @@ public class CourseController {
         ReturnCode<String> code=new ReturnCode<String>(error,imgUrl);
         return code.returnHandler();
 
+    }
+
+    @RequestMapping(value = "/course/label", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
+    public String getLabels(){
+        List<Label> list=iCourseService.getLabels();
+        ErrorEnum error = null;
+        if (list == null) {
+            error = ErrorEnum.REQUEST_FAIL;
+        } else {
+            error = ErrorEnum.SUCCESS;
+        }
+        ReturnCode<List<Label>> code=new ReturnCode<List<Label>>(error, list);
+        return code.returnHandler();
     }
 
 

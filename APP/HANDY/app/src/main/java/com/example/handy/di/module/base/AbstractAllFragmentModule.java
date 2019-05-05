@@ -8,6 +8,8 @@ import com.example.handy.di.module.MainPagerFragmentModule;
 import com.example.handy.di.module.ReceivedCommentFragmentModule;
 import com.example.handy.di.module.ReceivedLikeFragmentModule;
 import com.example.handy.di.module.ReceivedReplyFragmentModule;
+import com.example.handy.di.module.SelectAlbumFragmentModule;
+import com.example.handy.view.fragment.SelectAlbumFragment;
 import com.example.handy.view.fragment.main.AccountPagerFragment;
 import com.example.handy.view.fragment.main.CollectPagerFragment;
 import com.example.handy.view.fragment.main.FollowPagerFragment;
@@ -50,5 +52,7 @@ public abstract class AbstractAllFragmentModule {
     @ContributesAndroidInjector(modules = ReceivedLikeFragmentModule.class)
     abstract ReceivedLikeFragment contributesReceivedLikeFragmentInject();
 
+    @ContributesAndroidInjector(modules = SelectAlbumFragmentModule.class)
+    abstract SelectAlbumFragment contributesSelectAlbumFragmentInject();
 
 }
