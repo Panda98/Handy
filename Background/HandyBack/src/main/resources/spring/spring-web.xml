@@ -23,22 +23,21 @@
     <mvc:annotation-driven />
 
     <!-- MVC只处理controller-->
+
+
+
+
+
     <context:component-scan base-package="com.handy.web.controller" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
     </context:component-scan>
 
-    <!--<context:component-scan base-package="com.handy.support.recommend.process">-->
-    <!--</context:component-scan>-->
-
-
-    <!--<aop:aspectj-autoproxy/>-->
     <!-- 2.静态资源默认servlet配置
         (1)加入对静态资源的处理：js,gif,png
         (2)允许使用"/"做整体映射
      -->
     <mvc:default-servlet-handler/>
-
 
     <!-- 配置映射处理器：根据bean(自定义Controller)的name属性的url去寻找handler；springmvc默认的映射处理器是
 	BeanNameUrlHandlerMapping
