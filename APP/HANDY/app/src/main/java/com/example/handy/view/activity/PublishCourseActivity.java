@@ -113,8 +113,6 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
 
     }
 
-
-
     public void initRecyclerView(){
         stepData = new ArrayList<>();
         courseData = new PublishCourseData();
@@ -191,7 +189,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
     @OnClick({R.id.publish_course_btn})
     void OnClick(View view){
         if(view.getId() == R.id.publish_course_btn){
-            publish();
+            beforePublish();
         }
     }
 
@@ -335,43 +333,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
     }
 
     private void publish(){
-
-        LevelViewHolder viewHolder =  multiAdapter.getLevelViewHolder();
-        if(viewHolder == null){
-            Toast.makeText(this,"请选择难度等级",Toast.LENGTH_SHORT).show();
-            return;
-        }
-        int level =viewHolder.getLevel();
-
-
-        LabelViewHolder labelViewHolder = multiAdapter.getLabelViewHolder();
-        if(labelViewHolder == null){
-            Toast.makeText(this,"请选择至少一个标签或自定义一个标签",Toast.LENGTH_SHORT).show();
-            return;
-        }
-        List<LabelData> selectedLabel = labelViewHolder.getSelectedLabel();
-        String customLabel = labelViewHolder.getCustomLabel();
-
-
-
-        courseData.setItemList(materialItemData);
-        courseData.setStepList(stepData);
-        courseData.setDiyLabel(customLabel);
-        courseData.setLabelList(selectedLabel);
-        courseData.setLevelId(level);
-
-        if(checkInput()){
-            //todo： 上传
-            //上传图片，获得url
-            byte[] coverArr = pic2Byte(imgPath.get(0));
-            String coverURL = mPresenter.uploadPic(coverArr);
-            courseData.setCourseCover(coverURL);
-            for(int i=1;i<imgPath.size();i++){
-                byte[] imgArr = pic2Byte(imgPath.get(0));
-                String imgURL = mPresenter.uploadPic(imgArr);
-                courseData.getStepList().get(i-1).setStepImg(imgURL);
-            }
-        }
+        mPresenter.publish(courseData);
     }
 
     private boolean checkInput(){
@@ -534,6 +496,52 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
                     courseData.setCourseIntro(editable.toString());
                 }
             });
+        }
+    }
+
+    @Override
+    public void afterUploadPic(String url,int index){
+        imgPath.add(index,url);
+        if(imgPath.size() == stepData.size()+1){
+            publish();
+        }
+    }
+    @Override
+    public void afterPublish(String message){
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    }
+
+    private void beforePublish(){
+        LevelViewHolder viewHolder =  multiAdapter.getLevelViewHolder();
+        if(viewHolder == null){
+            Toast.makeText(this,"请选择难度等级",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        int level =viewHolder.getLevel();
+
+
+        LabelViewHolder labelViewHolder = multiAdapter.getLabelViewHolder();
+        if(labelViewHolder == null){
+            Toast.makeText(this,"请选择至少一个标签或自定义一个标签",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        List<LabelData> selectedLabel = labelViewHolder.getSelectedLabel();
+        String customLabel = labelViewHolder.getCustomLabel();
+
+
+
+        courseData.setItemList(materialItemData);
+        courseData.setStepList(stepData);
+        courseData.setDiyLabel(customLabel);
+        courseData.setLabelList(selectedLabel);
+        courseData.setLevelId(level);
+
+        if(checkInput()){
+            //上传图片，获得url
+            for(int i=0;i<imgPath.size();i++){
+                byte[] imgArr = pic2Byte(imgPath.get(0));
+                mPresenter.uploadPic(imgArr,i);
+            }
         }
     }
 }

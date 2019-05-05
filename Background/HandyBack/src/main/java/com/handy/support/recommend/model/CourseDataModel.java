@@ -29,9 +29,13 @@ public class CourseDataModel extends AbstractDataModel {
     private long[] itemIDs;
     private FastByIDMap<PreferenceArray> preferenceForItems;
     private FastByIDMap<FastByIDMap<Long>> timestamps;
-
+    private Date lastRefreshTime;
     public CourseDataModel(FastByIDMap<PreferenceArray> userData) {
         this(userData, (FastByIDMap)null);
+        lastRefreshTime=new Date();
+    }
+    public Date getLastRefreshTime(){
+        return this.lastRefreshTime;
     }
 
     public CourseDataModel(FastByIDMap<PreferenceArray> userData, FastByIDMap<FastByIDMap<Long>> timestamps) {
@@ -332,6 +336,7 @@ public class CourseDataModel extends AbstractDataModel {
     }
 
     public void refresh(Collection<Refreshable> alreadyRefreshed) {
+
     }
 
     public boolean hasPreferenceValues() {

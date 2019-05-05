@@ -8,6 +8,8 @@ import com.handy.support.service.Follow.FollowServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +21,21 @@ public class RecommendServiceImpl implements IRecommendService{
     MyFollowMapper followMapper;
     public void insertUserItemLike(UserItemLike itemLike){
         recommendMapper.insertSelective(itemLike);
+    }
+    public void updatePreference(int uid,int item,float value){
+        UserItemLike temp= recommendMapper.selectRecord(uid,item);
+        UserItemLike like=new UserItemLike();
+        like.setItemId(item);
+        like.setUserId(uid);
+        like.setUpdateTime(new Date());
+        if(temp==null){
+            like.setPreference(value);
+            recommendMapper.insertSelective(like);
+        }
+        else{
+            like.setPreference(value);
+            recommendMapper.updateRecord(like);
+        }
     }
     public void UserLikeItem(int uid,int item){
        UserItemLike temp= recommendMapper.selectRecord(uid,item);
@@ -42,6 +59,32 @@ public class RecommendServiceImpl implements IRecommendService{
             like.setItemId(item);
             like.setUserId(uid);
             like.setPreference(temp.getPreference()-0.7f);
+            like.setUpdateTime(new Date());
+            recommendMapper.updateRecord(like);
+        }
+    }
+    public void UserLikeItem(int uid,int item,float value){
+        UserItemLike temp= recommendMapper.selectRecord(uid,item);
+        UserItemLike like=new UserItemLike();
+        like.setItemId(item);
+        like.setUserId(uid);
+        like.setUpdateTime(new Date());
+        if(temp==null){
+            like.setPreference(value);
+            recommendMapper.insertSelective(like);
+        }
+        else{
+            like.setPreference(temp.getPreference()+value);
+            recommendMapper.updateRecord(like);
+        }
+    }
+    public void UserUlikeItem(int uid,int item,float value){
+        UserItemLike temp= recommendMapper.selectRecord(uid,item);
+        if(temp!=null){
+            UserItemLike like=new UserItemLike();
+            like.setItemId(item);
+            like.setUserId(uid);
+            like.setPreference(temp.getPreference()-value);
             like.setUpdateTime(new Date());
             recommendMapper.updateRecord(like);
         }
@@ -97,5 +140,10 @@ public class RecommendServiceImpl implements IRecommendService{
         for(int i=0;i<list.size();i++) {
             UserUlikeItem(uid,list.get(i));
         }
+    }
+    public List<UserItemLike> getUpdates(Date lastUpdate){
+        Format format= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String updateTime=format.format(lastUpdate);
+        return recommendMapper.getUpdates(updateTime);
     }
 }

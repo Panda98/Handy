@@ -7,13 +7,14 @@ import com.example.handy.core.bean.PublishCourseData;
 public interface PublishCourseContract {
 
     interface View extends AbstractView {
-
+        void afterUploadPic(String url,int index);
+        void afterPublish(String message);
     }
 
     interface Presenter extends AbstractPresenter<View> {
 
         void publish(PublishCourseData data);
-        String uploadPic(byte[] imgArr);
+        void uploadPic(byte[] imgArr,int index);
 
     }
 }
