@@ -70,4 +70,6 @@ public interface ICourseService {
 
 
      byte[] image2byte(String path);
+
+     List<Label> getLabels();
 }

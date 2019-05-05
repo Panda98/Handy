@@ -2,13 +2,7 @@ package com.handy.support.service.Course;
 
 import com.handy.support.entity.*;
 import com.handy.support.mapper.*;
-import com.handy.support.mapper.iMapper.ICourseAlbumMapper;
-import com.handy.support.mapper.iMapper.ICourseItemMapper;
-import com.handy.support.mapper.iMapper.ICourseLabelMapper;
-import com.handy.support.mapper.iMapper.ICourseStepMapper;
-import com.handy.support.mapper.iMapper.IHotMapper;
-import com.handy.support.mapper.iMapper.IFavorMapper;
-import com.handy.support.mapper.iMapper.ICourseMapper;
+import com.handy.support.mapper.iMapper.*;
 import com.handy.support.pojo.course.dto.CourseEditDTO;
 import com.handy.support.pojo.course.vo.CourseSimpleVO;
 import com.handy.support.pojo.course.vo.CourseDetailVO;
@@ -111,6 +105,10 @@ public class CourseServiceImpl implements ICourseService {
     @Autowired
     @SuppressWarnings("SpringJavaAutowiringInspection")
     private StepMapper stepMapper;
+
+    @Autowired
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    private ILabelMapper iLabelMapper;
 
     public Course getCourseByID(Integer courseId){
         return courseMapper.selectByPrimaryKey(courseId);
@@ -389,7 +387,9 @@ public class CourseServiceImpl implements ICourseService {
         }
         return data;
     }
-
+public List<Label> getLabels(){
+   return iLabelMapper.getAll();
+}
 
 
 }

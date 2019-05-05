@@ -225,10 +225,239 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@color/divide_color"/>
 
+            <!--发布教程-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_20">
+
+                <!--标题-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/dp_10">
+                    <!--文字-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="我发布的教程"
+                        android:textSize="18sp"
+                        android:textColor="@color/normal_text"/>
+
+
+                </LinearLayout>
+                <!--教程1-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dp_1"
+                    android:paddingBottom="@dimen/dp_15"
+                    android:orientation="horizontal">
+
+
+                    <!--教程1封面-->
+                    <com.shehuan.niv.NiceImageView
+                        android:id="@+id/account_page_course1_img"
+                        android:layout_gravity="center_vertical"
+                        app:is_circle="true"
+
+                        android:layout_width="@dimen/dp_80"
+                        android:layout_height="@dimen/dp_80" />
+
+                    <!--教程1内容-->
+                    <LinearLayout
+                        android:layout_height="@dimen/dp_80"
+                        android:layout_width="200dp"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="15dp">
+
+                        <!--教程1标题-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/dp_18"
+                            android:layout_marginTop="6dp"
+                            >
+                            <TextView
+                                android:id="@+id/account_page_course1_title"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="14dp"
+                                android:text="树脂画教程"
+                                android:textColor="@color/normal_text"/>
+
+                        </LinearLayout>
+                        <!--教程1简介-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp">
+
+                            <TextView
+                                android:id="@+id/account_page_course1_intro"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="10dp"
+                                android:text="这是一个树脂画教程，非常简单哦，大家快跟着学起来吧~"/>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--教程2-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dp_1"
+                    android:paddingBottom="@dimen/dp_15"
+                    android:orientation="horizontal">
+
+
+                    <!--教程1封面-->
+                    <com.shehuan.niv.NiceImageView
+                        android:id="@+id/account_page_course2_img"
+                        android:layout_gravity="center_vertical"
+                        app:is_circle="true"
+
+                        android:layout_width="@dimen/dp_80"
+                        android:layout_height="@dimen/dp_80" />
+
+                    <!--教程1内容-->
+                    <LinearLayout
+                        android:layout_height="@dimen/dp_80"
+                        android:layout_width="200dp"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="15dp">
+
+                        <!--教程1标题-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/dp_18"
+                            android:layout_marginTop="6dp"
+                            >
+                            <TextView
+                                android:id="@+id/account_page_course2_title"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="14dp"
+                                android:text="树脂画教程"
+                                android:textColor="@color/normal_text"/>
+
+                        </LinearLayout>
+                        <!--教程1简介-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp">
+
+                            <TextView
+                                android:id="@+id/account_page_course2_intro"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="10dp"
+                                android:text="这是一个树脂画教程，非常简单哦，大家快跟着学起来吧~"/>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!--发布的专辑-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_20">
+
+            <!--标题-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/dp_10">
+
+
+                <!--文字-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我发布的专辑"
+                    android:textSize="18sp"
+                    android:textColor="@color/normal_text"/>
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <!--专辑1-->
+                    <com.shehuan.niv.NiceImageView
+                        android:id="@+id/account_page_album1_img"
+                        android:layout_gravity="center_vertical"
+                        app:is_circle="true"
+
+                        android:layout_width="@dimen/dp_80"
+                        android:layout_height="@dimen/dp_80" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <com.shehuan.niv.NiceImageView
+                        android:id="@+id/account_page_album2_img"
+                        android:layout_gravity="center_vertical"
+                        app:is_circle="true"
+
+                        android:layout_width="@dimen/dp_80"
+                        android:layout_height="@dimen/dp_80" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <com.shehuan.niv.NiceImageView
+                        android:id="@+id/account_page_album3_img"
+                        android:layout_gravity="center_vertical"
+                        app:is_circle="true"
+
+                        android:layout_width="@dimen/dp_80"
+                        android:layout_height="@dimen/dp_80" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
         </LinearLayout>
 
 
-
+g
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 

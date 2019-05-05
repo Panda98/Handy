@@ -26,7 +26,7 @@
         course_likes AS courseLikes,
         user_id AS userId,
         diy_label AS diyLabel,
-        update_time AS updateTime,
+        cc.update_time AS updateTime,
         level_id AS levelId
         FROM course cc
         LEFT JOIN album_course ac ON cc.course_id=ac.course_id
