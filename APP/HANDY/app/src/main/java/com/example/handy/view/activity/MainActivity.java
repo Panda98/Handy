@@ -24,10 +24,10 @@ import com.example.handy.utils.BottomNavigationViewHelper;
 import com.example.handy.utils.CommonAlertDialog;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.StatusBarUtil;
-import com.example.handy.view.fragment.AccountPagerFragment;
-import com.example.handy.view.fragment.CollectPagerFragment;
-import com.example.handy.view.fragment.FollowPagerFragment;
-import com.example.handy.view.fragment.MainPagerFragment;
+import com.example.handy.view.fragment.main.AccountPagerFragment;
+import com.example.handy.view.fragment.main.CollectPagerFragment;
+import com.example.handy.view.fragment.main.FollowPagerFragment;
+import com.example.handy.view.fragment.main.MainPagerFragment;
 
 import java.util.ArrayList;
 

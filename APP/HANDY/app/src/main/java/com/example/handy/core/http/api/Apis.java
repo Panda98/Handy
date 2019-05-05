@@ -36,7 +36,8 @@ import retrofit2.http.Query;
  */
 public interface Apis {
     //String HOST = "http://106.13.106.249:8080/";
-    String HOST = "http://192.168.1.105:8080/Handy/";
+    String HOST = "http://192.168.2.28:8080/Handy/";
+    //String HOST = "http://192.168.2.7:8080/";
 
     /**
      * 登陆
