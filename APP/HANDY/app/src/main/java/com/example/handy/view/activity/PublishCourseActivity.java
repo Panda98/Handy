@@ -36,6 +36,8 @@ import com.example.handy.core.bean.PublishCourseData;
 import com.example.handy.presenter.PublishCoursePresenter;
 import com.example.handy.utils.StatusBarUtil;
 import com.example.handy.view.adapter.CourseEditorMultiAdapter;
+import com.example.handy.view.viewHolder.LabelViewHolder;
+import com.example.handy.view.viewHolder.LevelViewHolder;
 import com.example.handy.view.viewHolder.PublishStepViewHolder;
 import com.yuyh.library.imgsel.ISNav;
 import com.yuyh.library.imgsel.common.ImageLoader;
@@ -71,6 +73,8 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
     private List<MultipleItem> data;
 
     private List<LabelData> preLabels;
+
+    private List<String> imgPath;
 
 
 
@@ -114,6 +118,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
     public void initRecyclerView(){
         stepData = new ArrayList<>();
         courseData = new PublishCourseData();
+        imgPath = new ArrayList<>();
 
         materialItemData = new ArrayList<>();
         data = new ArrayList<>();
@@ -269,11 +274,17 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         if (requestCode == Constants.COURSE_COVER_UPLOAD && resultCode == RESULT_OK && data != null) {
             //todo: 处理封面图上传
             List<String> pathList = data.getStringArrayListExtra("result");
+
+            // UI图片显示
             ImageView view = recyclerView.findViewById(R.id.publish_course_header).findViewById(R.id.picture_upload);
             view.setImageBitmap(loadImg(pathList.get(0)));
 
             TextView textView = recyclerView.findViewById(R.id.publish_course_header).findViewById(R.id.cover_pic_text);
             textView.setVisibility(View.INVISIBLE);
+
+            //图片byte数组上传
+            imgPath.add(0,pathList.get(0));
+
 
             System.out.println(pathList);
         }
@@ -289,6 +300,8 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
 
             TextView textView = viewHolder.getTextView();
             textView.setVisibility(View.INVISIBLE);
+
+            imgPath.add(index+1,pathList.get(0));
 
             System.out.println(pathList);
 
@@ -306,7 +319,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         }
     }
 
-    private String pic2String(String imgPath){
+    private byte[] pic2Byte(String imgPath){
         BitmapFactory.Options options = null;
         options = new BitmapFactory.Options();
         options.inSampleSize = 3;
@@ -314,17 +327,30 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
                 options);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         // 压缩图片
-        bitmap.compress(Bitmap.CompressFormat.PNG, 50, stream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byte_arr = stream.toByteArray();
         // Base64图片转码为String
         String encodedString = Base64.encodeToString(byte_arr, 0);
-        return encodedString;
+        return byte_arr;
     }
 
     private void publish(){
-        int level = multiAdapter.getLevelViewHolder().getLevel();
-        List<LabelData> selectedLabel = multiAdapter.getLabelViewHolder().getSelectedLabel();
-        String customLabel = multiAdapter.getLabelViewHolder().getCustomLabel();
+
+        LevelViewHolder viewHolder =  multiAdapter.getLevelViewHolder();
+        if(viewHolder == null){
+            Toast.makeText(this,"请选择难度等级",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        int level =viewHolder.getLevel();
+
+
+        LabelViewHolder labelViewHolder = multiAdapter.getLabelViewHolder();
+        if(labelViewHolder == null){
+            Toast.makeText(this,"请选择至少一个标签或自定义一个标签",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        List<LabelData> selectedLabel = labelViewHolder.getSelectedLabel();
+        String customLabel = labelViewHolder.getCustomLabel();
 
 
 
@@ -336,6 +362,15 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
 
         if(checkInput()){
             //todo： 上传
+            //上传图片，获得url
+            byte[] coverArr = pic2Byte(imgPath.get(0));
+            String coverURL = mPresenter.uploadPic(coverArr);
+            courseData.setCourseCover(coverURL);
+            for(int i=1;i<imgPath.size();i++){
+                byte[] imgArr = pic2Byte(imgPath.get(0));
+                String imgURL = mPresenter.uploadPic(imgArr);
+                courseData.getStepList().get(i-1).setStepImg(imgURL);
+            }
         }
     }
 
@@ -344,7 +379,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
             Toast.makeText(this, "请输入标题", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(courseData.getCourseCover() == null) {
+        if(imgPath.get(0)==null) {
             Toast.makeText(this, "请上传一张封面图", Toast.LENGTH_SHORT).show();
             return false;
         }

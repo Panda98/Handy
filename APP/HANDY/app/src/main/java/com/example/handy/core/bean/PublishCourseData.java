@@ -8,7 +8,7 @@ public class PublishCourseData {
     String courseTitle;
     String courseIntro;
     String courseNote;
-    File courseCover;
+    String courseCover;
     int levelId;
     List<LabelData> labelList;
     String diyLabel;
@@ -48,11 +48,11 @@ public class PublishCourseData {
         this.courseNote = courseNote;
     }
 
-    public File getCourseCover() {
+    public String getCourseCover() {
         return courseCover;
     }
 
-    public void setCourseCover(File courseCover) {
+    public void setCourseCover(String courseCover) {
         this.courseCover = courseCover;
     }
 

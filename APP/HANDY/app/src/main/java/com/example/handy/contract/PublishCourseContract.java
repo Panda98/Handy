@@ -12,7 +12,8 @@ public interface PublishCourseContract {
 
     interface Presenter extends AbstractPresenter<View> {
 
-        void getPublishCourseInfos(PublishCourseData data);
+        void publish(PublishCourseData data);
+        String uploadPic(byte[] imgArr);
 
     }
 }

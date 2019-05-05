@@ -172,7 +172,7 @@ public interface HttpHelper {
      *
      * @return 结果
      */
-    Observable<BaseResponse> isLike(int userId, int courseId);
+    Observable<BaseResponse<Boolean>> isLike(int userId, int courseId);
 
     /**
      * 获取自己发布的教程

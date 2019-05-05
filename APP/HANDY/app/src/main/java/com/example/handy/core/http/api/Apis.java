@@ -167,7 +167,7 @@ public interface Apis {
      *
      * @return 结果
      */
-    @GET("course/collectCourse")
+    @GET("course/collect")
     Observable<BaseResponse> collectCourse(@Query("courseId")int courseId, @Query("albumId")int albumId);
 
     /**
@@ -208,7 +208,7 @@ public interface Apis {
      * @return 结果
      */
     @GET("course/isliked")
-    Observable<BaseResponse> isLike(@Query("userId")int userId, @Query("courseId")int courseId);
+    Observable<BaseResponse<Boolean>> isLike(@Query("userId")int userId, @Query("courseId")int courseId);
 
     /**
      * 获取自己发布的教程
