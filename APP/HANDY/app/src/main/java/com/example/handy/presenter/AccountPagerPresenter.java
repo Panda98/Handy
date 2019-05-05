@@ -6,6 +6,7 @@ import com.example.handy.base.presenter.BasePresenter;
 import com.example.handy.contract.AccountPagerContract;
 import com.example.handy.core.DataManager;
 
+import com.example.handy.core.bean.AlbumCoverData;
 import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.FollowData;
 
@@ -53,6 +54,18 @@ public class AccountPagerPresenter extends BasePresenter<AccountPagerContract.Vi
 
     @Override
     public void getMyAlbum(boolean isShowError) {
+        addSubscribe(mDataManager.getUserSharedAlbumList(getLoginAccount())
+                .compose(RxUtils.rxSchedulerHelper())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new BaseObserver<List<AlbumCoverData>>(mView,
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_follow_data),
+                        isShowError) {
+                    @Override
+                    public void onNext(List<AlbumCoverData> albumCoverData) {
+                        mView.showUserPublishAlbum(albumCoverData);
+                    }
+                }));
+
 
     }
 

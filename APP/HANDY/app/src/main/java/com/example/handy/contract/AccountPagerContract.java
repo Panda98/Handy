@@ -2,6 +2,7 @@ package com.example.handy.contract;
 
 import com.example.handy.base.presenter.AbstractPresenter;
 import com.example.handy.base.view.AbstractView;
+import com.example.handy.core.bean.AlbumCoverData;
 import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.UserInfoData;
 
@@ -14,6 +15,8 @@ public interface AccountPagerContract {
         void showUserInfo(UserInfoData userInfoData);
 
         void showUserPublishData(List<CourseData> courseData);
+
+        void showUserPublishAlbum(List<AlbumCoverData> albumCoverData);
 
     }
 
