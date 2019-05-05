@@ -56,6 +56,21 @@ public class CollectPagerPresenter extends BasePresenter<CollectPagerContract.Vi
     }
 
     @Override
+    public void getMyAlbumDataList(boolean isShowError) {
+        addSubscribe(mDataManager.getUserSharedAlbumList(getLoginAccount())
+                .compose(RxUtils.rxSchedulerHelper())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new BaseObserver<List<AlbumCoverData>>(mView,
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_follow_data),
+                        false) {
+                    @Override
+                    public void onNext(List<AlbumCoverData> albumCoverDataList) {
+                        mView.showMyAlbumData(albumCoverDataList, isRefresh);
+                    }
+                }));
+    }
+
+    @Override
     public void getCollectedAlbumDataList(boolean isShowError){
         addSubscribe(mDataManager.getCollectAlbumList(getLoginAccount())
                 .compose(RxUtils.rxSchedulerHelper())
@@ -70,10 +85,7 @@ public class CollectPagerPresenter extends BasePresenter<CollectPagerContract.Vi
                 }));
     };
 
-    @Override
-    public void getCollectedCourseDataList(boolean isShowError){
 
-    };
 
 
 

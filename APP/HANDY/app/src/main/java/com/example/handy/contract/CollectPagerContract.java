@@ -12,7 +12,8 @@ import java.util.List;
 public interface CollectPagerContract {
 
     interface View extends AbstractView {
-        void showMyCollectedCourseData(List<CourseData> courseDataList, boolean isRefresh);
+
+        void showMyAlbumData(List<AlbumCoverData> myAlbumDataList, boolean isRefresh);
 
         void showMyCollectedAlbumData(List<AlbumCoverData> albumListDataList, boolean isRefresh);
 
@@ -37,9 +38,9 @@ public interface CollectPagerContract {
         void loadMoreData();
 
         /**
-         * 加载教程信息
+         * 加载我的专辑
          */
-        void getCollectedCourseDataList(boolean isShowError);
+        void getMyAlbumDataList(boolean isShowError);
 
         /**
          * 加载专辑信息
