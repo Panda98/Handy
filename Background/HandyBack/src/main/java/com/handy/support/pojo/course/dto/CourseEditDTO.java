@@ -16,8 +16,8 @@ public class CourseEditDTO {
     private Byte levelId;
     private List<Label> labelList;
     private String diyLabel;
-    private List<ItemDTO> itemDtoList;
-    private List<StepDTO> stepDtoList;
+    private List<ItemDTO> itemList;
+    private List<StepDTO> stepList;
 
 
     public Integer getUserId() {
@@ -84,26 +84,26 @@ public class CourseEditDTO {
         this.diyLabel = diyLabel;
     }
 
-    public List<ItemDTO> getItemDtoList() {
-        return itemDtoList;
+    public List<ItemDTO> getItemList() {
+        return itemList;
     }
 
-    public void setItemDtoList(List<ItemDTO> itemDtoList) {
-        this.itemDtoList = itemDtoList;
+    public void setItemList(List<ItemDTO> itemList) {
+        this.itemList = itemList;
     }
 
-    public List<StepDTO> getStepDtoList() {
-        return stepDtoList;
+    public List<StepDTO> getStepList() {
+        return stepList;
     }
 
-    public void setStepDtoList(List<StepDTO> stepDtoList) {
-        this.stepDtoList = stepDtoList;
+    public void setStepList(List<StepDTO> stepList) {
+        this.stepList = stepList;
     }
 
     public CourseEditDTO() {
     }
 
-    public CourseEditDTO(Integer userId, String courseTitle, String courseIntro, String courseNote, String courseCover, Byte levelId, List<Label> labelList, String diyLabel, List<ItemDTO> itemDtoList, List<StepDTO> stepDtoList) {
+    public CourseEditDTO(Integer userId, String courseTitle, String courseIntro, String courseNote, String courseCover, Byte levelId, List<Label> labelList, String diyLabel, List<ItemDTO> itemList, List<StepDTO> stepList) {
         this.userId = userId;
         this.courseTitle = courseTitle;
         this.courseIntro = courseIntro;
@@ -112,7 +112,7 @@ public class CourseEditDTO {
         this.levelId = levelId;
         this.labelList = labelList;
         this.diyLabel = diyLabel;
-        this.itemDtoList = itemDtoList;
-        this.stepDtoList = stepDtoList;
+        this.itemList = itemList;
+        this.stepList = stepList;
     }
 }

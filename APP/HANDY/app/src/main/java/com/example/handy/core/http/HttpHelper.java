@@ -10,6 +10,7 @@ import com.example.handy.core.bean.CommentReplyData;
 import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
+import com.example.handy.core.bean.LabelData;
 import com.example.handy.core.bean.LikeMessageData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.PublishCourseData;
@@ -189,6 +190,13 @@ public interface HttpHelper {
     Observable<BaseResponse<List<CourseData>>> getUserPublishCourse(int userId, int currentPage, int n);
 
     /**
+     * 获取标签
+     *
+     * @return 标签列表
+     */
+    Observable<BaseResponse<List<LabelData>>> getLabelList();
+
+    /**
      * 发布教程
      *
      * @return 上传结果
@@ -252,21 +260,21 @@ public interface HttpHelper {
      *
      * @return 回复信息
      */
-    Observable<BaseResponse<CommentMessageData>> getCommentMessage(int uid, int currentPage, int n);
+    Observable<BaseResponse<List<CommentMessageData>>> getCommentMessage(int uid, int currentPage, int n);
 
     /**
      * 消息——收到的回复
      *
      * @return 回复信息
      */
-    Observable<BaseResponse<ReplyMessageData>> getReplyMessage(int uid, int currentPage, int n);
+    Observable<BaseResponse<List<ReplyMessageData>>> getReplyMessage(int uid, int currentPage, int n);
 
     /**
      * 消息——收到的赞
      *
      * @return 回复信息
      */
-    Observable<BaseResponse<LikeMessageData>> getLikeMessage(int uid, int currentPage, int n);
+    Observable<BaseResponse<List<LikeMessageData>>> getLikeMessage(int uid, int currentPage, int n);
 
 
 }

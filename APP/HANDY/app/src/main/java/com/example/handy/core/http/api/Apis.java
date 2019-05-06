@@ -10,6 +10,7 @@ import com.example.handy.core.bean.CommentReplyData;
 import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
+import com.example.handy.core.bean.LabelData;
 import com.example.handy.core.bean.LikeMessageData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.PublishCourseData;
@@ -222,6 +223,13 @@ public interface Apis {
     @GET("course")
     Observable<BaseResponse<List<CourseData>>> getUserPublishCourse(@Query("uid")int userId, @Query("page_no") int currentPage, @Query("n")int n);
 
+    /**
+     * 获取标签
+     *
+     * @return 标签列表
+     */
+    @GET("course/label")
+    Observable<BaseResponse<List<LabelData>>> getLabelList();
 
     /**
      * 发布教程
@@ -297,7 +305,7 @@ public interface Apis {
      * @return 回复信息
      */
     @GET("message/courseComment")
-    Observable<BaseResponse<CommentMessageData>> getCommentMessage(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
+    Observable<BaseResponse<List<CommentMessageData>>> getCommentMessage(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
 
     /**
      * 消息——收到的回复
@@ -305,7 +313,7 @@ public interface Apis {
      * @return 回复信息
      */
     @GET("message/commentReply")
-    Observable<BaseResponse<ReplyMessageData>> getReplyMessage(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
+    Observable<BaseResponse<List<ReplyMessageData>>> getReplyMessage(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
 
     /**
      * 消息——收到的赞
@@ -313,7 +321,7 @@ public interface Apis {
      * @return 回复信息
      */
     @GET("message/courseLike")
-    Observable<BaseResponse<LikeMessageData>> getLikeMessage(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
+    Observable<BaseResponse<List<LikeMessageData>>> getLikeMessage(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
 
 
 }

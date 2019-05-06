@@ -54,7 +54,8 @@ public class RecommendCourseAdapter extends BaseQuickAdapter<CourseData, CourseV
             ArrayList<String> label = new ArrayList<>();
 
             for (LabelData labelData : item.getLabelList()) {
-                label.add(labelData.getLabelName());
+                if (labelData != null)
+                    label.add(labelData.getLabelName());
             }
 
             LabelsView labelsView = (LabelsView) helper.getView(R.id.course_labels);

@@ -9,6 +9,7 @@ import com.example.handy.core.bean.CommentMessageData;
 import com.example.handy.core.bean.CommentReplyData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
+import com.example.handy.core.bean.LabelData;
 import com.example.handy.core.bean.LikeMessageData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.PublishCourseData;
@@ -156,6 +157,11 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
+    public Observable<BaseResponse<List<LabelData>>> getLabelList() {
+        return mApis.getLabelList();
+    }
+
+    @Override
     public Observable<BaseResponse> uploadCourse(PublishCourseData publishCourseData) {
         return mApis.uploadCourse(publishCourseData);
     }
@@ -197,17 +203,17 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse<CommentMessageData>> getCommentMessage(int uid, int currentPage, int n) {
+    public Observable<BaseResponse<List<CommentMessageData>>> getCommentMessage(int uid, int currentPage, int n) {
         return mApis.getCommentMessage(uid, currentPage, n);
     }
 
     @Override
-    public Observable<BaseResponse<ReplyMessageData>> getReplyMessage(int uid, int currentPage, int n) {
+    public Observable<BaseResponse<List<ReplyMessageData>>> getReplyMessage(int uid, int currentPage, int n) {
         return mApis.getReplyMessage(uid, currentPage, n);
     }
 
     @Override
-    public Observable<BaseResponse<LikeMessageData>> getLikeMessage(int uid, int currentPage, int n) {
+    public Observable<BaseResponse<List<LikeMessageData>>> getLikeMessage(int uid, int currentPage, int n) {
         return mApis.getLikeMessage(uid, currentPage, n);
     }
 }

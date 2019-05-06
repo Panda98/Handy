@@ -4,10 +4,9 @@ import com.example.handy.R;
 import com.example.handy.app.Constants;
 import com.example.handy.app.HandyAPP;
 import com.example.handy.base.presenter.BasePresenter;
-import com.example.handy.contract.MyPublishCourseContract;
+import com.example.handy.contract.MorePublishCourseContract;
 import com.example.handy.core.DataManager;
 import com.example.handy.core.bean.CourseData;
-import com.example.handy.core.bean.FollowData;
 import com.example.handy.utils.RxUtils;
 import com.example.handy.wigdet.BaseObserver;
 
@@ -15,23 +14,27 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class MyPublishCoursePresenter extends BasePresenter<MyPublishCourseContract.View> implements MyPublishCourseContract.Presenter {
+public class MorePublishCoursePresenter extends BasePresenter<MorePublishCourseContract.View> implements MorePublishCourseContract.Presenter {
 
     private DataManager mDataManager;
     private int mCurrentPage;
     private boolean isRefresh = true;
+    private int userId;
 
     @Inject
-    public MyPublishCoursePresenter(DataManager dataManager) {
+    public MorePublishCoursePresenter(DataManager dataManager) {
         super(dataManager);
         this.mDataManager = dataManager;
+        this.userId = getLoginAccount();
     }
 
     @Override
-    public void autoRefresh(boolean isShowError) {
+    public void autoRefresh(int userId, boolean isShowError) {
+        if (userId != 0)
+            this.userId = userId;
         isRefresh = true;
         mCurrentPage = 0;
-        getPublishCourseDataList(isShowError);
+        getPublishCourseDataList(this.userId, isShowError);
     }
 
     @Override
@@ -43,7 +46,7 @@ public class MyPublishCoursePresenter extends BasePresenter<MyPublishCourseContr
 
     @Override
     public void loadMoreData() {
-        addSubscribe(mDataManager.getUserPublishCourse(getLoginAccount(),mCurrentPage, Constants.LOAD_NUM)
+        addSubscribe(mDataManager.getUserPublishCourse(this.userId,mCurrentPage, Constants.LOAD_NUM)
                 .compose(RxUtils.rxSchedulerHelper())
                 .compose(RxUtils.handleResult())
                 .subscribeWith(new BaseObserver<List<CourseData>>(mView,
@@ -57,8 +60,11 @@ public class MyPublishCoursePresenter extends BasePresenter<MyPublishCourseContr
     }
 
     @Override
-    public void getPublishCourseDataList(boolean isShowError) {
-        addSubscribe(mDataManager.getUserPublishCourse(getLoginAccount(),mCurrentPage, Constants.LOAD_NUM)
+    public void getPublishCourseDataList(int userId, boolean isShowError) {
+        if (userId != 0)
+            this.userId = userId;
+
+        addSubscribe(mDataManager.getUserPublishCourse(this.userId, mCurrentPage, Constants.LOAD_NUM)
                 .compose(RxUtils.rxSchedulerHelper())
                 .compose(RxUtils.handleResult())
                 .subscribeWith(new BaseObserver<List<CourseData>>(mView,
