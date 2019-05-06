@@ -240,6 +240,15 @@ public interface Apis {
     Observable<BaseResponse> uploadCourse(@Body PublishCourseData publishCourseData);
 
     /**
+     * 根据标签获得教程
+     *
+     * @return 结果
+     */
+    @GET("course/labeledCourse")
+    Observable<BaseResponse<List<CourseData>>> getCourseWithLabel(@Query("labelId")int labelId, @Query("page_no") int currentPage, @Query("n")int n);
+
+
+    /**
      * 上传图片
      *
      * @return url
