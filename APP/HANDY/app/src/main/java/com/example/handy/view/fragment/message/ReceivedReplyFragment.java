@@ -59,7 +59,6 @@ public class ReceivedReplyFragment extends BaseRootFragment<ReceivedReplyPagerPr
         return fragment;
     }
 
-
     @Override
     public void showReplyMessage(List<ReplyMessageData> replyMessageData, boolean isRefresh) {
         if (replyMessageData == null) {
@@ -124,5 +123,6 @@ public class ReceivedReplyFragment extends BaseRootFragment<ReceivedReplyPagerPr
                 mReplyAdapter.getData().get(position).getInCourseId(),
                 mReplyAdapter.getData().get(position).getInCourseTitle()
         );
+
     }
 }

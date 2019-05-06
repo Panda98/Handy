@@ -5,6 +5,8 @@ import com.example.handy.app.HandyAPP;
 import com.example.handy.base.presenter.BasePresenter;
 import com.example.handy.contract.PublishCourseContract;
 import com.example.handy.core.DataManager;
+import com.example.handy.core.bean.BaseResponse;
+import com.example.handy.core.bean.LabelData;
 import com.example.handy.core.bean.PublishCourseData;
 import com.example.handy.utils.RxUtils;
 import com.example.handy.wigdet.BaseObserver;
@@ -12,6 +14,7 @@ import com.google.gson.Gson;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -66,6 +69,19 @@ public class PublishCoursePresenter extends BasePresenter<PublishCourseContract.
 
                     }
 
+                }));
+    }
+
+    @Override
+    public void requestLabels() {
+        addSubscribe(mDataManager.getLabelList()
+                .compose(RxUtils.rxSchedulerHelper())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new BaseObserver<List<LabelData>>(mView, false) {
+                    @Override
+                    public void onNext(List<LabelData> labelDataList) {
+                        mView.showLabels(labelDataList);
+                    }
                 }));
     }
 }

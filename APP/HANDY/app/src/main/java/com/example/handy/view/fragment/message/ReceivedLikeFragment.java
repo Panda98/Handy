@@ -13,15 +13,12 @@ import android.view.ViewGroup;
 import com.example.handy.R;
 import com.example.handy.app.Constants;
 import com.example.handy.base.fragment.BaseRootFragment;
-import com.example.handy.contract.message.ReceivedCommentPagerContract;
-import com.example.handy.contract.message.ReceivedLikePagerContract;
 import com.example.handy.core.bean.CommentMessageData;
+import com.example.handy.contract.message.ReceivedLikePagerContract;
 import com.example.handy.core.bean.LikeMessageData;
-import com.example.handy.presenter.message.ReceivedCommentPagerPresenter;
 import com.example.handy.presenter.message.ReceiveLikePagerPresenter;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.JudgeUtils;
-import com.example.handy.view.adapter.ReceiveCommentAdapter;
 import com.example.handy.view.adapter.ReceiveLikeAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
@@ -59,7 +56,6 @@ public class ReceivedLikeFragment extends BaseRootFragment<ReceiveLikePagerPrese
         return fragment;
     }
 
-    @Override
     public void showLikeMessage(List<LikeMessageData> likeMessageData, boolean isRefresh){
         if (likeMessageData == null) {
             return;
