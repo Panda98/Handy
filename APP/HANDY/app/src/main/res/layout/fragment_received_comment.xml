@@ -22,7 +22,7 @@
             android:gravity="center">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/follow_pager_recycler_view"
+                android:id="@+id/receive_comment_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/dp_10"
