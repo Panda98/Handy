@@ -158,10 +158,10 @@ public interface Apis {
     /**
      * 获得收藏专辑列表
      *
-     * @return AlbumListData
+     * @return AlbumCoverData
      */
     @GET("album/collection")
-    Observable<BaseResponse<List<AlbumListData>>> getCollectAlbumList(@Query("uid")int userId);
+    Observable<BaseResponse<List<AlbumCoverData>>> getCollectAlbumList(@Query("uid")int userId);
 
     /**
      * 收藏教程
@@ -209,7 +209,7 @@ public interface Apis {
      * @return 结果
      */
     @GET("course/isliked")
-    Observable<BaseResponse> isLike(@Query("userId")int userId, @Query("courseId")int courseId);
+    Observable<BaseResponse<Boolean>> isLike(@Query("userId")int userId, @Query("courseId")int courseId);
 
     /**
      * 获取自己发布的教程

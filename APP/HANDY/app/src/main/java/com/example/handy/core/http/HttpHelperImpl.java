@@ -113,7 +113,7 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse<List<AlbumListData>>> getCollectAlbumList(int userId) {
+    public Observable<BaseResponse<List<AlbumCoverData>>> getCollectAlbumList(int userId) {
         return mApis.getCollectAlbumList(userId);
     }
 
@@ -143,7 +143,7 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse> isLike(int userId, int courseId) {
+    public Observable<BaseResponse<Boolean>> isLike(int userId, int courseId) {
         return mApis.isLike(userId, courseId);
     }
 

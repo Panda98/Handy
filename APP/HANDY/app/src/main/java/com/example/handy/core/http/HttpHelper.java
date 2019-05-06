@@ -133,7 +133,7 @@ public interface HttpHelper {
      *
      * @return AlbumListData
      */
-    Observable<BaseResponse<List<AlbumListData>>> getCollectAlbumList(int userId);
+    Observable<BaseResponse<List<AlbumCoverData>>> getCollectAlbumList(int userId);
 
     /**
      * 收藏教程
@@ -175,7 +175,7 @@ public interface HttpHelper {
      *
      * @return 结果
      */
-    Observable<BaseResponse> isLike(int userId, int courseId);
+    Observable<BaseResponse<Boolean>> isLike(int userId, int courseId);
 
     /**
      * 获取自己发布的教程

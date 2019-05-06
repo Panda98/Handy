@@ -52,17 +52,17 @@ public class PublishCoursePresenter extends BasePresenter<PublishCourseContract.
     @Override
     public void uploadPic(byte[] imgArr,int index){
         //todo: 上传图片
-        addSubscribe(mDataManager.uploadImage(imgArr)
-                .compose(RxUtils.rxSchedulerHelper())
-                .compose(RxUtils.handleResult())
-                .subscribeWith(new BaseObserver<String>(mView,
-                        false) {
-                    @Override
-                    public void onNext(String url) {
-                        mView.afterUploadPic(url,index);
-
-                    }
-
-                }));
+        //addSubscribe(mDataManager.uploadImage(imgArr)
+        //        .compose(RxUtils.rxSchedulerHelper())
+        //        .compose(RxUtils.handleResult())
+        //        .subscribeWith(new BaseObserver<String>(mView,
+        //                false) {
+        //            @Override
+        //            public void onNext(String url) {
+        //                mView.afterUploadPic(url,index);
+        //
+        //            }
+        //
+        //        }));
     }
 }

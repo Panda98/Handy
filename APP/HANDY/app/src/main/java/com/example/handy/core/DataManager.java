@@ -114,7 +114,7 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse<List<AlbumListData>>> getCollectAlbumList(int userId) {
+    public Observable<BaseResponse<List<AlbumCoverData>>> getCollectAlbumList(int userId) {
         return mHttpHelper.getCollectAlbumList(userId);
     }
 
@@ -144,7 +144,7 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse> isLike(int userId, int courseId) {
+    public Observable<BaseResponse<Boolean>> isLike(int userId, int courseId) {
         return mHttpHelper.isLike(userId, courseId);
     }
 
