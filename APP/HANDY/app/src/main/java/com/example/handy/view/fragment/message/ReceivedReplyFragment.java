@@ -44,6 +44,6 @@ public class ReceivedReplyFragment extends BaseRootFragment<ReceivedCommentPager
 
     @Override
     public void showReceiveMessage(List<CommentMessageData> commentMessageData, boolean isRefresh) {
-
+        
     }
 }

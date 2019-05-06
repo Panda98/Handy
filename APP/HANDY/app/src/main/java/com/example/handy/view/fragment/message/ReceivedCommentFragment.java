@@ -1,10 +1,12 @@
 package com.example.handy.view.fragment.message;
 
 
+import android.app.ActivityOptions;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 
 import com.example.handy.R;
@@ -14,6 +16,7 @@ import com.example.handy.contract.message.ReceivedCommentPagerContract;
 import com.example.handy.core.bean.CommentMessageData;
 import com.example.handy.presenter.message.ReceivedCommentPagerPresenter;
 import com.example.handy.utils.CommonUtils;
+import com.example.handy.utils.JudgeUtils;
 import com.example.handy.view.adapter.FollowAdapter;
 import com.example.handy.view.adapter.ReceiveCommentAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -66,7 +69,7 @@ public class ReceivedCommentFragment extends BaseRootFragment<ReceivedCommentPag
         }
         showNormal();
         // 点击跳转事件
-        //mCommentAdapter.setOnItemClickListener((adapter, view, position) -> startCourseDetailActivit(this,));
+        mCommentAdapter.setOnItemClickListener((adapter, view, position) -> startCourseDetailPager(view, position));
 
     }
 
@@ -106,4 +109,19 @@ public class ReceivedCommentFragment extends BaseRootFragment<ReceivedCommentPag
         myCommentRecyclerview.setAdapter(mCommentAdapter);
     }
 
+    // 跳转
+    private void startCourseDetailPager(View view, int position) {
+        if (mCommentAdapter.getData().size() <= 0 || mCommentAdapter.getData().size() < position) {
+            return;
+        }
+
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, view, getString(R.string.share_view));
+        JudgeUtils.startCourseDetailActivity(_mActivity,
+                options,
+                mCommentAdapter.getData().get(position).getCourseId(),
+                mCommentAdapter.getData().get(position).getCourseTitle()
+        );
+    }
 }
+
+

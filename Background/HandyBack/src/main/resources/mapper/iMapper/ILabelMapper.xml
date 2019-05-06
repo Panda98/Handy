@@ -15,5 +15,8 @@
         label_name AS labelName,
         flabel_id AS flabelId
         FROM label
+        <where>flabel_id=0</where>
     </select>
+
+
 </mapper>

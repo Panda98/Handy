@@ -23,4 +23,5 @@ public interface ICourseMapper {
 
     Integer getLastStepId();
 
+    List<Integer> getByLabel(@Param("labelId") Integer labelId, @Param("start") Integer start, @Param("n") Integer n);
 }
