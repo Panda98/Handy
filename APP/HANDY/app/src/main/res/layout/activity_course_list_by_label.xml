@@ -5,6 +5,8 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+    <include layout="@layout/common_toolbar_no_scroll" />
+
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/normal_view"
         app:srlPrimaryColor="@color/white"
@@ -22,10 +24,10 @@
             android:gravity="center">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/receive_comment_recycler_view"
+                android:id="@+id/label_course_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/white"
                 />
 
         </LinearLayout>

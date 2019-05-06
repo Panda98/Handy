@@ -2,6 +2,7 @@ package com.handy.web.controller;
 
 import com.handy.support.pojo.Message.dto.FavorDTO;
 import com.handy.support.pojo.Message.vo.CourseMessageVO;
+import com.handy.support.pojo.Message.vo.FavorVO;
 import com.handy.support.pojo.Message.vo.ReplyMessageVO;
 import com.handy.support.pojo.comment.dto.CommentDTO;
 import com.handy.support.pojo.comment.dto.ReplyDTO;
@@ -65,7 +66,11 @@ public class MessageController {
     @RequestMapping(value = "/courseLike",method = GET)
     public String getMessageCourseComment(int uid,int page_no,int n){
             List<FavorDTO> list=messageService.getFavorMessage(uid,page_no,n);
-        ReturnCode<List> code = new ReturnCode<List>(list);
+            List<FavorVO> result=new ArrayList<FavorVO>();
+            for(int i=0;i<list.size();i++){
+                result.add(new FavorVO(list.get(i)));
+            }
+        ReturnCode<List> code = new ReturnCode<List>(result);
         return code.returnHandler();
     }
     @RequestMapping(value = "/test",method = GET)

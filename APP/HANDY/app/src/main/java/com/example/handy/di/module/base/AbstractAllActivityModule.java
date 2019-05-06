@@ -3,6 +3,7 @@ package com.example.handy.di.module.base;
 import com.example.handy.di.module.AlbumDetailActivityModule;
 import com.example.handy.di.module.AuthorHomepageActivityModule;
 import com.example.handy.di.module.CourseDetailActivityModule;
+import com.example.handy.di.module.CourseListByLabelActivityModule;
 import com.example.handy.di.module.MainActivityModule;
 import com.example.handy.di.module.MessageActivityModule;
 import com.example.handy.di.module.MyPublishAlbumActivityModule;
@@ -11,6 +12,7 @@ import com.example.handy.di.module.PublishCourseActivityModule;
 import com.example.handy.view.activity.AlbumDetailActivity;
 import com.example.handy.view.activity.AuthorHomepageActivity;
 import com.example.handy.view.activity.CourseDetailActivity;
+import com.example.handy.view.activity.CourseListByLabelActivity;
 import com.example.handy.view.activity.LoginActivity;
 import com.example.handy.view.activity.MainActivity;
 import com.example.handy.view.activity.MessageActivity;
@@ -62,5 +64,8 @@ public abstract class AbstractAllActivityModule {
 
     @ContributesAndroidInjector(modules = AuthorHomepageActivityModule.class)
     abstract AuthorHomepageActivity contributesAuthorHomepageActivityInjector();
+
+    @ContributesAndroidInjector(modules = CourseListByLabelActivityModule.class)
+    abstract CourseListByLabelActivity contributesCourseListByLabelActivityModuleInjector();
 
 }

@@ -387,6 +387,27 @@ public class CourseServiceImpl implements ICourseService {
    return iLabelMapper.getAll();
 }
 
+    public List<CourseSimpleVO> getCourseByLabel(Integer labelId,Integer page_no,Integer n){
+        List<Integer> courseIds=iCourseMapper.getByLabel(labelId,page_no*n,n);
+        List<CourseSimpleVO> simpleList=new ArrayList<CourseSimpleVO>();
+        for(Integer id:courseIds){
+            Course c=this.getCourseByID(id);
+            if(c !=null) {
+//                CourseSimpleVO simpleVO = new CourseSimpleVO(id, c.getCourseTitle(), c.getCourseCover(), c.getCourseIntro(), userMapper.selectByPrimaryKey(c.getUserId()).getNickName(), c.getLevelId(), this.getLabelList(id), c.getDiyLabel());
+                CourseSimpleVO simpleVO = new CourseSimpleVO();
+                simpleVO.setCourseId(id);
+                simpleVO.setCourseTitle(c.getCourseTitle());
+                simpleVO.setCourseIntro(c.getCourseIntro());
+                simpleVO.setCourseCover(c.getCourseCover());
+                simpleVO.setAuthorName(userMapper.selectByPrimaryKey(c.getUserId()).getNickName());
+                simpleVO.setLevelId(c.getLevelId());
+                simpleVO.setDiyLabel(c.getDiyLabel());
+                simpleVO.setLabelList(this.getLabelList(id));
+                simpleList.add(simpleVO);
+            }
+        }
+      return simpleList;
+    }
 
 }
 

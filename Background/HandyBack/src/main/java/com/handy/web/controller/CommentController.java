@@ -24,7 +24,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class CommentController {
     @Autowired
     CommentServiceImpl commentService;
-    @RequestMapping(value="/all",method = GET)
+    @RequestMapping(value="/all",produces = "application/json; charset=utf-8",method = GET)
    public String getCourseComment( CourseComReq req){
         List<CommentDTO>comments=commentService.getFullCourseComment(req);
         List<CourseCommentVO>list=new ArrayList<CourseCommentVO>();
@@ -34,7 +34,7 @@ public class CommentController {
         ReturnCode<List<CourseCommentVO>> code = new ReturnCode<List<CourseCommentVO>>(list);
         return code.returnHandler();
    }
-    @RequestMapping(value="/replyComment",method = GET)
+    @RequestMapping(value="/replyComment",produces = "application/json; charset=utf-8",method = GET)
     public String getCommentReply(ComRepReq req){
         List<ReplyUserDTO>commentReplies=commentService.getCommentReplyUserLimited(req);
         List<ReplyUserVO>list=new ArrayList<ReplyUserVO>();
@@ -44,7 +44,7 @@ public class CommentController {
         ReturnCode<List> code = new ReturnCode<List>(list);
         return code.returnHandler();
     }
-    @RequestMapping(value="/push",method = RequestMethod.POST)
+    @RequestMapping(value="/push",produces = "application/json; charset=utf-8",method = RequestMethod.POST)
     public String pushComment(@RequestBody  ComPush req){
         CommentPush commentPush=new CommentPush();
         commentPush.setComment(req);
@@ -52,7 +52,7 @@ public class CommentController {
         ReturnCode<Boolean> code = new ReturnCode<Boolean>(true);
         return code.returnHandler();
     }
-    @RequestMapping(value="/reply",method = POST)
+    @RequestMapping(value="/reply",produces = "application/json; charset=utf-8",method = POST)
     public String replyComment(@RequestBody  RepComReq req){
         ReplyPush replyPush=new ReplyPush();
         replyPush.setReply(req);

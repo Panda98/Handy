@@ -117,11 +117,24 @@ public class Constants {
     public static final String COURSE_Title = "course_title";
     public static final String AUTHOR_ID = "author_id";
     public static final String USER_ID = "user_id";
+    public static final String LABEL_ID = "label_id";
 
     /**
      * Album Detail
      */
     public static final String ALBUM_ID = "album_id";
+
+    /**
+     * Label Id
+     */
+    public static final int PAPER_LABEL_ID = 8;
+    public static final int CLOTH_LABEL_ID = 1;
+    public static final int FLOWER_LABEL_ID = 14;
+    public static final int HAND_DRAWN_LABEL_ID = 16;
+    public static final int HANDWRITING_LABEL_ID = 17;
+    public static final int KNIT_LABEL_ID = 28;
+    public static final int ACCESSORY_LABEL_ID = 21;
+    public static final int CRAVE_LABEL_ID = 18;
 
 
 

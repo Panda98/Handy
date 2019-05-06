@@ -47,7 +47,7 @@ public class MorePublishCourseActivity extends BaseActivity<MorePublishCoursePre
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_my_publish_course;
+        return R.layout.activity_more_publish_course;
     }
 
     @Override

@@ -167,6 +167,11 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
+    public Observable<BaseResponse<List<CourseData>>> getCourseWithLabel(int labelId, int currentPage, int n) {
+        return mApis.getCourseWithLabel(labelId, currentPage, n);
+    }
+
+    @Override
     public Observable<BaseResponse<String>> uploadImage(MultipartBody.Part file) {
         return mApis.uploadImage(file);
     }
@@ -203,17 +208,17 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse<CommentMessageData>> getCommentMessage(int uid, int currentPage, int n) {
+    public Observable<BaseResponse<List<CommentMessageData>>> getCommentMessage(int uid, int currentPage, int n) {
         return mApis.getCommentMessage(uid, currentPage, n);
     }
 
     @Override
-    public Observable<BaseResponse<ReplyMessageData>> getReplyMessage(int uid, int currentPage, int n) {
+    public Observable<BaseResponse<List<ReplyMessageData>>> getReplyMessage(int uid, int currentPage, int n) {
         return mApis.getReplyMessage(uid, currentPage, n);
     }
 
     @Override
-    public Observable<BaseResponse<LikeMessageData>> getLikeMessage(int uid, int currentPage, int n) {
+    public Observable<BaseResponse<List<LikeMessageData>>> getLikeMessage(int uid, int currentPage, int n) {
         return mApis.getLikeMessage(uid, currentPage, n);
     }
 }
