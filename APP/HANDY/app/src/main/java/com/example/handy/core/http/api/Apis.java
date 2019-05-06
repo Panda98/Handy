@@ -5,13 +5,16 @@ import com.example.handy.core.bean.AlbumListData;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
 import com.example.handy.core.bean.CommentData;
+import com.example.handy.core.bean.CommentMessageData;
 import com.example.handy.core.bean.CommentReplyData;
 import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
+import com.example.handy.core.bean.LikeMessageData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.PublishCourseData;
 import com.example.handy.core.bean.RecommendAlbumData;
+import com.example.handy.core.bean.ReplyMessageData;
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.vo.LoginView;
 import com.example.handy.core.vo.PostCommentView;
@@ -36,8 +39,8 @@ import retrofit2.http.Query;
  * @date 2019/04/07
  */
 public interface Apis {
-    //String HOST = "http://106.13.106.249:8080/";
-    String HOST = "http://192.168.2.28:8080/Handy/";
+    String HOST = "http://106.13.106.249:8080/";
+    //String HOST = "http://192.168.2.28:8080/Handy/";
     //String HOST = "http://192.168.2.7:8080/";
 
     /**
@@ -158,7 +161,7 @@ public interface Apis {
     /**
      * 获得收藏专辑列表
      *
-     * @return AlbumCoverData
+     * @return AlbumListData
      */
     @GET("album/collection")
     Observable<BaseResponse<List<AlbumCoverData>>> getCollectAlbumList(@Query("uid")int userId);
@@ -168,7 +171,7 @@ public interface Apis {
      *
      * @return 结果
      */
-    @GET("course/collectCourse")
+    @GET("course/collect")
     Observable<BaseResponse> collectCourse(@Query("courseId")int courseId, @Query("albumId")int albumId);
 
     /**
@@ -221,7 +224,7 @@ public interface Apis {
 
 
     /**
-     * 上传教程
+     * 发布教程
      *
      * @return 上传结果
      */
@@ -236,6 +239,7 @@ public interface Apis {
     @Multipart
     @POST("uploadImg")
     Observable<BaseResponse<String>> uploadImage(@Part MultipartBody.Part file);
+
 
     /**
      * 上传评论
@@ -286,4 +290,30 @@ public interface Apis {
      */
     @GET("album/brief")
     Observable<BaseResponse<AlbumCoverData>> getAlbumCoverData(@Query("albumid") int albumId);
+
+    /**
+     * 消息——收到的评论
+     *
+     * @return 回复信息
+     */
+    @GET("message/courseComment")
+    Observable<BaseResponse<CommentMessageData>> getCommentMessage(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
+
+    /**
+     * 消息——收到的回复
+     *
+     * @return 回复信息
+     */
+    @GET("message/commentReply")
+    Observable<BaseResponse<ReplyMessageData>> getReplyMessage(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
+
+    /**
+     * 消息——收到的赞
+     *
+     * @return 回复信息
+     */
+    @GET("message/courseLike")
+    Observable<BaseResponse<LikeMessageData>> getLikeMessage(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
+
+
 }
