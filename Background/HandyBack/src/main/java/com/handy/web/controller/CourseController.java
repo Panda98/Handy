@@ -116,11 +116,12 @@ public class CourseController {
     @RequestMapping(value = "/course/iscollected", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
     public String isCollected(int userId, int courseId){
         Integer result=iCourseService.isCollected(userId,courseId);
+        Boolean b=true;
         if(result == null){
-            result=0;
+            b=false;
         }
         ErrorEnum error=ErrorEnum.SUCCESS;
-        ReturnCode<Integer> code=new ReturnCode<Integer>(error,result);
+        ReturnCode<Boolean> code=new ReturnCode<Boolean>(error,b);
         return code.returnHandler();
     }
 
@@ -153,11 +154,13 @@ public class CourseController {
     @RequestMapping(value = "/course/isliked", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
     public String isLiked(int userId, int courseId){
         Integer result=iCourseService.isLiked(userId,courseId);
+        Boolean b=true;
+
         if(result == null){
-            result=0;
+            b=false;
         }
         ErrorEnum error=ErrorEnum.SUCCESS;
-        ReturnCode<Integer> code=new ReturnCode<Integer>(error,result);
+        ReturnCode<Boolean> code=new ReturnCode<Boolean>(error,b);
         return code.returnHandler();
     }
 
@@ -214,7 +217,7 @@ public class CourseController {
         // 判断文件是否为空
         if (!file.isEmpty()) {
             try {
-                DateFormat df = new SimpleDateFormat("yyyyMMdd_HH_mm_ss");
+                DateFormat df = new SimpleDateFormat("yyMMdd_HHmmssSSS");
                 String date = df.format(new Date());
                 String filename = date+".jpg";
                 imgUrl = iCourseService.uploadImg("106.13.106.249", "handy", "handy", 21, "/usr/local/tomcat/apache-tomcat-9.0.17/webapps/HandyBack_war_exploded/static/img/upload", filename, file);

@@ -49,6 +49,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -76,6 +77,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
     private List<LabelData> preLabels;
 
     private List<String> imgPath;
+    private HashMap<String,Integer> imgURL;
 
 
 
@@ -118,6 +120,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         stepData = new ArrayList<>();
         courseData = new PublishCourseData();
         imgPath = new ArrayList<>();
+        imgURL = new HashMap<>();
 
         materialItemData = new ArrayList<>();
         data = new ArrayList<>();
@@ -502,9 +505,14 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
 
     @Override
     public void afterUploadPic(String url,int index){
-        imgPath.add(index,url);
-        if(imgPath.size() == stepData.size()+1){
-            publish();
+        imgURL.put(url,index);
+        if(index == 0)
+            courseData.setCourseCover(url);
+        else{
+            courseData.getStepList().get(index-1).setStepImg(url);
+        }
+        if(imgURL.size() == stepData.size()+1){
+            mPresenter.publish(courseData);
         }
     }
     @Override
@@ -528,8 +536,6 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         }
         List<LabelData> selectedLabel = labelViewHolder.getSelectedLabel();
         String customLabel = labelViewHolder.getCustomLabel();
-
-
 
         courseData.setItemList(materialItemData);
         courseData.setStepList(stepData);

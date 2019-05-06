@@ -151,4 +151,10 @@ public class Item {
     public void setItemTag(Byte itemTag) {
         this.itemTag = itemTag;
     }
+
+    public Item(String itemName, String itemNumber, Byte itemTag) {
+        this.itemName = itemName;
+        this.itemNumber = itemNumber;
+        this.itemTag = itemTag;
+    }
 }

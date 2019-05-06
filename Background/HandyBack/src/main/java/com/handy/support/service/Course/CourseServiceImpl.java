@@ -6,6 +6,8 @@ import com.handy.support.mapper.iMapper.*;
 import com.handy.support.pojo.course.dto.CourseEditDTO;
 import com.handy.support.pojo.course.vo.CourseSimpleVO;
 import com.handy.support.pojo.course.vo.CourseDetailVO;
+import com.handy.support.pojo.course.dto.ItemDTO;
+import com.handy.support.pojo.course.dto.StepDTO;
 
 
 import org.apache.commons.net.ftp.FTPClient;
@@ -178,7 +180,7 @@ public class CourseServiceImpl implements ICourseService {
 
     public Integer collect(Integer albumId, Integer courseId){
         AlbumCourse ac=new AlbumCourse(albumId,courseId);
-        Integer count=albumCourseMapper.insert(ac);
+        Integer count=albumCourseMapper.insertSelective(ac);
         Course course=this.getCourseByID(courseId);
         Integer courseCollects=course.getCourseCollects();
         course.setCourseCollects(courseCollects+1);
@@ -274,21 +276,35 @@ public class CourseServiceImpl implements ICourseService {
             CourseLabel cl=new CourseLabel(courseId,l.getLabelId());
             courseLabelMapper.insert(cl);
         }
-        List<Item> itemList=this.sortItem(e.getItemList());
-        for(Item i:itemList){
-            itemMapper.insert(i);
-            CourseItem courseItem=new CourseItem(courseId,i.getItemId());
+
+        List<ItemDTO> itemList=e.getItemList();
+        for(ItemDTO i:itemList){
+            Item item=new Item();
+            item.setItemName(i.getItemName());
+            item.setItemNumber(i.getItemNumber());
+            item.setItemTag(i.getItemTag());
+            itemMapper.insertSelective(item);
+            Integer itemId=iCourseMapper.getLastItemId();
+            CourseItem courseItem=new CourseItem(courseId,itemId);
             courseItemMapper.insert(courseItem);
         }
-        List<Step> stepList=this.sortStep(e.getStepList());
 
-        for(Step s:stepList){
-            stepMapper.insert(s);
-            CourseStep courseStep=new CourseStep(courseId,s.getStepId());
-            courseStepMapper.insert(courseStep);
-        }
 
-        return count;
+
+            List<StepDTO> stepList=e.getStepList();
+            for(StepDTO s:stepList){
+                Step step=new Step();
+                step.setStepTag(s.getStepTag());
+                step.setStepImg(s.getStepImg());
+                step.setStepDetail(s.getStepDetail());
+                stepMapper.insertSelective(step);
+                Integer stepId=iCourseMapper.getLastStepId();
+                CourseStep courseStep=new CourseStep(courseId,stepId);
+                courseStepMapper.insert(courseStep);
+            }
+
+
+                return count;
     }
 
 //public List<CourseSimpleVO> getSearchedCourse(String text) throws IOException, SolrServerException{

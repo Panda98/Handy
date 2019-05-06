@@ -48,6 +48,15 @@
         SELECT MAX(course_id)
         FROM course;
     </select>
+    <select id="getLastItemId" resultType="Integer">
+        SELECT MAX(item_id)
+        FROM item;
+    </select>
+    <select id="getLastStepId" resultType="Integer">
+        SELECT MAX(step_id)
+        FROM step;
+    </select>
+
 
 
 
