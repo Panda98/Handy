@@ -4,16 +4,17 @@ import java.io.File;
 import java.util.List;
 
 public class PublishCourseData {
-    private int userId;
-    private String courseTitle;
-    private String courseIntro;
-    private String courseNote;
-    private String courseCover;
-    private int levelId;
-    private List<LabelData> labelList;
-    private String diyLabel;
-    private List<MaterialItemData> itemList;
-    private List<CourseStepData> stepList;
+    int userId;
+    String courseTitle;
+    String courseIntro;
+    String courseNote;
+    File courseCover;
+    int levelId;
+    List<LabelData> labelList;
+    String diyLabel;
+    List<MaterialItemData> itemList;
+    List<CourseStepData> stepList;
+    String tips;
 
     public int getUserId() {
         return userId;
@@ -47,11 +48,11 @@ public class PublishCourseData {
         this.courseNote = courseNote;
     }
 
-    public String getCourseCover() {
+    public File getCourseCover() {
         return courseCover;
     }
 
-    public void setCourseCover(String courseCover) {
+    public void setCourseCover(File courseCover) {
         this.courseCover = courseCover;
     }
 
@@ -95,4 +96,11 @@ public class PublishCourseData {
         this.stepList = stepList;
     }
 
+    public String getTips() {
+        return tips;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips;
+    }
 }

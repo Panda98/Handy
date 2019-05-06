@@ -63,8 +63,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <!--发布教程-->
+    // 发布教程
     <string name="publish_course_toolbar_title">发布教程</string>
+
+    <!--follow-->
+    <string name="follow">关注</string>
+    <string name="unFollow">取消关注</string>
+
+
     <string name="upload_cover_picture">+上传封面图</string>
     <string name="material">用料</string>
     <string name="material_name">用料名:</string>
@@ -91,16 +97,6 @@
     <string name="level_2">进阶</string>
     <string name="level_3">熟练</string>
     <string name="level_4">挑战</string>
-
-    <string name="publish_fail">发布失败！</string>
-
-
-
-    <!--follow-->
-    <string name="follow">关注</string>
-    <string name="unFollow">取消关注</string>
-
-
 
 
     <!--教程详情-->

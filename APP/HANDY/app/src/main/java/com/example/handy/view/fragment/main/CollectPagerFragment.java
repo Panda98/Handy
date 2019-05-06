@@ -1,27 +1,17 @@
 package com.example.handy.view.fragment.main;
 
 
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.example.handy.R;
 import com.example.handy.app.Constants;
 import com.example.handy.base.fragment.BaseRootFragment;
 import com.example.handy.contract.CollectPagerContract;
-import com.example.handy.core.bean.AlbumCoverData;
 import com.example.handy.presenter.CollectPagerPresenter;
 import com.example.handy.utils.CommonUtils;
-import com.example.handy.utils.JudgeUtils;
-import com.example.handy.view.adapter.AlbumCoverDataAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -33,17 +23,6 @@ public class CollectPagerFragment extends BaseRootFragment<CollectPagerPresenter
 
     @BindView(R.id.normal_view)
     SmartRefreshLayout mRefreshLayout;
-
-    @BindView(R.id.my_album_recycler_view)
-    RecyclerView myAlbumRecyclerView;
-
-    @BindView(R.id.my_collect_album_recycler_view)
-    RecyclerView mAlbumRecyclerView;
-
-    private AlbumCoverDataAdapter collectAlbumAdapter;
-    private AlbumCoverDataAdapter myAlbumAdapter;
-    private List<AlbumCoverData> mCollectedAlbumList;
-    private List<AlbumCoverData> myAlbumList;
 
 
     @Override
@@ -68,9 +47,8 @@ public class CollectPagerFragment extends BaseRootFragment<CollectPagerPresenter
 
     @Override
     protected void initEventAndData() {
+        super.initEventAndData();
         setRefresh();
-        mPresenter.getCollectedAlbumDataList(true);
-        mPresenter.getMyAlbumDataList(true);
         if (CommonUtils.isNetworkConnected()) {
             showLoading();
         }
@@ -90,74 +68,7 @@ public class CollectPagerFragment extends BaseRootFragment<CollectPagerPresenter
     @Override
     protected void initView() {
         super.initView();
-        initRecyclerView();
     }
-
-
-    @Override
-    public void showMyAlbumData(List<AlbumCoverData> myAlbumDataList, boolean isRefresh) {
-        if (myAlbumAdapter == null) {
-            return;
-        }
-        if (isRefresh) {
-            this.mCollectedAlbumList = myAlbumDataList;
-            myAlbumAdapter.replaceData(myAlbumDataList);
-        } else {
-            this.mCollectedAlbumList.addAll(myAlbumDataList);
-            myAlbumAdapter.addData(myAlbumDataList);
-        }
-        showNormal();
-        // 点击跳转事件
-        myAlbumAdapter.setOnItemClickListener((adapter, view, position) -> startAlbumDetailPager(view, position, myAlbumAdapter));
-    }
-
-    @Override
-    public void showMyCollectedAlbumData(List<AlbumCoverData> albumCoverDataList, boolean isRefresh){
-        if (collectAlbumAdapter == null) {
-            return;
-        }
-        if (isRefresh) {
-            this.mCollectedAlbumList = albumCoverDataList;
-            collectAlbumAdapter.replaceData(albumCoverDataList);
-        } else {
-            this.mCollectedAlbumList.addAll(albumCoverDataList);
-            collectAlbumAdapter.addData(albumCoverDataList);
-        }
-        showNormal();
-        // 点击跳转事件
-        collectAlbumAdapter.setOnItemClickListener((adapter, view, position) -> startAlbumDetailPager(view, position,collectAlbumAdapter));
-    }
-
-    private void startAlbumDetailPager(View view, int position, AlbumCoverDataAdapter adapter) {
-        if (adapter.getData().size() <= 0 || adapter.getData().size() < position) {
-            return;
-        }
-
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, view, getString(R.string.share_view));
-        JudgeUtils.startAlbumDetailActivity(_mActivity,
-                options,
-                adapter.getData().get(position).getAlbumId()
-        );
-    }
-
-    private void initRecyclerView() {
-        mCollectedAlbumList = new ArrayList<>();
-        collectAlbumAdapter = new AlbumCoverDataAdapter(R.layout.item_album_abstract, mCollectedAlbumList);
-        //collectAlbumAdapter.setOnItemClickListener((adapter, view, position) -> startArticleDetailPager(view, position));
-        mAlbumRecyclerView.setLayoutManager(new LinearLayoutManager(_mActivity));
-        mAlbumRecyclerView.setHasFixedSize(true);
-        mAlbumRecyclerView.setAdapter(collectAlbumAdapter);
-
-        myAlbumList = new ArrayList<>();
-        myAlbumAdapter = new AlbumCoverDataAdapter(R.layout.item_album_abstract, myAlbumList);
-        //collectAlbumAdapter.setOnItemClickListener((adapter, view, position) -> startArticleDetailPager(view, position));
-        myAlbumRecyclerView.setLayoutManager(new LinearLayoutManager(_mActivity));
-        myAlbumRecyclerView.setHasFixedSize(true);
-        myAlbumRecyclerView.setAdapter(myAlbumAdapter);
-    }
-
-
-
 
 
 

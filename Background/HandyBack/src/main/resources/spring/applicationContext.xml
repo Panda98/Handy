@@ -16,6 +16,9 @@
     <context:component-scan base-package="com.handy,other">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
+<<<<<<< HEAD
+
+=======
     <!--context:component-scan base-package="com.handy.support.pojo">
     </context:component-scan>
     <context:component-scan base-package="com.handy.support.entity">
@@ -29,6 +32,7 @@
     <context:component-scan base-package="com.handy.web">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan-->
+>>>>>>> c65e18a7c8c4bb6c0ba069bb288cb049e5e51ffb
     <import resource="classpath:spring/spring-dao.xml" />
     <import resource="classpath:spring/spring-web.xml"/>
     <import resource="classpath:spring/spring-service.xml"/>

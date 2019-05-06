@@ -48,7 +48,7 @@
                         app:corner_radius="@dimen/dp_10" />
 
                     <!--author info-->
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
@@ -59,7 +59,6 @@
                             android:id="@+id/course_detail_author_cover"
                             android:layout_width="@dimen/dp_100"
                             android:layout_height="@dimen/dp_100"
-                            android:layout_alignParentStart="true"
                             android:src="#E8E8E8"
                             app:is_circle="true" />
 
@@ -67,7 +66,6 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
                             android:layout_marginStart="@dimen/dp_20"
                             android:orientation="vertical">
 
@@ -93,9 +91,6 @@
 
                         <!--关注按钮-->
                         <TextView
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="@dimen/dp_30"
-                            android:layout_centerVertical="true"
                             android:id="@+id/course_detail_follow_btn"
                             android:layout_width="@dimen/dp_80"
                             android:layout_height="@dimen/dp_30"
@@ -108,7 +103,7 @@
                             android:textColor="@color/follow_boarder"
                             android:textSize="@dimen/sp_16" />
 
-                    </RelativeLayout>
+                    </LinearLayout>
 
                     <!--divide line-->
                     <View
@@ -237,9 +232,9 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:background="@color/white"
-                    android:descendantFocusability="blocksDescendants">
+                    android:background="@color/white">
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/course_detail_comment"
@@ -283,18 +278,18 @@
                 android:id="@+id/collect_button"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:layout_gravity="center">
 
-                <ImageView
-                    android:layout_width="@dimen/dp_30"
-                    android:layout_height="@dimen/dp_30"
-                    android:src="@drawable/ic_add_black_24dp"/>
+                <com.like.LikeButton
+                    android:id="@+id/course_detail_step_collect_button"
+                    app:icon_type="Star"
+                    app:icon_size="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_10"
                     android:text="@string/navigation_collect"
                     android:layout_gravity="center_vertical"
                     android:textColor="@color/normal_text"
@@ -317,11 +312,11 @@
                 android:layout_gravity="center">
 
                 <TextView
-                    android:id="@+id/comment_btn"
+                    android:id="@+id/comment_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="评论"
+                    android:text="0"
                     android:textColor="@color/normal_text"
                     android:textSize="@dimen/sp_16"/>
 
@@ -336,42 +331,30 @@
             android:layout_weight="1"
             android:gravity="center">
 
-            <!--<com.like.LikeButton-->
-                <!--android:id="@+id/like_course_button"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--app:icon_size="22dp"-->
-                <!--app:anim_scale_factor="3"-->
-                <!--app:icon_type="heart" />-->
-
-            <com.like.LikeButton
-                android:id="@+id/like_course_button"
+            <LinearLayout
+                android:id="@+id/like_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:circle_end_color="@android:color/holo_blue_dark"
-                app:circle_start_color="@android:color/holo_blue_bright"
-                app:dots_primary_color="@android:color/holo_blue_light"
-                app:dots_secondary_color="@android:color/holo_blue_dark"
-                app:icon_size="22dp"
-                app:like_drawable="@drawable/thumb_on"
-                app:unlike_drawable="@drawable/thumb_off"
-                />
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
 
-            <!--<LinearLayout-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_gravity="center">-->
+                <com.like.LikeButton
+                    app:icon_type="Thumb"
+                    app:icon_size="20dp"
+                    android:id="@+id/star_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
-                <!--<TextView-->
-                    <!--android:id="@+id/like_num"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:text="0"-->
-                    <!--android:textColor="@color/normal_text"-->
-                    <!--android:textSize="@dimen/sp_16"/>-->
 
-            <!--</LinearLayout>-->
+                <TextView
+                    android:id="@+id/like_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="0"
+                    android:textColor="@color/normal_text"
+                    android:textSize="@dimen/sp_16"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

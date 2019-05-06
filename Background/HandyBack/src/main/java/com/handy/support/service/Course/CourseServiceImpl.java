@@ -4,6 +4,8 @@ import com.handy.support.entity.*;
 import com.handy.support.mapper.*;
 import com.handy.support.mapper.iMapper.*;
 import com.handy.support.pojo.course.dto.CourseEditDTO;
+import com.handy.support.pojo.course.dto.ItemDTO;
+import com.handy.support.pojo.course.dto.StepDTO;
 import com.handy.support.pojo.course.vo.CourseSimpleVO;
 import com.handy.support.pojo.course.vo.CourseDetailVO;
 
@@ -20,6 +22,7 @@ import org.apache.solr.common.SolrDocumentList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.imageio.stream.FileImageInputStream;
@@ -273,17 +276,28 @@ public class CourseServiceImpl implements ICourseService {
             CourseLabel cl=new CourseLabel(courseId,l.getLabelId());
             courseLabelMapper.insert(cl);
         }
-        List<Item> itemList=this.sortItem(e.getItemList());
-        for(Item i:itemList){
-            itemMapper.insert(i);
-            CourseItem courseItem=new CourseItem(courseId,i.getItemId());
+
+        List<ItemDTO> itemList=e.getItemDtoList();
+        for(ItemDTO i:itemList){
+            Item item=new Item();
+            item.setItemName(i.getItemName());
+            item.setItemNumber(i.getItemNumber());
+            item.setItemTag(i.getItemTag());
+            itemMapper.insertSelective(item);
+            Integer itemId=iCourseMapper.getLastItemId();
+            CourseItem courseItem=new CourseItem(courseId,itemId);
             courseItemMapper.insert(courseItem);
         }
-        List<Step> stepList=this.sortStep(e.getStepList());
 
-        for(Step s:stepList){
-            stepMapper.insert(s);
-            CourseStep courseStep=new CourseStep(courseId,s.getStepId());
+List<StepDTO> stepList=e.getStepDtoList();
+        for(StepDTO s:stepList){
+            Step step=new Step();
+            step.setStepTag(s.getStepTag());
+            step.setStepImg(s.getStepImg());
+            step.setStepDetail(s.getStepDetail());
+            stepMapper.insertSelective(step);
+            Integer stepId=iCourseMapper.getLastStepId();
+            CourseStep courseStep=new CourseStep(courseId,stepId);
             courseStepMapper.insert(courseStep);
         }
 
@@ -326,7 +340,7 @@ public class CourseServiceImpl implements ICourseService {
     }
     public String uploadImg(String ftpHost, String ftpUserName,
                             String ftpPassword, int ftpPort, String ftpPath,
-                            String fileName, InputStream input){
+                            String fileName, MultipartFile file){
         String imgUrl=null;
 
         FTPClient ftpClient = null;
@@ -342,6 +356,8 @@ public class CourseServiceImpl implements ICourseService {
             ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
             ftpClient.enterLocalPassiveMode();
             ftpClient.changeWorkingDirectory(ftpPath);
+
+            InputStream input = file.getInputStream();
             if(ftpClient.storeFile(fileName, input)){
                 imgUrl="http://106.13.106.249:8080/static/img/upload/"+fileName;
             }

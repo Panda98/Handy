@@ -16,8 +16,8 @@ public class CourseEditDTO {
     private Byte levelId;
     private List<Label> labelList;
     private String diyLabel;
-    private List<Item> itemList;
-    private List<Step> stepList;
+    private List<ItemDTO> itemDtoList;
+    private List<StepDTO> stepDtoList;
 
     public Integer getUserId() {
         return userId;
@@ -83,26 +83,26 @@ public class CourseEditDTO {
         this.diyLabel = diyLabel;
     }
 
-    public List<Item> getItemList() {
-        return itemList;
+    public List<ItemDTO> getItemDtoList() {
+        return itemDtoList;
     }
 
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
+    public void setItemDtoList(List<ItemDTO> itemDtoList) {
+        this.itemDtoList = itemDtoList;
     }
 
-    public List<Step> getStepList() {
-        return stepList;
+    public List<StepDTO> getStepDtoList() {
+        return stepDtoList;
     }
 
-    public void setStepList(List<Step> stepList) {
-        this.stepList = stepList;
+    public void setStepDtoList(List<StepDTO> stepDtoList) {
+        this.stepDtoList = stepDtoList;
     }
 
     public CourseEditDTO() {
     }
 
-    public CourseEditDTO(Integer userId, String courseTitle, String courseIntro, String courseNote, String courseCover, Byte levelId, List<Label> labelList, String diyLabel, List<Item> itemList, List<Step> stepList) {
+    public CourseEditDTO(Integer userId, String courseTitle, String courseIntro, String courseNote, String courseCover, Byte levelId, List<Label> labelList, String diyLabel, List<ItemDTO> itemDtoList, List<StepDTO> stepDtoList) {
         this.userId = userId;
         this.courseTitle = courseTitle;
         this.courseIntro = courseIntro;
@@ -111,7 +111,7 @@ public class CourseEditDTO {
         this.levelId = levelId;
         this.labelList = labelList;
         this.diyLabel = diyLabel;
-        this.itemList = itemList;
-        this.stepList = stepList;
+        this.itemDtoList = itemDtoList;
+        this.stepDtoList = stepDtoList;
     }
 }
