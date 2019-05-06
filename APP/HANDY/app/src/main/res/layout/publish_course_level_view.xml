@@ -77,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/level_1"
-            android:background="@drawable/label_button"
+            android:background="@drawable/publish_course_level_btn"
             android:button="@null"
             android:padding="@dimen/dp_10"
             android:textColor="@color/label_button_text"

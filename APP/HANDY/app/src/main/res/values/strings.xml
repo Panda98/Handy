@@ -82,7 +82,7 @@
     <string name="material_hint">输入你的用料</string>
     <string name="share_view">shareView</string>
     <string name="publish_labels">分类标签</string>
-    <string name="publish_select_labels">请从下方选择一个或多个标签</string>
+    <string name="publish_select_labels">点击选择一个或多个标签</string>
     <string name="publish_custom_labels">或输入一个自定义标签</string>
     <string name="publish_course_label_hint">自定义标签</string>
     <string name="publish_level">难度等级</string>
