@@ -358,10 +358,9 @@ List<StepDTO> stepList=e.getStepDtoList();
             ftpClient.changeWorkingDirectory(ftpPath);
 
             InputStream input = file.getInputStream();
-            if(ftpClient.storeFile(fileName, input)){
+            if(ftpClient.storeUniqueFile(fileName,input)){
                 imgUrl="http://106.13.106.249:8080/static/img/upload/"+fileName;
             }
-
 
             input.close();
             ftpClient.logout();
@@ -380,30 +379,8 @@ List<StepDTO> stepList=e.getStepDtoList();
         return imgUrl;
     }
 
-    public byte[] image2byte(String path) {
-        // 定义byte数组
-        byte[] data = null;
-        // 输入流
-        FileImageInputStream input = null;
-        try {
-            input = new FileImageInputStream(new File(path));
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
-            byte[] buf = new byte[1024];
-            int numBytesRead = 0;
-            while ((numBytesRead = input.read(buf)) != -1) {
-                output.write(buf, 0, numBytesRead);
-            }
-            data = output.toByteArray();
-            output.close();
-            input.close();
-        } catch (FileNotFoundException ex1) {
-            ex1.printStackTrace();
-        } catch (IOException ex1) {
-            ex1.printStackTrace();
-        }
-        return data;
-    }
-public List<Label> getLabels(){
+
+    public List<Label> getLabels(){
    return iLabelMapper.getAll();
 }
 

@@ -66,12 +66,12 @@ public interface ICourseService {
 
     FTPClient getFTPClient(String ftpHost, String ftpUserName,
                            String ftpPassword, int ftpPort);
-   String uploadImg(String ftpHost, String ftpUserName,
+
+    String uploadImg(String ftpHost, String ftpUserName,
                     String ftpPassword, int ftpPort, String ftpPath,
-                    String fileName,MultipartFile file);
+                    String fileName, MultipartFile file);
 
 
-     byte[] image2byte(String path);
 
      List<Label> getLabels();
 }
