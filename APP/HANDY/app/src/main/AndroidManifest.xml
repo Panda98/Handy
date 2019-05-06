@@ -22,7 +22,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".view.activity.AuthorHomepageActivity"></activity>
+        <activity android:name=".view.activity.CourseListByLabelActivity"></activity>
+        <activity android:name=".view.activity.AuthorHomepageActivity" />
         <activity android:name=".view.activity.MessageActivity">
 
             <!-- <intent-filter> -->
