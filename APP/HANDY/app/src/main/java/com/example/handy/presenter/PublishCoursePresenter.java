@@ -10,6 +10,7 @@ import com.example.handy.utils.RxUtils;
 import com.example.handy.wigdet.BaseObserver;
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,19 +51,21 @@ public class PublishCoursePresenter extends BasePresenter<PublishCourseContract.
     }
 
     @Override
-    public void uploadPic(byte[] imgArr,int index){
+    public void uploadPic(File file, int index){
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpg"), file);
+        MultipartBody.Part part = MultipartBody.Part.createFormData("image",file.getName(),requestFile);
         //todo: 上传图片
-        //addSubscribe(mDataManager.uploadImage(imgArr)
-        //        .compose(RxUtils.rxSchedulerHelper())
-        //        .compose(RxUtils.handleResult())
-        //        .subscribeWith(new BaseObserver<String>(mView,
-        //                false) {
-        //            @Override
-        //            public void onNext(String url) {
-        //                mView.afterUploadPic(url,index);
-        //
-        //            }
-        //
-        //        }));
+        addSubscribe(mDataManager.uploadImage(part)
+                .compose(RxUtils.rxSchedulerHelper())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new BaseObserver<String>(mView,
+                        false) {
+                    @Override
+                    public void onNext(String url) {
+                        mView.afterUploadPic(url,index);
+
+                    }
+
+                }));
     }
 }

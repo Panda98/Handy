@@ -4,6 +4,8 @@ import com.example.handy.base.presenter.AbstractPresenter;
 import com.example.handy.base.view.AbstractView;
 import com.example.handy.core.bean.PublishCourseData;
 
+import java.io.File;
+
 public interface PublishCourseContract {
 
     interface View extends AbstractView {
@@ -14,7 +16,7 @@ public interface PublishCourseContract {
     interface Presenter extends AbstractPresenter<View> {
 
         void publish(PublishCourseData data);
-        void uploadPic(byte[] imgArr,int index);
+        void uploadPic(File file, int index);
 
     }
 }
