@@ -167,6 +167,11 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
+    public Observable<BaseResponse<List<CourseData>>> getCourseWithLabel(int labelId, int currentPage, int n) {
+        return mApis.getCourseWithLabel(labelId, currentPage, n);
+    }
+
+    @Override
     public Observable<BaseResponse<String>> uploadImage(MultipartBody.Part file) {
         return mApis.uploadImage(file);
     }

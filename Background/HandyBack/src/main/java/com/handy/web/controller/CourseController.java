@@ -246,6 +246,20 @@ public class CourseController {
         return code.returnHandler();
     }
 
+    @RequestMapping(value = "/course/labeledCourse", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
+    public String getCourseByLabel(int labelId,int page_no,int n){
+        List<CourseSimpleVO> list=iCourseService.getCourseByLabel(labelId,page_no,n);
+        ErrorEnum error = null;
+        if (list == null) {
+            error = ErrorEnum.REQUEST_FAIL;
+        } else {
+            error = ErrorEnum.SUCCESS;
+        }
+        ReturnCode<List<CourseSimpleVO>> code = new ReturnCode<List<CourseSimpleVO>>(error, list);
+        return code.returnHandler();
+
+    }
+
 
 
 

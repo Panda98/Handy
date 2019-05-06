@@ -65,4 +65,11 @@
         FROM course;
     </select>
 
+
+    <select id="getByLabel" resultType="Integer">
+        SELECT DISTINCT course_id
+        FROM course_label
+        WHERE label_id=#{labelId} limit #{start},#{n};
+    </select>
+
 </mapper>

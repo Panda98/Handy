@@ -168,6 +168,11 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
+    public Observable<BaseResponse<List<CourseData>>> getCourseWithLabel(int labelId, int currentPage, int n) {
+        return mHttpHelper.getCourseWithLabel(labelId, currentPage, n);
+    }
+
+    @Override
     public Observable<BaseResponse<String>> uploadImage(MultipartBody.Part file) {
         return mHttpHelper.uploadImage(file);
     }

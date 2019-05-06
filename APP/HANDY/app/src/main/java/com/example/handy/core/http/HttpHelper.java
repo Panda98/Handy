@@ -204,6 +204,14 @@ public interface HttpHelper {
     Observable<BaseResponse> uploadCourse(PublishCourseData publishCourseData);
 
     /**
+     * 根据标签获得教程
+     *
+     * @return 结果
+     */
+    Observable<BaseResponse<List<CourseData>>> getCourseWithLabel(int labelId, int currentPage, int n);
+
+
+    /**
      * 上传图片
      *
      * @return url
