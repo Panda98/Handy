@@ -161,8 +161,8 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse<String>> uploadImage(byte[] data) {
-        return mApis.uploadImage(data);
+    public Observable<BaseResponse<String>> uploadImage(MultipartBody.Part file) {
+        return mApis.uploadImage(file);
     }
 
 

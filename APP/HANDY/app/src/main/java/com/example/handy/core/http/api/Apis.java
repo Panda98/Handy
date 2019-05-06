@@ -236,8 +236,9 @@ public interface Apis {
      *
      * @return url
      */
+    @Multipart
     @POST("uploadImg")
-    Observable<BaseResponse<String>> uploadImage(@Query("data") byte[] data);
+    Observable<BaseResponse<String>> uploadImage(@Part MultipartBody.Part file);
 
 
     /**
