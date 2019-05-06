@@ -2,6 +2,7 @@ package com.example.handy.view.activity;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
@@ -9,16 +10,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.handy.R;
 import com.example.handy.app.Constants;
@@ -26,7 +26,6 @@ import com.example.handy.base.activity.BaseActivity;
 import com.example.handy.contract.CourseDetailContract;
 import com.example.handy.core.bean.CommentData;
 import com.example.handy.core.bean.CourseDetailData;
-import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.ItemData;
 import com.example.handy.core.bean.StepData;
 import com.example.handy.presenter.CourseDetailPresenter;
@@ -35,7 +34,10 @@ import com.example.handy.utils.ImageLoader;
 import com.example.handy.utils.StatusBarUtil;
 import com.example.handy.view.adapter.CommentAdapter;
 import com.example.handy.view.adapter.CourseStepAdapter;
-import com.example.handy.view.adapter.FollowAdapter;
+import com.example.handy.view.fragment.CommentDialogFragment;
+import com.example.handy.view.fragment.SelectAlbumFragment;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.shehuan.niv.NiceImageView;
 
@@ -44,6 +46,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.functions.Function;
 
@@ -83,9 +86,21 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     @BindView(R.id.course_detail_comment)
     RecyclerView mCommentRv;
 
+    @BindView(R.id.collect_button)
+    LinearLayout collectBtn;
+
+    @BindView(R.id.comment_btn)
+    TextView commentBtn;
+
+    @BindView(R.id.like_course_button)
+    LikeButton likeButton;
+
     ArrayAdapter<String> mItemArrayAdapter;
     CourseStepAdapter mCourseStepAdapter;
     private CommentAdapter mCommentAdapter;
+
+    private SelectAlbumFragment searchDialogFragment;
+    private CommentDialogFragment commentDialogFragment;
 
     private List<CommentData> commentDataList;
     private List<StepData> stepDataList;
@@ -94,6 +109,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     private int followId;
     private boolean followStatus;
     private String courseTitle;
+    private int userId;
 
 
     @Override
@@ -104,6 +120,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     @Override
     protected void initToolbar() {
         initBundleData();
+        initLikeButton();
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
@@ -119,11 +136,29 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
 
     }
 
+
+    private void initLikeButton() {
+        //likeButton.setLiked(true);
+        likeButton.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                System.out.println("liked");
+                mPresenter.likeCourse(courseId);
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                System.out.println("unliked");
+                mPresenter.unlikeCourse(courseId);
+            }
+        });
+    }
     @Override
     protected void initEventAndData() {
         setRefresh();
         mPresenter.getCourseDetail(true, this.courseId);
         mPresenter.getCommentList(true,this.courseId);
+        mPresenter.getLikeStatus(this.courseId);
         if (CommonUtils.isNetworkConnected()) {
             showLoading();
         }
@@ -147,6 +182,8 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         initCommentRecyclerView();
     }
 
+
+
     private void initBundleData() {
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
@@ -156,18 +193,43 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         System.out.println(this.courseTitle);
     }
 
-    @OnClick({R.id.course_detail_follow_btn})
+    @OnClick({R.id.course_detail_follow_btn, R.id.collect_button, R.id.comment_btn})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.course_detail_follow_btn:
                 collectEvent();
+                break;
+            case R.id.collect_button:
+                if (searchDialogFragment == null) {
+                    searchDialogFragment = new SelectAlbumFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("courseId", this.courseId);
+                    searchDialogFragment.setArguments(bundle);
+                }
+                if (!isDestroyed() && searchDialogFragment.isAdded()) {
+                    searchDialogFragment.dismiss();
+                }
+                searchDialogFragment.show(getSupportFragmentManager(), "SelectAlbumFragment");
+                break;
+            case R.id.comment_btn:
+                if (commentDialogFragment == null) {
+                    commentDialogFragment = new CommentDialogFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("courseId", this.courseId);
+                    commentDialogFragment.setArguments(bundle);
+                }
+                if (!isDestroyed() && commentDialogFragment.isAdded()) {
+                    commentDialogFragment.dismiss();
+                }
+                commentDialogFragment.show(getSupportFragmentManager(), "CommentDialogFragment");
                 break;
             default:
                 break;
         }
     }
 
-    // 收藏事件
+
+    // 关注
     private void collectEvent() {
         if (!mPresenter.getLoginStatus()) {
             CommonUtils.showMessage(this, getString(R.string.login_tint));
@@ -200,8 +262,13 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         this.mFollowBtn.setText(getString(R.string.follow));
     }
 
+
+
     @Override
     public void showCourseDetail(CourseDetailData courseDetailData) {
+
+        this.userId = courseDetailData.getUserId();
+
         // 设置教程封面
         if (!TextUtils.isEmpty(courseDetailData.getCourseCover())) {
             ImageLoader.loadToNIV(this, courseDetailData.getCourseCover(), mCourseCoverNIv);
@@ -303,6 +370,20 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         }
     }
 
+    @Override
+    public void setLikeStatus(boolean isLike) {
+        likeButton.setLiked(isLike);
+        //likeButton.setLiked(true);
+
+    }
+
+    @Override
+    public void setFollowVisibility(int userId) {
+        if (this.userId == userId) {
+            mFollowBtn.setVisibility(View.INVISIBLE);
+        }
+    }
+
     private void initStep() {
         mCourseStepAdapter = new CourseStepAdapter(R.layout.item_course_detail_step, this.stepDataList);
         //mAdapter.setOnItemClickListener((adapter, view, position) -> startArticleDetailPager(view, position));
@@ -311,6 +392,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         mStepRv.setAdapter(mCourseStepAdapter);
     }
 
+    //ListView 高度
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) {

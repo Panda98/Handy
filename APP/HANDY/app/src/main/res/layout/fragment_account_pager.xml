@@ -40,6 +40,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -247,11 +250,31 @@
                         android:textSize="18sp"
                         android:textColor="@color/normal_text"/>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/account_course_more"
+                        android:layout_width="@dimen/dp_40"
+                        android:layout_height="@dimen/dp_20"
+                        android:textSize="@dimen/dp_11"
+                        android:text="更多"
+                        android:textColor="@color/follow_boarder"
+                        android:background="@drawable/bg_follow"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"                    />
+                    </LinearLayout>
+
 
                 </LinearLayout>
                 <!--教程1-->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/account_page_course1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/dp_1"
                     android:paddingBottom="@dimen/dp_15"
@@ -262,8 +285,8 @@
                     <com.shehuan.niv.NiceImageView
                         android:id="@+id/account_page_course1_img"
                         android:layout_gravity="center_vertical"
-                        app:is_circle="true"
-
+                        app:corner_radius="@dimen/dp_10"
+                        android:scaleType="centerCrop"
                         android:layout_width="@dimen/dp_80"
                         android:layout_height="@dimen/dp_80" />
 
@@ -285,7 +308,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textSize="14dp"
-                                android:text="树脂画教程"
                                 android:textColor="@color/normal_text"/>
 
                         </LinearLayout>
@@ -299,8 +321,7 @@
                                 android:id="@+id/account_page_course1_intro"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textSize="10dp"
-                                android:text="这是一个树脂画教程，非常简单哦，大家快跟着学起来吧~"/>
+                                android:textSize="10dp" />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -309,7 +330,8 @@
 
                 <!--教程2-->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/account_page_course2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/dp_1"
                     android:paddingBottom="@dimen/dp_15"
@@ -320,8 +342,8 @@
                     <com.shehuan.niv.NiceImageView
                         android:id="@+id/account_page_course2_img"
                         android:layout_gravity="center_vertical"
-                        app:is_circle="true"
-
+                        app:corner_radius="@dimen/dp_10"
+                        android:scaleType="centerCrop"
                         android:layout_width="@dimen/dp_80"
                         android:layout_height="@dimen/dp_80" />
 
@@ -343,7 +365,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textSize="14dp"
-                                android:text="树脂画教程"
                                 android:textColor="@color/normal_text"/>
 
                         </LinearLayout>
@@ -357,8 +378,7 @@
                                 android:id="@+id/account_page_course2_intro"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textSize="10dp"
-                                android:text="这是一个树脂画教程，非常简单哦，大家快跟着学起来吧~"/>
+                                android:textSize="10dp" />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -367,6 +387,13 @@
 
 
             </LinearLayout>
+
+            <!--divide line-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/divide_color"/>
 
             <!--发布的专辑-->
 
@@ -394,27 +421,64 @@
                     android:textColor="@color/normal_text"/>
 
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/account_album_more"
+                        android:layout_width="@dimen/dp_40"
+                        android:layout_height="@dimen/dp_20"
+                        android:text="更多"
+                        android:textSize="@dimen/dp_11"
+                        android:textColor="@color/follow_boarder"
+                        android:background="@drawable/bg_follow"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"                    />
+                </LinearLayout>
+
+
 
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center">
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
 
                     <!--专辑1-->
                     <com.shehuan.niv.NiceImageView
                         android:id="@+id/account_page_album1_img"
-                        android:layout_gravity="center_vertical"
-                        app:is_circle="true"
-
+                        app:corner_radius="@dimen/dp_10"
+                        android:scaleType="centerCrop"
                         android:layout_width="@dimen/dp_80"
                         android:layout_height="@dimen/dp_80" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/dp_10"
+                        android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/account_page_album1_title"
+                        android:layout_width="@dimen/dp_80"
+                        android:layout_height="@dimen/dp_20"
+                        android:textColor="@color/normal_text"
+                        android:textSize="@dimen/dp_10"/>
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -422,15 +486,33 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center">
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
 
-                    <com.shehuan.niv.NiceImageView
-                        android:id="@+id/account_page_album2_img"
-                        android:layout_gravity="center_vertical"
-                        app:is_circle="true"
+                        <!--专辑1-->
+                        <com.shehuan.niv.NiceImageView
+                            android:id="@+id/account_page_album2_img"
+                            app:corner_radius="@dimen/dp_10"
+                            android:scaleType="centerCrop"
+                            android:layout_width="@dimen/dp_80"
+                            android:layout_height="@dimen/dp_80" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/dp_10"
+                        android:gravity="center">
 
-                        android:layout_width="@dimen/dp_80"
-                        android:layout_height="@dimen/dp_80" />
+                        <TextView
+                            android:id="@+id/account_page_album2_title"
+                            android:layout_width="@dimen/dp_80"
+                            android:layout_height="@dimen/dp_20"
+                            android:textColor="@color/normal_text"
+                            android:textSize="@dimen/dp_10"/>
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -438,15 +520,33 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center">
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
 
-                    <com.shehuan.niv.NiceImageView
-                        android:id="@+id/account_page_album3_img"
-                        android:layout_gravity="center_vertical"
-                        app:is_circle="true"
+                        <!--专辑1-->
+                        <com.shehuan.niv.NiceImageView
+                            android:id="@+id/account_page_album3_img"
+                            app:corner_radius="@dimen/dp_10"
+                            android:scaleType="centerCrop"
+                            android:layout_width="@dimen/dp_80"
+                            android:layout_height="@dimen/dp_80" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/dp_10"
+                        android:gravity="center">
 
-                        android:layout_width="@dimen/dp_80"
-                        android:layout_height="@dimen/dp_80" />
+                        <TextView
+                            android:id="@+id/account_page_album3_title"
+                            android:layout_width="@dimen/dp_80"
+                            android:layout_height="@dimen/dp_20"
+                            android:textColor="@color/normal_text"
+                            android:textSize="@dimen/dp_10"/>
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -455,9 +555,10 @@
         </LinearLayout>
 
         </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
 
 
-g
+
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 

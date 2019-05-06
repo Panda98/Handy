@@ -18,8 +18,4 @@ public interface ICourseMapper {
     //Integer insertCourse(@Param("course")Course course);
 
     Integer getLastId();
-
-    Integer getLastItemId();
-
-    Integer getLastStepId();
 }

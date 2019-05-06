@@ -11,7 +11,6 @@
     <!-- 配置整合mybatis过程 -->
     <!-- 1.配置数据库相关参数properties的属性：${url} -->
 
-
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -22,7 +21,6 @@
 
         <property name="password" value="handycraft@205" />
     </bean>
-
 
 
     <!-- 3.配置SqlSessionFactory对象 -->

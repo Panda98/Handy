@@ -4,8 +4,6 @@ import com.handy.support.entity.*;
 import com.handy.support.mapper.*;
 import com.handy.support.mapper.iMapper.*;
 import com.handy.support.pojo.course.dto.CourseEditDTO;
-import com.handy.support.pojo.course.dto.ItemDTO;
-import com.handy.support.pojo.course.dto.StepDTO;
 import com.handy.support.pojo.course.vo.CourseSimpleVO;
 import com.handy.support.pojo.course.vo.CourseDetailVO;
 
@@ -276,28 +274,17 @@ public class CourseServiceImpl implements ICourseService {
             CourseLabel cl=new CourseLabel(courseId,l.getLabelId());
             courseLabelMapper.insert(cl);
         }
-
-        List<ItemDTO> itemList=e.getItemDtoList();
-        for(ItemDTO i:itemList){
-            Item item=new Item();
-            item.setItemName(i.getItemName());
-            item.setItemNumber(i.getItemNumber());
-            item.setItemTag(i.getItemTag());
-            itemMapper.insertSelective(item);
-            Integer itemId=iCourseMapper.getLastItemId();
-            CourseItem courseItem=new CourseItem(courseId,itemId);
+        List<Item> itemList=this.sortItem(e.getItemList());
+        for(Item i:itemList){
+            itemMapper.insert(i);
+            CourseItem courseItem=new CourseItem(courseId,i.getItemId());
             courseItemMapper.insert(courseItem);
         }
+        List<Step> stepList=this.sortStep(e.getStepList());
 
-List<StepDTO> stepList=e.getStepDtoList();
-        for(StepDTO s:stepList){
-            Step step=new Step();
-            step.setStepTag(s.getStepTag());
-            step.setStepImg(s.getStepImg());
-            step.setStepDetail(s.getStepDetail());
-            stepMapper.insertSelective(step);
-            Integer stepId=iCourseMapper.getLastStepId();
-            CourseStep courseStep=new CourseStep(courseId,stepId);
+        for(Step s:stepList){
+            stepMapper.insert(s);
+            CourseStep courseStep=new CourseStep(courseId,s.getStepId());
             courseStepMapper.insert(courseStep);
         }
 

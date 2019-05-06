@@ -5,12 +5,16 @@ import com.example.handy.core.bean.AlbumListData;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
 import com.example.handy.core.bean.CommentData;
+import com.example.handy.core.bean.CommentMessageData;
 import com.example.handy.core.bean.CommentReplyData;
 import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
+import com.example.handy.core.bean.LikeMessageData;
 import com.example.handy.core.bean.LoginData;
+import com.example.handy.core.bean.PublishCourseData;
 import com.example.handy.core.bean.RecommendAlbumData;
+import com.example.handy.core.bean.ReplyMessageData;
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.http.HttpHelper;
 import com.example.handy.core.prefs.PreferenceHelper;
@@ -113,7 +117,7 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse<List<AlbumListData>>> getCollectAlbumList(int userId) {
+    public Observable<BaseResponse<List<AlbumCoverData>>> getCollectAlbumList(int userId) {
         return mHttpHelper.getCollectAlbumList(userId);
     }
 
@@ -143,7 +147,7 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse> isLike(int userId, int courseId) {
+    public Observable<BaseResponse<Boolean>> isLike(int userId, int courseId) {
         return mHttpHelper.isLike(userId, courseId);
     }
 
@@ -153,9 +157,15 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse> uploadCourse(Map<String, RequestBody> partMap, MultipartBody.Part... files) {
-        return mHttpHelper.uploadCourse(partMap, files);
+    public Observable<BaseResponse> uploadCourse(PublishCourseData publishCourseData) {
+        return mHttpHelper.uploadCourse(publishCourseData);
     }
+
+    @Override
+    public Observable<BaseResponse<String>> uploadImage(byte[] data) {
+        return mHttpHelper.uploadImage(data);
+    }
+
 
     @Override
     public Observable<BaseResponse<Boolean>> postComment(PostCommentView commentView) {
@@ -185,6 +195,21 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     @Override
     public Observable<BaseResponse<AlbumCoverData>> getAlbumCoverData(int albumId) {
         return mHttpHelper.getAlbumCoverData(albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse<CommentMessageData>> getCommentMessage(int uid, int currentPage, int n) {
+        return mHttpHelper.getCommentMessage(uid, currentPage, n);
+    }
+
+    @Override
+    public Observable<BaseResponse<ReplyMessageData>> getReplyMessage(int uid, int currentPage, int n) {
+        return mHttpHelper.getReplyMessage(uid, currentPage, n);
+    }
+
+    @Override
+    public Observable<BaseResponse<LikeMessageData>> getLikeMessage(int uid, int currentPage, int n) {
+        return mHttpHelper.getLikeMessage(uid, currentPage, n);
     }
 
 

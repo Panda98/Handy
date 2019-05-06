@@ -96,7 +96,9 @@ public class CourseDetailPresenter extends BasePresenter<CourseDetailContract.Vi
                     @Override
                     public void onNext(Boolean status) {
                         System.out.println(status);
+                        mView.setFollowVisibility(getLoginAccount());
                         mView.setFollowStatus(status);
+
                     }
 
                 }));
@@ -128,6 +130,45 @@ public class CourseDetailPresenter extends BasePresenter<CourseDetailContract.Vi
                     @Override
                     public void onNext(List<CommentData> commentDataList) {
                         mView.showCommentData(commentDataList, isRefresh);
+                    }
+                }));
+    }
+
+    @Override
+    public void likeCourse(int courseId) {
+        addSubscribe(mDataManager.like(getLoginAccount(), courseId)
+                .compose(RxUtils.rxSchedulerHelper())
+                .subscribeWith(new BaseObserver(mView,
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_follow_data)) {
+                    @Override
+                    public void onNext(Object o) {
+                    }
+                }));
+    }
+
+    @Override
+    public void unlikeCourse(int courseId) {
+        addSubscribe(mDataManager.unLike(getLoginAccount(), courseId)
+                .compose(RxUtils.rxSchedulerHelper())
+                .subscribeWith(new BaseObserver(mView,
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_follow_data)) {
+                    @Override
+                    public void onNext(Object o) {
+                    }
+                }));
+    }
+
+    @Override
+    public void getLikeStatus(int courseId) {
+        addSubscribe(mDataManager.isLike(getLoginAccount(), courseId)
+                .compose(RxUtils.rxSchedulerHelper())
+                .compose(RxUtils.handleResult())
+                .subscribeWith(new BaseObserver<Boolean>(mView,
+                        HandyAPP.getInstance().getString(R.string.failed_to_obtain_follow_data)) {
+
+                    @Override
+                    public void onNext(Boolean aBoolean) {
+                        mView.setLikeStatus(aBoolean);
                     }
                 }));
     }

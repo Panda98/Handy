@@ -116,13 +116,11 @@ public class CourseController {
     @RequestMapping(value = "/course/iscollected", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
     public String isCollected(int userId, int courseId){
         Integer result=iCourseService.isCollected(userId,courseId);
-        Boolean b=true;
-
         if(result == null){
-            b=false;
+            result=0;
         }
         ErrorEnum error=ErrorEnum.SUCCESS;
-        ReturnCode<Boolean> code=new ReturnCode<Boolean>(error,b);
+        ReturnCode<Integer> code=new ReturnCode<Integer>(error,result);
         return code.returnHandler();
     }
 
@@ -155,12 +153,11 @@ public class CourseController {
     @RequestMapping(value = "/course/isliked", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
     public String isLiked(int userId, int courseId){
         Integer result=iCourseService.isLiked(userId,courseId);
-        Boolean b=true;
         if(result == null){
-            b=false;
+            result=0;
         }
         ErrorEnum error=ErrorEnum.SUCCESS;
-        ReturnCode<Boolean> code=new ReturnCode<Boolean>(error,b);
+        ReturnCode<Integer> code=new ReturnCode<Integer>(error,result);
         return code.returnHandler();
     }
 
@@ -212,7 +209,6 @@ public class CourseController {
 
     @RequestMapping(value = "/uploadImg",produces = "application/json; charset=utf-8",method = RequestMethod.POST)
     public String getUploadUrL(@RequestParam("image") MultipartFile file) {
-
         String imgUrl = null;
         ErrorEnum error = null;
         // 判断文件是否为空
