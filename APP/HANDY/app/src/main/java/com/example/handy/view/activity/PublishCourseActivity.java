@@ -535,6 +535,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         courseData.setDiyLabel(customLabel);
         courseData.setLabelList(selectedLabel);
         courseData.setLevelId(level);
+        courseData.setUserId(mPresenter.getLoginAccount());
 
         if(checkInput()){
             //上传图片，获得url
