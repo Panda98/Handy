@@ -2,10 +2,9 @@ package com.example.handy.view.activity;
 
 import android.app.ActivityOptions;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -16,17 +15,12 @@ import android.widget.TextView;
 import com.example.handy.R;
 import com.example.handy.app.Constants;
 import com.example.handy.base.activity.BaseActivity;
-import com.example.handy.contract.CourseDetailContract;
-import com.example.handy.contract.MyPublishCourseContract;
-import com.example.handy.core.bean.AlbumListData;
+import com.example.handy.contract.MorePublishCourseContract;
 import com.example.handy.core.bean.CourseData;
-import com.example.handy.core.bean.FollowData;
-import com.example.handy.presenter.CourseDetailPresenter;
-import com.example.handy.presenter.MyPublishCoursePresenter;
+import com.example.handy.presenter.MorePublishCoursePresenter;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.JudgeUtils;
 import com.example.handy.utils.StatusBarUtil;
-import com.example.handy.view.adapter.FollowAdapter;
 import com.example.handy.view.adapter.RecommendCourseAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
@@ -35,7 +29,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MyPublishCourseActivity extends BaseActivity<MyPublishCoursePresenter> implements MyPublishCourseContract.View {
+public class MorePublishCourseActivity extends BaseActivity<MorePublishCoursePresenter> implements MorePublishCourseContract.View {
 
     @BindView(R.id.common_toolbar)
     Toolbar mToolbar;
@@ -48,6 +42,7 @@ public class MyPublishCourseActivity extends BaseActivity<MyPublishCoursePresent
 
     private List<CourseData> mPublishCourseList;
     private RecommendCourseAdapter mAdapter;
+    private int userId;
 
 
     @Override
@@ -58,6 +53,7 @@ public class MyPublishCourseActivity extends BaseActivity<MyPublishCoursePresent
     @Override
     protected void initToolbar() {
 
+        initBundleData();
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
@@ -72,11 +68,19 @@ public class MyPublishCourseActivity extends BaseActivity<MyPublishCoursePresent
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
+    private void initBundleData() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            this.userId = ((int) bundle.get(Constants.USER_ID));
+            System.out.println(this.userId);
+        }
+    }
+
     @Override
     protected void initEventAndData() {
 
         setRefresh();
-        mPresenter.getPublishCourseDataList(true);
+        mPresenter.getPublishCourseDataList(userId, true);
         if (CommonUtils.isNetworkConnected()) {
             showLoading();
         }
@@ -84,7 +88,7 @@ public class MyPublishCourseActivity extends BaseActivity<MyPublishCoursePresent
 
     private void setRefresh() {
         mRefreshLayout.setOnRefreshListener(refreshLayout -> {
-            mPresenter.autoRefresh(false);
+            mPresenter.autoRefresh(userId, false);
             refreshLayout.finishRefresh(1000);
         });
         mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {

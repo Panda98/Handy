@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.activity.AuthorHomepageActivity">
+
+    <include layout="@layout/common_toolbar_no_scroll" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/normal_view"
+        app:srlPrimaryColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dp_20"
+                android:paddingEnd="@dimen/dp_20"
+                android:orientation="vertical">
+
+                <!--user info-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:orientation="horizontal">
+
+                    <!--头像-->
+                    <com.shehuan.niv.NiceImageView
+                        android:id="@+id/homepage_user_image"
+                        android:layout_width="@dimen/dp_80"
+                        android:layout_height="@dimen/dp_80"
+                        android:layout_gravity="center_vertical"
+                        app:is_circle="true" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/homepage_user_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="UserName"
+                                android:textColor="@color/normal_text"
+                                android:textSize="@dimen/sp_24" />
+
+                            <!--关注按钮-->
+                            <TextView
+                                android:id="@+id/homepage_follow_btn"
+                                android:layout_width="@dimen/dp_80"
+                                android:layout_height="@dimen/dp_30"
+                                android:layout_marginStart="@dimen/dp_20"
+                                android:layout_gravity="center_vertical"
+                                android:background="@drawable/bg_follow"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:gravity="center"
+                                android:text="@string/follow"
+                                android:textColor="@color/follow_boarder"
+                                android:textSize="@dimen/sp_16" />
+
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/dp_10">
+                            <!--fan-->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_16"
+                                    android:text="粉丝"
+                                    android:textColor="@color/normal_text" />
+
+                                <TextView
+                                    android:id="@+id/homepage_user_follower"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dp_10"
+                                    android:text="0"
+                                    android:textSize="@dimen/sp_16"
+                                    android:textColor="@color/normal_text" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="@dimen/dp_1"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="@dimen/dp_10"
+                                android:layout_centerInParent="true"
+                                android:background="@color/divide_color"
+                                />
+
+                            <!--follow-->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_16"
+                                    android:text="关注"
+                                    android:textColor="@color/normal_text" />
+
+                                <TextView
+                                    android:id="@+id/homepage_user_follow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/dp_10"
+                                    android:text="0"
+                                    android:textSize="@dimen/sp_16"
+                                    android:textColor="@color/normal_text" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@color/divide_color"/>
+
+                <!--标题-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="@dimen/dp_10">
+                    <!--文字-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="Ta发布的教程"
+                        android:textColor="@color/normal_text"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/homepage_course_more"
+
+                        android:layout_width="@dimen/dp_40"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/bg_follow"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:text="更多"
+                        android:textColor="@color/follow_boarder"
+                        android:textSize="@dimen/sp_12" />
+
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/homepage_user_course_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="@color/divide_color"/>
+
+                <!--标题-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="@dimen/dp_10">
+                    <!--文字-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="Ta发布的专辑"
+                        android:textColor="@color/normal_text"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/homepage_album_more"
+                        android:layout_width="@dimen/dp_40"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/bg_follow"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:text="更多"
+                        android:textColor="@color/follow_boarder"
+                        android:textSize="@dimen/sp_12" />
+
+                </RelativeLayout>
+
+                <GridView
+                    android:id="@+id/homepage_user_album_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="3"
+                    android:scrollbars="none"
+                    android:verticalSpacing="20dip"
+                    android:horizontalSpacing="10dip"
+                    android:stretchMode="columnWidth"
+                    android:listSelector="@color/transparent"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+
+
+
+
+
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.handy.view.activity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
@@ -31,6 +32,7 @@ import com.example.handy.core.bean.StepData;
 import com.example.handy.presenter.CourseDetailPresenter;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.ImageLoader;
+import com.example.handy.utils.JudgeUtils;
 import com.example.handy.utils.StatusBarUtil;
 import com.example.handy.view.adapter.CommentAdapter;
 import com.example.handy.view.adapter.CourseStepAdapter;
@@ -110,7 +112,6 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     private boolean followStatus;
     private String courseTitle;
     private int userId;
-
 
     @Override
     protected int getLayoutId() {
@@ -193,7 +194,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         System.out.println(this.courseTitle);
     }
 
-    @OnClick({R.id.course_detail_follow_btn, R.id.collect_button, R.id.comment_btn})
+    @OnClick({R.id.course_detail_follow_btn, R.id.collect_button, R.id.comment_btn, R.id.course_detail_author_cover})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.course_detail_follow_btn:
@@ -223,6 +224,8 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
                 }
                 commentDialogFragment.show(getSupportFragmentManager(), "CommentDialogFragment");
                 break;
+            case R.id.course_detail_author_cover:
+                startAuthorHomepage(v);
             default:
                 break;
         }
@@ -390,6 +393,15 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         mStepRv.setLayoutManager(new LinearLayoutManager(this));
         mStepRv.setHasFixedSize(true);
         mStepRv.setAdapter(mCourseStepAdapter);
+    }
+
+    private void startAuthorHomepage(View view) {
+
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, view, getString(R.string.share_view));
+        JudgeUtils.startAuthorHomepageActivity(this,
+                options,
+                this.userId
+        );
     }
 
     //ListView 高度

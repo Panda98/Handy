@@ -10,6 +10,7 @@ import com.example.handy.core.bean.CommentReplyData;
 import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
+import com.example.handy.core.bean.LabelData;
 import com.example.handy.core.bean.LikeMessageData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.PublishCourseData;
@@ -157,8 +158,18 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
+    public Observable<BaseResponse<List<LabelData>>> getLabelList() {
+        return mHttpHelper.getLabelList();
+    }
+
+    @Override
     public Observable<BaseResponse> uploadCourse(PublishCourseData publishCourseData) {
         return mHttpHelper.uploadCourse(publishCourseData);
+    }
+
+    @Override
+    public Observable<BaseResponse<List<CourseData>>> getCourseWithLabel(int labelId, int currentPage, int n) {
+        return mHttpHelper.getCourseWithLabel(labelId, currentPage, n);
     }
 
     @Override
@@ -198,17 +209,17 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse<CommentMessageData>> getCommentMessage(int uid, int currentPage, int n) {
+    public Observable<BaseResponse<List<CommentMessageData>>> getCommentMessage(int uid, int currentPage, int n) {
         return mHttpHelper.getCommentMessage(uid, currentPage, n);
     }
 
     @Override
-    public Observable<BaseResponse<ReplyMessageData>> getReplyMessage(int uid, int currentPage, int n) {
+    public Observable<BaseResponse<List<ReplyMessageData>>> getReplyMessage(int uid, int currentPage, int n) {
         return mHttpHelper.getReplyMessage(uid, currentPage, n);
     }
 
     @Override
-    public Observable<BaseResponse<LikeMessageData>> getLikeMessage(int uid, int currentPage, int n) {
+    public Observable<BaseResponse<List<LikeMessageData>>> getLikeMessage(int uid, int currentPage, int n) {
         return mHttpHelper.getLikeMessage(uid, currentPage, n);
     }
 

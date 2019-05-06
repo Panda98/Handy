@@ -1,6 +1,7 @@
 package com.example.handy.di.module.base;
 
 import com.example.handy.di.module.AlbumDetailActivityModule;
+import com.example.handy.di.module.AuthorHomepageActivityModule;
 import com.example.handy.di.module.CourseDetailActivityModule;
 import com.example.handy.di.module.MainActivityModule;
 import com.example.handy.di.module.MessageActivityModule;
@@ -8,12 +9,13 @@ import com.example.handy.di.module.MyPublishAlbumActivityModule;
 import com.example.handy.di.module.MyPublishCourseActivityModule;
 import com.example.handy.di.module.PublishCourseActivityModule;
 import com.example.handy.view.activity.AlbumDetailActivity;
+import com.example.handy.view.activity.AuthorHomepageActivity;
 import com.example.handy.view.activity.CourseDetailActivity;
 import com.example.handy.view.activity.LoginActivity;
 import com.example.handy.view.activity.MainActivity;
 import com.example.handy.view.activity.MessageActivity;
-import com.example.handy.view.activity.MyPublishAlbumActivity;
-import com.example.handy.view.activity.MyPublishCourseActivity;
+import com.example.handy.view.activity.MorePublishAlbumActivity;
+import com.example.handy.view.activity.MorePublishCourseActivity;
 import com.example.handy.view.activity.PublishCourseActivity;
 import com.example.handy.view.activity.RegisterActivity;
 import com.example.handy.di.component.BaseActivityComponent;
@@ -50,12 +52,15 @@ public abstract class AbstractAllActivityModule {
     abstract AlbumDetailActivity contributesAlbumDetailActivityInjector();
 
     @ContributesAndroidInjector(modules = MyPublishAlbumActivityModule.class)
-    abstract MyPublishAlbumActivity contributesMyPublishAlbumActivityInjector();
+    abstract MorePublishAlbumActivity contributesMyPublishAlbumActivityInjector();
 
     @ContributesAndroidInjector(modules = MyPublishCourseActivityModule.class)
-    abstract MyPublishCourseActivity contributesMyPublishCourseActivityInjector();
+    abstract MorePublishCourseActivity contributesMyPublishCourseActivityInjector();
 
     @ContributesAndroidInjector(modules = MessageActivityModule.class)
     abstract MessageActivity contributesMessageActivityInjector();
+
+    @ContributesAndroidInjector(modules = AuthorHomepageActivityModule.class)
+    abstract AuthorHomepageActivity contributesAuthorHomepageActivityInjector();
 
 }
