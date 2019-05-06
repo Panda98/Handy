@@ -305,7 +305,7 @@ public interface Apis {
      * @return 回复信息
      */
     @GET("message/courseComment")
-    Observable<BaseResponse<CommentMessageData>> getCommentMessage(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
+    Observable<BaseResponse<List<CommentMessageData>>> getCommentMessage(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
 
     /**
      * 消息——收到的回复
@@ -313,7 +313,7 @@ public interface Apis {
      * @return 回复信息
      */
     @GET("message/commentReply")
-    Observable<BaseResponse<ReplyMessageData>> getReplyMessage(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
+    Observable<BaseResponse<List<ReplyMessageData>>> getReplyMessage(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
 
     /**
      * 消息——收到的赞
@@ -321,7 +321,7 @@ public interface Apis {
      * @return 回复信息
      */
     @GET("message/courseLike")
-    Observable<BaseResponse<LikeMessageData>> getLikeMessage(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
+    Observable<BaseResponse<List<LikeMessageData>>> getLikeMessage(@Query("uid")int uid, @Query("page_no") int currentPage, @Query("n")int n);
 
 
 }

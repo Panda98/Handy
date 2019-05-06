@@ -260,21 +260,21 @@ public interface HttpHelper {
      *
      * @return 回复信息
      */
-    Observable<BaseResponse<CommentMessageData>> getCommentMessage(int uid, int currentPage, int n);
+    Observable<BaseResponse<List<CommentMessageData>>> getCommentMessage(int uid, int currentPage, int n);
 
     /**
      * 消息——收到的回复
      *
      * @return 回复信息
      */
-    Observable<BaseResponse<ReplyMessageData>> getReplyMessage(int uid, int currentPage, int n);
+    Observable<BaseResponse<List<ReplyMessageData>>> getReplyMessage(int uid, int currentPage, int n);
 
     /**
      * 消息——收到的赞
      *
      * @return 回复信息
      */
-    Observable<BaseResponse<LikeMessageData>> getLikeMessage(int uid, int currentPage, int n);
+    Observable<BaseResponse<List<LikeMessageData>>> getLikeMessage(int uid, int currentPage, int n);
 
 
 }
