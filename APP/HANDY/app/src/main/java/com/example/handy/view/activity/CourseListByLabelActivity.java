@@ -2,9 +2,9 @@ package com.example.handy.view.activity;
 
 import android.app.ActivityOptions;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -15,13 +15,13 @@ import android.widget.TextView;
 import com.example.handy.R;
 import com.example.handy.app.Constants;
 import com.example.handy.base.activity.BaseActivity;
-import com.example.handy.contract.MorePublishAlbumContract;
-import com.example.handy.core.bean.AlbumCoverData;
-import com.example.handy.presenter.MorePublishAlbumPresenter;
+import com.example.handy.contract.CourseListByLabelContract;
+import com.example.handy.core.bean.CourseData;
+import com.example.handy.presenter.CourseListByLabelPresenter;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.JudgeUtils;
 import com.example.handy.utils.StatusBarUtil;
-import com.example.handy.view.adapter.AlbumCoverDataAdapter;
+import com.example.handy.view.adapter.RecommendCourseAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MorePublishAlbumActivity extends BaseActivity<MorePublishAlbumPresenter> implements MorePublishAlbumContract.View {
+public class CourseListByLabelActivity extends BaseActivity<CourseListByLabelPresenter> implements CourseListByLabelContract.View {
 
     @BindView(R.id.common_toolbar)
     Toolbar mToolbar;
@@ -37,17 +37,16 @@ public class MorePublishAlbumActivity extends BaseActivity<MorePublishAlbumPrese
     TextView mTitleTv;
     @BindView(R.id.normal_view)
     SmartRefreshLayout mRefreshLayout;
-    @BindView(R.id.my_publish_album_recycler_view)
+    @BindView(R.id.label_course_recycler_view)
     RecyclerView mRecyclerView;
 
-    private List<AlbumCoverData> mPublishAlbumList;
-    private AlbumCoverDataAdapter mAdapter;
-
-    private int userId;
+    private List<CourseData> mPublishCourseList;
+    private RecommendCourseAdapter mAdapter;
+    private int labelId;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_more_publish_album;
+        return R.layout.activity_course_list_by_label;
     }
 
     @Override
@@ -59,7 +58,7 @@ public class MorePublishAlbumActivity extends BaseActivity<MorePublishAlbumPrese
         assert actionBar != null;
         actionBar.setDisplayShowTitleEnabled(false);
 
-        mTitleTv.setText("我发布的专辑");
+        mTitleTv.setText("更多推荐教程");
         StatusBarUtil.setStatusColor(getWindow(), ContextCompat.getColor(this, R.color.publish_course_button_green), 1f);
         mToolbar.setNavigationOnClickListener(v -> onBackPressedSupport());
 
@@ -71,15 +70,16 @@ public class MorePublishAlbumActivity extends BaseActivity<MorePublishAlbumPrese
     private void initBundleData() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            this.userId = ((int) bundle.get(Constants.USER_ID));
-            System.out.println(this.userId);
+            this.labelId = ((int) bundle.get(Constants.LABEL_ID));
+            System.out.println(this.labelId);
         }
     }
 
     @Override
     protected void initEventAndData() {
+
         setRefresh();
-        mPresenter.getMyPublishAlbumDataList(userId,true);
+        mPresenter.getCourseListByLabel(labelId, true);
         if (CommonUtils.isNetworkConnected()) {
             showLoading();
         }
@@ -87,8 +87,12 @@ public class MorePublishAlbumActivity extends BaseActivity<MorePublishAlbumPrese
 
     private void setRefresh() {
         mRefreshLayout.setOnRefreshListener(refreshLayout -> {
-            mPresenter.autoRefresh(userId,false);
+            mPresenter.autoRefresh(labelId, false);
             refreshLayout.finishRefresh(1000);
+        });
+        mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
+            mPresenter.loadMore(labelId);
+            refreshLayout.finishLoadMore(1000);
         });
     }
 
@@ -99,8 +103,8 @@ public class MorePublishAlbumActivity extends BaseActivity<MorePublishAlbumPrese
     }
 
     private void initRecyclerView() {
-        mPublishAlbumList = new ArrayList<>();
-        mAdapter = new AlbumCoverDataAdapter(R.layout.item_album_abstract, mPublishAlbumList);
+        mPublishCourseList = new ArrayList<>();
+        mAdapter = new RecommendCourseAdapter(R.layout.item_recommend_course, mPublishCourseList);
         //mAdapter.setOnItemClickListener((adapter, view, position) -> startArticleDetailPager(view, position));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
@@ -108,32 +112,33 @@ public class MorePublishAlbumActivity extends BaseActivity<MorePublishAlbumPrese
     }
 
     @Override
-    public void showMyPublishAlbumData(List<AlbumCoverData> albumListDataList, boolean isRefresh) {
-
+    public void showCourseListByLabel(List<CourseData> courseDataList, boolean isRefresh) {
         if (mAdapter == null) {
             return;
         }
         if (isRefresh) {
-            this.mPublishAlbumList = albumListDataList;
-            mAdapter.replaceData(albumListDataList);
+            this.mPublishCourseList = courseDataList;
+            mAdapter.replaceData(courseDataList);
         } else {
-            this.mPublishAlbumList.addAll(albumListDataList);
-            mAdapter.addData(albumListDataList);
+            this.mPublishCourseList.addAll(courseDataList);
+            mAdapter.addData(courseDataList);
         }
         showNormal();
         // 点击跳转事件
-        mAdapter.setOnItemClickListener((adapter, view, position) -> startAlbumDetailPager(view, position));
+        mAdapter.setOnItemClickListener((adapter, view, position) -> startCourseDetailPager(view, position));
     }
 
-    private void startAlbumDetailPager(View view, int position) {
+    // 跳转
+    private void startCourseDetailPager(View view, int position) {
         if (mAdapter.getData().size() <= 0 || mAdapter.getData().size() < position) {
             return;
         }
 
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, view, getString(R.string.share_view));
-        JudgeUtils.startAlbumDetailActivity(this,
+        JudgeUtils.startCourseDetailActivity(this,
                 options,
-                mAdapter.getData().get(position).getAlbumId()
+                mAdapter.getData().get(position).getCourseId(),
+                mAdapter.getData().get(position).getCourseTitle()
         );
     }
 }

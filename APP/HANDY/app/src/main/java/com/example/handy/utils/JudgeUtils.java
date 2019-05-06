@@ -9,6 +9,7 @@ import com.example.handy.app.Constants;
 import com.example.handy.view.activity.AlbumDetailActivity;
 import com.example.handy.view.activity.AuthorHomepageActivity;
 import com.example.handy.view.activity.CourseDetailActivity;
+import com.example.handy.view.activity.CourseListByLabelActivity;
 import com.example.handy.view.activity.MorePublishAlbumActivity;
 import com.example.handy.view.activity.MorePublishCourseActivity;
 
@@ -127,5 +128,18 @@ public class JudgeUtils {
         intent.putExtra(Constants.USER_ID, userId);
         mActivity.startActivity(intent);
 
+    }
+
+    // 跳转标签课程列表
+    public static void startLabelCourseListActivity(Context mActivity, ActivityOptions activityOptions, int labelId) {
+
+        Intent intent = new Intent(mActivity, CourseListByLabelActivity.class);
+        intent.putExtra(Constants.LABEL_ID, labelId);
+
+        if (activityOptions != null && !Build.MANUFACTURER.contains("samsung") && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            mActivity.startActivity(intent, activityOptions.toBundle());
+        } else {
+            mActivity.startActivity(intent);
+        }
     }
 }

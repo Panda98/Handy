@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -29,6 +30,7 @@ import com.example.handy.core.bean.CourseData;
 import com.example.handy.presenter.MainPagerPresenter;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.JudgeUtils;
+import com.example.handy.view.activity.CourseListByLabelActivity;
 import com.example.handy.view.activity.PublishCourseActivity;
 import com.example.handy.view.adapter.RecommendAlbumAdapter;
 import com.example.handy.view.adapter.RecommendCourseAdapter;
@@ -62,6 +64,10 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
 
     private GridView gridView;
     private GridView albumGridView;
+
+    // 更多推荐专辑按钮
+    private TextView albumMoreBtn;
+
     //定义以及初始化Menu数据
     private List<Map<String,Object>> dataList;
     private int[] icon =
@@ -73,6 +79,12 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
             {
                     "纸艺","布艺","花艺","手绘",
                     "书法","织物","饰品","雕刻"
+            };
+
+    private int[] labelId =
+            {
+                    Constants.PAPER_LABEL_ID, Constants.CLOTH_LABEL_ID, Constants.FLOWER_LABEL_ID, Constants.HAND_DRAWN_LABEL_ID,
+                    Constants.HANDWRITING_LABEL_ID, Constants.KNIT_LABEL_ID, Constants.ACCESSORY_LABEL_ID, Constants.CRAVE_LABEL_ID
             };
 
     LinearLayout linearLayout;
@@ -207,6 +219,15 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
         indicator = mHeaderGroup.findViewById(R.id.main_pager_indicator);
         gridView = mHeaderGroup.findViewById(R.id.main_pager_gridView);
         albumGridView = mHeaderGroup.findViewById(R.id.main_pager_recommend_album);
+        albumMoreBtn = mHeaderGroup.findViewById(R.id.main_pager_album_more);
+
+        albumMoreBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //startActivity(new Intent(getActivity(), CourseListByLabelActivity.class));
+
+            }
+        });
 
         initMenu();
     }
@@ -220,8 +241,9 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(),"我是"+iconName[i],Toast.LENGTH_SHORT).show();
-                Log.i("tag","我是"+iconName[i]);
+                //Toast.makeText(getActivity(), labelId[i], Toast.LENGTH_SHORT).show();
+                // 跳转
+                startLabelCourse(view, i);
             }
         });
     }
@@ -303,7 +325,6 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
         // 点击跳转事件
         mAdapter.setOnItemClickListener((adapter, view, position) -> startCourseDetailPager(view, position));
 
-
         showNormal();
     }
 
@@ -329,6 +350,16 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
         JudgeUtils.startAlbumDetailActivity(_mActivity,
                 options,
                 albumAdapter.getData().get(position).getAlbumId()
+        );
+    }
+
+    // 跳转
+    private void startLabelCourse(View view, int position) {
+
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, view, getString(R.string.share_view));
+        JudgeUtils.startLabelCourseListActivity(_mActivity,
+                options,
+                labelId[position]
         );
     }
 

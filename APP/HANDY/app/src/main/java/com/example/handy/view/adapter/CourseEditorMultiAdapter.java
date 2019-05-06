@@ -10,19 +10,18 @@ import com.example.handy.core.bean.MultipleItem;
 import com.example.handy.view.viewHolder.LabelViewHolder;
 import com.example.handy.view.viewHolder.LevelViewHolder;
 import com.example.handy.view.viewHolder.PublishStepViewHolder;
-import com.example.handy.view.viewHolder.StepViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CourseEditorMultiAdapter extends BaseMultiItemQuickAdapter<MultipleItem, BaseViewHolder> {
 
-    private List<LabelData> preinstallLabels;
+    private List<LabelData> choosedlLabels;
     private LabelViewHolder labelViewHolder;
     private LevelViewHolder levelViewHolder;
     private List<PublishStepViewHolder> stepViewHolders;
 
-    public CourseEditorMultiAdapter(List data,List<LabelData> preinstallLabels){
+    public CourseEditorMultiAdapter(List data){
         super(data);
         addItemType(MultipleItem.STEP_VIEW,R.layout.step_text_view);
         addItemType(MultipleItem.METERIAL_BTN_VIEW,R.layout.material_btn_view);
@@ -34,7 +33,6 @@ public class CourseEditorMultiAdapter extends BaseMultiItemQuickAdapter<Multiple
         addItemType(MultipleItem.LABEL_VIEW,R.layout.publish_course_labels);
         addItemType(MultipleItem.LEVEL_VIEW,R.layout.publish_course_level_view);
 
-        this.preinstallLabels = preinstallLabels;
 
         stepViewHolders = new ArrayList<>();
 
@@ -52,7 +50,8 @@ public class CourseEditorMultiAdapter extends BaseMultiItemQuickAdapter<Multiple
         .addOnClickListener(R.id.step_explain_ed)
         .addOnClickListener(R.id.publish_course_title_view)
         .addOnClickListener(R.id.publish_tips_ed)
-        .addOnClickListener(R.id.publish_course_intro);
+        .addOnClickListener(R.id.publish_course_intro)
+        .addOnClickListener(R.id.publish_choose_labels_btn);
         if(item.getItemType() == MultipleItem.STEP_ITEM){
             helper.setText(R.id.step_number_text,"步骤"+item.getIndex());
             ((PublishStepViewHolder)helper).setIndex(item.getIndex());
@@ -70,7 +69,7 @@ public class CourseEditorMultiAdapter extends BaseMultiItemQuickAdapter<Multiple
     @Override
     protected BaseViewHolder onCreateDefViewHolder(ViewGroup parent, int viewType){
         if(viewType == MultipleItem.LABEL_VIEW){
-            LabelViewHolder viewHolder = new LabelViewHolder(getItemView(R.layout.publish_course_labels,parent),preinstallLabels);
+            LabelViewHolder viewHolder = new LabelViewHolder(getItemView(R.layout.publish_course_labels,parent), choosedlLabels);
             return viewHolder;
         }else if (viewType == MultipleItem.LEVEL_VIEW){
             LevelViewHolder viewHolder = new LevelViewHolder(getItemView(R.layout.publish_course_level_view,parent));
