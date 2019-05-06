@@ -5,16 +5,12 @@ import com.example.handy.core.bean.AlbumListData;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
 import com.example.handy.core.bean.CommentData;
-import com.example.handy.core.bean.CommentMessageData;
 import com.example.handy.core.bean.CommentReplyData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
-import com.example.handy.core.bean.LikeMessageData;
 import com.example.handy.core.bean.LoginData;
-import com.example.handy.core.bean.PublishCourseData;
 import com.example.handy.core.bean.RecommendAlbumData;
 import com.example.handy.core.bean.CourseData;
-import com.example.handy.core.bean.ReplyMessageData;
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.http.api.Apis;
 import com.example.handy.core.vo.LoginView;
@@ -116,7 +112,7 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse<List<AlbumCoverData>>> getCollectAlbumList(int userId) {
+    public Observable<BaseResponse<List<AlbumListData>>> getCollectAlbumList(int userId) {
         return mApis.getCollectAlbumList(userId);
     }
 
@@ -146,7 +142,7 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse<Boolean>> isLike(int userId, int courseId) {
+    public Observable<BaseResponse> isLike(int userId, int courseId) {
         return mApis.isLike(userId, courseId);
     }
 
@@ -155,14 +151,10 @@ public class HttpHelperImpl implements HttpHelper {
         return mApis.getUserPublishCourse(userId, currentPage, n);
     }
 
-    @Override
-    public Observable<BaseResponse> uploadCourse(PublishCourseData publishCourseData) {
-        return mApis.uploadCourse(publishCourseData);
-    }
 
     @Override
-    public Observable<BaseResponse<String>> uploadImage(byte[] data) {
-        return mApis.uploadImage(data);
+    public Observable<BaseResponse<String>> uploadImage(MultipartBody.Part file) {
+        return mApis.uploadImage(file);
     }
 
 
@@ -194,20 +186,5 @@ public class HttpHelperImpl implements HttpHelper {
     @Override
     public Observable<BaseResponse<AlbumCoverData>> getAlbumCoverData(int albumId) {
         return mApis.getAlbumCoverData(albumId);
-    }
-
-    @Override
-    public Observable<BaseResponse<CommentMessageData>> getCommentMessage(int uid, int currentPage, int n) {
-        return mApis.getCommentMessage(uid, currentPage, n);
-    }
-
-    @Override
-    public Observable<BaseResponse<ReplyMessageData>> getReplyMessage(int uid, int currentPage, int n) {
-        return mApis.getReplyMessage(uid, currentPage, n);
-    }
-
-    @Override
-    public Observable<BaseResponse<LikeMessageData>> getLikeMessage(int uid, int currentPage, int n) {
-        return mApis.getLikeMessage(uid, currentPage, n);
     }
 }
