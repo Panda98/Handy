@@ -211,14 +211,8 @@ public class CourseController {
 //    }
 
     @RequestMapping(value = "/uploadImg",produces = "application/json; charset=utf-8",method = RequestMethod.POST)
-<<<<<<< HEAD
-    public String getUploadUrL(byte[] data) {
- //       String path ="/Users/joanie/Desktop/img/2.jpg";
-//        byte[] data = iCourseService.image2byte(path);
-        InputStream fr =new ByteArrayInputStream(data);
-=======
     public String getUploadUrL(@RequestParam("image") MultipartFile file) {
->>>>>>> c65e18a7c8c4bb6c0ba069bb288cb049e5e51ffb
+
         String imgUrl = null;
         ErrorEnum error = null;
         // 判断文件是否为空
