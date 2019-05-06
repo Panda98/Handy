@@ -277,7 +277,7 @@ public class CourseServiceImpl implements ICourseService {
             courseLabelMapper.insert(cl);
         }
 
-        List<ItemDTO> itemList=e.getItemDtoList();
+        List<ItemDTO> itemList=e.getItemList();
         for(ItemDTO i:itemList){
             Item item=new Item();
             item.setItemName(i.getItemName());
@@ -291,7 +291,7 @@ public class CourseServiceImpl implements ICourseService {
 
 
 
-            List<StepDTO> stepList=e.getStepDtoList();
+            List<StepDTO> stepList=e.getStepList();
             for(StepDTO s:stepList){
                 Step step=new Step();
                 step.setStepTag(s.getStepTag());

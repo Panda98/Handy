@@ -15,7 +15,7 @@
 
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
 
-        <property name="url" value="jdbc:mysql://106.13.106.249:3306/handy" />
+        <property name="url" value="jdbc:mysql://106.13.106.249:3306/handy?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT&amp;useSSL=false" />
 
         <property name="username" value="handy" />
 
