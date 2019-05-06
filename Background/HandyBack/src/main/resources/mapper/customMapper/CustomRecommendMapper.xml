@@ -57,4 +57,7 @@
     <select id="getCoursesFromAlbum" resultType="java.lang.Integer">
         select course_id from album_course where album_id=#{albumId}  limit #{startRow},#{size}
     </select>
+    <select id="getUpdates" resultMap="UserItemLikeMap">
+        select * from recommend where update_time > #{updateTime}
+    </select>
 </mapper>

@@ -1,12 +1,11 @@
 package com.handy.web.controller;
 
 import com.handy.support.pojo.Message.dto.FavorDTO;
+import com.handy.support.pojo.Message.vo.CourseMessageVO;
 import com.handy.support.pojo.Message.vo.ReplyMessageVO;
 import com.handy.support.pojo.comment.dto.CommentDTO;
 import com.handy.support.pojo.comment.dto.ReplyDTO;
-import com.handy.support.pojo.comment.vo.CourseCommentVO;
-import com.handy.support.recommend.process.Recommend;
-import com.handy.support.service.Comment.CommentServiceImpl;
+import com.handy.support.recommend.operation.Recommend;
 import com.handy.support.service.Message.MessageServiceImpl;
 import com.handy.support.service.Recommend.RecommendServiceImpl;
 import com.handy.support.utils.status.ReturnCode;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,6 +24,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RestController
 @RequestMapping(value = "/message",produces = "application/json; charset=utf-8")
 public class MessageController {
+    private  Recommend recommend;
     @Autowired
     MessageServiceImpl messageService;
     @Autowired
@@ -33,7 +32,11 @@ public class MessageController {
         @RequestMapping(value = "/courseComment",method = GET)
     public String getMessageComment(int uid,int page_no,int n){
         List<CommentDTO> comments=messageService.getCourseCommentMessage(uid,page_no,n);
-        ReturnCode<List> code = new ReturnCode<List>(comments);
+        List<CourseMessageVO>results=new ArrayList<CourseMessageVO>();
+        for(int i=0;i<comments.size();i++){
+            results.add(new CourseMessageVO(comments.get(i)));
+        }
+        ReturnCode<List> code = new ReturnCode<List>(results);
         return code.returnHandler();
     }
     @RequestMapping(value = "/commentReply",method = GET)
@@ -67,13 +70,14 @@ public class MessageController {
     }
     @RequestMapping(value = "/test",method = GET)
     public String getRecommend(int uid,int page_no,int n){
-       /*  recommendService.UserLikeItem(3,1);
-         recommendService.UserlikeAlbum(3,1);
-               Recommend recommend=new Recommend();
-            recommend.init();
-        List<RecommendedItem> list=recommend.getRecommend(uid);
-        ReturnCode<List> code = new ReturnCode<List>(list);*/
-        ReturnCode<Integer> code = new ReturnCode<Integer>(1);
+            if(recommend==null) {
+                recommend = new Recommend();
+                recommend.init();
+            }
+        List<RecommendedItem> list=recommend.getRecommend(uid,page_no,n);
+        ReturnCode<List> code = new ReturnCode<List>(list);
+        recommend.refresh();
+        //ReturnCode<Integer> code = new ReturnCode<Integer>(1);
         return code.returnHandler();
     }
 }

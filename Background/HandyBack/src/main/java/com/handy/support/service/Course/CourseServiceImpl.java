@@ -22,6 +22,7 @@ import org.apache.solr.common.SolrDocumentList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.imageio.stream.FileImageInputStream;
@@ -339,7 +340,7 @@ List<StepDTO> stepList=e.getStepDtoList();
     }
     public String uploadImg(String ftpHost, String ftpUserName,
                             String ftpPassword, int ftpPort, String ftpPath,
-                            String fileName, InputStream input){
+                            String fileName, MultipartFile file){
         String imgUrl=null;
 
         FTPClient ftpClient = null;
@@ -355,6 +356,8 @@ List<StepDTO> stepList=e.getStepDtoList();
             ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
             ftpClient.enterLocalPassiveMode();
             ftpClient.changeWorkingDirectory(ftpPath);
+
+            InputStream input = file.getInputStream();
             if(ftpClient.storeFile(fileName, input)){
                 imgUrl="http://106.13.106.249:8080/static/img/upload/"+fileName;
             }

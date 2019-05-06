@@ -11,13 +11,12 @@ import com.handy.support.utils.status.ErrorEnum;
 import com.handy.support.utils.status.ReturnCode;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.handy.support.service.Course.ICourseService;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -212,25 +211,33 @@ public class CourseController {
 //    }
 
     @RequestMapping(value = "/uploadImg",produces = "application/json; charset=utf-8",method = RequestMethod.POST)
+<<<<<<< HEAD
     public String getUploadUrL(byte[] data) {
  //       String path ="/Users/joanie/Desktop/img/2.jpg";
 //        byte[] data = iCourseService.image2byte(path);
         InputStream fr =new ByteArrayInputStream(data);
+=======
+    public String getUploadUrL(@RequestParam("image") MultipartFile file) {
+>>>>>>> c65e18a7c8c4bb6c0ba069bb288cb049e5e51ffb
         String imgUrl = null;
         ErrorEnum error = null;
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_HH_mm_ss");
-        String date = df.format(new Date());
-        if (fr!= null) {
-            imgUrl = iCourseService.uploadImg("106.13.106.249", "handy", "handy", 21, "/usr/local/tomcat/apache-tomcat-9.0.17/webapps/HandyBack_war_exploded/static/img/upload", date+".jpg", fr);
+        // 判断文件是否为空
+        if (!file.isEmpty()) {
+            try {
+                DateFormat df = new SimpleDateFormat("yyyyMMdd_HH_mm_ss");
+                String date = df.format(new Date());
+                String filename = date+".jpg";
+                imgUrl = iCourseService.uploadImg("106.13.106.249", "handy", "handy", 21, "/usr/local/tomcat/apache-tomcat-9.0.17/webapps/HandyBack_war_exploded/static/img/upload", filename, file);
+                if(imgUrl == null)
+                    error = ErrorEnum.UPLOAD_FAIL;
+                else
+                    error = ErrorEnum.SUCCESS;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        if(imgUrl==null){
-            error = ErrorEnum.UPLOAD_FAIL;
-        }else{
-            error=ErrorEnum.SUCCESS;
-        }
-        ReturnCode<String> code=new ReturnCode<String>(error,imgUrl);
+        ReturnCode<String> code = new ReturnCode<String>(error,imgUrl);
         return code.returnHandler();
-
     }
 
     @RequestMapping(value = "/course/label", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
