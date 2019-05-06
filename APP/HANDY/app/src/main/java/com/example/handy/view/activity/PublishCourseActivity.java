@@ -45,6 +45,7 @@ import com.yuyh.library.imgsel.config.ISListConfig;
 
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -540,8 +541,9 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         if(checkInput()){
             //上传图片，获得url
             for(int i=0;i<imgPath.size();i++){
-                byte[] imgArr = pic2Byte(imgPath.get(0));
-                mPresenter.uploadPic(imgArr,i);
+                File file = new File(imgPath.get(i));
+
+                mPresenter.uploadPic(file,i);
             }
         }
     }
