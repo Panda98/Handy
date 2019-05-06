@@ -5,13 +5,17 @@ import com.example.handy.core.bean.AlbumListData;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
 import com.example.handy.core.bean.CommentData;
+import com.example.handy.core.bean.CommentMessageData;
 import com.example.handy.core.bean.CommentReplyData;
 import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
+import com.example.handy.core.bean.LabelData;
+import com.example.handy.core.bean.LikeMessageData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.PublishCourseData;
 import com.example.handy.core.bean.RecommendAlbumData;
+import com.example.handy.core.bean.ReplyMessageData;
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.vo.LoginView;
 import com.example.handy.core.vo.PostCommentView;
@@ -134,7 +138,7 @@ public interface HttpHelper {
      *
      * @return AlbumListData
      */
-    Observable<BaseResponse<List<AlbumListData>>> getCollectAlbumList(int userId);
+    Observable<BaseResponse<List<AlbumCoverData>>> getCollectAlbumList(int userId);
 
     /**
      * 收藏教程
@@ -186,6 +190,13 @@ public interface HttpHelper {
     Observable<BaseResponse<List<CourseData>>> getUserPublishCourse(int userId, int currentPage, int n);
 
     /**
+     * 获取标签
+     *
+     * @return 标签列表
+     */
+    Observable<BaseResponse<List<LabelData>>> getLabelList();
+
+    /**
      * 发布教程
      *
      * @return 上传结果
@@ -193,12 +204,19 @@ public interface HttpHelper {
     Observable<BaseResponse> uploadCourse(PublishCourseData publishCourseData);
 
     /**
+     * 根据标签获得教程
+     *
+     * @return 结果
+     */
+    Observable<BaseResponse<List<CourseData>>> getCourseWithLabel(int labelId, int currentPage, int n);
+
+
+    /**
      * 上传图片
      *
      * @return url
      */
-    @Multipart
-    Observable<BaseResponse<String>> uploadImage(byte[] data);
+    Observable<BaseResponse<String>> uploadImage(MultipartBody.Part file);
 
 
     /**
@@ -244,5 +262,27 @@ public interface HttpHelper {
      * @return 回复信息
      */
     Observable<BaseResponse<AlbumCoverData>> getAlbumCoverData(int albumId);
+
+    /**
+     * 消息——收到的评论
+     *
+     * @return 回复信息
+     */
+    Observable<BaseResponse<List<CommentMessageData>>> getCommentMessage(int uid, int currentPage, int n);
+
+    /**
+     * 消息——收到的回复
+     *
+     * @return 回复信息
+     */
+    Observable<BaseResponse<List<ReplyMessageData>>> getReplyMessage(int uid, int currentPage, int n);
+
+    /**
+     * 消息——收到的赞
+     *
+     * @return 回复信息
+     */
+    Observable<BaseResponse<List<LikeMessageData>>> getLikeMessage(int uid, int currentPage, int n);
+
 
 }

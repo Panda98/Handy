@@ -48,12 +48,28 @@
         SELECT MAX(course_id)
         FROM course;
     </select>
+    <select id="getLastItemId" resultType="Integer">
+        SELECT MAX(item_id)
+        FROM item;
+    </select>
+    <select id="getLastStepId" resultType="Integer">
+        SELECT MAX(step_id)
+        FROM step;
+    </select>
+
 
 
 
     <select id="getLength" resultType="Integer">
         SELECT COUNT(*)
         FROM course;
+    </select>
+
+
+    <select id="getByLabel" resultType="Integer">
+        SELECT DISTINCT course_id
+        FROM course_label
+        WHERE label_id=#{labelId} limit #{start},#{n};
     </select>
 
 </mapper>

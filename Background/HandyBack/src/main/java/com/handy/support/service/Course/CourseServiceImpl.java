@@ -6,6 +6,8 @@ import com.handy.support.mapper.iMapper.*;
 import com.handy.support.pojo.course.dto.CourseEditDTO;
 import com.handy.support.pojo.course.vo.CourseSimpleVO;
 import com.handy.support.pojo.course.vo.CourseDetailVO;
+import com.handy.support.pojo.course.dto.ItemDTO;
+import com.handy.support.pojo.course.dto.StepDTO;
 
 
 import org.apache.commons.net.ftp.FTPClient;
@@ -20,6 +22,7 @@ import org.apache.solr.common.SolrDocumentList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.imageio.stream.FileImageInputStream;
@@ -177,7 +180,7 @@ public class CourseServiceImpl implements ICourseService {
 
     public Integer collect(Integer albumId, Integer courseId){
         AlbumCourse ac=new AlbumCourse(albumId,courseId);
-        Integer count=albumCourseMapper.insert(ac);
+        Integer count=albumCourseMapper.insertSelective(ac);
         Course course=this.getCourseByID(courseId);
         Integer courseCollects=course.getCourseCollects();
         course.setCourseCollects(courseCollects+1);
@@ -273,21 +276,35 @@ public class CourseServiceImpl implements ICourseService {
             CourseLabel cl=new CourseLabel(courseId,l.getLabelId());
             courseLabelMapper.insert(cl);
         }
-        List<Item> itemList=this.sortItem(e.getItemList());
-        for(Item i:itemList){
-            itemMapper.insert(i);
-            CourseItem courseItem=new CourseItem(courseId,i.getItemId());
+
+        List<ItemDTO> itemList=e.getItemList();
+        for(ItemDTO i:itemList){
+            Item item=new Item();
+            item.setItemName(i.getItemName());
+            item.setItemNumber(i.getItemNumber());
+            item.setItemTag(i.getItemTag());
+            itemMapper.insertSelective(item);
+            Integer itemId=iCourseMapper.getLastItemId();
+            CourseItem courseItem=new CourseItem(courseId,itemId);
             courseItemMapper.insert(courseItem);
         }
-        List<Step> stepList=this.sortStep(e.getStepList());
 
-        for(Step s:stepList){
-            stepMapper.insert(s);
-            CourseStep courseStep=new CourseStep(courseId,s.getStepId());
-            courseStepMapper.insert(courseStep);
-        }
 
-        return count;
+
+            List<StepDTO> stepList=e.getStepList();
+            for(StepDTO s:stepList){
+                Step step=new Step();
+                step.setStepTag(s.getStepTag());
+                step.setStepImg(s.getStepImg());
+                step.setStepDetail(s.getStepDetail());
+                stepMapper.insertSelective(step);
+                Integer stepId=iCourseMapper.getLastStepId();
+                CourseStep courseStep=new CourseStep(courseId,stepId);
+                courseStepMapper.insert(courseStep);
+            }
+
+
+                return count;
     }
 
 //public List<CourseSimpleVO> getSearchedCourse(String text) throws IOException, SolrServerException{
@@ -326,7 +343,7 @@ public class CourseServiceImpl implements ICourseService {
     }
     public String uploadImg(String ftpHost, String ftpUserName,
                             String ftpPassword, int ftpPort, String ftpPath,
-                            String fileName, InputStream input){
+                            String fileName, MultipartFile file){
         String imgUrl=null;
 
         FTPClient ftpClient = null;
@@ -342,10 +359,11 @@ public class CourseServiceImpl implements ICourseService {
             ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
             ftpClient.enterLocalPassiveMode();
             ftpClient.changeWorkingDirectory(ftpPath);
-            if(ftpClient.storeFile(fileName, input)){
+
+            InputStream input = file.getInputStream();
+            if(ftpClient.storeUniqueFile(fileName,input)){
                 imgUrl="http://106.13.106.249:8080/static/img/upload/"+fileName;
             }
-
 
             input.close();
             ftpClient.logout();
@@ -364,33 +382,32 @@ public class CourseServiceImpl implements ICourseService {
         return imgUrl;
     }
 
-    public byte[] image2byte(String path) {
-        // 定义byte数组
-        byte[] data = null;
-        // 输入流
-        FileImageInputStream input = null;
-        try {
-            input = new FileImageInputStream(new File(path));
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
-            byte[] buf = new byte[1024];
-            int numBytesRead = 0;
-            while ((numBytesRead = input.read(buf)) != -1) {
-                output.write(buf, 0, numBytesRead);
-            }
-            data = output.toByteArray();
-            output.close();
-            input.close();
-        } catch (FileNotFoundException ex1) {
-            ex1.printStackTrace();
-        } catch (IOException ex1) {
-            ex1.printStackTrace();
-        }
-        return data;
-    }
-public List<Label> getLabels(){
+
+    public List<Label> getLabels(){
    return iLabelMapper.getAll();
 }
 
+    public List<CourseSimpleVO> getCourseByLabel(Integer labelId,Integer page_no,Integer n){
+        List<Integer> courseIds=iCourseMapper.getByLabel(labelId,page_no*n,n);
+        List<CourseSimpleVO> simpleList=new ArrayList<CourseSimpleVO>();
+        for(Integer id:courseIds){
+            Course c=this.getCourseByID(id);
+            if(c !=null) {
+//                CourseSimpleVO simpleVO = new CourseSimpleVO(id, c.getCourseTitle(), c.getCourseCover(), c.getCourseIntro(), userMapper.selectByPrimaryKey(c.getUserId()).getNickName(), c.getLevelId(), this.getLabelList(id), c.getDiyLabel());
+                CourseSimpleVO simpleVO = new CourseSimpleVO();
+                simpleVO.setCourseId(id);
+                simpleVO.setCourseTitle(c.getCourseTitle());
+                simpleVO.setCourseIntro(c.getCourseIntro());
+                simpleVO.setCourseCover(c.getCourseCover());
+                simpleVO.setAuthorName(userMapper.selectByPrimaryKey(c.getUserId()).getNickName());
+                simpleVO.setLevelId(c.getLevelId());
+                simpleVO.setDiyLabel(c.getDiyLabel());
+                simpleVO.setLabelList(this.getLabelList(id));
+                simpleList.add(simpleVO);
+            }
+        }
+      return simpleList;
+    }
 
 }
 

@@ -45,9 +45,11 @@ import com.yuyh.library.imgsel.config.ISListConfig;
 
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -75,6 +77,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
     private List<LabelData> preLabels;
 
     private List<String> imgPath;
+    private HashMap<String,Integer> imgURL;
 
 
 
@@ -117,6 +120,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         stepData = new ArrayList<>();
         courseData = new PublishCourseData();
         imgPath = new ArrayList<>();
+        imgURL = new HashMap<>();
 
         materialItemData = new ArrayList<>();
         data = new ArrayList<>();
@@ -333,9 +337,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
     }
 
     private void publish(){
-
-
-
+        mPresenter.publish(courseData);
     }
 
     private boolean checkInput(){
@@ -502,8 +504,20 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
     }
 
     @Override
-    public void afterUploadPic(boolean res){
-
+    public void afterUploadPic(String url,int index){
+        imgURL.put(url,index);
+        if(index == 0)
+            courseData.setCourseCover(url);
+        else{
+            courseData.getStepList().get(index-1).setStepImg(url);
+        }
+        if(imgURL.size() == stepData.size()+1){
+            mPresenter.publish(courseData);
+        }
+    }
+    @Override
+    public void afterPublish(String message){
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
     }
 
     private void beforePublish(){
@@ -523,23 +537,19 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         List<LabelData> selectedLabel = labelViewHolder.getSelectedLabel();
         String customLabel = labelViewHolder.getCustomLabel();
 
-
-
         courseData.setItemList(materialItemData);
         courseData.setStepList(stepData);
         courseData.setDiyLabel(customLabel);
         courseData.setLabelList(selectedLabel);
         courseData.setLevelId(level);
+        courseData.setUserId(mPresenter.getLoginAccount());
 
         if(checkInput()){
-            //todo： 上传
             //上传图片，获得url
-            byte[] coverArr = pic2Byte(imgPath.get(0));
-            mPresenter.uploadPic(coverArr);
+            for(int i=0;i<imgPath.size();i++){
+                File file = new File(imgPath.get(i));
 
-            for(int i=1;i<imgPath.size();i++){
-                byte[] imgArr = pic2Byte(imgPath.get(0));
-                mPresenter.uploadPic(imgArr);
+                mPresenter.uploadPic(file,i);
             }
         }
     }

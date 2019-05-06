@@ -6,6 +6,12 @@ public class PostCommentView {
     private int course_id;
     private String content;
 
+    public PostCommentView(int uid, int course_id, String content) {
+        this.uid = uid;
+        this.course_id = course_id;
+        this.content = content;
+    }
+
     public int getUid() {
         return uid;
     }

@@ -19,16 +19,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:targetApi="m">
+        <activity android:name=".view.activity.AuthorHomepageActivity"></activity>
         <activity android:name=".view.activity.MessageActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".view.activity.MyPublishAlbumActivity"></activity>
-        <activity android:name=".view.activity.MyPublishCourseActivity"></activity>
+        <activity android:name=".view.activity.MorePublishAlbumActivity" />
+        <activity android:name=".view.activity.MorePublishCourseActivity" />
         <activity android:name=".view.activity.AlbumDetailActivity" />
         <activity android:name=".view.activity.CourseDetailActivity" />
         <activity android:name=".view.activity.PublishCourseActivity">

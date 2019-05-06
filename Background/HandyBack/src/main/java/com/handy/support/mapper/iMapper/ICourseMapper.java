@@ -18,4 +18,10 @@ public interface ICourseMapper {
     //Integer insertCourse(@Param("course")Course course);
 
     Integer getLastId();
+
+    Integer getLastItemId();
+
+    Integer getLastStepId();
+
+    List<Integer> getByLabel(@Param("labelId") Integer labelId, @Param("start") Integer start, @Param("n") Integer n);
 }

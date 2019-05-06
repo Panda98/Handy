@@ -10,8 +10,10 @@ import com.handy.support.pojo.course.dto.*;
 import com.handy.support.pojo.course.vo.*;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.solr.client.solrj.*;
+import org.springframework.web.multipart.MultipartFile;
 import sun.net.ftp.FtpClient;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -64,12 +66,15 @@ public interface ICourseService {
 
     FTPClient getFTPClient(String ftpHost, String ftpUserName,
                            String ftpPassword, int ftpPort);
-   String uploadImg(String ftpHost, String ftpUserName,
+
+    String uploadImg(String ftpHost, String ftpUserName,
                     String ftpPassword, int ftpPort, String ftpPath,
-                    String fileName,InputStream input);
+                    String fileName, MultipartFile file);
 
 
-     byte[] image2byte(String path);
 
      List<Label> getLabels();
+
+     List<CourseSimpleVO> getCourseByLabel(Integer labelId,Integer page_no,Integer n);
+
 }

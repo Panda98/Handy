@@ -1,5 +1,6 @@
 package com.example.handy.view.activity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
@@ -31,9 +32,11 @@ import com.example.handy.core.bean.StepData;
 import com.example.handy.presenter.CourseDetailPresenter;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.ImageLoader;
+import com.example.handy.utils.JudgeUtils;
 import com.example.handy.utils.StatusBarUtil;
 import com.example.handy.view.adapter.CommentAdapter;
 import com.example.handy.view.adapter.CourseStepAdapter;
+import com.example.handy.view.fragment.CommentDialogFragment;
 import com.example.handy.view.fragment.SelectAlbumFragment;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
@@ -88,13 +91,18 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     @BindView(R.id.collect_button)
     LinearLayout collectBtn;
 
+    @BindView(R.id.comment_btn)
+    TextView commentBtn;
+
     @BindView(R.id.like_course_button)
     LikeButton likeButton;
 
     ArrayAdapter<String> mItemArrayAdapter;
     CourseStepAdapter mCourseStepAdapter;
     private CommentAdapter mCommentAdapter;
+
     private SelectAlbumFragment searchDialogFragment;
+    private CommentDialogFragment commentDialogFragment;
 
     private List<CommentData> commentDataList;
     private List<StepData> stepDataList;
@@ -103,7 +111,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     private int followId;
     private boolean followStatus;
     private String courseTitle;
-
+    private int userId;
 
     @Override
     protected int getLayoutId() {
@@ -128,6 +136,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
     }
+
 
     private void initLikeButton() {
         //likeButton.setLiked(true);
@@ -185,7 +194,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         System.out.println(this.courseTitle);
     }
 
-    @OnClick({R.id.course_detail_follow_btn,R.id.collect_button})
+    @OnClick({R.id.course_detail_follow_btn, R.id.collect_button, R.id.comment_btn, R.id.course_detail_author_cover})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.course_detail_follow_btn:
@@ -201,8 +210,22 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
                 if (!isDestroyed() && searchDialogFragment.isAdded()) {
                     searchDialogFragment.dismiss();
                 }
-                searchDialogFragment.show(getSupportFragmentManager(), "SearchDialogFragment");
+                searchDialogFragment.show(getSupportFragmentManager(), "SelectAlbumFragment");
                 break;
+            case R.id.comment_btn:
+                if (commentDialogFragment == null) {
+                    commentDialogFragment = new CommentDialogFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("courseId", this.courseId);
+                    commentDialogFragment.setArguments(bundle);
+                }
+                if (!isDestroyed() && commentDialogFragment.isAdded()) {
+                    commentDialogFragment.dismiss();
+                }
+                commentDialogFragment.show(getSupportFragmentManager(), "CommentDialogFragment");
+                break;
+            case R.id.course_detail_author_cover:
+                startAuthorHomepage(v);
             default:
                 break;
         }
@@ -242,8 +265,13 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         this.mFollowBtn.setText(getString(R.string.follow));
     }
 
+
+
     @Override
     public void showCourseDetail(CourseDetailData courseDetailData) {
+
+        this.userId = courseDetailData.getUserId();
+
         // 设置教程封面
         if (!TextUtils.isEmpty(courseDetailData.getCourseCover())) {
             ImageLoader.loadToNIV(this, courseDetailData.getCourseCover(), mCourseCoverNIv);
@@ -352,6 +380,13 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
 
     }
 
+    @Override
+    public void setFollowVisibility(int userId) {
+        if (this.userId == userId) {
+            mFollowBtn.setVisibility(View.INVISIBLE);
+        }
+    }
+
     private void initStep() {
         mCourseStepAdapter = new CourseStepAdapter(R.layout.item_course_detail_step, this.stepDataList);
         //mAdapter.setOnItemClickListener((adapter, view, position) -> startArticleDetailPager(view, position));
@@ -360,6 +395,16 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         mStepRv.setAdapter(mCourseStepAdapter);
     }
 
+    private void startAuthorHomepage(View view) {
+
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, view, getString(R.string.share_view));
+        JudgeUtils.startAuthorHomepageActivity(this,
+                options,
+                this.userId
+        );
+    }
+
+    //ListView 高度
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) {

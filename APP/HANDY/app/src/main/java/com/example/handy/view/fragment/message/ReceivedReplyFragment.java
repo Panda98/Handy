@@ -11,8 +11,11 @@ import com.example.handy.R;
 import com.example.handy.app.Constants;
 import com.example.handy.base.fragment.BaseRootFragment;
 import com.example.handy.contract.message.ReceivedCommentPagerContract;
+import com.example.handy.core.bean.CommentMessageData;
 import com.example.handy.presenter.message.ReceivedCommentPagerPresenter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -40,4 +43,8 @@ public class ReceivedReplyFragment extends BaseRootFragment<ReceivedCommentPager
     }
 
 
+    @Override
+    public void showReceiveMessage(List<CommentMessageData> commentMessageData, boolean isRefresh) {
+
+    }
 }

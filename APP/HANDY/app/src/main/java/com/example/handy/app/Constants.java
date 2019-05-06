@@ -99,6 +99,13 @@ public class Constants {
     public static final String RECOMMEND_COURSE_DATA = "recommend_course_data";
     public static final String CURRENT_PAGE = "current_page";
 
+    /**
+     * author homepage
+     */
+    public static final String USER_INFO_DATA = "user_info_data";
+    public static final String USER_ALBUM_DATA = "user_album_data";
+    public static final String USER_COURSE_DATA = "user_course_data";
+
     public static final int COURSE_COVER_UPLOAD = 0;
     public static final int STEP_PIC_UPLOAD = 1;
 
@@ -109,11 +116,13 @@ public class Constants {
     public static final String COURSE_ID = "course_id";
     public static final String COURSE_Title = "course_title";
     public static final String AUTHOR_ID = "author_id";
+    public static final String USER_ID = "user_id";
 
     /**
      * Album Detail
      */
     public static final String ALBUM_ID = "album_id";
+
 
 
 }

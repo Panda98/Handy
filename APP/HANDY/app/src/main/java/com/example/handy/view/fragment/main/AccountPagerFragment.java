@@ -22,8 +22,8 @@ import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.ImageLoader;
 import com.example.handy.utils.JudgeUtils;
 import com.example.handy.view.activity.MessageActivity;
-import com.example.handy.view.activity.MyPublishAlbumActivity;
-import com.example.handy.view.activity.MyPublishCourseActivity;
+import com.example.handy.view.activity.MorePublishAlbumActivity;
+import com.example.handy.view.activity.MorePublishCourseActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.shehuan.niv.NiceImageView;
 
@@ -305,7 +305,7 @@ public class AccountPagerFragment extends BaseRootFragment<AccountPagerPresenter
         mAlbumMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentToMore = new Intent(_mActivity, MyPublishAlbumActivity.class);
+                Intent intentToMore = new Intent(_mActivity, MorePublishAlbumActivity.class);
                 startActivity(intentToMore);
             }
         });
@@ -313,7 +313,7 @@ public class AccountPagerFragment extends BaseRootFragment<AccountPagerPresenter
         mCourseMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentToMore = new Intent(_mActivity, MyPublishCourseActivity.class);
+                Intent intentToMore = new Intent(_mActivity, MorePublishCourseActivity.class);
                 startActivity(intentToMore);
             }
         });

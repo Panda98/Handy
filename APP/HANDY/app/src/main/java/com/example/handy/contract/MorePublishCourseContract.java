@@ -3,11 +3,10 @@ package com.example.handy.contract;
 import com.example.handy.base.presenter.AbstractPresenter;
 import com.example.handy.base.view.AbstractView;
 import com.example.handy.core.bean.CourseData;
-import com.example.handy.core.bean.FollowData;
 
 import java.util.List;
 
-public interface MyPublishCourseContract {
+public interface MorePublishCourseContract {
 
     interface View extends AbstractView {
         /**
@@ -18,13 +17,13 @@ public interface MyPublishCourseContract {
         void showMyPublishCourseData(List<CourseData> courseDataList, boolean isRefresh);
     }
 
-    interface Presenter extends AbstractPresenter<MyPublishCourseContract.View> {
+    interface Presenter extends AbstractPresenter<MorePublishCourseContract.View> {
         /**
          * Auto refresh 自动刷新
          *
          * @param isShowError If show error
          */
-        void autoRefresh(boolean isShowError);
+        void autoRefresh(int userId, boolean isShowError);
 
         /**
          * Load more 加载更多
@@ -41,6 +40,6 @@ public interface MyPublishCourseContract {
          *
          * @param isShowError If show error
          */
-        void getPublishCourseDataList(boolean isShowError);
+        void getPublishCourseDataList(int userId, boolean isShowError);
     }
 }

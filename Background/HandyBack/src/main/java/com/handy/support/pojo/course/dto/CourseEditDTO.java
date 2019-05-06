@@ -16,8 +16,9 @@ public class CourseEditDTO {
     private Byte levelId;
     private List<Label> labelList;
     private String diyLabel;
-    private List<Item> itemList;
-    private List<Step> stepList;
+    private List<ItemDTO> itemList;
+    private List<StepDTO> stepList;
+
 
     public Integer getUserId() {
         return userId;
@@ -83,26 +84,26 @@ public class CourseEditDTO {
         this.diyLabel = diyLabel;
     }
 
-    public List<Item> getItemList() {
+    public List<ItemDTO> getItemList() {
         return itemList;
     }
 
-    public void setItemList(List<Item> itemList) {
+    public void setItemList(List<ItemDTO> itemList) {
         this.itemList = itemList;
     }
 
-    public List<Step> getStepList() {
+    public List<StepDTO> getStepList() {
         return stepList;
     }
 
-    public void setStepList(List<Step> stepList) {
+    public void setStepList(List<StepDTO> stepList) {
         this.stepList = stepList;
     }
 
     public CourseEditDTO() {
     }
 
-    public CourseEditDTO(Integer userId, String courseTitle, String courseIntro, String courseNote, String courseCover, Byte levelId, List<Label> labelList, String diyLabel, List<Item> itemList, List<Step> stepList) {
+    public CourseEditDTO(Integer userId, String courseTitle, String courseIntro, String courseNote, String courseCover, Byte levelId, List<Label> labelList, String diyLabel, List<ItemDTO> itemList, List<StepDTO> stepList) {
         this.userId = userId;
         this.courseTitle = courseTitle;
         this.courseIntro = courseIntro;
