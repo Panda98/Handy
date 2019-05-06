@@ -1,11 +1,21 @@
 package com.handy.support.pojo.comment.dto;
 
 import com.handy.support.pojo.Follow.dto.CourseBrief;
+import com.handy.support.pojo.Follow.dto.UserBrief;
 
 public class ReplyDTO extends ReplyUserDTO implements Comparable<ReplyDTO>{
     private CourseBrief course;
     private CommentBrief comment;
     private ReplyBrief toReply;
+    private UserBrief user;//回复他人的人
+
+    public UserBrief getUser() {
+        return user;
+    }
+
+    public void setUser(UserBrief user) {
+        this.user = user;
+    }
 
     public ReplyBrief getToReply() {
         return toReply;
