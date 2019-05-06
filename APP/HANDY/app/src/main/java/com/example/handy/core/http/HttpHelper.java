@@ -5,13 +5,16 @@ import com.example.handy.core.bean.AlbumListData;
 import com.example.handy.core.bean.BannerData;
 import com.example.handy.core.bean.BaseResponse;
 import com.example.handy.core.bean.CommentData;
+import com.example.handy.core.bean.CommentMessageData;
 import com.example.handy.core.bean.CommentReplyData;
 import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
+import com.example.handy.core.bean.LikeMessageData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.PublishCourseData;
 import com.example.handy.core.bean.RecommendAlbumData;
+import com.example.handy.core.bean.ReplyMessageData;
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.vo.LoginView;
 import com.example.handy.core.vo.PostCommentView;
@@ -244,5 +247,27 @@ public interface HttpHelper {
      * @return 回复信息
      */
     Observable<BaseResponse<AlbumCoverData>> getAlbumCoverData(int albumId);
+
+    /**
+     * 消息——收到的评论
+     *
+     * @return 回复信息
+     */
+    Observable<BaseResponse<CommentMessageData>> getCommentMessage(int uid, int currentPage, int n);
+
+    /**
+     * 消息——收到的回复
+     *
+     * @return 回复信息
+     */
+    Observable<BaseResponse<ReplyMessageData>> getReplyMessage(int uid, int currentPage, int n);
+
+    /**
+     * 消息——收到的赞
+     *
+     * @return 回复信息
+     */
+    Observable<BaseResponse<LikeMessageData>> getLikeMessage(int uid, int currentPage, int n);
+
 
 }

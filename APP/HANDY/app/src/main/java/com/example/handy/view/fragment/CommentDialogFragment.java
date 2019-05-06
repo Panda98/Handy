@@ -65,7 +65,7 @@ public class CommentDialogFragment extends BaseDialogFragment<CommentDialogPrese
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         //DialogSearch的宽
         int width = (int) (metrics.widthPixels * 0.8);
-        int height = (int) (metrics.widthPixels * 0.8);
+        int height = (int) (metrics.widthPixels * 0.6);
         assert window != null;
         //window.setLayout(width, WindowManager.LayoutParams.MATCH_PARENT);
         window.setLayout(width, height);

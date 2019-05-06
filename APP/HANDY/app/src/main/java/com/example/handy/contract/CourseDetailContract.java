@@ -18,6 +18,7 @@ public interface CourseDetailContract {
         void showUnFollowView();
         void setFollowStatus(boolean isFollow);
         void setLikeStatus(boolean isLike);
+        void setFollowVisibility(int userId);
 
     }
 
