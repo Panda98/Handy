@@ -10,6 +10,7 @@ import com.example.handy.core.bean.CommentReplyData;
 import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
+import com.example.handy.core.bean.LabelData;
 import com.example.handy.core.bean.LikeMessageData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.PublishCourseData;
@@ -154,6 +155,11 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     @Override
     public Observable<BaseResponse<List<CourseData>>> getUserPublishCourse(int userId, int currentPage, int n) {
         return mHttpHelper.getUserPublishCourse(userId, currentPage, n);
+    }
+
+    @Override
+    public Observable<BaseResponse<List<LabelData>>> getLabelList() {
+        return mHttpHelper.getLabelList();
     }
 
     @Override

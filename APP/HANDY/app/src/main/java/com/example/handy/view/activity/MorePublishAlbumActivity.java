@@ -2,10 +2,9 @@ package com.example.handy.view.activity;
 
 import android.app.ActivityOptions;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -16,19 +15,13 @@ import android.widget.TextView;
 import com.example.handy.R;
 import com.example.handy.app.Constants;
 import com.example.handy.base.activity.BaseActivity;
-import com.example.handy.contract.MyPublishAlbumContract;
-import com.example.handy.contract.MyPublishCourseContract;
+import com.example.handy.contract.MorePublishAlbumContract;
 import com.example.handy.core.bean.AlbumCoverData;
-import com.example.handy.core.bean.AlbumListData;
-import com.example.handy.core.bean.CourseData;
-import com.example.handy.presenter.MyPublishAlbumPresenter;
-import com.example.handy.presenter.MyPublishCoursePresenter;
+import com.example.handy.presenter.MorePublishAlbumPresenter;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.JudgeUtils;
 import com.example.handy.utils.StatusBarUtil;
 import com.example.handy.view.adapter.AlbumCoverDataAdapter;
-import com.example.handy.view.adapter.AlbumDetailAdapter;
-import com.example.handy.view.adapter.RecommendCourseAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
@@ -36,7 +29,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MyPublishAlbumActivity extends BaseActivity<MyPublishAlbumPresenter> implements MyPublishAlbumContract.View {
+public class MorePublishAlbumActivity extends BaseActivity<MorePublishAlbumPresenter> implements MorePublishAlbumContract.View {
 
     @BindView(R.id.common_toolbar)
     Toolbar mToolbar;
@@ -50,6 +43,8 @@ public class MyPublishAlbumActivity extends BaseActivity<MyPublishAlbumPresenter
     private List<AlbumCoverData> mPublishAlbumList;
     private AlbumCoverDataAdapter mAdapter;
 
+    private int userId;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_my_publish_album;
@@ -58,6 +53,7 @@ public class MyPublishAlbumActivity extends BaseActivity<MyPublishAlbumPresenter
     @Override
     protected void initToolbar() {
 
+        initBundleData();
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
@@ -72,10 +68,18 @@ public class MyPublishAlbumActivity extends BaseActivity<MyPublishAlbumPresenter
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
+    private void initBundleData() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            this.userId = ((int) bundle.get(Constants.USER_ID));
+            System.out.println(this.userId);
+        }
+    }
+
     @Override
     protected void initEventAndData() {
         setRefresh();
-        mPresenter.getMyPublishAlbumDataList(true);
+        mPresenter.getMyPublishAlbumDataList(userId,true);
         if (CommonUtils.isNetworkConnected()) {
             showLoading();
         }
@@ -83,7 +87,7 @@ public class MyPublishAlbumActivity extends BaseActivity<MyPublishAlbumPresenter
 
     private void setRefresh() {
         mRefreshLayout.setOnRefreshListener(refreshLayout -> {
-            mPresenter.autoRefresh(false);
+            mPresenter.autoRefresh(userId,false);
             refreshLayout.finishRefresh(1000);
         });
     }

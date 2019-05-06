@@ -10,6 +10,7 @@ import com.example.handy.core.bean.CommentReplyData;
 import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
+import com.example.handy.core.bean.LabelData;
 import com.example.handy.core.bean.LikeMessageData;
 import com.example.handy.core.bean.LoginData;
 import com.example.handy.core.bean.PublishCourseData;
@@ -187,6 +188,13 @@ public interface HttpHelper {
      * @return 结果
      */
     Observable<BaseResponse<List<CourseData>>> getUserPublishCourse(int userId, int currentPage, int n);
+
+    /**
+     * 获取标签
+     *
+     * @return 标签列表
+     */
+    Observable<BaseResponse<List<LabelData>>> getLabelList();
 
     /**
      * 发布教程
