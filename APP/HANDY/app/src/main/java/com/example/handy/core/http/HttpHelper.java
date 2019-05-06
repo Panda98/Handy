@@ -10,6 +10,7 @@ import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.CourseDetailData;
 import com.example.handy.core.bean.FollowData;
 import com.example.handy.core.bean.LoginData;
+import com.example.handy.core.bean.PublishCourseData;
 import com.example.handy.core.bean.RecommendAlbumData;
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.vo.LoginView;
@@ -22,7 +23,9 @@ import java.util.Map;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface HttpHelper {
@@ -181,6 +184,12 @@ public interface HttpHelper {
      */
     Observable<BaseResponse<List<CourseData>>> getUserPublishCourse(int userId, int currentPage, int n);
 
+    /**
+     * 上传教程
+     *
+     * @return 上传结果
+     */
+    Observable<BaseResponse> uploadCourse(PublishCourseData publishCourseData);
 
     /**
      * 上传教程
