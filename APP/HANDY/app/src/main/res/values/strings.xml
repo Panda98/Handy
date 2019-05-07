@@ -106,5 +106,9 @@
     <string name="course_step">步骤</string>
     <string name="course_abstract_tint">树脂画是由树脂胶的透明特定性和可流动性逐层绘制、叠加而成，非传统绘画能达到的立体效果。也是近年来在国内兴起的一门新鲜艺术，树脂画材料一般为透明硬树脂胶和丙烯颜料。</string>
 
+    <!--空布局-->
+    <string name="network_err">网络错误</string>
+    <string name="empty_network_error">网络错误，点击重试</string>
+    <string name="empty_no_data">没有数据，点击重试</string>
 
 </resources>
