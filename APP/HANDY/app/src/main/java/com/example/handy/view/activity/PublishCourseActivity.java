@@ -1,6 +1,8 @@
 package com.example.handy.view.activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,16 +16,21 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.donkingliang.labels.LabelsView;
 import com.example.handy.R;
 import com.example.handy.app.Constants;
 import com.example.handy.base.activity.BaseActivity;
@@ -66,6 +73,8 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
     @BindView(R.id.publish_course_rv)
     RecyclerView recyclerView;
 
+    AlertDialog chooseLabelDialog;
+
     private CourseEditorMultiAdapter multiAdapter;
 
     private PublishCourseData courseData;
@@ -75,6 +84,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
     private List<MultipleItem> data;
 
     private List<LabelData> preLabels;
+    private List<Integer> selectedLabelIndex;
 
     private List<String> imgPath;
     private HashMap<String,Integer> imgURL;
@@ -107,20 +117,17 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 
-        initRecyclerView();
+
 
     }
 
     @Override
     protected void initEventAndData() {
-
-    }
-
-    public void initRecyclerView(){
         stepData = new ArrayList<>();
         courseData = new PublishCourseData();
         imgPath = new ArrayList<>();
         imgURL = new HashMap<>();
+        selectedLabelIndex = new ArrayList<>();
 
         materialItemData = new ArrayList<>();
         data = new ArrayList<>();
@@ -132,17 +139,12 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         data.add(new MultipleItem(MultipleItem.LEVEL_VIEW));
         data.add(new MultipleItem(MultipleItem.LABEL_VIEW));
 
-        //todo: 获得label数据
-        preLabels = new ArrayList<>();
-        LabelData d = new LabelData();
-        d.setLabelName("布艺");
-        preLabels.add(d);
-        preLabels.add(d);
-        preLabels.add(d);
-        preLabels.add(d);
-        preLabels.add(d);
-        preLabels.add(d);
-        multiAdapter = new CourseEditorMultiAdapter(data,preLabels);
+        mPresenter.requestLabels();
+    }
+
+    public void initRecyclerView(){
+
+        multiAdapter = new CourseEditorMultiAdapter(data);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -181,6 +183,10 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
                         break;
                     case R.id.publish_course_intro:
                         setIntroEditorListener(view);
+                        break;
+                    case R.id.publish_choose_labels_btn:
+                        setChooseLabelDialog();
+                        break;
 
                 }
             }
@@ -518,6 +524,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
     @Override
     public void afterPublish(String message){
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+        this.onBackPressedSupport();
     }
 
     private void beforePublish(){
@@ -534,13 +541,11 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
             Toast.makeText(this,"请选择至少一个标签或自定义一个标签",Toast.LENGTH_SHORT).show();
             return;
         }
-        List<LabelData> selectedLabel = labelViewHolder.getSelectedLabel();
         String customLabel = labelViewHolder.getCustomLabel();
 
         courseData.setItemList(materialItemData);
         courseData.setStepList(stepData);
         courseData.setDiyLabel(customLabel);
-        courseData.setLabelList(selectedLabel);
         courseData.setLevelId(level);
         courseData.setUserId(mPresenter.getLoginAccount());
 
@@ -552,5 +557,70 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
                 mPresenter.uploadPic(file,i);
             }
         }
+    }
+
+    @Override
+    public void showLabels(List<LabelData> labelDataList) {
+        preLabels = labelDataList;
+        initRecyclerView();
+    }
+
+    public void setChooseLabelDialog(){
+        final String[] labelsName = new String[preLabels.size()];
+        final boolean[] selected = new boolean[preLabels.size()];
+        for(int i=0;i<preLabels.size();i++){
+            labelsName[i] = preLabels.get(i).getLabelName();
+        }
+        ViewGroup view = new LinearLayout(this);
+        ((LinearLayout) view).setOrientation(LinearLayout.VERTICAL);
+        ((LinearLayout) view).setPadding(20,10,20,10);
+        TextView title = new TextView(this);
+        title.setText("选择标签");
+        title.setGravity(Gravity.CENTER);
+        title.setTextSize(20);
+        title.setTextColor(getResources().getColor(R.color.black));
+        LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
+        titleParams.setMargins(0,0,0,10);
+        title.setLayoutParams(titleParams);
+
+        LabelsView labelsView = (LabelsView) LayoutInflater.from(this).inflate(R.layout.publish_choose_label_view,null);
+
+        addLabelButton(labelsView);
+        view.addView(title);
+        view.addView(labelsView);
+        chooseLabelDialog = new AlertDialog.Builder(this)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        courseData.setLabelList(new ArrayList<>());
+                        chooseLabelDialog.dismiss();
+                        courseData.setLabelList(labelsView.getSelectLabelDatas());
+                        LabelViewHolder viewHolder = multiAdapter.getLabelViewHolder();
+                        viewHolder.addButton(labelsView.getSelectLabelDatas());
+                        selectedLabelIndex = labelsView.getSelectLabels();
+
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        chooseLabelDialog.dismiss();
+                    }
+                })
+                .setView(view).create();
+        chooseLabelDialog.show();
+
+    }
+    public void addLabelButton(LabelsView labelsView){
+        labelsView.setLabels(preLabels, new LabelsView.LabelTextProvider<LabelData>() {
+            @Override
+            public CharSequence getLabelText(TextView label, int position, LabelData data) {
+                return data.getLabelName();
+            }
+        });
+        if(courseData.getLabelList() != null){
+            labelsView.setSelects(selectedLabelIndex);
+        }
+
     }
 }

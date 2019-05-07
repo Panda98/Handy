@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.donkingliang.labels.LabelsView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/publish_choose_label_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:labelBackground="@drawable/label_button"
+    app:labelTextColor="@color/label_button_text"
+    app:labelTextPaddingBottom="5dp"
+    app:labelTextPaddingLeft="10dp"
+    app:labelTextPaddingRight="10dp"
+    app:labelTextPaddingTop="5dp"
+    app:wordMargin="10dp"
+    app:lineMargin="10dp"
+    app:selectType="MULTI"
+    >
+
+</com.donkingliang.labels.LabelsView>

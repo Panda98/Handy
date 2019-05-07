@@ -29,7 +29,23 @@ public class ReplyMessageVO extends ReplyUserVO implements Comparable<ReplyMessa
     private String toReplyContent;
     private Date toReplyUpdateTime;
 
-    public ReplyMessageVO(ReplyDTO dto,int type){
+    private int userId;
+    private String userPic;
+    private String userNickName;
+
+    public String getUserPic() {
+        return userPic;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public String getUserNickName() {
+        return userNickName;
+    }
+
+    public ReplyMessageVO(ReplyDTO dto, int type){
         super(dto,type);
         this.inCommentContent=dto.getComment().getCommentContent();
         this.inCommentId=dto.getComment().getCommentId();
@@ -45,6 +61,9 @@ public class ReplyMessageVO extends ReplyUserVO implements Comparable<ReplyMessa
         this.inCourseUpdateTime=dto.getCourse().getUpdateTime();
         this.toReplyContent=dto.getReplyContent();
         this.toReplyUpdateTime=dto.getUpdateTime();
+        this.userId=dto.getUser().getUserId();
+        this.userNickName=dto.getUser().getNickName();
+        this.userPic=dto.getUser().getUserPic();
     }
 
     public Byte getInCourseLevelId() {
