@@ -30,15 +30,15 @@ public class processData {
     public void unLikeCourse(int userId,int courseId){
         recommendService.UserUlikeItem(userId,courseId);
     }
-    @After("execution(* com.handy.web.controller.CourseController.collect(int,int))" +
-           "&& args(courseId,albumId)")
-   public void collectCourse(int courseId,int albumId){
-       //recommendService.UserlikeAlbum(uid,albumid);
+    @After("execution(* com.handy.web.controller.CourseController.collect(int,int,int))" +
+           "&& args(uid,courseId,albumId)")
+   public void collectCourse(int uid,int courseId,int albumId){
+       recommendService.UserLikeItem(uid,courseId,2);
     }
-    @After("execution(* com.handy.web.controller.CourseController.uncollect(int,int))"+
-            "&& args(courseId,albumId)")
-    public void unCollectCourse(int courseId,int albumId){
-        //recommendService.UserUlikeAlbum(uid,albumid);
+    @After("execution(* com.handy.web.controller.CourseController.uncollect(int,int,int))"+
+            "&& args(uid,courseId,albumId)")
+    public void unCollectCourse(int uid,int courseId,int albumId){
+        recommendService.UserLikeItem(uid,courseId,1.5f);
     }
     @After("execution(* com.handy.web.controller.AlbumController.collectAlbum(int,int))"+
             "&& args(uid,albumid)")

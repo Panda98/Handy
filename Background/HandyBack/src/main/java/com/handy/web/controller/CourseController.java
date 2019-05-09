@@ -120,7 +120,7 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/course/collect", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
-    public String collect(int albumId, int courseId){
+    public String collect(int uid,int albumId, int courseId){
         int result=iCourseService.collect(courseId,albumId);
         ErrorEnum error=null;
         if(result ==1){
@@ -133,7 +133,7 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/course/uncollect", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
-    public String uncollect(int albumId, int courseId){
+    public String uncollect(int uid,int albumId, int courseId){
         int result=iCourseService.uncollect(courseId,albumId);
         ErrorEnum error=null;
         if(result ==1){
