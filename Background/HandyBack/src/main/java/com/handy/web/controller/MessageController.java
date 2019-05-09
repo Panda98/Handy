@@ -81,7 +81,7 @@ public class MessageController {
             }
         List<RecommendedItem> list=recommend.getRecommend(uid,page_no,n);
         ReturnCode<List> code = new ReturnCode<List>(list);
-        recommend.refresh();
+     //   recommend.refresh();
         //ReturnCode<Integer> code = new ReturnCode<Integer>(1);
         return code.returnHandler();
     }

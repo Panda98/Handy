@@ -35,8 +35,9 @@ public class CourseController {
      * 获取热门推荐
      * @return json
      */
+
     @RequestMapping(value = "/main/banner", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
-    private String getBanner() {
+    public String getBanner() {
         List<CourseSimpleVO> list = iCourseService.getBannerList();
         ErrorEnum error = null;
         if (list == null) {

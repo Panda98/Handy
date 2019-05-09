@@ -10,11 +10,13 @@
 
     <description>spring Configuration</description>
     <!-- 加载配置文件-->
+    <context:annotation-config/>
     <context:property-placeholder  ignore-resource-not-found="true" location="classpath:properties/*.properties" />
 
     <!-- 在spring里加载除了controller的Bean-->
-    <context:component-scan base-package="com.handy,other">
+    <context:component-scan base-package="com.handy">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <!--context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/-->
     </context:component-scan>
     <!--context:component-scan base-package="com.handy.support.pojo">
     </context:component-scan>
@@ -30,7 +32,7 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan-->
     <import resource="classpath:spring/spring-dao.xml" />
-    <import resource="classpath:spring/spring-web.xml"/>
+    <!--import resource="classpath:spring/spring-web.xml"/-->
     <import resource="classpath:spring/spring-service.xml"/>
 
 
