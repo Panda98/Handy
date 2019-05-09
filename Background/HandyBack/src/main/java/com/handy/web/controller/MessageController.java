@@ -10,6 +10,7 @@ import com.handy.support.recommend.operation.Recommend;
 import com.handy.support.service.Message.MessageServiceImpl;
 import com.handy.support.service.Recommend.RecommendServiceImpl;
 import com.handy.support.utils.status.ReturnCode;
+import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RestController
 @RequestMapping(value = "/message",produces = "application/json; charset=utf-8")
 public class MessageController {
+    @Autowired
     private  Recommend recommend;
     @Autowired
     MessageServiceImpl messageService;
@@ -74,15 +76,15 @@ public class MessageController {
         return code.returnHandler();
     }
     @RequestMapping(value = "/test",method = GET)
-    public String getRecommend(int uid,int page_no,int n){
-            if(recommend==null) {
-                recommend = new Recommend();
+    public String getRecommend(int uid,int page_no,int n)throws TasteException {
+            if(recommend.isHasInit()==false) {
                 recommend.init();
+            }
+            else {
+                recommend.refresh();
             }
         List<RecommendedItem> list=recommend.getRecommend(uid,page_no,n);
         ReturnCode<List> code = new ReturnCode<List>(list);
-     //   recommend.refresh();
-        //ReturnCode<Integer> code = new ReturnCode<Integer>(1);
         return code.returnHandler();
     }
 }

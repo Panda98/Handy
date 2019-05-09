@@ -32,8 +32,9 @@ public class Recommend {
     private Recommender recommender;
     private CourseDataModel dataModel;
     private MysqlDataSource dataSource;
+    private boolean hasInit=false;
     @Autowired
-   RecommendServiceImpl recommendService;
+   private RecommendServiceImpl recommendService;
     /*
     * 获得数据库
     * */
@@ -50,6 +51,12 @@ public class Recommend {
     * 注入数据
     *
     * */
+
+    public boolean isHasInit() {
+        return hasInit;
+    }
+
+
     public boolean init(){
         try {
             if(dataSource==null)
@@ -66,6 +73,7 @@ public class Recommend {
         catch (IOException ex){
             return false;
         }
+        hasInit=true;
         return true;
     }
     /*
@@ -84,8 +92,14 @@ public class Recommend {
             return null;
         }
     }
-    public void refresh(){
+    public void refresh() throws TasteException{
        Date lastRefreshTime=dataModel.getLastRefreshTime();
-       List<UserItemLike>updates=recommendService.getUpdates(lastRefreshTime);
+       List<UserItemLike>updates=recommendService.getUpdates(lastRefreshTime);//获得数据库新更新的所有表项
+        dataModel.setLastRefreshTime(new Date());
+        for(int i=0;i<updates.size();i++){
+            UserItemLike temp=updates.get(i);
+            dataModel.addPreference(temp.getUserId(),temp.getItemId(),temp.getPreference());
+        }
+        recommender.refresh(null);
     }
 }

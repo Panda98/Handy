@@ -288,7 +288,35 @@ public class CourseDataModel extends AbstractDataModel {
         }
     }
     public void addPreference(long userID, long itemID,float value)throws TasteException {
-        PreferenceArray prefs = this.getPreferencesFromUser(userID);
+      //  PreferenceArray prefs = this.getPreferencesFromUser(userID);
+            PreferenceArray prefs = this.preferenceFromUsers.get(userID);
+            boolean hasItem=false;
+            for(int i=0;i<this.itemIDs.length;i++){
+                if(itemIDs[i]==itemID)
+                    hasItem=true;
+            }
+            if(hasItem==false){
+                long[]it=this.itemIDs;
+                this.itemIDs=new long[it.length+1];
+                for(int i=0;i<it.length;i++){
+                    this.itemIDs[i]=it[i];
+                }
+                this.itemIDs[it.length]=itemID;
+            }
+        if(prefs==null){
+            PreferenceArray temp=new GenericUserPreferenceArray(1);
+            temp.setUserID(0,userID);
+            temp.setItemID(0,itemID);
+            temp.setValue(0,value);
+            this.preferenceFromUsers.put(userID,temp);
+            long[]idt=this.userIDs;
+            this.userIDs=new long[idt.length+1];
+            for(int i=0;i<idt.length;i++){
+                this.userIDs[i]=idt[i];
+            }
+            this.userIDs[idt.length]=userID;
+            return;
+        }
         PreferenceArray temp=new GenericUserPreferenceArray(prefs.length()+1);
         int size = prefs.length();
         for(int i=0;i<size;i++){
@@ -361,5 +389,8 @@ public class CourseDataModel extends AbstractDataModel {
 
         result.append(']');
         return result.toString();
+    }
+    public void setLastRefreshTime(Date lastRefreshTime){
+        this.lastRefreshTime=lastRefreshTime;
     }
 }
