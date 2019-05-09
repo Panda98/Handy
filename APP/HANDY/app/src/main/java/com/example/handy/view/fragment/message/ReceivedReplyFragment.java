@@ -6,22 +6,17 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.handy.R;
 import com.example.handy.app.Constants;
 import com.example.handy.base.fragment.BaseRootFragment;
-import com.example.handy.contract.message.ReceivedCommentPagerContract;
 import com.example.handy.contract.message.ReceivedReplyPagerContract;
-import com.example.handy.core.bean.CommentMessageData;
 import com.example.handy.core.bean.ReplyMessageData;
-import com.example.handy.presenter.message.ReceivedCommentPagerPresenter;
 import com.example.handy.presenter.message.ReceivedReplyPagerPresenter;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.JudgeUtils;
-import com.example.handy.view.adapter.ReceiveCommentAdapter;
 import com.example.handy.view.adapter.ReceiveReplyAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
@@ -40,7 +35,9 @@ public class ReceivedReplyFragment extends BaseRootFragment<ReceivedReplyPagerPr
     SmartRefreshLayout mRefreshLayout;
 
     @BindView(R.id.receive_reply_recycler_view)
-    RecyclerView myReplyRecyclerview;
+    RecyclerView myReplyRecyclerView;
+
+    private View notDataView;
 
     private List<ReplyMessageData> myReplyMessageList;
     private ReceiveReplyAdapter mReplyAdapter;
@@ -87,6 +84,9 @@ public class ReceivedReplyFragment extends BaseRootFragment<ReceivedReplyPagerPr
     }
 
     private void setRefresh() {
+        mReplyAdapter.setEmptyView(R.layout.loading_view, (ViewGroup) myReplyRecyclerView.getParent());
+        mReplyAdapter.setEmptyView(notDataView);
+
         mRefreshLayout.setOnRefreshListener(refreshLayout -> {
             mPresenter.autoRefresh(false);
             refreshLayout.finishRefresh(1000);
@@ -104,12 +104,21 @@ public class ReceivedReplyFragment extends BaseRootFragment<ReceivedReplyPagerPr
     }
 
     private void initRecyclerView() {
+        notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) myReplyRecyclerView.getParent(), false);
+        notDataView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setRefresh();
+            }
+        });
+
         myReplyMessageList = new ArrayList<>();
         mReplyAdapter = new ReceiveReplyAdapter(R.layout.item_receive_reply, myReplyMessageList);
         //mAdapter.setOnItemClickListener((adapter, view, position) -> startArticleDetailPager(view, position));
-        myReplyRecyclerview.setLayoutManager(new LinearLayoutManager(_mActivity));
-        myReplyRecyclerview.setHasFixedSize(true);
-        myReplyRecyclerview.setAdapter(mReplyAdapter);
+        myReplyRecyclerView.setLayoutManager(new LinearLayoutManager(_mActivity));
+        myReplyRecyclerView.setHasFixedSize(true);
+        myReplyRecyclerView.setAdapter(mReplyAdapter);
+        setRefresh();
     }
 
     private void startCourseDetailPager(View view, int position) {

@@ -35,7 +35,7 @@ public class PreferenceHelperImpl  implements PreferenceHelper {
 
     @Override
     public int getLoginAccount() {
-        return mPreferences.getInt(Constants.ACCOUNT,20);
+        return mPreferences.getInt(Constants.ACCOUNT,0);
     }
 
     @Override
