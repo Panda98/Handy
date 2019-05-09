@@ -2,31 +2,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <item
         android:id="@+id/tab_main_pager"
         android:enabled="true"
-        android:icon="@drawable/icon_home_pager_not_selected"
+        android:icon="@drawable/homepage_icon_not_selected"
         android:title="@string/navigation_home_pager"
         app:showAsAction="ifRoom" />
+
 
     <item
         android:id="@+id/tab_follow"
         android:enabled="true"
-        android:icon="@drawable/icon_knowledge_hierarchy_not_selected"
+        android:icon="@drawable/follow_icon_not_selected"
         android:title="@string/navigation_follow"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/tab_collect"
         android:enabled="true"
-        android:icon="@drawable/ic_wx_article"
+        android:icon="@drawable/collect_icon_not_selected"
         android:title="@string/navigation_collect"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/tab_account"
         android:enabled="true"
-        android:icon="@drawable/icon_navigation_not_selected"
+        android:icon="@drawable/account_icon_not_selected"
         android:title="@string/navigation_account"
         app:showAsAction="ifRoom" />
 

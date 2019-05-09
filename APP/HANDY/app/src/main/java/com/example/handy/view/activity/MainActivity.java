@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -104,10 +106,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mBottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.tab_main_pager:
+                    //替换图标
+                    item.setIcon(R.drawable.homepage_icon_selected);
                     loadPager(getString(R.string.navigation_home_pager), 0,
                             mMainPagerFragment, Constants.TYPE_MAIN_PAGER);
                     break;
                 case R.id.tab_follow:
+                    //替换图标
                     if (!mPresenter.getLoginStatus()) {
                         startActivity(new Intent(this, LoginActivity.class));
                         CommonUtils.showMessage(this, getString(R.string.login_tint));
@@ -161,12 +166,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mFollowPagerFragment = FollowPagerFragment.getInstance(null, null);
         mCollectPagerFragment = CollectPagerFragment.getInstance(null, null);
         mAccountPagerFragment = AccountPagerFragment.getInstance(null, null);
-        //mWxArticleFragment = WxArticleFragment.getInstance(null, null);
-        //mNavigationFragment = NavigationFragment.getInstance(null, null);
-        //mProjectFragment = ProjectFragment.getInstance(null, null);
-        //CollectFragment collectFragment = CollectFragment.getInstance(null, null);
-        //SettingFragment settingFragment = SettingFragment.getInstance(null, null);
-        //
+
         mFragments.add(mFollowPagerFragment);
         mFragments.add(mCollectPagerFragment);
         mFragments.add(mAccountPagerFragment);
