@@ -189,7 +189,7 @@ public interface Apis {
      *
      * @return null
      */
-    @GET("album/iscollect")
+    @GET("album/state")
     Observable<BaseResponse<Boolean>> isCollectAlbum(@Query("uid")int userId, @Query("albumid") int albumId);
 
     /**
