@@ -14,6 +14,11 @@
         <param-name>contextConfigLocation</param-name>              <!-- 环境配置位置 -->
         <param-value>classpath:spring/applicationContext.xml</param-value>
     </context-param>
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
     <!---->
     <!--&lt;!&ndash; 编码过滤器 request和response都setCharacterEncoding("UTF-8") &ndash;&gt;-->
     <!--<filter>-->
@@ -40,8 +45,8 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath*:spring/spring-service.xml,
-                        classpath*:spring/spring-dao.xml,
+            <param-value><!--classpath*:spring/spring-service.xml,
+                        classpath*:spring/spring-dao.xml,-->
                         classpath*:spring/spring-web.xml</param-value>
         </init-param>
     </servlet>

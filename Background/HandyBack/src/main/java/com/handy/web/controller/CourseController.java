@@ -6,9 +6,13 @@ import com.handy.support.entity.Label;
 import com.handy.support.pojo.course.dto.CourseEditDTO;
 import com.handy.support.pojo.course.vo.CourseDetailVO;
 import com.handy.support.pojo.course.vo.CourseSimpleVO;
+import com.handy.support.recommend.operation.Recommend;
 import com.handy.support.service.Course.SolrConnect;
+import com.handy.support.service.Recommend.IRecommendService;
 import com.handy.support.utils.status.ErrorEnum;
 import com.handy.support.utils.status.ReturnCode;
+import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,14 +34,19 @@ public class CourseController {
     @Autowired
     private ICourseService iCourseService;
     @Autowired
+    private IRecommendService recommendService;
+    @Autowired
     private Gson gson;
+    @Autowired
+    private Recommend recommend;
 
     /**
      * 获取热门推荐
      * @return json
      */
+
     @RequestMapping(value = "/main/banner", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
-    private String getBanner() {
+    public String getBanner() {
         List<CourseSimpleVO> list = iCourseService.getBannerList();
         ErrorEnum error = null;
         if (list == null) {
@@ -50,14 +60,36 @@ public class CourseController {
 
     @RequestMapping(value = "/course/recommend", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
     public String getRecommend(int uid,int page_no,int n){
-        List<CourseSimpleVO> list=iCourseService.getRecommendList(uid,page_no,n);
-        ErrorEnum error = null;
-        if (list == null) {
-            error = ErrorEnum.REQUEST_FAIL;
-        } else {
-            error = ErrorEnum.SUCCESS;
+        ErrorEnum error = ErrorEnum.SUCCESS;
+        List<RecommendedItem> recommendList=new ArrayList<RecommendedItem>();
+        try {
+            if (recommend.isHasInit() == false) {
+                recommend.init();
+            } else {
+                recommend.refresh();
+            }
+            recommendList = recommend.getRecommend(uid, page_no, n);
         }
-        ReturnCode<List<CourseSimpleVO>> code = new ReturnCode<List<CourseSimpleVO>>(error, list);
+        catch (TasteException ex){
+            error=ErrorEnum.REQUEST_FAIL;
+        }
+        List<Long>tempList=new ArrayList<Long>();
+        for(int i=0;i<recommendList.size();i++){
+            tempList.add(recommendList.get(i).getItemID());
+        }
+        List<CourseSimpleVO>subResult=recommendService.getCourseList(tempList);
+        if(subResult.size()<n){
+            List<CourseSimpleVO> list=iCourseService.getRecommendList(uid,page_no,n);
+            if(list==null&&subResult.size()==0) {
+                error = ErrorEnum.REQUEST_FAIL;
+            }
+            else {
+                for (int i = subResult.size(), j = 0; i < n; i++, j++) {
+                    subResult.add(list.get(j));
+                }
+            }
+        }
+        ReturnCode<List<CourseSimpleVO>> code = new ReturnCode<List<CourseSimpleVO>>(error, subResult);
         return code.returnHandler();
     }
 
@@ -88,7 +120,7 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/course/collect", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
-    public String collect(int albumId, int courseId){
+    public String collect(int uid,int albumId, int courseId){
         int result=iCourseService.collect(courseId,albumId);
         ErrorEnum error=null;
         if(result ==1){
@@ -101,7 +133,7 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/course/uncollect", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
-    public String uncollect(int albumId, int courseId){
+    public String uncollect(int uid,int albumId, int courseId){
         int result=iCourseService.uncollect(courseId,albumId);
         ErrorEnum error=null;
         if(result ==1){

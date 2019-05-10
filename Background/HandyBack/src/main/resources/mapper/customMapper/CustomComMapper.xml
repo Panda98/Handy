@@ -19,6 +19,8 @@
         <association property="course" columnPrefix="course_" resultMap="com.handy.support.mapper.customMapper.MyUsersCoursesMapper.CourseMap" />
         <association property="comment" columnPrefix="comment_" resultMap="CommentMap"/>
         <association property="toReply" columnPrefix="toReply_" resultMap="ReplyMap"/>
+        <association property="user" columnPrefix="user_" resultMap="com.handy.support.mapper.customMapper.MyUsersCoursesMapper.UserMap"/>
+
     </resultMap>
     <resultMap id="CommentMap" type="com.handy.support.pojo.comment.dto.CommentBrief" >
         <id column="comment_id" property="commentId" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -92,7 +94,8 @@
         c.course_cover course_course_cover,c.course_id course_course_id,c.course_title course_course_title
         ,c.diy_label course_diy_label,c.level_id course_level_id,c.course_intro course_course_intro
         from (select * from comment where comment.user_id=#{userId}) co
-         inner join comment_reply r on r.comment_id=co.comment_id and r.to_reply_id=0
+         inner join comment_reply r on( r.comment_id=co.comment_id and r.to_reply_id=0 and
+         r.user_id!=#{userId})
          inner join user u on r.user_id=u.user_id
          inner join user u3 on co.user_id=u3.user_id
          inner join course c on c.course_id=co.course_id
@@ -118,7 +121,7 @@ u2.user_id courseUser_user_id,u2.nick_name courseUser_nick_name,u2.user_pic cour
          inner join comment  co on co.comment_id=r2.comment_id
          inner join course c on c.course_id=co.course_id
          inner join user u3 on co.user_id=u3.user_id
-         inner join comment_reply r on r.to_reply_id=r2.reply_id <!--收到的回复-->
+         inner join comment_reply r on (r.to_reply_id=r2.reply_id and r.user_id!=#{userId}) <!--收到的回复-->
           inner join user u on r.user_id=u.user_id<!--此条回复的发出者-->
         inner join user u2 on u2.user_id=c.user_id
         order by r.update_time desc limit #{startRow},#{size}

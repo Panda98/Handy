@@ -2,6 +2,7 @@ package com.example.handy.view.activity;
 
 import android.app.ActivityOptions;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -39,6 +41,9 @@ public class CourseListByLabelActivity extends BaseActivity<CourseListByLabelPre
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.label_course_recycler_view)
     RecyclerView mRecyclerView;
+
+    private View notDataView;
+
 
     private List<CourseData> mPublishCourseList;
     private RecommendCourseAdapter mAdapter;
@@ -86,6 +91,9 @@ public class CourseListByLabelActivity extends BaseActivity<CourseListByLabelPre
     }
 
     private void setRefresh() {
+        mAdapter.setEmptyView(R.layout.loading_view, (ViewGroup) mRecyclerView.getParent());
+        mAdapter.setEmptyView(notDataView);
+
         mRefreshLayout.setOnRefreshListener(refreshLayout -> {
             mPresenter.autoRefresh(labelId, false);
             refreshLayout.finishRefresh(1000);
@@ -103,12 +111,21 @@ public class CourseListByLabelActivity extends BaseActivity<CourseListByLabelPre
     }
 
     private void initRecyclerView() {
+        notDataView = getLayoutInflater().inflate(R.layout.empty_view, (ViewGroup) mRecyclerView.getParent(), false);
+        notDataView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setRefresh();
+            }
+        });
+
         mPublishCourseList = new ArrayList<>();
         mAdapter = new RecommendCourseAdapter(R.layout.item_recommend_course, mPublishCourseList);
         //mAdapter.setOnItemClickListener((adapter, view, position) -> startArticleDetailPager(view, position));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
+        setRefresh();
     }
 
     @Override
