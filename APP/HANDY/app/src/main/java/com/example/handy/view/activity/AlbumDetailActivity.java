@@ -1,18 +1,18 @@
 package com.example.handy.view.activity;
 
 import android.app.ActivityOptions;
+import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.handy.R;
@@ -26,8 +26,9 @@ import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.ImageLoader;
 import com.example.handy.utils.JudgeUtils;
 import com.example.handy.utils.StatusBarUtil;
-import com.example.handy.view.adapter.AlbumDetailAdapter;
 import com.example.handy.view.adapter.RecommendCourseAdapter;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.shehuan.niv.NiceImageView;
 
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> implements AlbumDetailContract.View {
 
@@ -42,6 +44,9 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
     Toolbar mToolbar;
     @BindView(R.id.common_toolbar_title_tv)
     TextView mTitleTv;
+    @BindView(R.id.album_delete_btn)
+    TextView deleteAlbumBtn;
+
     @BindView(R.id.normal_view)
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.album_detail_course_rv)
@@ -52,8 +57,8 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
     TextView mAlbumTitle;
     @BindView(R.id.album_detail_author_name)
     TextView mAlbumAuthor;
-    @BindView(R.id.album_detail_collect_num)
-    TextView mAlbumCollectNum;
+    @BindView(R.id.collect_album_button)
+    LikeButton collectButton;
 
     private AlbumCoverData albumCoverData;
     private List<CourseData> courseDataList;
@@ -61,7 +66,7 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
     private RecommendCourseAdapter mAdapter;
 
     private int albumId;
-    private boolean followStatus;
+    //private boolean followStatus;
 
     @Override
     protected int getLayoutId() {
@@ -72,6 +77,7 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
     protected void initToolbar() {
         initBundleData();
         initRecyclerView();
+        initCollectButton();
 
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -94,11 +100,29 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
         System.out.println(this.albumId);
     }
 
+    private void initCollectButton() {
+        //likeButton.setLiked(true);
+        collectButton.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                System.out.println("收藏");
+                mPresenter.collectAlbum(albumId);
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                System.out.println("取消收藏");
+                mPresenter.unCollectAlbum(albumId);
+            }
+        });
+    }
+
     @Override
     protected void initEventAndData() {
         setRefresh();
         mPresenter.getAlbumCoverData(true, albumId);
         mPresenter.getAlbumDetailData(true, albumId);
+        mPresenter.isCollectAlbum(this.albumId);
         //mPresenter.getCommentList(true,this.courseId);
         if (CommonUtils.isNetworkConnected()) {
             showLoading();
@@ -127,6 +151,38 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
         mRecyclerView.setAdapter(mAdapter);
     }
 
+    @OnClick({R.id.album_delete_btn})
+    void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.album_delete_btn:
+                AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(this);
+
+                //监听下方button点击事件
+                alertDialogBuilder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mPresenter.deleteAlbum(albumId);
+                        CommonUtils.showSnackMessage(AlbumDetailActivity.this, "删除成功");
+                    }
+                });
+
+                //监听下方button点击事件
+                alertDialogBuilder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                });
+
+                alertDialogBuilder.setMessage("确认要删除此专辑吗？");//设置标题
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+                break;
+            default:
+                break;
+        }
+    }
+
 
     @Override
     public void showAlbumCoverData(AlbumCoverData albumCoverData) {
@@ -140,10 +196,10 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
             mAlbumTitle.setText(albumCoverData.getAlbumName());
         }
 
-        // 设置作者
-        //if (!TextUtils.isEmpty(albumCoverData.getAuthorId())) {
-        //    mAlbumTitle.setText(albumCoverData.getAlbumName());
-        //}
+        //设置作者
+        if (!TextUtils.isEmpty(albumCoverData.getAuthorName())) {
+            mAlbumAuthor.setText(albumCoverData.getAuthorName());
+        }
     }
 
     @Override
@@ -164,6 +220,31 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
         mAdapter.setOnItemClickListener((adapter, view, position) -> startCourseDetailPager(view, position));
 
         showNormal();
+    }
+
+    @Override
+    public void showCollectResult() {
+
+    }
+
+    @Override
+    public void showUnCollectResult() {
+
+    }
+
+    @Override
+    public void setCollectStatus(boolean status) {
+        collectButton.setLiked(status);
+    }
+
+    @Override
+    public void showMyAlbumView() {
+        collectButton.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showOthersAlbumView() {
+        deleteAlbumBtn.setVisibility(View.INVISIBLE);
     }
 
     private void startCourseDetailPager(View view, int position) {

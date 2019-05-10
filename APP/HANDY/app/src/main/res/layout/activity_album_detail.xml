@@ -7,7 +7,35 @@
     android:orientation="vertical"
     tools:context=".view.activity.CourseDetailActivity">
 
-    <include layout="@layout/common_toolbar_no_scroll" />
+    <!--<include layout="@layout/common_toolbar_no_scroll" />-->
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/common_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_54"
+        android:background="@color/light_tab_bac"
+        app:navigationIcon="@drawable/ic_arrow_back_white_24dp">
+
+        <TextView
+            android:id="@+id/common_toolbar_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            tools:text="开发环境" />
+
+        <TextView
+            android:id="@+id/album_delete_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:clickable="true"
+            android:text="删除"/>
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,19 +83,20 @@
                 android:layout_marginTop="@dimen/dp_15"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/navigation_collect"
-                    android:textColor="@color/album_detail_collect"/>
+                <com.like.LikeButton
+                    android:id="@+id/collect_album_button"
+                    app:icon_type="Star"
+                    android:layout_width="@dimen/dp_22"
+                    android:layout_height="@dimen/dp_22"
+                    app:icon_size="22dp"
+                    />
 
-                <TextView
-                    android:id="@+id/album_detail_collect_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_10"
-                    android:text="0"
-                    android:textColor="@color/album_detail_collect"/>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginStart="@dimen/dp_10"-->
+                    <!--android:text="@string/navigation_collect"-->
+                    <!--android:textColor="@color/album_detail_collect"/>-->
 
             </LinearLayout>
 

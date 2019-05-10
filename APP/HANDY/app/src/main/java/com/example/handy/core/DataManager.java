@@ -19,6 +19,7 @@ import com.example.handy.core.bean.ReplyMessageData;
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.http.HttpHelper;
 import com.example.handy.core.prefs.PreferenceHelper;
+import com.example.handy.core.vo.CreateAlbumView;
 import com.example.handy.core.vo.LoginView;
 import com.example.handy.core.vo.PostCommentView;
 import com.example.handy.core.vo.ReplyCommentView;
@@ -120,6 +121,31 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     @Override
     public Observable<BaseResponse<List<AlbumCoverData>>> getCollectAlbumList(int userId) {
         return mHttpHelper.getCollectAlbumList(userId);
+    }
+
+    @Override
+    public Observable<BaseResponse> collectAlbum(int userId, int albumId) {
+        return mHttpHelper.collectAlbum(userId, albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse> unCollectAlbum(int userId, int albumId) {
+        return mHttpHelper.unCollectAlbum(userId, albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse<Boolean>> isCollectAlbum(int userId, int albumId) {
+        return mHttpHelper.isCollectAlbum(userId, albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse> createAlbum(CreateAlbumView createAlbumView) {
+        return mHttpHelper.createAlbum(createAlbumView);
+    }
+
+    @Override
+    public Observable<BaseResponse> deleteAlbum(int albumId) {
+        return mHttpHelper.deleteAlbum(albumId);
     }
 
     @Override

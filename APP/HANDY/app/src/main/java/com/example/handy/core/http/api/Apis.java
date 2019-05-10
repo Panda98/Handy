@@ -17,6 +17,7 @@ import com.example.handy.core.bean.PublishCourseData;
 import com.example.handy.core.bean.RecommendAlbumData;
 import com.example.handy.core.bean.ReplyMessageData;
 import com.example.handy.core.bean.UserInfoData;
+import com.example.handy.core.vo.CreateAlbumView;
 import com.example.handy.core.vo.LoginView;
 import com.example.handy.core.vo.PostCommentView;
 import com.example.handy.core.vo.ReplyCommentView;
@@ -166,6 +167,46 @@ public interface Apis {
      */
     @GET("album/collection")
     Observable<BaseResponse<List<AlbumCoverData>>> getCollectAlbumList(@Query("uid")int userId);
+
+    /**
+     * 收藏专辑
+     *
+     * @return null
+     */
+    @GET("album/collect")
+    Observable<BaseResponse> collectAlbum(@Query("uid")int userId, @Query("albumid") int albumId);
+
+    /**
+     * 取消收藏专辑
+     *
+     * @return null
+     */
+    @GET("album/uncollect")
+    Observable<BaseResponse> unCollectAlbum(@Query("uid")int userId, @Query("albumid") int albumId);
+
+    /**
+     * 获得收藏专辑状态
+     *
+     * @return null
+     */
+    @GET("album/iscollect")
+    Observable<BaseResponse<Boolean>> isCollectAlbum(@Query("uid")int userId, @Query("albumid") int albumId);
+
+    /**
+     * 创建专辑
+     *
+     * @return null
+     */
+    @POST("album/create")
+    Observable<BaseResponse> createAlbum(@Body CreateAlbumView createAlbumView);
+
+    /**
+     * 删除专辑
+     *
+     * @return null
+     */
+    @GET("album/delete")
+    Observable<BaseResponse> deleteAlbum(@Query("albumid") int albumId);
 
     /**
      * 收藏教程

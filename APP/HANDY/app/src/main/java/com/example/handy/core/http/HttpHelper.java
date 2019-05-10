@@ -17,6 +17,7 @@ import com.example.handy.core.bean.PublishCourseData;
 import com.example.handy.core.bean.RecommendAlbumData;
 import com.example.handy.core.bean.ReplyMessageData;
 import com.example.handy.core.bean.UserInfoData;
+import com.example.handy.core.vo.CreateAlbumView;
 import com.example.handy.core.vo.LoginView;
 import com.example.handy.core.vo.PostCommentView;
 import com.example.handy.core.vo.ReplyCommentView;
@@ -139,6 +140,41 @@ public interface HttpHelper {
      * @return AlbumListData
      */
     Observable<BaseResponse<List<AlbumCoverData>>> getCollectAlbumList(int userId);
+
+    /**
+     * 收藏专辑
+     *
+     * @return null
+     */
+    Observable<BaseResponse> collectAlbum(int userId, int albumId);
+
+    /**
+     * 取消收藏专辑
+     *
+     * @return null
+     */
+    Observable<BaseResponse> unCollectAlbum(int userId, int albumId);
+
+    /**
+     * 获得收藏专辑状态
+     *
+     * @return null
+     */
+    Observable<BaseResponse<Boolean>> isCollectAlbum(int userId, int albumId);
+
+    /**
+     * 创建专辑
+     *
+     * @return null
+     */
+    Observable<BaseResponse> createAlbum(CreateAlbumView createAlbumView);
+
+    /**
+     * 删除专辑
+     *
+     * @return null
+     */
+    Observable<BaseResponse> deleteAlbum(int albumId);
 
     /**
      * 收藏教程

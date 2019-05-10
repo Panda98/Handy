@@ -4,14 +4,16 @@ import com.example.handy.di.component.BaseFragmentComponent;
 import com.example.handy.di.module.AccountPagerFragmentModule;
 import com.example.handy.di.module.CollectPagerFragmentModule;
 import com.example.handy.di.module.CommentDialogFragmentModule;
+import com.example.handy.di.module.CreateAlbumDialogFragmentModule;
 import com.example.handy.di.module.FollowPagerFragmentModule;
 import com.example.handy.di.module.MainPagerFragmentModule;
 import com.example.handy.di.module.ReceivedCommentFragmentModule;
 import com.example.handy.di.module.ReceivedLikeFragmentModule;
 import com.example.handy.di.module.ReceivedReplyFragmentModule;
 import com.example.handy.di.module.SelectAlbumFragmentModule;
-import com.example.handy.view.fragment.CommentDialogFragment;
-import com.example.handy.view.fragment.SelectAlbumFragment;
+import com.example.handy.view.fragment.dialog.CommentDialogFragment;
+import com.example.handy.view.fragment.dialog.CreateAlbumDialogFragment;
+import com.example.handy.view.fragment.dialog.SelectAlbumFragment;
 import com.example.handy.view.fragment.main.AccountPagerFragment;
 import com.example.handy.view.fragment.main.CollectPagerFragment;
 import com.example.handy.view.fragment.main.FollowPagerFragment;
@@ -59,5 +61,8 @@ public abstract class AbstractAllFragmentModule {
 
     @ContributesAndroidInjector(modules = CommentDialogFragmentModule.class)
     abstract CommentDialogFragment contributesCommentDialogFragmentInject();
+
+    @ContributesAndroidInjector(modules = CreateAlbumDialogFragmentModule.class)
+    abstract CreateAlbumDialogFragment contributesCreateAlbumDialogFragmentInject();
 
 }

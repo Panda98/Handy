@@ -1,7 +1,6 @@
 package com.example.handy.view.viewHolder;
 
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -21,7 +20,7 @@ public class CourseViewHolder extends BaseViewHolder {
     TextView courseTitle;
     @BindView(R.id.recommend_course_description)
     TextView courseDesc;
-    @BindView(R.id.recommend_course_author)
+    @BindView(R.id.course_author)
     TextView courseAuthor;
     @BindView(R.id.course_labels)
     LabelsView courseLabels;

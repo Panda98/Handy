@@ -18,6 +18,7 @@ import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.ReplyMessageData;
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.http.api.Apis;
+import com.example.handy.core.vo.CreateAlbumView;
 import com.example.handy.core.vo.LoginView;
 import com.example.handy.core.vo.PostCommentView;
 import com.example.handy.core.vo.ReplyCommentView;
@@ -119,6 +120,31 @@ public class HttpHelperImpl implements HttpHelper {
     @Override
     public Observable<BaseResponse<List<AlbumCoverData>>> getCollectAlbumList(int userId) {
         return mApis.getCollectAlbumList(userId);
+    }
+
+    @Override
+    public Observable<BaseResponse> collectAlbum(int userId, int albumId) {
+        return mApis.collectAlbum(userId, albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse> unCollectAlbum(int userId, int albumId) {
+        return mApis.unCollectAlbum(userId, albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse<Boolean>> isCollectAlbum(int userId, int albumId) {
+        return mApis.isCollectAlbum(userId, albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse> createAlbum(CreateAlbumView createAlbumView) {
+        return mApis.createAlbum(createAlbumView);
+    }
+
+    @Override
+    public Observable<BaseResponse> deleteAlbum(int albumId) {
+        return mApis.deleteAlbum(albumId);
     }
 
     @Override

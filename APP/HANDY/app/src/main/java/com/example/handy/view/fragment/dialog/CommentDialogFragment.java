@@ -1,4 +1,4 @@
-package com.example.handy.view.fragment;
+package com.example.handy.view.fragment.dialog;
 
 
 import android.os.Bundle;
