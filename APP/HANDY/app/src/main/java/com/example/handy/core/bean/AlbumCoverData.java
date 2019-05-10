@@ -11,7 +11,12 @@ public class AlbumCoverData {
     private String albumName;
     private String albumDetail;
     private int authorId;
+    private String authorName;
     private String albumPic;
+
+    public String getAuthorName() {
+        return authorName;
+    }
 
     public int getAlbumId() {
         return albumId;

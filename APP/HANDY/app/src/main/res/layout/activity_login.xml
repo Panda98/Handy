@@ -45,6 +45,7 @@
             android:id="@+id/login_account_edit"
             style="@style/style_circle_edit"
             android:hint="@string/login_account_tint"
+            android:maxLines="1"
             android:layout_marginStart="@dimen/dp_6"/>
     </LinearLayout>
 
@@ -79,6 +80,7 @@
             android:id="@+id/login_password_edit"
             style="@style/style_circle_edit"
             android:hint="@string/login_password_tint"
+            android:maxLines="1"
             android:inputType="textPassword"
             android:layout_marginStart="@dimen/dp_6" />
     </LinearLayout>

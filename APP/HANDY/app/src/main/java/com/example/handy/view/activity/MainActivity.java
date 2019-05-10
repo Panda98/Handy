@@ -30,6 +30,7 @@ import com.example.handy.view.fragment.main.AccountPagerFragment;
 import com.example.handy.view.fragment.main.CollectPagerFragment;
 import com.example.handy.view.fragment.main.FollowPagerFragment;
 import com.example.handy.view.fragment.main.MainPagerFragment;
+import com.like.LikeButton;
 
 import java.util.ArrayList;
 
@@ -107,7 +108,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
             switch (item.getItemId()) {
                 case R.id.tab_main_pager:
                     //替换图标
-                    item.setIcon(R.drawable.homepage_icon_selected);
+                    //item.setIcon(R.drawable.homepage_icon_selected);
                     loadPager(getString(R.string.navigation_home_pager), 0,
                             mMainPagerFragment, Constants.TYPE_MAIN_PAGER);
                     break;

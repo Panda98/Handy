@@ -47,7 +47,7 @@ public class SelectAlbumPresenter extends BasePresenter<SelectAlbumContract.View
 
     @Override
     public void collectCourse(int courseId, int albumId) {
-        addSubscribe(mDataManager.collectCourse(courseId,albumId)
+        addSubscribe(mDataManager.collectCourse(getLoginAccount(), courseId,albumId)
                 .compose(RxUtils.rxSchedulerHelper())
                 .subscribeWith(new BaseObserver(mView,
                         HandyAPP.getInstance().getString(R.string.failed_to_obtain_follow_data),

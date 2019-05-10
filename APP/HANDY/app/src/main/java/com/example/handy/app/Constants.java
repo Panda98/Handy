@@ -107,6 +107,7 @@ public class Constants {
     public static final String USER_COURSE_DATA = "user_course_data";
 
     public static final int COURSE_COVER_UPLOAD = 0;
+    public static final int ALBUM_COVER_UPLOAD = 0;
     public static final int STEP_PIC_UPLOAD = 1;
 
 

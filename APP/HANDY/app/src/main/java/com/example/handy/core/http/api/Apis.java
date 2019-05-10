@@ -17,6 +17,7 @@ import com.example.handy.core.bean.PublishCourseData;
 import com.example.handy.core.bean.RecommendAlbumData;
 import com.example.handy.core.bean.ReplyMessageData;
 import com.example.handy.core.bean.UserInfoData;
+import com.example.handy.core.vo.CreateAlbumView;
 import com.example.handy.core.vo.LoginView;
 import com.example.handy.core.vo.PostCommentView;
 import com.example.handy.core.vo.ReplyCommentView;
@@ -168,12 +169,52 @@ public interface Apis {
     Observable<BaseResponse<List<AlbumCoverData>>> getCollectAlbumList(@Query("uid")int userId);
 
     /**
+     * 收藏专辑
+     *
+     * @return null
+     */
+    @GET("album/collect")
+    Observable<BaseResponse> collectAlbum(@Query("uid")int userId, @Query("albumid") int albumId);
+
+    /**
+     * 取消收藏专辑
+     *
+     * @return null
+     */
+    @GET("album/uncollect")
+    Observable<BaseResponse> unCollectAlbum(@Query("uid")int userId, @Query("albumid") int albumId);
+
+    /**
+     * 获得收藏专辑状态
+     *
+     * @return null
+     */
+    @GET("album/state")
+    Observable<BaseResponse<Boolean>> isCollectAlbum(@Query("uid")int userId, @Query("albumid") int albumId);
+
+    /**
+     * 创建专辑
+     *
+     * @return null
+     */
+    @POST("album/create")
+    Observable<BaseResponse> createAlbum(@Body CreateAlbumView createAlbumView);
+
+    /**
+     * 删除专辑
+     *
+     * @return null
+     */
+    @GET("album/delete")
+    Observable<BaseResponse> deleteAlbum(@Query("albumid") int albumId);
+
+    /**
      * 收藏教程
      *
      * @return 结果
      */
     @GET("course/collect")
-    Observable<BaseResponse> collectCourse(@Query("courseId")int courseId, @Query("albumId")int albumId);
+    Observable<BaseResponse> collectCourse(@Query("uid") int userId, @Query("courseId")int courseId, @Query("albumId")int albumId);
 
     /**
      * 取消收藏教程
@@ -181,7 +222,7 @@ public interface Apis {
      * @return 结果
      */
     @GET("course/uncollect")
-    Observable<BaseResponse> unCollectCourse(@Query("courseId")int courseId, @Query("albumId")int albumId);
+    Observable<BaseResponse> unCollectCourse(@Query("uid") int userId, @Query("courseId")int courseId, @Query("albumId")int albumId);
 
     /**
      * 获取教程收藏状态
