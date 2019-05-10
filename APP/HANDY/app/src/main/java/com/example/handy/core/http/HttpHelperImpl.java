@@ -31,6 +31,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.http.Query;
 
 /**
  * 对外隐藏进行网络请求的实现细节
@@ -148,13 +149,13 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse> collectCourse(int courseId, int albumId) {
-        return mApis.collectCourse(courseId, albumId);
+    public Observable<BaseResponse> collectCourse(int userId, int courseId, int albumId) {
+        return mApis.collectCourse(userId, courseId, albumId);
     }
 
     @Override
-    public Observable<BaseResponse> unCollectCourse(int courseId, int albumId) {
-        return mApis.unCollectCourse(courseId, albumId);
+    public Observable<BaseResponse> unCollectCourse(int userId, int courseId, int albumId) {
+        return mApis.unCollectCourse(userId, courseId, albumId);
     }
 
     @Override

@@ -181,14 +181,14 @@ public interface HttpHelper {
      *
      * @return 结果
      */
-    Observable<BaseResponse> collectCourse(int courseId, int albumId);
+    Observable<BaseResponse> collectCourse(int userId, int courseId, int albumId);
 
     /**
      * 取消收藏教程
      *
      * @return 结果
      */
-    Observable<BaseResponse> unCollectCourse(int courseId, int albumId);
+    Observable<BaseResponse> unCollectCourse(int userId, int courseId, int albumId);
 
     /**
      * 获取教程收藏状态

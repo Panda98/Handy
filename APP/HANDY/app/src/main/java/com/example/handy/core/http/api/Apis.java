@@ -214,7 +214,7 @@ public interface Apis {
      * @return 结果
      */
     @GET("course/collect")
-    Observable<BaseResponse> collectCourse(@Query("courseId")int courseId, @Query("albumId")int albumId);
+    Observable<BaseResponse> collectCourse(@Query("uid") int userId, @Query("courseId")int courseId, @Query("albumId")int albumId);
 
     /**
      * 取消收藏教程
@@ -222,7 +222,7 @@ public interface Apis {
      * @return 结果
      */
     @GET("course/uncollect")
-    Observable<BaseResponse> unCollectCourse(@Query("courseId")int courseId, @Query("albumId")int albumId);
+    Observable<BaseResponse> unCollectCourse(@Query("uid") int userId, @Query("courseId")int courseId, @Query("albumId")int albumId);
 
     /**
      * 获取教程收藏状态
