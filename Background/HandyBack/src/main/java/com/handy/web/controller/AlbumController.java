@@ -75,7 +75,7 @@ public class AlbumController {
     }
 
     @RequestMapping(value = "/album/collection",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
-    public String getListCollection(int uid){
+    public String getAlbumCollection(int uid){
         List<AlbumDto> dtos = albumService.getCollectedAlbum(uid);
         List<AlbumVO> vos = new ArrayList<AlbumVO>();
         for(AlbumDto dto:dtos){
@@ -88,7 +88,7 @@ public class AlbumController {
 
 
     @RequestMapping(value = "/album/detail",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
-    public String getListDetail(int uid, int albumid,int page,int n){
+    public String getAlbumDetail(int uid, int albumid, int page, int n){
         List<AlbumCourseInfoDto> list = albumService.getAlbumDetail(albumid,page,n);
         List<AlbumCourseInfoVO> vos = new ArrayList<AlbumCourseInfoVO>();
         for(AlbumCourseInfoDto dto:list){
@@ -130,6 +130,8 @@ public class AlbumController {
     public String createAlbum(@RequestBody AlbumCreateVO albumVO){
         AlbumDto dto = new AlbumDto();
         BeanUtils.copyProperties(albumVO,dto);
+        if(dto.getAlbumPic() == null){
+        }
         ErrorEnum errorEnum = albumService.createAlbum(dto);
 
         ReturnCode<String> returnCode = new ReturnCode<String>();
@@ -143,6 +145,20 @@ public class AlbumController {
 
         ReturnCode<String> returnCode = new ReturnCode<String>();
         returnCode.setErrorEnum(errorEnum);
+        return returnCode.returnHandler();
+    }
+
+    @RequestMapping(value = "/album/state",produces = "application/json; charset=utf-8",method = RequestMethod.GET)
+    public String getAlbumState(int uid,int albumid){
+        List<AlbumDto> collected = albumService.getCollectedAlbum(uid);
+        boolean isCollected = false;
+        for(AlbumDto collection:collected){
+            if (collection.getAlbumId() == albumid){
+                isCollected = true;
+                break;
+            }
+        }
+        ReturnCode<Boolean> returnCode = new ReturnCode<Boolean>(isCollected);
         return returnCode.returnHandler();
     }
 
