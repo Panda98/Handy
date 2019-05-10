@@ -1,15 +1,21 @@
 package com.handy.support.service.Recommend;
 
+import com.handy.support.entity.Course;
+import com.handy.support.mapper.UserMapper;
 import com.handy.support.mapper.customMapper.MyFollowMapper;
 import com.handy.support.mapper.customMapper.MyRecommendMapper;
+import com.handy.support.mapper.iMapper.ICourseMapper;
+import com.handy.support.pojo.course.vo.CourseSimpleVO;
 import com.handy.support.pojo.recommend.dto.UserItemLike;
 import com.handy.support.service.Course.CourseServiceImpl;
+import com.handy.support.service.Course.ICourseService;
 import com.handy.support.service.Follow.FollowServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +25,10 @@ public class RecommendServiceImpl implements IRecommendService{
     MyRecommendMapper recommendMapper;
     @Autowired
     MyFollowMapper followMapper;
+    @Autowired
+    UserMapper userMapper;
+    @Autowired
+    ICourseService courseService;
     public void insertUserItemLike(UserItemLike itemLike){
         recommendMapper.insertSelective(itemLike);
     }
@@ -142,8 +152,20 @@ public class RecommendServiceImpl implements IRecommendService{
         }
     }
     public List<UserItemLike> getUpdates(Date lastUpdate){
-        Format format= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Format format= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String updateTime=format.format(lastUpdate);
         return recommendMapper.getUpdates(updateTime);
+    }
+    public List<CourseSimpleVO> getCourseList(List<Long>courseList){
+        List<Course>temp=recommendMapper.getCourseList(courseList);
+        List<CourseSimpleVO>result=new ArrayList<CourseSimpleVO>();
+        for(Course c:temp){
+            if(c !=null) {
+                Integer id = c.getCourseId();
+                CourseSimpleVO simpleVO = new CourseSimpleVO(id, c.getCourseTitle(), c.getCourseCover(), c.getCourseIntro(), userMapper.selectByPrimaryKey(c.getUserId()).getNickName(), c.getLevelId(), courseService.getLabelList(id), c.getDiyLabel());
+                result.add(simpleVO);
+            }
+        }
+        return result;
     }
 }

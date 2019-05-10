@@ -33,7 +33,7 @@ public class CourseRecommender implements Recommender{
         UserSimilarity similarity=
                 new UncenteredCosineSimilarity(model);
         UserNeighborhood neighborhood=
-                new NearestNUserNeighborhood(2,similarity,model);
+                new NearestNUserNeighborhood(20,0.5,similarity,model);
         this.model=model;
               delegate=new GenericUserBasedRecommender(model,neighborhood,similarity);
     }

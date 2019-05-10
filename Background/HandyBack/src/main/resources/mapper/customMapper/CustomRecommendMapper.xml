@@ -57,7 +57,32 @@
     <select id="getCoursesFromAlbum" resultType="java.lang.Integer">
         select course_id from album_course where album_id=#{albumId}  limit #{startRow},#{size}
     </select>
-    <select id="getUpdates" resultMap="UserItemLikeMap">
+    <select id="getUpdates" parameterType="java.lang.String" resultMap="UserItemLikeMap">
         select * from recommend where update_time > #{updateTime}
+    </select>
+    <select id="getCourseList" resultType="com.handy.support.entity.Course">
+         SELECT
+    course_id AS courseId,
+    course_title As courseTitle,
+    course_intro AS courseIntro,
+    course_note AS courseNote,
+    course_cover AS courseCover,
+    course_views AS courseViews,
+    course_collects AS courseCollects,
+    course_likes AS courseLikes,
+    user_id AS userId,
+    diy_label AS diyLabel,
+    update_time AS updateTime,
+    level_id AS levelId
+  FROM
+     course where user_id=user_id
+        <if test="courseIDs.size!=0">
+            and course_id in <foreach collection="courseIDs" open="(" close=")" separator=","
+                                      item="id" index="i">
+            #{id}
+        </foreach> </if>
+        <if test="courseIDs.size==0">
+            and course_id=-1
+        </if>
     </select>
 </mapper>
