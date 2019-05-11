@@ -46,20 +46,11 @@ public class SettingPresenter extends BasePresenter<SettingContract.View> implem
 
     @Override
     public void logout() {
-        addSubscribe(mDataManager.logout()
-                .compose(RxUtils.rxSchedulerHelper())
-                .compose(RxUtils.handleLogoutResult())
-                .subscribeWith(new BaseObserver<LoginData>(mView,
-                        HandyAPP.getInstance().getString(R.string.logout_fail)) {
-                    @Override
-                    public void onNext(LoginData loginData) {
-                        setLoginAccount(0);
-                        setLoginStatus(false);
-                        CookiesManager.clearAllCookies();
-                        RxBus.getDefault().post(new LoginEvent(false));
-                        mView.showLogoutSuccess();
-                    }
-                }));
+        setLoginAccount(0);
+        setLoginStatus(false);
+        CookiesManager.clearAllCookies();
+        RxBus.getDefault().post(new LoginEvent(false));
+        mView.showLogoutSuccess();
 
     }
 }
