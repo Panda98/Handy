@@ -1,10 +1,6 @@
 package com.handy.support.pojo.Message.vo;
 
 import com.handy.support.entity.Label;
-import com.handy.support.pojo.Follow.dto.CourseBrief;
-import com.handy.support.pojo.Follow.dto.UserBrief;
-import com.handy.support.pojo.comment.dto.CommentBrief;
-import com.handy.support.pojo.comment.dto.ReplyBrief;
 import com.handy.support.pojo.comment.dto.ReplyDTO;
 import com.handy.support.pojo.comment.vo.ReplyUserVO;
 
