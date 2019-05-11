@@ -38,7 +38,9 @@ public class AuthorHomepagePresenter extends BasePresenter<AuthorHomepageContrac
 
     @Override
     public void autoRefresh(int userId, boolean isShowError) {
-
+        getUserInfo(userId, isShowError);
+        getAuthorAlbum(userId, isShowError);
+        getAuthorCourse(userId, isShowError);
     }
 
     @Override

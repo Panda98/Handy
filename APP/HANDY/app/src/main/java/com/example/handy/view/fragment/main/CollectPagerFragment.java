@@ -19,11 +19,8 @@ import com.example.handy.presenter.CollectPagerPresenter;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.JudgeUtils;
 import com.example.handy.view.adapter.AlbumCoverDataAdapter;
-import com.example.handy.view.fragment.dialog.CommentDialogFragment;
 import com.example.handy.view.fragment.dialog.CreateAlbumDialogFragment;
-import com.example.handy.view.fragment.dialog.SelectAlbumFragment;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.squareup.haha.perflib.Main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,10 +38,10 @@ public class CollectPagerFragment extends BaseRootFragment<CollectPagerPresenter
     SmartRefreshLayout mRefreshLayout;
 
     @BindView(R.id.my_album_recycler_view)
-    RecyclerView myAlbumRecyclerView;
+    RecyclerView myAlbumRV;
 
     @BindView(R.id.my_collect_album_recycler_view)
-    RecyclerView mAlbumRecyclerView;
+    RecyclerView myCollectAlbumRV;
 
     @BindView(R.id.create_album_btn)
     ImageView mCreateAlbumBtn;
@@ -52,7 +49,6 @@ public class CollectPagerFragment extends BaseRootFragment<CollectPagerPresenter
     private AlbumCoverDataAdapter collectAlbumAdapter;
     private AlbumCoverDataAdapter myAlbumAdapter;
     private List<AlbumCoverData> mCollectedAlbumList;
-    private List<AlbumCoverData> myAlbumList;
 
     private CreateAlbumDialogFragment createAlbumDialogFragment;
 
@@ -170,19 +166,26 @@ public class CollectPagerFragment extends BaseRootFragment<CollectPagerPresenter
     }
 
     private void initRecyclerView() {
+        // 初始化我的专辑
+        List<AlbumCoverData> myAlbumList = new ArrayList<>();
+        myAlbumAdapter = new AlbumCoverDataAdapter(R.layout.item_album_abstract, myAlbumList);
+        //collectAlbumAdapter.setOnItemClickListener((adapter, view, position) -> startArticleDetailPager(view, position));
+        myAlbumRV.setLayoutManager(new LinearLayoutManager(_mActivity));
+        // Disabled nested scrolling since Parent scrollview will scroll the content.
+        myAlbumRV.setHasFixedSize(true);
+        myAlbumRV.setNestedScrollingEnabled(false);
+        myAlbumRV.setAdapter(myAlbumAdapter);
+
+        // 初始化我收藏的专辑
         mCollectedAlbumList = new ArrayList<>();
         collectAlbumAdapter = new AlbumCoverDataAdapter(R.layout.item_album_abstract, mCollectedAlbumList);
         //collectAlbumAdapter.setOnItemClickListener((adapter, view, position) -> startArticleDetailPager(view, position));
-        mAlbumRecyclerView.setLayoutManager(new LinearLayoutManager(_mActivity));
-        mAlbumRecyclerView.setHasFixedSize(true);
-        mAlbumRecyclerView.setAdapter(collectAlbumAdapter);
+        myCollectAlbumRV.setLayoutManager(new LinearLayoutManager(_mActivity));
+        myCollectAlbumRV.setHasFixedSize(true);
+        myCollectAlbumRV.setNestedScrollingEnabled(false);
+        myCollectAlbumRV.setAdapter(collectAlbumAdapter);
 
-        myAlbumList = new ArrayList<>();
-        myAlbumAdapter = new AlbumCoverDataAdapter(R.layout.item_album_abstract, myAlbumList);
-        //collectAlbumAdapter.setOnItemClickListener((adapter, view, position) -> startArticleDetailPager(view, position));
-        myAlbumRecyclerView.setLayoutManager(new LinearLayoutManager(_mActivity));
-        myAlbumRecyclerView.setHasFixedSize(true);
-        myAlbumRecyclerView.setAdapter(myAlbumAdapter);
+
     }
 
 
