@@ -72,4 +72,15 @@ public class PreferenceHelperImpl  implements PreferenceHelper {
     public void setNoImageState(boolean b) {
         mPreferences.edit().putBoolean(Constants.NO_IMAGE_STATE, b).apply();
     }
+
+    @Override
+    public boolean getAutoCacheState() {
+        return mPreferences.getBoolean(Constants.AUTO_CACHE_STATE, true);
+    }
+
+    @Override
+    public void setAutoCacheState(boolean b) {
+        mPreferences.edit().putBoolean(Constants.AUTO_CACHE_STATE, b).apply();
+    }
+
 }

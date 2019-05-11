@@ -106,7 +106,7 @@
         <Button
             android:id="@+id/login_btn"
             style="@style/style_circle_btn"
-            android:background="@drawable/bg_conner_bottom_red"
+            android:background="@drawable/bg_conner_bottom_green"
             android:layout_marginTop="@dimen/dp_32"
             android:text="@string/login_in" />
 

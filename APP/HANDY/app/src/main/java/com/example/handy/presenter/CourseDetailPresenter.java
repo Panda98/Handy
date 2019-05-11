@@ -105,7 +105,9 @@ public class CourseDetailPresenter extends BasePresenter<CourseDetailContract.Vi
     }
 
     @Override
-    public void autoRefresh(boolean isShowError) {
+    public void autoRefresh(int courseId, boolean isShowError) {
+        getCommentList(isShowError, courseId);
+        getCourseDetail(isShowError, courseId);
 
     }
 

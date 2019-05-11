@@ -81,4 +81,18 @@ public interface PreferenceHelper {
      * @param b current no image state
      */
     void setNoImageState(boolean b);
+
+    /**
+     * Get auto cache state
+     *
+     * @return if auto cache state
+     */
+    boolean getAutoCacheState();
+
+    /**
+     * Set auto cache state
+     *
+     * @param b current auto cache state
+     */
+    void setAutoCacheState(boolean b);
 }

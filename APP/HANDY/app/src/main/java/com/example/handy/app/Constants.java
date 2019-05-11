@@ -23,6 +23,8 @@ public class Constants {
 
     public static final String NO_IMAGE_STATE = "no_image_state";
 
+    public static final String AUTO_CACHE_STATE = "auto_cache_state";
+
     /**
      * Path
      */

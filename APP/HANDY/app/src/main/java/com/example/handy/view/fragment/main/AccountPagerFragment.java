@@ -24,6 +24,7 @@ import com.example.handy.utils.JudgeUtils;
 import com.example.handy.view.activity.MessageActivity;
 import com.example.handy.view.activity.MorePublishAlbumActivity;
 import com.example.handy.view.activity.MorePublishCourseActivity;
+import com.example.handy.view.activity.SettingActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.shehuan.niv.NiceImageView;
 
@@ -103,6 +104,9 @@ public class AccountPagerFragment extends BaseRootFragment<AccountPagerPresenter
 
     @BindView(R.id.account_page_message_btn)
     LinearLayout mMessageBtn;
+
+    @BindView(R.id.account_page_setting_btn)
+    LinearLayout mSettingBtn;
 
     @Override
     public void onAttach(Context context) {
@@ -323,6 +327,14 @@ public class AccountPagerFragment extends BaseRootFragment<AccountPagerPresenter
             public void onClick(View v) {
                 Intent intentToMore = new Intent(_mActivity, MessageActivity.class);
                 startActivity(intentToMore);
+            }
+        });
+
+        mSettingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentToSetting = new Intent(_mActivity, SettingActivity.class);
+                startActivity(intentToSetting);
             }
         });
 

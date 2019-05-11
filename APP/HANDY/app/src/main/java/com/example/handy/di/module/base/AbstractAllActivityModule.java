@@ -9,6 +9,7 @@ import com.example.handy.di.module.MessageActivityModule;
 import com.example.handy.di.module.MyPublishAlbumActivityModule;
 import com.example.handy.di.module.MyPublishCourseActivityModule;
 import com.example.handy.di.module.PublishCourseActivityModule;
+import com.example.handy.di.module.SettingActivityModule;
 import com.example.handy.view.activity.AlbumDetailActivity;
 import com.example.handy.view.activity.AuthorHomepageActivity;
 import com.example.handy.view.activity.CourseDetailActivity;
@@ -23,6 +24,7 @@ import com.example.handy.view.activity.RegisterActivity;
 import com.example.handy.di.component.BaseActivityComponent;
 import com.example.handy.di.module.LoginActivityModule;
 import com.example.handy.di.module.RegisterActivityModule;
+import com.example.handy.view.activity.SettingActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -67,5 +69,8 @@ public abstract class AbstractAllActivityModule {
 
     @ContributesAndroidInjector(modules = CourseListByLabelActivityModule.class)
     abstract CourseListByLabelActivity contributesCourseListByLabelActivityModuleInjector();
+
+    @ContributesAndroidInjector(modules = SettingActivityModule.class)
+    abstract SettingActivity contributesSettingActivityModuleInjector();
 
 }

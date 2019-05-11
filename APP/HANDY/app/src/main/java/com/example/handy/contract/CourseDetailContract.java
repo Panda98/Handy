@@ -55,7 +55,7 @@ public interface CourseDetailContract {
          *
          * @param isShowError If show error
          */
-        void autoRefresh(boolean isShowError);
+        void autoRefresh(int courseId, boolean isShowError);
 
         /**
          * Load more 加载更多

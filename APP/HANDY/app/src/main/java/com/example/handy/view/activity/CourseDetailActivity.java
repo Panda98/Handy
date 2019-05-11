@@ -164,7 +164,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
 
     private void setRefresh() {
         mRefreshLayout.setOnRefreshListener(refreshLayout -> {
-            mPresenter.autoRefresh(false);
+            mPresenter.autoRefresh(courseId, false);
             refreshLayout.finishRefresh(1000);
         });
         mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
@@ -177,6 +177,12 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     protected void onViewCreated() {
         super.onViewCreated();
         initCommentRecyclerView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.autoRefresh(courseId, false);
     }
 
 
