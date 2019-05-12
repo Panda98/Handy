@@ -227,9 +227,9 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         int cropAspectX,cropAspectY,outputX,outputY;
         if(type == Constants.COURSE_COVER_UPLOAD){
             cropAspectX = 400;
-            cropAspectY = 250;
+            cropAspectY = 400;
             outputX = 400;
-            outputY = 250;
+            outputY = 400;
         }else{
             cropAspectX = 300;
             cropAspectY = 200;
@@ -327,24 +327,6 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         }
     }
 
-    private byte[] pic2Byte(String imgPath){
-        BitmapFactory.Options options = null;
-        options = new BitmapFactory.Options();
-        options.inSampleSize = 3;
-        Bitmap bitmap = BitmapFactory.decodeFile(imgPath,
-                options);
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        // 压缩图片
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byte_arr = stream.toByteArray();
-        // Base64图片转码为String
-        String encodedString = Base64.encodeToString(byte_arr, 0);
-        return byte_arr;
-    }
-
-    private void publish(){
-        mPresenter.publish(courseData);
-    }
 
     private boolean checkInput(){
         if(courseData.getCourseTitle() == null) {
