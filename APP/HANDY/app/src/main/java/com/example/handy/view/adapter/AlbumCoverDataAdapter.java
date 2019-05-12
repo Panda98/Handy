@@ -29,9 +29,9 @@ public class AlbumCoverDataAdapter extends BaseQuickAdapter<AlbumCoverData, Albu
             helper.setText(R.id.album_description, item.getAlbumDetail());
         }
         // 设置作者
-        //if (!TextUtils.isEmpty(item.getAuthorId())) {
-        //    helper.setText(R.id.recommend_course_author, item.getAuthorName());
-        //}
+        if (!TextUtils.isEmpty(item.getAuthorName())) {
+            helper.setText(R.id.album_author, item.getAuthorName());
+        }
 
         // 设置图片
         if (!TextUtils.isEmpty(item.getAlbumPic())) {

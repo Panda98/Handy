@@ -63,7 +63,7 @@ public class CourseListByLabelActivity extends BaseActivity<CourseListByLabelPre
         assert actionBar != null;
         actionBar.setDisplayShowTitleEnabled(false);
 
-        mTitleTv.setText("更多推荐教程");
+        mTitleTv.setText("分类教程");
         StatusBarUtil.setStatusColor(getWindow(), ContextCompat.getColor(this, R.color.publish_course_button_green), 1f);
         mToolbar.setNavigationOnClickListener(v -> onBackPressedSupport());
 

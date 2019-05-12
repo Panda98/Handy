@@ -40,7 +40,7 @@ public class RecommendCourseAdapter extends BaseQuickAdapter<CourseData, CourseV
         }
         // 设置作者
         if (!TextUtils.isEmpty(item.getAuthorName())) {
-            helper.setText(R.id.recommend_course_author, item.getAuthorName());
+            helper.setText(R.id.course_author, item.getAuthorName());
         }
 
         // 设置图片

@@ -18,6 +18,7 @@ import com.example.handy.core.bean.CourseData;
 import com.example.handy.core.bean.ReplyMessageData;
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.http.api.Apis;
+import com.example.handy.core.vo.CreateAlbumView;
 import com.example.handy.core.vo.LoginView;
 import com.example.handy.core.vo.PostCommentView;
 import com.example.handy.core.vo.ReplyCommentView;
@@ -30,6 +31,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.http.Query;
 
 /**
  * 对外隐藏进行网络请求的实现细节
@@ -122,13 +124,38 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse> collectCourse(int courseId, int albumId) {
-        return mApis.collectCourse(courseId, albumId);
+    public Observable<BaseResponse> collectAlbum(int userId, int albumId) {
+        return mApis.collectAlbum(userId, albumId);
     }
 
     @Override
-    public Observable<BaseResponse> unCollectCourse(int courseId, int albumId) {
-        return mApis.unCollectCourse(courseId, albumId);
+    public Observable<BaseResponse> unCollectAlbum(int userId, int albumId) {
+        return mApis.unCollectAlbum(userId, albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse<Boolean>> isCollectAlbum(int userId, int albumId) {
+        return mApis.isCollectAlbum(userId, albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse> createAlbum(CreateAlbumView createAlbumView) {
+        return mApis.createAlbum(createAlbumView);
+    }
+
+    @Override
+    public Observable<BaseResponse> deleteAlbum(int albumId) {
+        return mApis.deleteAlbum(albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse> collectCourse(int userId, int courseId, int albumId) {
+        return mApis.collectCourse(userId, courseId, albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse> unCollectCourse(int userId, int courseId, int albumId) {
+        return mApis.unCollectCourse(userId, courseId, albumId);
     }
 
     @Override

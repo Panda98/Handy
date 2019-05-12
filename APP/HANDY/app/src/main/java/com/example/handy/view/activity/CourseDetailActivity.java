@@ -3,7 +3,6 @@ package com.example.handy.view.activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.handy.R;
 import com.example.handy.app.Constants;
@@ -36,8 +34,8 @@ import com.example.handy.utils.JudgeUtils;
 import com.example.handy.utils.StatusBarUtil;
 import com.example.handy.view.adapter.CommentAdapter;
 import com.example.handy.view.adapter.CourseStepAdapter;
-import com.example.handy.view.fragment.CommentDialogFragment;
-import com.example.handy.view.fragment.SelectAlbumFragment;
+import com.example.handy.view.fragment.dialog.CommentDialogFragment;
+import com.example.handy.view.fragment.dialog.SelectAlbumFragment;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -48,9 +46,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.functions.Function;
 
 public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> implements CourseDetailContract.View {
 
@@ -168,7 +164,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
 
     private void setRefresh() {
         mRefreshLayout.setOnRefreshListener(refreshLayout -> {
-            mPresenter.autoRefresh(false);
+            mPresenter.autoRefresh(courseId, false);
             refreshLayout.finishRefresh(1000);
         });
         mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
@@ -181,6 +177,12 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     protected void onViewCreated() {
         super.onViewCreated();
         initCommentRecyclerView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.autoRefresh(courseId, false);
     }
 
 

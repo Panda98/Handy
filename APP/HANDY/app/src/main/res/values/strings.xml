@@ -23,6 +23,7 @@
     <string name="login_confirm_password_tint">请输入确认密码</string>
     <string name="login_in">登录</string>
     <string name="register">注册</string>
+    <string name="login_out">退出登录</string>
 
     <string name="or">或</string>
 
@@ -110,5 +111,18 @@
     <string name="network_err">网络错误</string>
     <string name="empty_network_error">网络错误，点击重试</string>
     <string name="empty_no_data">没有数据，点击重试</string>
+
+    //设置
+    <string name="setting_normal">通用设置</string>
+    <string name="setting_cache">自动缓存</string>
+    <string name="setting_image">无图模式</string>
+    <string name="setting_night">夜间模式</string>
+    <string name="setting_other">其它设置</string>
+    <string name="setting_feedback">意见反馈</string>
+    <string name="setting_clear">清除缓存</string>
+    <string name="setting">设置</string>
+    <string name="send_email">选择邮件客户端:</string>
+    <string name="ok">是</string>
+    <string name="no">否</string>
 
 </resources>

@@ -45,6 +45,10 @@
             android:id="@+id/login_account_edit"
             style="@style/style_circle_edit"
             android:hint="@string/login_account_tint"
+            android:lines="1"
+            android:inputType="text"
+            android:imeOptions="actionNext"
+            android:nextFocusForward="@+id/login_password_edit"
             android:layout_marginStart="@dimen/dp_6"/>
     </LinearLayout>
 
@@ -79,6 +83,7 @@
             android:id="@+id/login_password_edit"
             style="@style/style_circle_edit"
             android:hint="@string/login_password_tint"
+            android:lines="1"
             android:inputType="textPassword"
             android:layout_marginStart="@dimen/dp_6" />
     </LinearLayout>
@@ -104,7 +109,7 @@
         <Button
             android:id="@+id/login_btn"
             style="@style/style_circle_btn"
-            android:background="@drawable/bg_conner_bottom_red"
+            android:background="@drawable/bg_conner_bottom_green"
             android:layout_marginTop="@dimen/dp_32"
             android:text="@string/login_in" />
 

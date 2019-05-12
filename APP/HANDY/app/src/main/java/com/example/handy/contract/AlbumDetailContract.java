@@ -23,6 +23,37 @@ public interface AlbumDetailContract {
          * @param courseDataList List<CourseData>
          */
         void showAlbumCourseData(List<CourseData> courseDataList, boolean isRefresh);
+
+        /**
+         * 显示收藏结果
+         *
+         */
+        void showCollectResult();
+
+        /**
+         * 显示取消收藏结果
+         *
+         */
+        void showUnCollectResult();
+
+        /**
+         * 设置收藏状态
+         *
+         */
+        void setCollectStatus(boolean status);
+
+        /**
+         * 设置收藏状态
+         *
+         */
+        void showMyAlbumView();
+
+        /**
+         * 设置收藏状态
+         *
+         */
+        void showOthersAlbumView();
+
     }
 
     interface Presenter extends AbstractPresenter<AlbumDetailContract.View> {
@@ -59,9 +90,32 @@ public interface AlbumDetailContract {
         void getAlbumDetailData(boolean isShowError, int albumId);
 
         /**
-         * Collect Album 收藏专辑
+         * Get album collect status 获得专辑收藏状态
+         *
+         * @param albumId int
          */
-        //void collectAlbum();
+        void isCollectAlbum(int albumId);
+
+        /**
+         * Collect Album 收藏专辑
+         *
+         * @param albumId int
+         */
+        void collectAlbum(int albumId);
+
+        /**
+         * un Collect Album 取消收藏专辑
+         *
+         * @param albumId int
+         */
+        void unCollectAlbum(int albumId);
+
+        /**
+         * 删除收藏的专辑
+         *
+         * @param albumId int
+         */
+        void deleteAlbum(int albumId);
 
     }
 }

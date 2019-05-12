@@ -4,7 +4,6 @@ import com.handy.support.entity.Follow;
 import com.handy.support.pojo.Follow.dto.FollowDTO;
 import com.handy.support.pojo.Follow.dto.FollowUserInfo;
 import com.handy.support.pojo.UserCourse.dto.UsersCoursesBrief;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 

@@ -22,7 +22,14 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".view.activity.CourseListByLabelActivity"></activity>
+        <activity android:name=".view.activity.SettingActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".view.activity.CourseListByLabelActivity" />
         <activity android:name=".view.activity.AuthorHomepageActivity" />
         <activity android:name=".view.activity.MessageActivity">
 

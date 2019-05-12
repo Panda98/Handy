@@ -346,8 +346,8 @@
 
             <com.like.LikeButton
                 android:id="@+id/like_course_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
                 app:circle_end_color="@android:color/holo_blue_dark"
                 app:circle_start_color="@android:color/holo_blue_bright"
                 app:dots_primary_color="@android:color/holo_blue_light"

@@ -19,6 +19,7 @@ import com.example.handy.core.bean.ReplyMessageData;
 import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.http.HttpHelper;
 import com.example.handy.core.prefs.PreferenceHelper;
+import com.example.handy.core.vo.CreateAlbumView;
 import com.example.handy.core.vo.LoginView;
 import com.example.handy.core.vo.PostCommentView;
 import com.example.handy.core.vo.ReplyCommentView;
@@ -123,13 +124,38 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse> collectCourse(int courseId, int albumId) {
-        return mHttpHelper.collectCourse(courseId, albumId);
+    public Observable<BaseResponse> collectAlbum(int userId, int albumId) {
+        return mHttpHelper.collectAlbum(userId, albumId);
     }
 
     @Override
-    public Observable<BaseResponse> unCollectCourse(int courseId, int albumId) {
-        return mHttpHelper.unCollectCourse(courseId, albumId);
+    public Observable<BaseResponse> unCollectAlbum(int userId, int albumId) {
+        return mHttpHelper.unCollectAlbum(userId, albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse<Boolean>> isCollectAlbum(int userId, int albumId) {
+        return mHttpHelper.isCollectAlbum(userId, albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse> createAlbum(CreateAlbumView createAlbumView) {
+        return mHttpHelper.createAlbum(createAlbumView);
+    }
+
+    @Override
+    public Observable<BaseResponse> deleteAlbum(int albumId) {
+        return mHttpHelper.deleteAlbum(albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse> collectCourse(int userId, int courseId, int albumId) {
+        return mHttpHelper.collectCourse(userId, courseId, albumId);
+    }
+
+    @Override
+    public Observable<BaseResponse> unCollectCourse(int userId, int courseId, int albumId) {
+        return mHttpHelper.unCollectCourse(userId, courseId, albumId);
     }
 
     @Override
@@ -276,6 +302,16 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     @Override
     public void setNoImageState(boolean b) {
         mPreferenceHelper.setNoImageState(b);
+    }
+
+    @Override
+    public boolean getAutoCacheState() {
+        return mPreferenceHelper.getAutoCacheState();
+    }
+
+    @Override
+    public void setAutoCacheState(boolean b) {
+        mPreferenceHelper.setAutoCacheState(b);
     }
 
 
