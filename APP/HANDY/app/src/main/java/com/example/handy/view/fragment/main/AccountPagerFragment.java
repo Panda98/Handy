@@ -193,9 +193,14 @@ public class AccountPagerFragment extends BaseRootFragment<AccountPagerPresenter
                 @Override
                 public void onClick(View v) {
 
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, v, getString(R.string.share_view));
-                    JudgeUtils.startCourseDetailActivity(_mActivity,
-                            options,
+                    //ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, v, getString(R.string.share_view));
+                    //JudgeUtils.startCourseDetailActivity(_mActivity,
+                    //        options,
+                    //        course1.getCourseId(),
+                    //        course1.getCourseTitle()
+                    //);
+
+                    JudgeUtils.startCourseDetailActivityWithoutOption(_mActivity,
                             course1.getCourseId(),
                             course1.getCourseTitle()
                     );
@@ -224,9 +229,13 @@ public class AccountPagerFragment extends BaseRootFragment<AccountPagerPresenter
                 @Override
                 public void onClick(View v) {
 
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, v, getString(R.string.share_view));
-                    JudgeUtils.startCourseDetailActivity(_mActivity,
-                            options,
+                    //ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, v, getString(R.string.share_view));
+                    //JudgeUtils.startCourseDetailActivity(_mActivity,
+                    //        options,
+                    //        course2.getCourseId(),
+                    //        course2.getCourseTitle()
+                    //);
+                    JudgeUtils.startCourseDetailActivityWithoutOption(_mActivity,
                             course2.getCourseId(),
                             course2.getCourseTitle()
                     );

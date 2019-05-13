@@ -1,5 +1,6 @@
 ﻿<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -289,21 +290,23 @@
                         <LinearLayout
                             android:layout_width="200dp"
                             android:layout_height="@dimen/dp_80"
-                            android:layout_marginLeft="15dp"
+                            android:layout_marginStart="15dp"
                             android:orientation="vertical">
 
                             <!--教程1标题-->
                             <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="@dimen/dp_18"
+                                android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp">
 
                                 <TextView
                                     android:id="@+id/account_page_course1_title"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/normal_text"
-                                    android:textSize="14dp" />
+                                    android:maxLines="1"
+                                    android:textColor="@color/black"
+                                    android:text="树脂画教程"
+                                    android:textSize="@dimen/sp_18"/>
 
                             </LinearLayout>
                             <!--教程1简介-->
@@ -314,9 +317,13 @@
 
                                 <TextView
                                     android:id="@+id/account_page_course1_intro"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="10dp" />
+                                    android:layout_marginTop="@dimen/dp_5"
+                                    android:maxLines="2"
+                                    android:textSize="@dimen/sp_15"
+                                    android:textColor="@color/black"
+                                    android:text=""/>
 
                             </LinearLayout>
                         </LinearLayout>
@@ -352,15 +359,17 @@
                             <!--教程1标题-->
                             <LinearLayout
                                 android:layout_width="wrap_content"
-                                android:layout_height="@dimen/dp_18"
+                                android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp">
 
                                 <TextView
                                     android:id="@+id/account_page_course2_title"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/normal_text"
-                                    android:textSize="14dp" />
+                                    android:maxLines="1"
+                                    android:textColor="@color/black"
+                                    android:text="树脂画教程"
+                                    android:textSize="@dimen/sp_18" />
 
                             </LinearLayout>
                             <!--教程1简介-->
@@ -371,9 +380,13 @@
 
                                 <TextView
                                     android:id="@+id/account_page_course2_intro"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="10dp" />
+                                    android:layout_marginTop="@dimen/dp_5"
+                                    android:maxLines="2"
+                                    android:textSize="@dimen/sp_15"
+                                    android:textColor="@color/black"
+                                    android:text="" />
 
                             </LinearLayout>
                         </LinearLayout>
@@ -452,7 +465,8 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center">
+                                android:gravity="center"
+                                android:orientation="vertical">
 
                                 <!--专辑1-->
                                 <com.shehuan.niv.NiceImageView
@@ -461,20 +475,17 @@
                                     android:layout_height="@dimen/dp_80"
                                     android:scaleType="centerCrop"
                                     app:corner_radius="@dimen/dp_10" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:paddingTop="@dimen/dp_10">
 
                                 <TextView
                                     android:id="@+id/account_page_album1_title"
                                     android:layout_width="@dimen/dp_80"
                                     android:layout_height="@dimen/dp_20"
+                                    android:layout_marginTop="@dimen/dp_10"
                                     android:textColor="@color/normal_text"
-                                    android:textSize="@dimen/dp_10" />
+                                    android:maxLength="13"
+                                    android:maxLines="2"
+                                    android:textAlignment="center"
+                                    android:text="@string/search_tint" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -488,7 +499,8 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center">
+                                android:gravity="center"
+                                android:orientation="vertical">
 
                                 <!--专辑1-->
                                 <com.shehuan.niv.NiceImageView
@@ -497,20 +509,17 @@
                                     android:layout_height="@dimen/dp_80"
                                     android:scaleType="centerCrop"
                                     app:corner_radius="@dimen/dp_10" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:paddingTop="@dimen/dp_10">
 
                                 <TextView
                                     android:id="@+id/account_page_album2_title"
                                     android:layout_width="@dimen/dp_80"
                                     android:layout_height="@dimen/dp_20"
+                                    android:layout_marginTop="@dimen/dp_10"
                                     android:textColor="@color/normal_text"
-                                    android:textSize="@dimen/dp_10" />
+                                    android:maxLength="13"
+                                    android:maxLines="2"
+                                    android:textAlignment="center"
+                                    android:text="@string/search_tint" />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -524,7 +533,8 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center">
+                                android:gravity="center"
+                                android:orientation="vertical">
 
                                 <!--专辑1-->
                                 <com.shehuan.niv.NiceImageView
@@ -533,21 +543,19 @@
                                     android:layout_height="@dimen/dp_80"
                                     android:scaleType="centerCrop"
                                     app:corner_radius="@dimen/dp_10" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:paddingTop="@dimen/dp_10">
 
                                 <TextView
                                     android:id="@+id/account_page_album3_title"
                                     android:layout_width="@dimen/dp_80"
                                     android:layout_height="@dimen/dp_20"
+                                    android:layout_marginTop="@dimen/dp_10"
                                     android:textColor="@color/normal_text"
-                                    android:textSize="@dimen/dp_10" />
+                                    android:maxLength="13"
+                                    android:maxLines="2"
+                                    android:textAlignment="center"
+                                    android:text="@string/search_tint" />
                             </LinearLayout>
+
 
                         </LinearLayout>
 

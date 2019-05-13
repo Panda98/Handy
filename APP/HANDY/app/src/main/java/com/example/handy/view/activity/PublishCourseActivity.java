@@ -94,6 +94,8 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
     private int materialNum = 1;
     private int stepNum = 2+materialNum;
 
+    private boolean isCoverSelected = false;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_publish_course;
@@ -158,10 +160,10 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
                         uploadPic(view,position,Constants.COURSE_COVER_UPLOAD);
                         break;
                     case R.id.add_material_row:
-                        addMaterialRow(view);
+                        addMaterialRow(view,position);
                         break;
                     case R.id.add_step_row:
-                        addStepRow(view);
+                        addStepRow(view,position);
                         break;
                     case R.id.step_picture_upload:
                         int stepIndex = ((MultipleItem)adapter.getItem(position)).getIndex();
@@ -203,17 +205,19 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         }
     }
 
-    protected void addMaterialRow(View view){
+    protected void addMaterialRow(View view,int position){
         data.add(materialNum,new MultipleItem(MultipleItem.MATERIAL_ITEM,materialNum-1));
-        multiAdapter.replaceData(data);
+//        multiAdapter.replaceData(data);
+        multiAdapter.notifyItemChanged(position);
         materialNum++;
         stepNum++;
+        materialItemData.add(new MaterialItemData());
     }
 
-    protected void addStepRow(View view){
+    protected void addStepRow(View view,int position){
 
         data.add(stepNum,new MultipleItem(MultipleItem.STEP_ITEM,stepNum-1-materialNum));
-        multiAdapter.replaceData(data);
+        multiAdapter.notifyItemChanged(position);
         stepNum++;
     }
 
@@ -227,9 +231,9 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         int cropAspectX,cropAspectY,outputX,outputY;
         if(type == Constants.COURSE_COVER_UPLOAD){
             cropAspectX = 400;
-            cropAspectY = 250;
+            cropAspectY = 400;
             outputX = 400;
-            outputY = 250;
+            outputY = 400;
         }else{
             cropAspectX = 300;
             cropAspectY = 200;
@@ -280,7 +284,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         super.onActivityResult(requestCode, resultCode, data);
         // 图片选择结果回调
         if (requestCode == Constants.COURSE_COVER_UPLOAD && resultCode == RESULT_OK && data != null) {
-            //todo: 处理封面图上传
+
             List<String> pathList = data.getStringArrayListExtra("result");
 
             // UI图片显示
@@ -290,14 +294,13 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
             TextView textView = recyclerView.findViewById(R.id.publish_course_header).findViewById(R.id.cover_pic_text);
             textView.setVisibility(View.INVISIBLE);
 
-            //图片byte数组上传
             imgPath.add(0,pathList.get(0));
 
-
             System.out.println(pathList);
+            isCoverSelected = true;
         }
         if(requestCode >= Constants.STEP_PIC_UPLOAD && resultCode == RESULT_OK && data != null){
-            //todo: 处理步骤图上传
+
             int index = requestCode-Constants.STEP_PIC_UPLOAD-1;//从0开始
             List<String> pathList = data.getStringArrayListExtra("result");
 
@@ -327,31 +330,13 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         }
     }
 
-    private byte[] pic2Byte(String imgPath){
-        BitmapFactory.Options options = null;
-        options = new BitmapFactory.Options();
-        options.inSampleSize = 3;
-        Bitmap bitmap = BitmapFactory.decodeFile(imgPath,
-                options);
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        // 压缩图片
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byte_arr = stream.toByteArray();
-        // Base64图片转码为String
-        String encodedString = Base64.encodeToString(byte_arr, 0);
-        return byte_arr;
-    }
-
-    private void publish(){
-        mPresenter.publish(courseData);
-    }
 
     private boolean checkInput(){
         if(courseData.getCourseTitle() == null) {
             Toast.makeText(this, "请输入标题", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(imgPath.get(0)==null) {
+        if(!isCoverSelected) {
             Toast.makeText(this, "请上传一张封面图", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -387,9 +372,9 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
 
                 @Override
                 public void afterTextChanged(Editable editable) {
-                    if(index>=materialItemData.size()){
-                        materialItemData.add(new MaterialItemData());
-                    }
+//                    if(index>=materialItemData.size()){
+//                        materialItemData.add(new MaterialItemData());
+//                    }
                     materialItemData.get(index).setItemName(editable.toString());
 
                 }

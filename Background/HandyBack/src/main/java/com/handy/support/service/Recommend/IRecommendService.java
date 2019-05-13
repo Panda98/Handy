@@ -13,7 +13,7 @@ public interface IRecommendService {
     void UserUlikeItem(int uid,int item);
     void UserLikeItem(int uid,int item,float value);
     void UserUlikeItem(int uid,int item,float value);
-    void UserFollowSomeone(int uid,int follow);
+    void UserFollowSomeone(int uid,int follow);//考虑是否去掉
     void UserUfollowSomeone(int uid,int follow);
     void UserlikeAlbum(int uid,int album);
     void UserUlikeAlbum(int uid,int album);

@@ -11,10 +11,15 @@ import com.handy.support.service.Follow.IFollowService;
 import com.handy.support.utils.GsonSetting;
 import com.handy.support.utils.status.ErrorEnum;
 import com.handy.support.utils.status.ReturnCode;
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.handy.support.service.User.IUserService;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Pan on 2019/4/11.
@@ -70,7 +75,15 @@ public class UserController {
      */
     @RequestMapping(value = "/user/regist",produces = "application/json; charset=utf-8",method = RequestMethod.POST)
     public String regist(@RequestBody UserAuthVO userAuthVO){
-        ErrorEnum res = iUserService.addUser(userAuthVO.getUsername(), userAuthVO.getPassword());
+        String pattern = ".+@.+\\.com";
+        ErrorEnum res;
+        if(!Pattern.matches(pattern,userAuthVO.getUsername())){
+            res = ErrorEnum.EMAIL_FAIL;
+            ReturnCode<UserVO> code = new ReturnCode<UserVO>();
+            code.setErrorEnum(res);
+            return code.returnHandler();
+        }
+        res = iUserService.addUser(userAuthVO.getUsername(), userAuthVO.getPassword());
 
         UserVO vo = null;
         if(res == ErrorEnum.SUCCESS){

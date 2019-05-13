@@ -115,9 +115,13 @@ public class ReceivedCommentFragment extends BaseRootFragment<ReceivedCommentPag
             return;
         }
 
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, view, getString(R.string.share_view));
-        JudgeUtils.startCourseDetailActivity(_mActivity,
-                options,
+        //ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, view, getString(R.string.share_view));
+        //JudgeUtils.startCourseDetailActivity(_mActivity,
+        //        options,
+        //        mCommentAdapter.getData().get(position).getCourseId(),
+        //        mCommentAdapter.getData().get(position).getCourseTitle()
+        //);
+        JudgeUtils.startCourseDetailActivityWithoutOption(_mActivity,
                 mCommentAdapter.getData().get(position).getCourseId(),
                 mCommentAdapter.getData().get(position).getCourseTitle()
         );

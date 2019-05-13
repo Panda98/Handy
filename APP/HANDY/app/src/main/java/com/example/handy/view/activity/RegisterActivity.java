@@ -23,10 +23,8 @@ import butterknife.BindView;
 
 public class RegisterActivity extends BaseActivity<RegisterPresenter> implements RegisterContract.View {
 
-    @BindView(R.id.common_toolbar)
+    @BindView(R.id.register_toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.common_toolbar_title_tv)
-    TextView mTitleTv;
     @BindView(R.id.register_account_edit)
     EditText mAccountEdit;
     @BindView(R.id.register_password_edit)
@@ -45,10 +43,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     protected void initToolbar() {
         StatusBarUtil.immersive(this);
         StatusBarUtil.setPaddingSmart(this, mToolbar);
-        mToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.register_bac));
-        mTitleTv.setText(R.string.register);
-        mTitleTv.setTextColor(ContextCompat.getColor(this, R.color.white));
-        mTitleTv.setTextSize(20);
         mToolbar.setNavigationOnClickListener(v -> onBackPressedSupport());
     }
 
