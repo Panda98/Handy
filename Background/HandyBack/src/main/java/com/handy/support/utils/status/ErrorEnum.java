@@ -11,6 +11,7 @@ public enum ErrorEnum{
     WRONG_PASSWORD(1001, "您输入的密码不正确!"),
     REGISTER_FAIL(2001,"注册失败！"),
     EMAIL_FAIL(2002,"该邮箱已被使用！"),
+    EMAIL_INVALID(2003,"该邮箱号不合法"),
     DATABASE_BUSY(3001,"数据库忙!"),
     UPLOAD_FAIL(4002,"上传失败！"),
     PUBLISH_FAIL(4001,"发布失败！"),
