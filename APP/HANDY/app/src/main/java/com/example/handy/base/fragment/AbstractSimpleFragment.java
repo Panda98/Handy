@@ -50,8 +50,8 @@ public abstract class AbstractSimpleFragment extends SupportFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        RefWatcher refWatcher = HandyAPP.getRefWatcher(_mActivity);
-        refWatcher.watch(this);
+        //RefWatcher refWatcher = HandyAPP.getRefWatcher(_mActivity);
+        //refWatcher.watch(this);
     }
 
     @Override

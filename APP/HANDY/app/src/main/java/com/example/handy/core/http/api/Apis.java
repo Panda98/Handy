@@ -61,7 +61,7 @@ public interface Apis {
      * @return 注册数据
      */
     @POST("user/regist")
-    Observable<BaseResponse<LoginData>> getRegisterData(@Body LoginView loginData);
+    Observable<BaseResponse<UserInfoData>> getRegisterData(@Body LoginView loginData);
 
     /**
      * 退出登录

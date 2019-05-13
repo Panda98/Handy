@@ -10,6 +10,7 @@ import com.example.handy.contract.LoginContract;
 import com.example.handy.contract.RegisterContract;
 import com.example.handy.core.DataManager;
 import com.example.handy.core.bean.LoginData;
+import com.example.handy.core.bean.UserInfoData;
 import com.example.handy.core.event.LoginEvent;
 import com.example.handy.core.vo.LoginView;
 import com.example.handy.utils.RxUtils;
@@ -45,10 +46,10 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.View> impl
         addSubscribe(mDataManager.getRegisterData(registerView)
                 .compose(RxUtils.rxSchedulerHelper())
                 .compose(RxUtils.handleResult())
-                .subscribeWith(new BaseObserver<LoginData>(mView,
+                .subscribeWith(new BaseObserver<UserInfoData>(mView,
                         HandyAPP.getInstance().getString(R.string.register_fail)) {
                     @Override
-                    public void onNext(LoginData loginData) {
+                    public void onNext(UserInfoData loginData) {
                         mView.showRegisterSuccess();
                     }
                 }));
