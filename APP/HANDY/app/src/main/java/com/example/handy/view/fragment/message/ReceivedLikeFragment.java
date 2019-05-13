@@ -115,9 +115,13 @@ public class ReceivedLikeFragment extends BaseRootFragment<ReceiveLikePagerPrese
             return;
         }
 
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, view, getString(R.string.share_view));
-        JudgeUtils.startCourseDetailActivity(_mActivity,
-                options,
+        //ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, view, getString(R.string.share_view));
+        //JudgeUtils.startCourseDetailActivity(_mActivity,
+        //        options,
+        //        mLikeAdapter.getData().get(position).getCourseId(),
+        //        mLikeAdapter.getData().get(position).getCourseTitle()
+        //);
+        JudgeUtils.startCourseDetailActivityWithoutOption(_mActivity,
                 mLikeAdapter.getData().get(position).getCourseId(),
                 mLikeAdapter.getData().get(position).getCourseTitle()
         );

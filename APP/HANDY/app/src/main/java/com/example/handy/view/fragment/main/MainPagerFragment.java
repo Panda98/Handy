@@ -333,9 +333,14 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
             return;
         }
 
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, view, getString(R.string.share_view));
-        JudgeUtils.startCourseDetailActivity(_mActivity,
-                options,
+        //ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, view, getString(R.string.share_view));
+        //JudgeUtils.startCourseDetailActivity(_mActivity,
+        //        options,
+        //        mAdapter.getData().get(position).getCourseId(),
+        //        mAdapter.getData().get(position).getCourseTitle()
+        //);
+        //ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, view, getString(R.string.share_view));
+        JudgeUtils.startCourseDetailActivityWithoutOption(_mActivity,
                 mAdapter.getData().get(position).getCourseId(),
                 mAdapter.getData().get(position).getCourseTitle()
         );
