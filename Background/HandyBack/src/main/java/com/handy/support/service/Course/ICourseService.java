@@ -64,12 +64,9 @@ public interface ICourseService {
 
 //    List<CourseSimpleVO> getSearchedCourse(String text) throws IOException, SolrServerException;
 
-    FTPClient getFTPClient(String ftpHost, String ftpUserName,
-                           String ftpPassword, int ftpPort);
+    FTPClient getFTPClient(String ftpHost, String ftpUserName, String ftpPassword, int ftpPort);
 
-    String uploadImg(String ftpHost, String ftpUserName,
-                    String ftpPassword, int ftpPort, String ftpPath,
-                    String fileName, MultipartFile file);
+    String uploadImg(String ftpHost, String ftpUserName, String ftpPassword, int ftpPort, String ftpPath, String fileName, MultipartFile file);
 
 
 

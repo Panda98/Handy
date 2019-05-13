@@ -125,17 +125,17 @@ public class RecommendServiceImpl implements IRecommendService{
             UserUlikeItem(uid,list.get(i));
         }
     }
-    public void UserlikeAlbum(int uid,int album){
+    public void UserlikeAlbum(int uid,int album,float value){
         int count=0;
         List<Integer> list= recommendMapper.getCoursesFromAlbum(album,count++,10);
         while(list.size()==10){
             for(int i=0;i<list.size();i++) {
-                UserLikeItem(uid,list.get(i));
+                UserLikeItem(uid,list.get(i),value);
             }
             list=recommendMapper.getCoursesFromAlbum(album,count++,10);
         }
         for(int i=0;i<list.size();i++) {
-            UserLikeItem(uid,list.get(i));
+            UserLikeItem(uid,list.get(i),value);
         }
     }
     public void UserUlikeAlbum(int uid,int album){
