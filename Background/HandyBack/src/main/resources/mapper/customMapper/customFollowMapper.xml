@@ -26,7 +26,7 @@
        delete from follow where user_id=#{followId} and follower_id=#{userId}
    </delete>
     <select id="hasFollowed" resultMap="com.handy.support.mapper.FollowMapper.BaseResultMap">
-  select * from follow where follower_id=#{userId}  and user_id=#{followId} </select>
+  select * from follow where follower_id=#{userId}  and user_id=#{followId} limit 0,1 </select>
     <select id="getFansNum" resultType="java.lang.Integer">
         select count(*) from follow where user_id=#{userId}
     </select>
