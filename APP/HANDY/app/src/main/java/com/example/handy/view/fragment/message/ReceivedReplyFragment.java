@@ -126,9 +126,13 @@ public class ReceivedReplyFragment extends BaseRootFragment<ReceivedReplyPagerPr
             return;
         }
 
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, view, getString(R.string.share_view));
-        JudgeUtils.startCourseDetailActivity(_mActivity,
-                options,
+        //ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(_mActivity, view, getString(R.string.share_view));
+        //JudgeUtils.startCourseDetailActivity(_mActivity,
+        //        options,
+        //        mReplyAdapter.getData().get(position).getInCourseId(),
+        //        mReplyAdapter.getData().get(position).getInCourseTitle()
+        //);
+        JudgeUtils.startCourseDetailActivityWithoutOption(_mActivity,
                 mReplyAdapter.getData().get(position).getInCourseId(),
                 mReplyAdapter.getData().get(position).getInCourseTitle()
         );

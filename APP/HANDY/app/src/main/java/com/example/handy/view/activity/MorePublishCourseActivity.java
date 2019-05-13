@@ -136,9 +136,13 @@ public class MorePublishCourseActivity extends BaseActivity<MorePublishCoursePre
             return;
         }
 
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, view, getString(R.string.share_view));
-        JudgeUtils.startCourseDetailActivity(this,
-                options,
+        //ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, view, getString(R.string.share_view));
+        //JudgeUtils.startCourseDetailActivity(this,
+        //        options,
+        //        mAdapter.getData().get(position).getCourseId(),
+        //        mAdapter.getData().get(position).getCourseTitle()
+        //);
+        JudgeUtils.startCourseDetailActivityWithoutOption(this,
                 mAdapter.getData().get(position).getCourseId(),
                 mAdapter.getData().get(position).getCourseTitle()
         );

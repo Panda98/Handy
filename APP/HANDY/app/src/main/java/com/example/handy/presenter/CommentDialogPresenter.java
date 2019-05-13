@@ -1,5 +1,7 @@
 package com.example.handy.presenter;
 
+import android.text.TextUtils;
+
 import com.example.handy.R;
 import com.example.handy.app.HandyAPP;
 import com.example.handy.base.presenter.BasePresenter;
@@ -27,6 +29,10 @@ public class CommentDialogPresenter extends BasePresenter<CommentDialogContract.
 
     @Override
     public void comment(int courseId, String content) {
+        if (TextUtils.isEmpty(content)) {
+            mView.showSnackBar("评论内容不能为空");
+            return;
+        }
         PostCommentView postCommentView = new PostCommentView(getLoginAccount(), courseId, content);
         addSubscribe(mDataManager.postComment(postCommentView)
                 .compose(RxUtils.rxSchedulerHelper())

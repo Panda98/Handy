@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp_54"
+        android:layout_marginBottom="@dimen/dp_54"
         app:srlPrimaryColor="@color/white">
 
         <com.scwang.smartrefresh.layout.header.ClassicsHeader
@@ -170,13 +171,21 @@
                             android:layout_marginTop="@dimen/dp_5"
                             android:background="@color/shallow_green" />
 
-                        <ListView
-                            android:id="@+id/course_detail_item"
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_10"
-                            android:divider="@color/transparent"
-                            android:scrollbars="none" />
+                            android:descendantFocusability="blocksDescendants">
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/course_detail_item"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:divider="@color/transparent"
+                                android:scrollbars="none" />
+
+                        </RelativeLayout>
+
 
 
                     </LinearLayout>
@@ -202,11 +211,20 @@
                             android:layout_marginTop="@dimen/dp_5"
                             android:background="@color/shallow_green" />
 
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/course_detail_step"
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_10" />
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:descendantFocusability="blocksDescendants">
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/course_detail_step"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                />
+
+                        </RelativeLayout>
+
 
                     </LinearLayout>
 
@@ -260,11 +278,11 @@
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     <!--divide line-->
-    <ImageView
+    <View
         android:layout_alignTop="@+id/bottom_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/divide_line"/>
+        android:layout_height="1dp"
+        android:background="@color/divide_color"/>
     <!--bottom bar-->
     <LinearLayout
         android:id="@+id/bottom_bar"

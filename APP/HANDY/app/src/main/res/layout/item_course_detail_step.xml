@@ -37,7 +37,6 @@
         android:layout_marginTop="@dimen/dp_10"
         android:textSize="@dimen/sp_20"
         android:textColor="@color/text_content"
-        android:text="AB胶2.5:1比例混合搅拌均匀静置（搅拌久一点才会更清澈，气泡不用管，它会自己慢慢消失的~~）"
         />
 
     <!--image-->

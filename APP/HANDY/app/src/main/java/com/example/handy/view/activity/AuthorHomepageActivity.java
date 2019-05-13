@@ -276,9 +276,13 @@ public class AuthorHomepageActivity extends BaseActivity<AuthorHomepagePresenter
             return;
         }
 
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, view, getString(R.string.share_view));
-        JudgeUtils.startCourseDetailActivity(this,
-                options,
+        //ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, view, getString(R.string.share_view));
+        //JudgeUtils.startCourseDetailActivity(this,
+        //        options,
+        //        courseAdapter.getData().get(position).getCourseId(),
+        //        courseAdapter.getData().get(position).getCourseTitle()
+        //);
+        JudgeUtils.startCourseDetailActivityWithoutOption(this,
                 courseAdapter.getData().get(position).getCourseId(),
                 courseAdapter.getData().get(position).getCourseTitle()
         );
