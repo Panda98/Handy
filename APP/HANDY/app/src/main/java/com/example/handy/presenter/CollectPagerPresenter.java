@@ -42,6 +42,8 @@ public class CollectPagerPresenter extends BasePresenter<CollectPagerContract.Vi
     public void autoRefresh(boolean isShowError) {
         isRefresh = true;
         mCurrentPage = 0;
+        getMyAlbumDataList(isShowError);
+        getCollectedAlbumDataList(isShowError);
     }
 
     @Override

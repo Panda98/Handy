@@ -39,7 +39,7 @@
             android:layout_height="wrap_content" />
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
 
         <LinearLayout
@@ -120,20 +120,20 @@
                         />
 
                 </RelativeLayout>
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_10">
-                    <!--教程-->
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/my_collect_album_recycler_view"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/white"
-                            />
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:descendantFocusability="blocksDescendants">
 
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/my_collect_album_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        />
 
-                </LinearLayout>
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
         </ScrollView>

@@ -163,6 +163,7 @@ public class AlbumDetailActivity extends BaseActivity<AlbumDetailPresenter> impl
                     public void onClick(DialogInterface dialogInterface, int i) {
                         mPresenter.deleteAlbum(albumId);
                         CommonUtils.showSnackMessage(AlbumDetailActivity.this, "删除成功");
+                        onBackPressedSupport();
                     }
                 });
 
