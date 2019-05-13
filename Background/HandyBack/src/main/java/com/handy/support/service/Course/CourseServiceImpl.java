@@ -153,7 +153,11 @@ public class CourseServiceImpl implements ICourseService {
 
     public List<CourseSimpleVO> getRecommendList(Integer userId,Integer page_no, Integer n){
         List<CourseSimpleVO> simpleList=new ArrayList<CourseSimpleVO>();
-        List<Course> courseList=iCourseMapper.getAll(page_no*n,n);
+        Integer count=iCourseMapper.getLength();
+
+        List<Course> courseList=null;
+        if(count<page_no*n)
+            courseList=iCourseMapper.getAll(page_no*n,n);
 
         for(Course c:courseList){
             if(c !=null) {
