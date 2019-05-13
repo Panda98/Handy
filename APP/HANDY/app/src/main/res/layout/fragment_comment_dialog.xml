@@ -25,29 +25,27 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_10"
         android:padding="@dimen/dp_10"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:background="@color/white">
 
         <EditText
             android:id="@+id/comment_edit_text"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
             android:padding="@dimen/dp_5"
             android:ems="10"
             android:minLines="5"
             android:gravity="top"
-            android:layout_marginTop="20dp"
             android:background="@drawable/bg_comment"
             android:inputType="textMultiLine" />
 
         <Button
             android:id="@+id/comment_button"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_20"
-            android:layout_gravity="bottom"
-            android:layout_weight="1"
+            android:layout_marginTop="@dimen/dp_10"
+            android:padding="@dimen/dp_10"
+            android:layout_gravity="end"
             android:background="@drawable/bg_conner_bottom_green"
             android:text="评论"
             android:textColor="@color/white"
