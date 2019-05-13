@@ -96,17 +96,15 @@ public class CourseController {
             tempList.add(recommendList.get(i).getItemID());
         }
         List<CourseSimpleVO> subResult=recommendService.getCourseList(tempList);
-       // if(subResult.size()<n){
+        if(subResult.size()<n){
             List<CourseSimpleVO> list=iCourseService.getRecommendList(uid,page_no,n);
-            if(list.size()==0&&subResult.size()==0) {
+            if(list.size()!=0||subResult.size()!=0) {
                 error = ErrorEnum.REQUEST_FAIL;
-            }
-            else {
                 for (int i = subResult.size(), j = 0; i < n; i++, j++) {
                     subResult.add(list.get(j));
                 }
             }
-       // }
+        }
         ReturnCode<List<CourseSimpleVO>> code = new ReturnCode<List<CourseSimpleVO>>(error, subResult);
         return code.returnHandler();
     }
