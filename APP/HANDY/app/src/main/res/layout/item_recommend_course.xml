@@ -47,6 +47,7 @@
                 android:id="@+id/recommend_course_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
                 android:textColor="@color/black"
                 android:text="树脂画教程"
                 android:textSize="@dimen/sp_18"

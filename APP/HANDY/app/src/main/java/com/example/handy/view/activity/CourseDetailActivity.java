@@ -33,6 +33,7 @@ import com.example.handy.utils.ImageLoader;
 import com.example.handy.utils.JudgeUtils;
 import com.example.handy.utils.StatusBarUtil;
 import com.example.handy.view.adapter.CommentAdapter;
+import com.example.handy.view.adapter.CourseItemAdapter;
 import com.example.handy.view.adapter.CourseStepAdapter;
 import com.example.handy.view.fragment.dialog.CommentDialogFragment;
 import com.example.handy.view.fragment.dialog.SelectAlbumFragment;
@@ -76,7 +77,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
     TextView mCourseIntro;
 
     @BindView(R.id.course_detail_item)
-    ListView mItemLv;
+    RecyclerView mItemRv;
 
     @BindView(R.id.course_detail_step)
     RecyclerView mStepRv;
@@ -95,6 +96,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
 
     ArrayAdapter<String> mItemArrayAdapter;
     CourseStepAdapter mCourseStepAdapter;
+    CourseItemAdapter mCourseItemAdapter;
     private CommentAdapter mCommentAdapter;
 
     private SelectAlbumFragment searchDialogFragment;
@@ -102,6 +104,7 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
 
     private List<CommentData> commentDataList;
     private List<StepData> stepDataList;
+    private List<ItemData> itemDataList;
 
     private int courseId;
     private int followId;
@@ -304,22 +307,25 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         mPresenter.isFollow(this.followId);
 
         this.stepDataList = courseDetailData.getStepList();
+        this.itemDataList = courseDetailData.getItemList();
 
-        String[] itemNameList = new String[courseDetailData.getItemList().size()];
-        for (ItemData i : courseDetailData.getItemList()) {
-            itemNameList[i.getItemTag()-1] = i.getItemName();
-        }
-        System.out.println(Arrays.toString(itemNameList));
+        //String[] itemNameList = new String[courseDetailData.getItemList().size()];
+        //for (ItemData i : courseDetailData.getItemList()) {
+        //    itemNameList[i.getItemTag()-1] = i.getItemName();
+        //}
+        //System.out.println(Arrays.toString(itemNameList));
+        //
+        //mItemArrayAdapter = new ArrayAdapter<String>(
+        //        this,
+        //        R.layout.item_course_detail_material,
+        //        R.id.course_detail_item_name,
+        //        itemNameList
+        //);
+        //mItemRv.setNestedScrollingEnabled(false);
+        //mItemRv.setAdapter(mItemArrayAdapter);
+        //setListViewHeightBasedOnChildren_2(mItemRv);
 
-        mItemArrayAdapter = new ArrayAdapter<String>(
-                this,
-                R.layout.item_course_detail_material,
-                R.id.course_detail_item_name,
-                itemNameList
-        );
-        mItemLv.setAdapter(mItemArrayAdapter);
-        setListViewHeightBasedOnChildren(mItemLv);
-
+        initItem();
         initStep();
 
     }
@@ -389,11 +395,21 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         }
     }
 
+    private void initItem() {
+        mCourseItemAdapter = new CourseItemAdapter(R.layout.item_course_detail_material, this.itemDataList);
+        //mAdapter.setOnItemClickListener((adapter, view, position) -> startArticleDetailPager(view, position));
+        mItemRv.setLayoutManager(new LinearLayoutManager(this));
+        mItemRv.setHasFixedSize(true);
+        mItemRv.setNestedScrollingEnabled(false);
+        mItemRv.setAdapter(mCourseItemAdapter);
+    }
+
     private void initStep() {
         mCourseStepAdapter = new CourseStepAdapter(R.layout.item_course_detail_step, this.stepDataList);
         //mAdapter.setOnItemClickListener((adapter, view, position) -> startArticleDetailPager(view, position));
         mStepRv.setLayoutManager(new LinearLayoutManager(this));
         mStepRv.setHasFixedSize(true);
+        mStepRv.setNestedScrollingEnabled(false);
         mStepRv.setAdapter(mCourseStepAdapter);
     }
 
@@ -406,6 +422,39 @@ public class CourseDetailActivity extends BaseActivity<CourseDetailPresenter> im
         );
     }
 
+
+
+    /*
+     * 当ScrollView 与 LiseView 同时滚动计算高度的方法
+     * 设置listview 的高度
+     * 参数：listivew的findviewbyid
+     * */
+    public static void setListViewHeightBasedOnChildren_2(ListView listView) {
+        try{
+            // 获取ListView对应的Adapter
+            ListAdapter listAdapter = listView.getAdapter();
+            if (listAdapter == null) {
+                return;
+            }
+
+            int totalHeight = 0;
+            for (int i = 0, len = listAdapter.getCount(); i < len; i++) {
+                // listAdapter.getCount()返回数据项的数目
+                View listItem = listAdapter.getView(i, null, listView);
+                // 计算子项View 的宽高
+                listItem.measure(0, 0);
+                // 统计所有子项的总高度
+                totalHeight += listItem.getMeasuredHeight();
+            }
+            ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = totalHeight+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+            // listView.getDividerHeight()获取子项间分隔符占用的高度
+            // params.height最后得到整个ListView完整显示需要的高度
+            listView.setLayoutParams(params);
+        }catch (Exception e){
+            //Helper.saveFileLog("setListViewHeightBasedOnChildren___"+e.toString());
+        }
+    }
     //ListView 高度
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
