@@ -9,6 +9,7 @@ import com.handy.support.pojo.UserCourse.dto.UsersCoursesBrief;
 import com.handy.support.pojo.UserCourse.vo.UserCourseUpdate;
 import com.handy.support.service.Follow.FollowServiceImpl;
 import com.handy.support.service.Recommend.RecommendServiceImpl;
+import com.handy.support.utils.status.ErrorEnum;
 import com.handy.support.utils.status.ReturnCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,7 @@ public class FollowController {
     @Autowired
     RecommendServiceImpl recommendService;
     @RequestMapping(value="/follows",method = RequestMethod.GET)
-    public String getFollowers(int uid,int page_no,int n){
+    public String getFollows(int uid,int page_no,int n){
        /* List<Follow> followList=followService.getFollows(uid,page_no,n);
         List<FollowVO>followVOS=new LinkedList<FollowVO>();
         for(int i=0;i<followList.size();i++){
@@ -45,18 +46,24 @@ public class FollowController {
     }
     @RequestMapping(value="/follow",method = RequestMethod.GET)
     public String followSomeone(FollowVO follow){
+        ErrorEnum error=ErrorEnum.SUCCESS;
         FollowDTO followPush=new FollowDTO();
         followPush.setFollow(follow);
-        followService.followOther(followPush);
-        ReturnCode<Boolean> code = new ReturnCode<Boolean>(true);
+        boolean result=followService.followOther(followPush);
+        if(result==false)
+            error=ErrorEnum.FOLLOW_FAIL;
+        ReturnCode<Boolean> code = new ReturnCode<Boolean>(error,result);
         return code.returnHandler();
     }
     @RequestMapping(value="/unfollow",method = RequestMethod.GET)
-    public String unFollowSomeone(FollowVO followVOo){
+    public String unFollowSomeone(FollowVO followVO){
+        ErrorEnum error=ErrorEnum.SUCCESS;
         FollowDTO followDTO=new FollowDTO();
-        followDTO.setFollow(followVOo);
-        followService.unFollowOther(followDTO);
-        ReturnCode<Boolean> code = new ReturnCode<Boolean>(true);
+        followDTO.setFollow(followVO);
+        boolean result=followService.unFollowOther(followDTO);
+        if(result==false)
+            error=ErrorEnum.UNFOLLOW_FAIL;
+        ReturnCode<Boolean> code = new ReturnCode<Boolean>(error,result);
         return code.returnHandler();
     }
     @RequestMapping(value="/hasFollowed",method = RequestMethod.GET)

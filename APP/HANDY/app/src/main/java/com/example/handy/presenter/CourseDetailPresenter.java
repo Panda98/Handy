@@ -41,7 +41,7 @@ public class CourseDetailPresenter extends BasePresenter<CourseDetailContract.Vi
     @Override
     public void getCourseDetail(boolean isShowError, int courseId) {
 
-        addSubscribe(mDataManager.getCourseDetail(courseId)
+        addSubscribe(mDataManager.getCourseDetail(courseId, getLoginAccount())
                 .compose(RxUtils.rxSchedulerHelper())
                 .compose(RxUtils.handleResult())
                 .subscribeWith(new BaseObserver<CourseDetailData>(mView,
