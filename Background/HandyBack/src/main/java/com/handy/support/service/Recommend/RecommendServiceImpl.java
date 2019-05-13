@@ -33,12 +33,16 @@ public class RecommendServiceImpl implements IRecommendService{
         recommendMapper.insertSelective(itemLike);
     }
     public void updatePreference(int uid,int item,float value){
-        UserItemLike temp= recommendMapper.selectRecord(uid,item);
+        List<UserItemLike> temp= recommendMapper.selectRecord(uid,item);
+        if(temp.size()>1){
+            recommendMapper.deleteRecord(uid,item);
+            temp=null;
+        }
         UserItemLike like=new UserItemLike();
         like.setItemId(item);
         like.setUserId(uid);
         like.setUpdateTime(new Date());
-        if(temp==null){
+        if(temp==null||temp.size()==0){
             like.setPreference(value);
             recommendMapper.insertSelective(like);
         }
@@ -48,53 +52,69 @@ public class RecommendServiceImpl implements IRecommendService{
         }
     }
     public void UserLikeItem(int uid,int item){
-       UserItemLike temp= recommendMapper.selectRecord(uid,item);
+       List<UserItemLike> temp= recommendMapper.selectRecord(uid,item);
+        if(temp.size()>1){
+            recommendMapper.deleteRecord(uid,item);
+            temp=null;
+        }
         UserItemLike like=new UserItemLike();
         like.setItemId(item);
         like.setUserId(uid);
         like.setUpdateTime(new Date());
-       if(temp==null){
+       if(temp==null||temp.size()==0){
            like.setPreference(1);
            recommendMapper.insertSelective(like);
        }
        else{
-           like.setPreference(temp.getPreference()+1);
+           like.setPreference(temp.get(0).getPreference()+1);
            recommendMapper.updateRecord(like);
        }
     }
     public void UserUlikeItem(int uid,int item){
-        UserItemLike temp= recommendMapper.selectRecord(uid,item);
-        if(temp!=null){
+        List<UserItemLike> temp= recommendMapper.selectRecord(uid,item);
+        if(temp.size()>1){
+            recommendMapper.deleteRecord(uid,item);
+            temp=null;
+        }
+        if(temp!=null&&temp.size()!=0){
             UserItemLike like=new UserItemLike();
             like.setItemId(item);
             like.setUserId(uid);
-            like.setPreference(temp.getPreference()-0.7f);
+            like.setPreference(temp.get(0).getPreference()-0.7f);
             like.setUpdateTime(new Date());
             recommendMapper.updateRecord(like);
         }
     }
     public void UserLikeItem(int uid,int item,float value){
-        UserItemLike temp= recommendMapper.selectRecord(uid,item);
+        List<UserItemLike> temp= recommendMapper.selectRecord(uid,item);
+        if(temp.size()>1){
+            recommendMapper.deleteRecord(uid,item);
+            temp=null;
+        }
         UserItemLike like=new UserItemLike();
         like.setItemId(item);
         like.setUserId(uid);
         like.setUpdateTime(new Date());
-        if(temp==null){
+        if(temp==null||temp.size()==0){
             like.setPreference(value);
             recommendMapper.insertSelective(like);
         }
         else{
-            like.setPreference(temp.getPreference()+value);
+            like.setPreference(temp.get(0).getPreference()+value);
             recommendMapper.updateRecord(like);
         }
     }
     public void UserUlikeItem(int uid,int item,float value){
-        UserItemLike temp= recommendMapper.selectRecord(uid,item);
-        if(temp!=null){
+        List<UserItemLike> temp= recommendMapper.selectRecord(uid,item);
+        if(temp.size()>1){
+            recommendMapper.deleteRecord(uid,item);
+            temp=null;
+        }
+        if(temp!=null&&temp.size()!=0){
             UserItemLike like=new UserItemLike();
             like.setItemId(item);
             like.setUserId(uid);
-            like.setPreference(temp.getPreference()-value);
+            like.setPreference(temp.get(0).getPreference()-value);
             like.setUpdateTime(new Date());
             recommendMapper.updateRecord(like);
         }
