@@ -89,9 +89,9 @@
     <string name="publish_level">难度等级</string>
     <string name="publish_select_level">请选择一个合适的难度等级</string>
     <string name="level_1">入门</string>
-    <string name="level_2">进阶</string>
-    <string name="level_3">熟练</string>
-    <string name="level_4">挑战</string>
+    <string name="level_2">普通</string>
+    <string name="level_3">困难</string>
+    <string name="level_4">专业</string>
 
     <string name="publish_fail">发布失败！</string>
 

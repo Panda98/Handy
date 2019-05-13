@@ -333,7 +333,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
             Toast.makeText(this, "请输入标题", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(imgPath.get(0)==null) {
+        if(courseData.getCourseCover() == null) {
             Toast.makeText(this, "请上传一张封面图", Toast.LENGTH_SHORT).show();
             return false;
         }
