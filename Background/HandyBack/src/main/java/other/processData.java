@@ -23,7 +23,7 @@ public class processData {
     @After("execution(* com.handy.web.controller.CourseController.likeCourse(int,int)) "+
             "&& args(userId,courseId)")
     public void likeCourse(int userId,int courseId){
-        recommendService.UserLikeItem(userId,courseId);
+        recommendService.UserLikeItem(userId,courseId,2);
     }
     @After("execution(* com.handy.web.controller.CourseController.unlike(int,int))"+
             "&& args(userId,courseId)")
@@ -43,14 +43,14 @@ public class processData {
     @After("execution(* com.handy.web.controller.AlbumController.collectAlbum(int,int))"+
             "&& args(uid,albumid)")
     public void collectAlbum(int uid,int albumid){
-        recommendService.UserlikeAlbum(uid,albumid);
+        recommendService.UserlikeAlbum(uid,albumid,2);
     }
     @After("execution(* com.handy.web.controller.AlbumController.uncollectAlbum(int,int))"+
             "&& args(uid,albumid)")
     public void unCollectAlbum(int uid,int albumid){
        recommendService.UserUlikeAlbum(uid,albumid);
     }
-    @After("execution(* com.handy.web.controller.FollowController.followSomeone(..))"+
+   /* @After("execution(* com.handy.web.controller.FollowController.followSomeone(..))"+
             "&& args(follow)")
     public void followSomeone(FollowVO follow){
         //recommendService.UserFollowSomeone(follow.getUid(),follow.getFollow_id());
@@ -59,6 +59,11 @@ public class processData {
             "&& args(follow)")
     public void unFollowSomeone(FollowVO follow){
       //recommendService.UserUfollowSomeone(follow.getUid(),follow.getFollow_id());
+    }*/
+    @After("execution(* com.handy.web.controller.CourseController.getCourseDetail(int,int))"+
+            "&& args(courseId,uid)")
+    public void viewCourse(int courseId,int uid){
+        recommendService.UserLikeItem(uid,courseId);
     }
 
 }

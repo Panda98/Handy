@@ -15,7 +15,7 @@ public interface IRecommendService {
     void UserUlikeItem(int uid,int item,float value);
     void UserFollowSomeone(int uid,int follow);//考虑是否去掉
     void UserUfollowSomeone(int uid,int follow);
-    void UserlikeAlbum(int uid,int album);
+    void UserlikeAlbum(int uid,int album,float value);
     void UserUlikeAlbum(int uid,int album);
     List<UserItemLike> getUpdates(Date lastUpdate);
     List<CourseSimpleVO> getCourseList(List<Long>courseList);
