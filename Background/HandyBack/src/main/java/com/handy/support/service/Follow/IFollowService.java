@@ -10,9 +10,9 @@ import java.util.List;
 public interface IFollowService {
     List<Follow> getFollows(int uid, int page_no, int n);
     List<FollowUserInfo> getFollowUsersInfo(int uid, int page_no, int n);
-    void followOther(FollowDTO followDTO);
+    boolean followOther(FollowDTO followDTO);
     List<UsersCoursesBrief> getFollowsUpdate(List<Integer>list, int page_no, int n);
-    void unFollowOther(FollowDTO followDTO);
+    boolean unFollowOther(FollowDTO followDTO);
     boolean hasFollowedSomeone(int uid,int followId);
     List<Follow> getFollowsAll(int uid);
     int getFollowNum(int uid);

@@ -13,10 +13,10 @@ import com.handy.support.pojo.comment.vo.CourseComReq;
 import java.util.List;
 
 public interface ICommentService {
-     public List<Comment> getCourseComment(CourseComReq req);
-     public List<CommentDTO> getFullCourseComment(CourseComReq req);
-     public List<ReplyUserDTO> getCommentReplyUserLimited(ComRepReq req);
-     public void pushCommentToCourse(CommentPush req);
-     public List<CommentReply> getCommentReply(ComRepReq req) ;
-     public void pushCommentReply(ReplyPush req);
+      List<Comment> getCourseComment(CourseComReq req);
+      List<CommentDTO> getFullCourseComment(CourseComReq req);
+      List<ReplyUserDTO> getCommentReplyUserLimited(ComRepReq req);
+      boolean pushCommentToCourse(CommentPush req);
+      List<CommentReply> getCommentReply(ComRepReq req) ;
+      boolean pushCommentReply(ReplyPush req);
 }
