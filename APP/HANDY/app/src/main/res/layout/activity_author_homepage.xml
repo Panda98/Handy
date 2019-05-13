@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".view.activity.AuthorHomepageActivity">
 
     <include layout="@layout/common_toolbar_no_scroll" />
@@ -26,6 +27,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
                 android:paddingStart="@dimen/dp_20"
                 android:paddingEnd="@dimen/dp_20"
                 android:orientation="vertical">
