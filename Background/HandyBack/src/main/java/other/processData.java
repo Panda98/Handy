@@ -53,12 +53,12 @@ public class processData {
     @After("execution(* com.handy.web.controller.FollowController.followSomeone(..))"+
             "&& args(follow)")
     public void followSomeone(FollowVO follow){
-        recommendService.UserFollowSomeone(follow.getUid(),follow.getFollow_id());
+        //recommendService.UserFollowSomeone(follow.getUid(),follow.getFollow_id());
     }
     @After("execution(* com.handy.web.controller.FollowController.unFollowSomeone(..))"+
             "&& args(follow)")
     public void unFollowSomeone(FollowVO follow){
-      recommendService.UserUfollowSomeone(follow.getUid(),follow.getFollow_id());
+      //recommendService.UserUfollowSomeone(follow.getUid(),follow.getFollow_id());
     }
 
 }

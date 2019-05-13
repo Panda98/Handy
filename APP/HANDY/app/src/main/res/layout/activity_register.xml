@@ -7,7 +7,10 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <include layout="@layout/common_toolbar_no_scroll" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/register_toolbar"
+        style="@style/AppTheme.Toolbar"
+        app:navigationIcon="@drawable/ic_arrow_back_black_24dp" />
 
     <TextView
         android:id="@+id/login_tv"
@@ -48,6 +51,7 @@
                 android:id="@+id/register_account_edit"
                 style="@style/style_circle_edit"
                 android:hint="@string/register_account_hint"
+                android:inputType="textWebEmailAddress"
                 android:layout_marginStart="@dimen/dp_6"/>
         </LinearLayout>
 
@@ -136,7 +140,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@id/confirm_password_divider"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/dp_40"
         android:gravity="center_vertical">
@@ -144,7 +147,7 @@
         <Button
             android:id="@+id/register_btn"
             style="@style/style_circle_btn"
-            android:background="@drawable/bg_conner_green"
+            android:background="@drawable/bg_conner_bottom_green"
             android:layout_marginTop="@dimen/dp_32"
             android:text="@string/register" />
 

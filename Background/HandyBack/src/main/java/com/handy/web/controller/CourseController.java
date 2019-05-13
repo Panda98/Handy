@@ -94,7 +94,7 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/course/detail", produces = "application/json; charset=utf-8",method = RequestMethod.GET)
-    public String getCourseDetail(int courseId){
+    public String getCourseDetail(int courseId,int uid){
         CourseDetailVO detailVO=iCourseService.getCourseDetail(courseId);
         ErrorEnum error = null;
         if (detailVO == null) {
