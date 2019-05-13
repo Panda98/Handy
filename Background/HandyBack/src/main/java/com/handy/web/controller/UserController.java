@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.handy.support.service.User.IUserService;
 
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -78,7 +79,7 @@ public class UserController {
         String pattern = ".+@.+\\.com";
         ErrorEnum res;
         if(!Pattern.matches(pattern,userAuthVO.getUsername())){
-            res = ErrorEnum.EMAIL_FAIL;
+            res = ErrorEnum.EMAIL_INVALID;
             ReturnCode<UserVO> code = new ReturnCode<UserVO>();
             code.setErrorEnum(res);
             return code.returnHandler();
@@ -89,6 +90,14 @@ public class UserController {
         if(res == ErrorEnum.SUCCESS){
             User user = iUserService.getUserByEmail(userAuthVO.getUsername());
             vo = iUserService.revert2VO(user);
+            UserModifyVO modifyVO = new UserModifyVO();
+            modifyVO.setUserId(vo.getId());
+            Date date = new Date();
+            modifyVO.setNickName("handy"+date.getTime());
+            modifyVO.setUserPic("http://106.13.106.249:8080/static/img/upload/190513_220618324.jpg");
+            vo.setNickname("handy"+date.getTime());
+            vo.setUserPic("http://106.13.106.249:8080/static/img/upload/190513_220618324.jpg");
+            modify(modifyVO);
 
         }
         ReturnCode<UserVO> code = new ReturnCode<UserVO>(res,vo);
