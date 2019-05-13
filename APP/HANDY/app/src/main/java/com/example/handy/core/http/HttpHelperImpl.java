@@ -54,7 +54,7 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse<LoginData>> getRegisterData(LoginView loginView) {
+    public Observable<BaseResponse<UserInfoData>> getRegisterData(LoginView loginView) {
         return mApis.getRegisterData(loginView);
     }
 

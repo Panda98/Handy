@@ -49,7 +49,7 @@ public interface HttpHelper {
      * @param loginView user name password
      * @return 登陆数据
      */
-    Observable<BaseResponse<LoginData>> getRegisterData(LoginView loginView);
+    Observable<BaseResponse<UserInfoData>> getRegisterData(LoginView loginView);
 
     /**
      * 退出登录

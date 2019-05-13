@@ -50,7 +50,7 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse<LoginData>> getRegisterData(LoginView loginView) {
+    public Observable<BaseResponse<UserInfoData>> getRegisterData(LoginView loginView) {
         return mHttpHelper.getRegisterData(loginView);
     }
 
