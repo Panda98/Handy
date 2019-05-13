@@ -118,7 +118,7 @@ public interface Apis {
      * @return 教程详情信息
      */
     @GET("course/detail")
-    Observable<BaseResponse<CourseDetailData>> getCourseDetail(@Query("courseId")int courseId);
+    Observable<BaseResponse<CourseDetailData>> getCourseDetail(@Query("courseId")int courseId, @Query("uid")int userId);
 
     /**
      * 关注

@@ -97,7 +97,7 @@ public interface HttpHelper {
      *
      * @return 教程详情信息
      */
-    Observable<BaseResponse<CourseDetailData>> getCourseDetail(int courseId);
+    Observable<BaseResponse<CourseDetailData>> getCourseDetail(int courseId, int userId);
 
     /**
      * 关注
