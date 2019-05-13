@@ -59,7 +59,7 @@ public class MorePublishAlbumActivity extends BaseActivity<MorePublishAlbumPrese
         assert actionBar != null;
         actionBar.setDisplayShowTitleEnabled(false);
 
-        mTitleTv.setText("我发布的专辑");
+        mTitleTv.setText("发布的专辑");
         StatusBarUtil.setStatusColor(getWindow(), ContextCompat.getColor(this, R.color.publish_course_button_green), 1f);
         mToolbar.setNavigationOnClickListener(v -> onBackPressedSupport());
 

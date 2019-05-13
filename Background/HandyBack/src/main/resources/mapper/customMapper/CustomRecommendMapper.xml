@@ -85,4 +85,7 @@
             and course_id=-1
         </if>
     </select>
+    <delete id="deleteRecord">
+        delete from recommend where user_id=#{userId} and item_id=#{itemId}
+    </delete>
 </mapper>
