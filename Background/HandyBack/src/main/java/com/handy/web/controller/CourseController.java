@@ -21,8 +21,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.text.DateFormat;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +41,7 @@ public class CourseController {
     private Gson gson;
     @Autowired
     private Recommend recommend;
+    Date lastModified;
 
     /**
      * 获取热门推荐
@@ -66,7 +69,22 @@ public class CourseController {
             if (recommend.isHasInit() == false) {
                 recommend.init();
             } else {
-                recommend.refresh();
+                if(lastModified==null) {
+                    lastModified =new Date();
+                            recommend.refresh();
+                }
+                else{//至少十五分钟后进行下一次更新
+                    Calendar c = Calendar.getInstance();
+                    //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    Date thisTime=new Date();
+                    c.setTime(lastModified);
+                    c.add(Calendar.MINUTE,15);
+                    Date nextTime=c.getTime();
+                    if(nextTime.before(thisTime)){
+                        lastModified =new Date();
+                        recommend.refresh();
+                    }
+                }
             }
             recommendList = recommend.getRecommend(uid, page_no, n);
         }
