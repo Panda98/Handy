@@ -131,6 +131,7 @@ public class AlbumController {
         AlbumDto dto = new AlbumDto();
         BeanUtils.copyProperties(albumVO,dto);
         if(dto.getAlbumPic() == null){
+            dto.setAlbumPic("http://106.13.106.249:8080/static/img/upload/190513_220618324.jpg");
         }
         ErrorEnum errorEnum = albumService.createAlbum(dto);
 

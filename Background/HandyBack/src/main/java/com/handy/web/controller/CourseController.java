@@ -270,7 +270,7 @@ public class CourseController {
                 DateFormat df = new SimpleDateFormat("yyMMdd_HHmmssSSS");
                 String date = df.format(new Date());
                 String filename = date+".jpg";
-                imgUrl = iCourseService.uploadImg("106.13.106.249", "handy", "handy", 21, "/usr/local/tomcat/apache-tomcat-9.0.17/webapps/HandyBack_war_exploded/static/img/upload", filename, file);
+                imgUrl = iCourseService.uploadImg("106.13.106.249", "handy", "handycraft@205", 21, "/usr/local/tomcat/apache-tomcat-9.0.17/webapps/HandyBack_war_exploded/static/img/upload", filename, file);
                 if(imgUrl == null)
                     error = ErrorEnum.UPLOAD_FAIL;
                 else

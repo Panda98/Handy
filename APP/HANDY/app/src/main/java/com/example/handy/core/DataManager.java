@@ -89,8 +89,8 @@ public class DataManager implements HttpHelper, PreferenceHelper {
     }
 
     @Override
-    public Observable<BaseResponse<CourseDetailData>> getCourseDetail(int courseId) {
-        return mHttpHelper.getCourseDetail(courseId);
+    public Observable<BaseResponse<CourseDetailData>> getCourseDetail(int courseId, int userId) {
+        return mHttpHelper.getCourseDetail(courseId, userId);
     }
 
     @Override

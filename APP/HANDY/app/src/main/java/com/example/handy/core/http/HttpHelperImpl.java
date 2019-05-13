@@ -89,8 +89,8 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResponse<CourseDetailData>> getCourseDetail(int courseId) {
-        return mApis.getCourseDetail(courseId);
+    public Observable<BaseResponse<CourseDetailData>> getCourseDetail(int courseId, int userId) {
+        return mApis.getCourseDetail(courseId, userId);
     }
 
     @Override
