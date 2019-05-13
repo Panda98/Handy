@@ -23,7 +23,7 @@ public class processData {
     @After("execution(* com.handy.web.controller.CourseController.likeCourse(int,int)) "+
             "&& args(userId,courseId)")
     public void likeCourse(int userId,int courseId){
-        recommendService.UserLikeItem(userId,courseId);
+        recommendService.UserLikeItem(userId,courseId,5);
     }
     @After("execution(* com.handy.web.controller.CourseController.unlike(int,int))"+
             "&& args(userId,courseId)")
@@ -33,17 +33,17 @@ public class processData {
     @After("execution(* com.handy.web.controller.CourseController.collect(int,int,int))" +
            "&& args(uid,courseId,albumId)")
    public void collectCourse(int uid,int courseId,int albumId){
-       recommendService.UserLikeItem(uid,courseId,2);
+       recommendService.UserLikeItem(uid,courseId,10);
     }
     @After("execution(* com.handy.web.controller.CourseController.uncollect(int,int,int))"+
             "&& args(uid,courseId,albumId)")
     public void unCollectCourse(int uid,int courseId,int albumId){
-        recommendService.UserLikeItem(uid,courseId,1.5f);
+        recommendService.UserLikeItem(uid,courseId,8);
     }
     @After("execution(* com.handy.web.controller.AlbumController.collectAlbum(int,int))"+
             "&& args(uid,albumid)")
     public void collectAlbum(int uid,int albumid){
-        recommendService.UserlikeAlbum(uid,albumid);
+        recommendService.UserlikeAlbum(uid,albumid,2);
     }
     @After("execution(* com.handy.web.controller.AlbumController.uncollectAlbum(int,int))"+
             "&& args(uid,albumid)")
@@ -59,6 +59,11 @@ public class processData {
             "&& args(follow)")
     public void unFollowSomeone(FollowVO follow){
       recommendService.UserUfollowSomeone(follow.getUid(),follow.getFollow_id());
+    }
+    @After("execution(* com.handy.web.controller.CourseController.getCourseDetail(int,int))"+
+            "&& args(courseId,uid)")
+    public void viewCourse(int courseId,int uid){
+        recommendService.UserLikeItem(uid,courseId);
     }
 
 }

@@ -11,10 +11,16 @@ import com.handy.support.service.Follow.IFollowService;
 import com.handy.support.utils.GsonSetting;
 import com.handy.support.utils.status.ErrorEnum;
 import com.handy.support.utils.status.ReturnCode;
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.handy.support.service.User.IUserService;
+
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Pan on 2019/4/11.
@@ -70,12 +76,28 @@ public class UserController {
      */
     @RequestMapping(value = "/user/regist",produces = "application/json; charset=utf-8",method = RequestMethod.POST)
     public String regist(@RequestBody UserAuthVO userAuthVO){
-        ErrorEnum res = iUserService.addUser(userAuthVO.getUsername(), userAuthVO.getPassword());
+        String pattern = ".+@.+\\.com";
+        ErrorEnum res;
+        if(!Pattern.matches(pattern,userAuthVO.getUsername())){
+            res = ErrorEnum.EMAIL_INVALID;
+            ReturnCode<UserVO> code = new ReturnCode<UserVO>();
+            code.setErrorEnum(res);
+            return code.returnHandler();
+        }
+        res = iUserService.addUser(userAuthVO.getUsername(), userAuthVO.getPassword());
 
         UserVO vo = null;
         if(res == ErrorEnum.SUCCESS){
             User user = iUserService.getUserByEmail(userAuthVO.getUsername());
             vo = iUserService.revert2VO(user);
+            UserModifyVO modifyVO = new UserModifyVO();
+            modifyVO.setUserId(vo.getId());
+            Date date = new Date();
+            modifyVO.setNickName("handy"+date.getTime());
+            modifyVO.setUserPic("http://106.13.106.249:8080/static/img/upload/190513_220618324.jpg");
+            vo.setNickname("handy"+date.getTime());
+            vo.setUserPic("http://106.13.106.249:8080/static/img/upload/190513_220618324.jpg");
+            modify(modifyVO);
 
         }
         ReturnCode<UserVO> code = new ReturnCode<UserVO>(res,vo);

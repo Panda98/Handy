@@ -28,6 +28,14 @@ public class UserServiceImpl implements IUserService{
     private UserLabelMapper userLabelMapper;
 
     public ErrorEnum addUser(String username, String password){
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        criteria.andEmailEqualTo(username);
+        example.or(criteria);
+        List<User> searchUser = userMapper.selectByExample(example);
+        if(searchUser.size() != 0){
+            return ErrorEnum.EMAIL_FAIL;
+        }
         User user = new User(username,password);
         try{
             userMapper.insertSelective(user);

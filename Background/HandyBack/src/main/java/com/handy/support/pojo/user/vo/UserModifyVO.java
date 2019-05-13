@@ -59,7 +59,8 @@ public class UserModifyVO {
     public UserDto revert2DTO(){
         UserDto userDto = new UserDto();
         BeanUtils.copyProperties(this,userDto);
-        userDto.setSex(this.sex.equals("男")?(byte)1:2);
+        if(this.sex != null)
+            userDto.setSex(this.sex.equals("男")?(byte)1:2);
 
 
         try{
