@@ -35,7 +35,7 @@ public class HandyAPP extends Application implements HasActivityInjector {
             return;
         }
 
-        refWatcher = LeakCanary.install(this);
+        //refWatcher = LeakCanary.install(this);
         instance = this;
 
 

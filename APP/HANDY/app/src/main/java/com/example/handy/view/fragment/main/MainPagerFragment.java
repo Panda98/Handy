@@ -67,7 +67,7 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
     private GridView albumGridView;
 
     // 更多推荐专辑按钮
-    private TextView albumMoreBtn;
+    //private TextView albumMoreBtn;
 
     //定义以及初始化Menu数据
     private List<Map<String,Object>> dataList;
@@ -226,15 +226,15 @@ public class MainPagerFragment extends BaseRootFragment<MainPagerPresenter>
         indicator = mHeaderGroup.findViewById(R.id.main_pager_indicator);
         gridView = mHeaderGroup.findViewById(R.id.main_pager_gridView);
         albumGridView = mHeaderGroup.findViewById(R.id.main_pager_recommend_album);
-        albumMoreBtn = mHeaderGroup.findViewById(R.id.main_pager_album_more);
-
-        albumMoreBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //startActivity(new Intent(getActivity(), CourseListByLabelActivity.class));
-
-            }
-        });
+        //albumMoreBtn = mHeaderGroup.findViewById(R.id.main_pager_album_more);
+        //
+        //albumMoreBtn.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View view) {
+        //        //startActivity(new Intent(getActivity(), CourseListByLabelActivity.class));
+        //
+        //    }
+        //});
 
         initMenu();
     }
