@@ -66,7 +66,7 @@ public class MessageController {
         return code.returnHandler();
     }
     @RequestMapping(value = "/courseLike",method = GET)
-    public String getMessageCourseComment(int uid,int page_no,int n){
+    public String getMessageCourseLike(int uid,int page_no,int n){
             List<FavorDTO> list=messageService.getFavorMessage(uid,page_no,n);
             List<FavorVO> result=new ArrayList<FavorVO>();
             for(int i=0;i<list.size();i++){
