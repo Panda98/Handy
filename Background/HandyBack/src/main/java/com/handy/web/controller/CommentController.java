@@ -6,6 +6,7 @@ import com.handy.support.pojo.comment.dto.ReplyPush;
 import com.handy.support.pojo.comment.dto.ReplyUserDTO;
 import com.handy.support.pojo.comment.vo.*;
 import com.handy.support.service.Comment.CommentServiceImpl;
+import com.handy.support.utils.status.ErrorEnum;
 import com.handy.support.utils.status.ReturnCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,18 +47,24 @@ public class CommentController {
     }
     @RequestMapping(value="/push",produces = "application/json; charset=utf-8",method = RequestMethod.POST)
     public String pushComment(@RequestBody  ComPush req){
+        ErrorEnum error=ErrorEnum.SUCCESS;
         CommentPush commentPush=new CommentPush();
         commentPush.setComment(req);
-        commentService.pushCommentToCourse(commentPush);
-        ReturnCode<Boolean> code = new ReturnCode<Boolean>(true);
+        boolean result=commentService.pushCommentToCourse(commentPush);
+        if(result==false)
+            error=ErrorEnum.PUSHCOMMENT_FAIL;
+        ReturnCode<Boolean> code = new ReturnCode<Boolean>(error,result);
         return code.returnHandler();
     }
     @RequestMapping(value="/reply",produces = "application/json; charset=utf-8",method = POST)
     public String replyComment(@RequestBody  RepComReq req){
+        ErrorEnum error=ErrorEnum.SUCCESS;
         ReplyPush replyPush=new ReplyPush();
         replyPush.setReply(req);
-        commentService.pushCommentReply(replyPush);
-        ReturnCode<Boolean> code = new ReturnCode<Boolean>(true);
+        boolean result=commentService.pushCommentReply(replyPush);
+        if(result==false)
+            error=ErrorEnum.REPLY_FAIL;
+        ReturnCode<Boolean> code = new ReturnCode<Boolean>(error,result);
         return code.returnHandler();
     }
 }

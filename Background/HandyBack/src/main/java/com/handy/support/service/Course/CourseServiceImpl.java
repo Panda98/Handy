@@ -151,22 +151,20 @@ public class CourseServiceImpl implements ICourseService {
         return simpleList;
     }
 
-    public List<CourseSimpleVO> getRecommendList(Integer userId,Integer page_no, Integer n){
-        List<CourseSimpleVO> simpleList=new ArrayList<CourseSimpleVO>();
-        Integer count=iCourseMapper.getLength();
+    public List<CourseSimpleVO> getRecommendList(Integer userId,Integer page_no, Integer n) {
+        List<CourseSimpleVO> simpleList = new ArrayList<CourseSimpleVO>();
+        Integer count = iCourseMapper.getLength();
 
-        List<Course> courseList=null;
-        if(count<page_no*n)
-            courseList=iCourseMapper.getAll(page_no*n,n);
+            List<Course> courseList = iCourseMapper.getAll(page_no * n, n);
 
-        for(Course c:courseList){
-            if(c !=null) {
-                Integer id = c.getCourseId();
-                CourseSimpleVO simpleVO = new CourseSimpleVO(id, c.getCourseTitle(), c.getCourseCover(), c.getCourseIntro(), userMapper.selectByPrimaryKey(c.getUserId()).getNickName(), c.getLevelId(), this.getLabelList(id), c.getDiyLabel());
-                simpleList.add(simpleVO);
+            for (Course c : courseList) {
+                if (c != null) {
+                    Integer id = c.getCourseId();
+                    CourseSimpleVO simpleVO = new CourseSimpleVO(id, c.getCourseTitle(), c.getCourseCover(), c.getCourseIntro(), userMapper.selectByPrimaryKey(c.getUserId()).getNickName(), c.getLevelId(), this.getLabelList(id), c.getDiyLabel());
+                    simpleList.add(simpleVO);
+                }
             }
-        }
-        return simpleList;
+            return simpleList;
     }
 
     public CourseDetailVO getCourseDetail(Integer courseId){

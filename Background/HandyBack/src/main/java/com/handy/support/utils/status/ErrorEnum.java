@@ -23,8 +23,11 @@ public enum ErrorEnum{
     LIKE_FAIL(8001,"点赞失败"),
     UNLIKE_FAIL(8002,"取消点赞失败!"),
     COMMENT_FAIL(9001,"评论失败!"),
-    ALBUM_CREATE_FAIL(7001,"创建专辑失败！");
-
+    ALBUM_CREATE_FAIL(7001,"创建专辑失败！"),
+    FOLLOW_FAIL(501,"关注出错"),
+    UNFOLLOW_FAIL(502,"取关用户不存在"),
+    PUSHCOMMENT_FAIL(503,"教程不存在"),
+    REPLY_FAIL(504,"评论不存在");
     /**
      * 状态码
      */

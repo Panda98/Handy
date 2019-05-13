@@ -95,10 +95,10 @@ public class CourseController {
         for(int i=0;i<recommendList.size();i++){
             tempList.add(recommendList.get(i).getItemID());
         }
-        List<CourseSimpleVO>subResult=recommendService.getCourseList(tempList);
-        if(subResult.size()<n){
+        List<CourseSimpleVO> subResult=recommendService.getCourseList(tempList);
+       // if(subResult.size()<n){
             List<CourseSimpleVO> list=iCourseService.getRecommendList(uid,page_no,n);
-            if(list==null&&subResult.size()==0) {
+            if(list.size()==0&&subResult.size()==0) {
                 error = ErrorEnum.REQUEST_FAIL;
             }
             else {
@@ -106,7 +106,7 @@ public class CourseController {
                     subResult.add(list.get(j));
                 }
             }
-        }
+       // }
         ReturnCode<List<CourseSimpleVO>> code = new ReturnCode<List<CourseSimpleVO>>(error, subResult);
         return code.returnHandler();
     }
