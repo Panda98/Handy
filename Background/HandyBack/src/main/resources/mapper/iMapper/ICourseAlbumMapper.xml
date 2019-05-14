@@ -13,6 +13,7 @@
         LEFT JOIN album a ON ac.album_id=a.album_id
         WHERE user_id=#{userId} AND course_id=#{courseId} limit 1;
     </select>
+
     
     <select id="getCourseList" resultType="com.handy.support.entity.Course">
         SELECT
@@ -32,6 +33,32 @@
         LEFT JOIN album_course ac ON cc.course_id=ac.course_id
         WHERE ac.album_id=#{albumId};
     </select>
+
+    <insert id="insertOne" >
+        insert into album_course
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="albumId != null">
+            album_id,
+        </if>
+        <if test="courseId != null">
+            course_id,
+        </if>
+        <if test="updateTime != null">
+            update_time,
+        </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="albumId != null">
+                #{albumId,jdbcType=INTEGER},
+            </if>
+            <if test="courseId != null">
+                #{courseId,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
 
 
 </mapper>
