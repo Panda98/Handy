@@ -178,12 +178,14 @@ public class CourseServiceImpl implements ICourseService {
         view.setCourseId(courseId);
         viewMapper.insertSelective(view);
         User author=userMapper.selectByPrimaryKey(authorId);
-        return new CourseDetailVO(courseId,c.getCourseTitle(),c.getCourseIntro(),c.getCourseNote(),c.getCourseCover(),c.getCourseViews(),c.getCourseCollects(),c.getCourseLikes(),authorId,author.getNickName(),author.getUserPic(),c.getLevelId(),this.getLabelList(courseId),c.getDiyLabel(),c.getUpdateTime(),this.sortItem(this.getItemList(courseId)),this.sortStep(this.getStepList(courseId)));
+        List<Item> itemList=this.sortItem(this.getItemList(courseId));
+        List<Step> stepList=this.sortStep(this.getStepList(courseId));
+        return new CourseDetailVO(courseId,c.getCourseTitle(),c.getCourseIntro(),c.getCourseNote(),c.getCourseCover(),c.getCourseViews(),c.getCourseCollects(),c.getCourseLikes(),authorId,author.getNickName(),author.getUserPic(),c.getLevelId(),this.getLabelList(courseId),c.getDiyLabel(),c.getUpdateTime(),itemList,stepList);
     }
 
     public Integer collect(Integer albumId, Integer courseId){
         AlbumCourse ac=new AlbumCourse(albumId,courseId);
-        Integer count=albumCourseMapper.insert(ac);
+        Integer count=albumCourseMapper.insertSelective(ac);
         Course course=this.getCourseByID(courseId);
         Integer courseCollects=course.getCourseCollects();
         course.setCourseCollects(courseCollects+1);
@@ -206,7 +208,7 @@ public class CourseServiceImpl implements ICourseService {
 
     public Integer likeCourse(Integer userId, Integer courseId){
         Favor f=new Favor(userId,courseId);
-        Integer count=favorMapper.insert(f);
+        Integer count=favorMapper.insertSelective(f);
         Course course=this.getCourseByID(courseId);
         Integer courseLikes=course.getCourseLikes();
         course.setCourseLikes(courseLikes+1);
