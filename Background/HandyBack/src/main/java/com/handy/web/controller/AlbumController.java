@@ -40,6 +40,8 @@ public class AlbumController {
             for(AlbumDto dto:dtos){
                 AlbumVO vo = new AlbumVO(dto);
                 vos.add(vo);
+
+
             }
         }
 
