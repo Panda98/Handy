@@ -70,6 +70,13 @@ public class AccountPagerPresenter extends BasePresenter<AccountPagerContract.Vi
     }
 
     @Override
+    public void autoRefresh(boolean isShowError) {
+        getUserInfo(isShowError);
+        getMyAlbum(isShowError);
+        getMyCourse(isShowError);
+    }
+
+    @Override
     public void getUserInfo(boolean isShowError){
         addSubscribe(mDataManager.getUserInfo(getLoginAccount())
                 .compose(RxUtils.rxSchedulerHelper())

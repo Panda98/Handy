@@ -9,6 +9,7 @@ import com.example.handy.core.bean.AlbumCoverData;
 import com.example.handy.utils.RxUtils;
 import com.example.handy.wigdet.BaseObserver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -45,6 +46,7 @@ public class MorePublishAlbumPresenter extends BasePresenter<MorePublishAlbumCon
                         false) {
                     @Override
                     public void onNext(List<AlbumCoverData> albumListDataList) {
+
                         mView.showMyPublishAlbumData(albumListDataList, isRefresh);
                     }
                 }));

@@ -22,6 +22,12 @@ public interface AccountPagerContract {
 
     interface Presenter extends AbstractPresenter<AccountPagerContract.View> {
 
+        /**
+         * Auto refresh 自动刷新
+         *
+         * @param isShowError If show error
+         */
+        void autoRefresh(boolean isShowError);
 
         /**
          * Get User Info 加载用户数据

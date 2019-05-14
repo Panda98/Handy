@@ -14,7 +14,7 @@
         android:layout_marginBottom="20dp">
 
         <Button
-            android:id="@+id/main_pager_publish"
+            android:id="@+id/account_pager_publish"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginStart="@dimen/dp_40"
@@ -485,7 +485,7 @@
                                     android:maxLength="13"
                                     android:maxLines="2"
                                     android:textAlignment="center"
-                                    android:text="@string/search_tint" />
+                                    />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -519,7 +519,7 @@
                                     android:maxLength="13"
                                     android:maxLines="2"
                                     android:textAlignment="center"
-                                    android:text="@string/search_tint" />
+                                     />
                             </LinearLayout>
 
                         </LinearLayout>
@@ -553,7 +553,7 @@
                                     android:maxLength="13"
                                     android:maxLines="2"
                                     android:textAlignment="center"
-                                    android:text="@string/search_tint" />
+                                     />
                             </LinearLayout>
 
 

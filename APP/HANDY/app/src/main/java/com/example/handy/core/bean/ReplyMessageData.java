@@ -4,28 +4,91 @@ import java.util.List;
 
 public class ReplyMessageData {
 
+    //private int inCourseId;
+    //    //private String inCourseTitle;
+    //    //private String inCourseCover;
+    //    //private String inCourseDiyLabel;
+    //    //private String inCourseUpdateTime;
+    //    //private int inCourseLevelId;
+    //    //private String inCourseIntro;
+    //    //private List<LabelData> inCourseLabelList;
+    //    //private int inCommentId;
+    //    //private String inCommentContent;
+    //    //private int inCommentUserId;
+    //    //private String inCommentUpdateTime;
+    //    //private String toReplyContent;
+    //    //private String toReplyUpdateTime;
+    //    //private int userId;
+    //    //private String
+    //    //private int toReplyType;
+    //    //private int replyId;
+    //    //private String replyContent;
+    //    //private int toReplyId;
+    //    //private String updateTime;
+    //    //private int toReplyUserId;
+    //    //private String toReplyNickName;
+    //    //private String toReplyUserPic;
+
     private int inCourseId;
-    private String inCourseTitle;
+    private  String inCourseTitle;
     private String inCourseCover;
     private String inCourseDiyLabel;
     private String inCourseUpdateTime;
-    private int inCourseLevelId;
+    private Byte inCourseLevelId;
     private String inCourseIntro;
     private List<LabelData> inCourseLabelList;
+
     private int inCommentId;
     private String inCommentContent;
     private int inCommentUserId;
     private String inCommentUpdateTime;
+
     private String toReplyContent;
     private String toReplyUpdateTime;
+
+    private int userId;
+    private String userPic;
+    private String userNickName;
     private int toReplyType;
     private int replyId;
     private String replyContent;
-    private int toReplyId;
+    private int toReplyId;//有可能是commentTable中的，有可能是replyTable中的，视type定
     private String updateTime;
     private int toReplyUserId;
     private String toReplyNickName;
     private String toReplyUserPic;
+
+    public int getToReplyType() {
+        return toReplyType;
+    }
+
+    public int getReplyId() {
+        return replyId;
+    }
+
+    public String getReplyContent() {
+        return replyContent;
+    }
+
+    public int getToReplyId() {
+        return toReplyId;
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public int getToReplyUserId() {
+        return toReplyUserId;
+    }
+
+    public String getToReplyNickName() {
+        return toReplyNickName;
+    }
+
+    public String getToReplyUserPic() {
+        return toReplyUserPic;
+    }
 
     public int getInCourseId() {
         return inCourseId;
@@ -47,7 +110,7 @@ public class ReplyMessageData {
         return inCourseUpdateTime;
     }
 
-    public int getInCourseLevelId() {
+    public Byte getInCourseLevelId() {
         return inCourseLevelId;
     }
 
@@ -83,35 +146,15 @@ public class ReplyMessageData {
         return toReplyUpdateTime;
     }
 
-    public int getToReplyType() {
-        return toReplyType;
+    public int getUserId() {
+        return userId;
     }
 
-    public int getReplyId() {
-        return replyId;
+    public String getUserPic() {
+        return userPic;
     }
 
-    public String getReplyContent() {
-        return replyContent;
-    }
-
-    public int getToReplyId() {
-        return toReplyId;
-    }
-
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public int getToReplyUserId() {
-        return toReplyUserId;
-    }
-
-    public String getToReplyNickName() {
-        return toReplyNickName;
-    }
-
-    public String getToReplyUserPic() {
-        return toReplyUserPic;
+    public String getUserNickName() {
+        return userNickName;
     }
 }

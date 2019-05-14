@@ -21,12 +21,12 @@ public class ReceiveReplyAdapter extends BaseQuickAdapter<ReplyMessageData, Rece
     @Override
     protected void convert(ReceiveReplyViewHolder helper, ReplyMessageData item) {
         // 设置用户头像
-        if (!TextUtils.isEmpty(item.getToReplyUserPic())) {
-            ImageLoader.load(mContext, item.getToReplyUserPic(), helper.getView(R.id.item_receive_reply_user_image));
+        if (!TextUtils.isEmpty(item.getUserPic())) {
+            ImageLoader.load(mContext, item.getUserPic(), helper.getView(R.id.item_receive_reply_user_image));
         }
         //设置用户名
-        if (!TextUtils.isEmpty(item.getToReplyNickName())) {
-            helper.setText(R.id.item_receive_reply_user_name, item.getToReplyNickName());
+        if (!TextUtils.isEmpty(item.getUserNickName())) {
+            helper.setText(R.id.item_receive_reply_user_name, item.getUserNickName());
         }
 
 
@@ -38,12 +38,12 @@ public class ReceiveReplyAdapter extends BaseQuickAdapter<ReplyMessageData, Rece
 
         //设置回复内容
         if (!TextUtils.isEmpty(item.getReplyContent())) {
-            helper.setText(R.id.item_receive_reply_content, item.getReplyContent());
+            helper.setText(R.id.item_receive_reply_content, item.getToReplyContent());
         }
 
         //设置被回复的评论
         if (!TextUtils.isEmpty(item.getToReplyContent())) {
-            String content = "我的评论" + item.getToReplyContent();
+            String content = "我的评论" + item.getInCommentContent();
             helper.setText(R.id.item_receive_reply_comment, content);
         }
 

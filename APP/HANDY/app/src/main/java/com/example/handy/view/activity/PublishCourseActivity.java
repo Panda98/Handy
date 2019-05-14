@@ -219,6 +219,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
         data.add(stepNum,new MultipleItem(MultipleItem.STEP_ITEM,stepNum-1-materialNum));
         multiAdapter.notifyItemChanged(position);
         stepNum++;
+        stepData.add(new CourseStepData());
     }
 
     protected void uploadPic(View view,int position,int type){
@@ -403,9 +404,6 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
 
                 @Override
                 public void afterTextChanged(Editable editable) {
-                    if(index>=stepData.size()){
-                        stepData.add(new CourseStepData());
-                    }
                     stepData.get(index).setStepDetail(editable.toString());
 
                 }
@@ -501,6 +499,7 @@ public class PublishCourseActivity extends BaseActivity<PublishCoursePresenter> 
             courseData.setCourseCover(url);
         else{
             courseData.getStepList().get(index-1).setStepImg(url);
+            courseData.getStepList().get(index-1).setStepTag(index);
         }
         if(imgURL.size() == stepData.size()+1){
             mPresenter.publish(courseData);

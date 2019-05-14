@@ -21,9 +21,11 @@ import com.example.handy.presenter.AccountPagerPresenter;
 import com.example.handy.utils.CommonUtils;
 import com.example.handy.utils.ImageLoader;
 import com.example.handy.utils.JudgeUtils;
+import com.example.handy.view.activity.LoginActivity;
 import com.example.handy.view.activity.MessageActivity;
 import com.example.handy.view.activity.MorePublishAlbumActivity;
 import com.example.handy.view.activity.MorePublishCourseActivity;
+import com.example.handy.view.activity.PublishCourseActivity;
 import com.example.handy.view.activity.SettingActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.shehuan.niv.NiceImageView;
@@ -31,6 +33,7 @@ import com.shehuan.niv.NiceImageView;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -132,6 +135,7 @@ public class AccountPagerFragment extends BaseRootFragment<AccountPagerPresenter
     protected void initEventAndData() {
         super.initEventAndData();
         setListener();
+        setRefresh();
         mPresenter.getUserInfo(true);
         mPresenter.getMyCourse(true);
         mPresenter.getMyAlbum(true);
@@ -141,6 +145,30 @@ public class AccountPagerFragment extends BaseRootFragment<AccountPagerPresenter
         }
     }
 
+    private void setRefresh() {
+        mRefreshLayout.setOnRefreshListener(refreshLayout -> {
+            mPresenter.autoRefresh(false);
+            refreshLayout.finishRefresh(1000);
+        });
+    }
+
+    // 顶部发布教程按钮
+    @OnClick({R.id.account_pager_publish})
+    void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.account_pager_publish:
+                if (!mPresenter.getLoginStatus()) {
+                    startActivity(new Intent(_mActivity, LoginActivity.class));
+                    CommonUtils.showMessage(_mActivity, getString(R.string.login_tint));
+                    break;
+                }
+                startActivity(new Intent(getActivity(), PublishCourseActivity.class));
+
+                break;
+            default:
+                break;
+        }
+    }
 
     @Override
     protected void initView() {
