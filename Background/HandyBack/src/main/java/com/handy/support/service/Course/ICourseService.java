@@ -74,4 +74,6 @@ public interface ICourseService {
 
      List<CourseSimpleVO> getCourseByLabel(Integer labelId,Integer page_no,Integer n);
 
+
+
 }

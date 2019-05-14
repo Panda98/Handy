@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.imageio.stream.FileImageInputStream;
 import java.io.*;
 import java.net.SocketException;
+import java.sql.Timestamp;
 import java.util.*;
 
 
@@ -182,7 +183,7 @@ public class CourseServiceImpl implements ICourseService {
 
     public Integer collect(Integer albumId, Integer courseId){
         AlbumCourse ac=new AlbumCourse(albumId,courseId);
-        Integer count=albumCourseMapper.insertSelective(ac);
+        Integer count=albumCourseMapper.insert(ac);
         Course course=this.getCourseByID(courseId);
         Integer courseCollects=course.getCourseCollects();
         course.setCourseCollects(courseCollects+1);
@@ -410,6 +411,7 @@ public class CourseServiceImpl implements ICourseService {
         }
       return simpleList;
     }
+
 
 }
 
