@@ -59,14 +59,16 @@ public class AlbumServiceImpl implements IAlbumService {
         List<Album> albums = albumMapper.selectByExample(new AlbumExample());
         int i = 1;
         for(Album album:albums){
-            AlbumDto dto = new AlbumDto();
-            BeanUtils.copyProperties(album,dto);
-            User user = userMapper.selectByPrimaryKey(album.getUserId());
-            dto.setUserName(user.getNickName());
-            albumDtos.add(dto);
-            if(i == 3)
-                break;
-            i++;
+            if(album.getAlbumState()){
+                AlbumDto dto = new AlbumDto();
+                BeanUtils.copyProperties(album,dto);
+                User user = userMapper.selectByPrimaryKey(album.getUserId());
+                dto.setUserName(user.getNickName());
+                albumDtos.add(dto);
+                if(i == 3)
+                    break;
+                i++;
+            }
         }
         return albumDtos;
     }
